@@ -1,0 +1,44 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+* {
+  font-family: 'Noto Sans KR', sans-serif;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+/* Button Styles */
+.btn-primary {
+  @apply px-14 py-4 bg-white text-stone-900 text-sm font-semibold rounded-full transition-all cursor-pointer whitespace-nowrap;
+}
+
+.btn-primary:hover {
+  @apply bg-[#967353] text-white;
+}
+
+.btn-primary:active {
+  @apply bg-stone-300;
+}
+
+.btn-primary:focus {
+  @apply ring-1 ring-stone-300 ring-offset-2;
+}
+
+.btn-secondary {
+  @apply px-14 py-4 bg-transparent border-2 border-white text-white text-sm font-semibold rounded-full transition-all cursor-pointer whitespace-nowrap;
+}
+
+.btn-secondary:hover {
+  @apply bg-[#967353]/10 border-[#967353];
+}
+
+.btn-secondary:active {
+  @apply bg-white/20 border-white;
+}
+
+.btn-secondary:focus {
+  @apply ring-2 ring-white ring-offset-2 ring-offset-transparent;
+}
