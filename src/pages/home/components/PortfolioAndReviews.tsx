@@ -1,11 +1,11 @@
-import { useState } from 'react';
-import { portfolioItems, portfolioCategories } from '../../../mocks/portfolioData';
+import { useEffect, useState } from 'react';
+import { portfolioItems, portfolioCategories, type PortfolioItem } from '../../../mocks/portfolioData';
 
 const processSteps = [
   {
     step: '01',
     title: '무료 상담 신청',
-    summary: '간편하게 연락주세요',
+    summary: '마음편히 연락주세요',
     description: '전화, 카카오톡, 또는 홈페이지를 통해 간단히 시공 신청을 남겨주세요. 담당자가 24시간 내 연락드리며, 시공 범위와 예산에 맞는 최적의 방향을 안내해 드립니다.',
     tags: [
       { label: '전화 상담', href: 'tel:010-2422-7744' },
@@ -63,6 +63,44 @@ const processSteps = [
 export default function PortfolioAndReviews() {
   const [activeCategory, setActiveCategory] = useState('전체');
   const [activeStep, setActiveStep] = useState(0);
+  const [selectedItem, setSelectedItem] = useState<PortfolioItem | null>(null);
+
+  useEffect(() => {
+    if (!selectedItem) return;
+
+    const handleEsc = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') setSelectedItem(null);
+    };
+
+    const scrollY = window.scrollY;
+    const html = document.documentElement;
+    const body = document.body;
+    const prevInlineScrollBehavior = html.style.scrollBehavior;
+
+    html.style.overflow = 'hidden';
+    body.style.overflow = 'hidden';
+    body.style.position = 'fixed';
+    body.style.top = `-${scrollY}px`;
+    body.style.left = '0';
+    body.style.right = '0';
+    body.style.width = '100%';
+
+    window.addEventListener('keydown', handleEsc);
+
+    return () => {
+      html.style.overflow = '';
+      body.style.overflow = '';
+      body.style.position = '';
+      body.style.top = '';
+      body.style.left = '';
+      body.style.right = '';
+      body.style.width = '';
+      html.style.scrollBehavior = 'auto';
+      window.scrollTo(0, scrollY);
+      html.style.scrollBehavior = prevInlineScrollBehavior;
+      window.removeEventListener('keydown', handleEsc);
+    };
+  }, [selectedItem]);
 
   const filtered =
     activeCategory === '전체'
@@ -72,18 +110,19 @@ export default function PortfolioAndReviews() {
   return (
     <>
       {/* Portfolio Section */}
-      <section id="portfolio" className="py-24 px-6 md:px-12 lg:px-20 bg-stone-50">
+      <section id="portfolio" className="py-20 px-6 md:px-12 lg:px-20 bg-stone-50">
         <div className="max-w-7xl mx-auto">
-          <div className="mb-12">
+          <div className="mb-10">
             <span className="text-xs font-semibold tracking-widest text-stone-400 uppercase">Our Work</span>
             <h2 className="text-4xl md:text-5xl font-black text-stone-900 mt-2 leading-tight">
               완성된 프로젝트
             </h2>
-            <p className="text-stone-500 mt-3 text-base">고객님의 공간을 완벽하게 되살렸습니다</p>
+            <p className="text-stone-500 mt-1 sm:mt-3 text-base">고객님의 공간을 완벽하게 되살렸습니다</p>
           </div>
 
           {/* Category Filter */}
           <div className="flex flex-wrap gap-2 mb-10">
+
             {portfolioCategories.map((cat) => (
               <button
                 key={cat}
@@ -100,12 +139,12 @@ export default function PortfolioAndReviews() {
           </div>
 
           {/* Grid */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-2 sm:gap-4">
             {filtered.map((item) => (
               <div
                 key={item.id}
-                className="group relative rounded-2xl overflow-hidden cursor-pointer"
-                style={{ aspectRatio: '3/4' }}
+                onClick={() => setSelectedItem(item)}
+                className="group relative rounded-2xl overflow-hidden cursor-pointer aspect-[3/4]"
               >
                 <img
                   src={item.image}
@@ -126,8 +165,42 @@ export default function PortfolioAndReviews() {
         </div>
       </section>
 
+      {/* Portfolio Image Modal */}
+      {selectedItem && (
+        <div
+          className="fixed inset-0 z-[100] bg-black/80 flex items-center justify-center px-4"
+          onClick={() => setSelectedItem(null)}
+        >
+          <div
+            className="relative w-full max-w-3xl"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <button
+              type="button"
+              onClick={() => setSelectedItem(null)}
+              className="absolute -top-11 right-0 w-9 h-9 rounded-full bg-white/20 text-white hover:bg-white/30 transition-colors"
+              aria-label="닫기"
+            >
+              <i className="ri-close-line text-xl"></i>
+            </button>
+            <div className="rounded-2xl overflow-hidden shadow-2xl bg-black">
+              <img
+                src={selectedItem.image}
+                alt={selectedItem.title}
+                onClick={() => setSelectedItem(null)}
+                className="w-full max-h-[80vh] object-contain cursor-zoom-out"
+              />
+            </div>
+            <div className="mt-3 text-white">
+              <p className="text-sm font-semibold">{selectedItem.title}</p>
+              <p className="text-xs text-white/70 mt-1">{selectedItem.location}</p>
+            </div>
+          </div>
+        </div>
+      )}
+
       {/* Construction Process Section */}
-      <section id="process" className="py-24 px-6 md:px-12 lg:px-20 bg-white">
+      <section id="process" className="py-20 px-6 md:px-12 lg:px-20 bg-white">
         <div className="max-w-6xl mx-auto">
           {/* Header */}
           <div className="text-center mb-16">
@@ -141,22 +214,22 @@ export default function PortfolioAndReviews() {
           </div>
 
           {/* Step Progress Bar */}
-          <div className="relative flex items-start justify-between mb-14 px-4">
+          <div className="relative flex items-start justify-between mb-14 sm:px-16">
             {/* Connecting line */}
-            <div className="absolute top-7 left-[calc(12.5%)] right-[calc(12.5%)] h-px bg-stone-200 z-0"></div>
+            <div className="absolute top-7 left-[calc(15%)] right-[calc(15%)] h-px bg-stone-200 z-0"></div>
             <div
-              className="absolute top-7 left-[calc(12.5%)] h-px bg-stone-800 z-0 transition-all duration-500"
-              style={{ width: `${(activeStep / (processSteps.length - 1)) * 75}%` }}
+              className="absolute top-7 left-[calc(15%)] h-px bg-stone-800 z-0 transition-all duration-500"
+              style={{ width: `${(activeStep / (processSteps.length - 1)) * 70}%` }}
             ></div>
 
             {processSteps.map((s, idx) => (
               <button
                 key={s.step}
                 onClick={() => setActiveStep(idx)}
-                className="relative z-10 flex flex-col items-center gap-3 w-1/4 cursor-pointer group"
+                className="relative z-10 flex flex-col items-center gap-4 sm:gap-3 w-1/4 cursor-pointer group"
               >
                 <div
-                  className={`w-14 h-14 rounded-full flex items-center justify-center text-lg font-black transition-all duration-300 ${
+                  className={`w-16 h-16 rounded-full flex items-center justify-center text-2xl font-black transition-all duration-300 ${
                     idx === activeStep
                       ? 'bg-stone-900 text-white shadow-lg scale-110'
                       : idx < activeStep
@@ -167,10 +240,10 @@ export default function PortfolioAndReviews() {
                   {s.step}
                 </div>
                 <div className="text-center">
-                  <p className={`text-sm font-bold leading-snug ${idx === activeStep ? 'text-stone-900' : 'text-stone-400'}`}>
+                  <p className={`text-sm font-bold px-2 leading-snug ${idx === activeStep ? 'text-stone-900' : 'text-stone-400'}`}>
                     {s.title}
                   </p>
-                  <p className={`text-xs mt-0.5 ${idx === activeStep ? 'text-stone-500' : 'text-stone-300'}`}>
+                  <p className={`text-xs px-2 mt-1 ${idx === activeStep ? 'text-stone-600 font-medium' : 'text-stone-300'}`}>
                     {s.summary}
                   </p>
                 </div>
@@ -179,22 +252,22 @@ export default function PortfolioAndReviews() {
           </div>
 
           {/* Active Step Detail Card */}
-          <div className={`rounded-3xl border-2 p-10 transition-all duration-300 ${processSteps[activeStep].color}`}>
-            <div className="flex flex-col md:flex-row gap-8 items-start">
+          <div className={`rounded-3xl border-2 p-8 sm:p-10 transition-all duration-300 ${processSteps[activeStep].color}`}>
+            <div className="flex flex-col md:flex-row gap-4 sm:gap-8 items-start">
               {/* Icon & Number */}
               <div className="flex-shrink-0">
-                <div className={`text-8xl font-black leading-none select-none ${processSteps[activeStep].numberColor}`}>
+                <div className={`text-6xl sm:text-8xl font-black leading-none select-none ${processSteps[activeStep].numberColor}`}>
                   {processSteps[activeStep].step}
                 </div>
               </div>
 
               {/* Content */}
               <div className="flex-1">
-                <div className="w-12 h-12 flex items-center justify-center rounded-2xl bg-white border border-stone-100 mb-4">
+                {/* <div className="w-12 h-12 flex items-center justify-center rounded-2xl bg-white border border-stone-100 mb-4">
                   <i className={`${processSteps[activeStep].icon} text-2xl text-stone-700`}></i>
-                </div>
+                </div> */}
                 <h3 className="text-2xl font-black text-stone-900">{processSteps[activeStep].title}</h3>
-                <p className="text-stone-600 mt-3 leading-relaxed text-base max-w-xl">
+                <p className="text-base text-stone-600 mt-3 leading-relaxed text-base max-w-2xl">
                   {processSteps[activeStep].description}
                 </p>
                 <div className="flex flex-wrap gap-2 mt-6">
@@ -212,14 +285,14 @@ export default function PortfolioAndReviews() {
                         }}
                         target={tag.href.startsWith('http') ? '_blank' : undefined}
                         rel={tag.href.startsWith('http') ? 'nofollow noreferrer' : undefined}
-                        className="px-4 py-1.5 rounded-full border border-stone-200 bg-white text-stone-600 text-sm font-medium hover:bg-stone-100 hover:border-stone-300 transition-all cursor-pointer"
+                        className="px-4 py-1.5 rounded-full border border-stone-200 bg-white text-stone-600 text-xs sm:text-sm font-medium hover:bg-stone-100 hover:border-stone-300 transition-all cursor-pointer"
                       >
                         {tag.label}
                       </a>
                     ) : (
                       <span
                         key={tag.label}
-                        className="px-4 py-1.5 rounded-full border border-stone-200 bg-white text-stone-600 text-sm font-medium"
+                        className="px-4 py-1.5 rounded-full border border-stone-200 bg-white text-xs sm:text-sm text-stone-600 font-medium"
                       >
                         {tag.label}
                       </span>

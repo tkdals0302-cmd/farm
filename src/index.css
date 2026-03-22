@@ -12,7 +12,7 @@ html {
 
 /* Button Styles */
 .btn-primary {
-  @apply px-14 py-4 bg-white text-stone-900 text-sm font-semibold rounded-full transition-all cursor-pointer whitespace-nowrap;
+  @apply px-6 py-3 bg-white text-stone-900 text-sm font-semibold rounded-full transition-all cursor-pointer whitespace-nowrap flex-1 sm:flex-none sm:px-14;
 }
 
 .btn-primary:hover {
@@ -28,7 +28,7 @@ html {
 }
 
 .btn-secondary {
-  @apply px-14 py-4 bg-transparent border-2 border-white text-white text-sm font-semibold rounded-full transition-all cursor-pointer whitespace-nowrap;
+  @apply px-6 py-3 bg-transparent border-2 border-white text-white text-sm font-semibold rounded-full transition-all cursor-pointer whitespace-nowrap flex-1 sm:flex-none sm:px-14;
 }
 
 .btn-secondary:hover {
@@ -41,4 +41,39 @@ html {
 
 .btn-secondary:focus {
   @apply ring-2 ring-white ring-offset-2 ring-offset-transparent;
+}
+
+@keyframes shine {
+  0% { background-position: -200% center; }
+  100% { background-position: 200% center; }
+}
+
+.shine-border {
+  position: relative;
+  display: inline-block;
+}
+
+.shine-border::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 9999px;
+  padding: 1px;
+  background: linear-gradient(90deg, #292929, #3f3f3f, #e2e2e2, #3f3f3f, #292929);
+  background-size: 200% auto;
+  animation: shine 8s linear infinite;
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+}
+
+@keyframes bg-shine {
+  0% { background-position: 0% center; }
+  100% { background-position: 200% center; }
+}
+
+.call-bg {
+  background: linear-gradient(90deg, #70553b, #70553b, #967353, #70553b, #70553b);
+  background-size: 200% auto;
+  animation: bg-shine 4s linear infinite;
 }

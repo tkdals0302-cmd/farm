@@ -16,10 +16,10 @@ export default function Footer() {
   };
 
   return (
-    <footer className="bg-stone-800 rounded-t-3xl mx-3 overflow-hidden">
-      <div className="px-8 md:px-12 lg:px-16 pt-14 pb-8">
+    <footer className="bg-stone-800 rounded-t-3xl mx-2 overflow-hidden">
+      <div className="px-6 md:px-12 lg:px-16 pt-10 pb-8">
         {/* Top Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 mb-12">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 mb-6 md:mb-12">
           {/* Brand */}
           <div className="lg:col-span-1">
             <img
@@ -48,7 +48,7 @@ export default function Footer() {
           </div>
 
           {/* Quick Links */}
-          <div>
+          <div className="hidden md:block">
             <h4 className="text-white font-bold text-sm mb-5">빠른 링크</h4>
             <ul className="space-y-3">
               {NAV_LINKS.map((link) => (
@@ -65,7 +65,7 @@ export default function Footer() {
           </div>
 
           {/* Services */}
-          <div>
+          <div className="hidden md:block">
             <h4 className="text-white font-bold text-sm mb-5">시공 서비스</h4>
             <ul className="space-y-3">
               {SERVICES.map((s) => (
@@ -77,7 +77,7 @@ export default function Footer() {
           </div>
 
           {/* Social */}
-          <div>
+          <div className="hidden md:block">
             <h4 className="text-white font-bold text-sm mb-5">소셜 미디어</h4>
             <div className="space-y-3">
               {[
@@ -115,13 +115,6 @@ export default function Footer() {
             </div>
           </div>
         </div>
-      </div>
-
-      {/* Watermark */}
-      <div className="text-center pb-4 overflow-hidden">
-        <span className="text-stone-700 text-6xl md:text-8xl font-black tracking-widest select-none opacity-30">
-          House Pick
-        </span>
       </div>
     </footer>
   );

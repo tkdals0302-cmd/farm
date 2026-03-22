@@ -51,15 +51,16 @@ const INSTAGRAM_POSTS = [
 
 export default function InstagramSection() {
   return (
-    <section id="instagram" className="py-24 px-6 md:px-12 lg:px-20" style={{ backgroundColor: '#f5f3ee' }}>
+    <section id="instagram" className="py-20 px-6 md:px-12 lg:px-20" style={{ backgroundColor: '#f5f3ee' }}>
       <div className="max-w-7xl mx-auto">
         {/* Header */}
-        <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-12">
+        <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-6 sm:mb-10">
           <div>
-            <span className="inline-flex items-center gap-2 bg-white text-stone-700 text-xs font-semibold px-4 py-1.5 rounded-full mb-4">
+             <span className="text-xs font-semibold tracking-widest text-stone-400 uppercase">live working</span>
+            {/* <span className="inline-flex items-center gap-2 bg-white text-stone-700 text-xs font-semibold px-4 py-1.5 rounded-full mb-4">
               <i className="ri-instagram-line"></i>
               Instagram
-            </span>
+            </span> */}
             <h2 className="text-4xl md:text-5xl font-black text-stone-900 leading-tight">
               실시간 시공 현장
             </h2>
@@ -68,25 +69,25 @@ export default function InstagramSection() {
             href="https://www.instagram.com/ssang_men"
             target="_blank"
             rel="nofollow noreferrer"
-            className="inline-flex items-center gap-2 px-6 py-3 bg-stone-900 text-white text-sm font-semibold rounded-full hover:bg-stone-700 transition-all cursor-pointer whitespace-nowrap self-start md:self-auto"
+            className="inline-flex items-center gap-2 px-10 py-3 bg-stone-900 text-white text-sm font-semibold rounded-full hover:bg-stone-700 transition-all cursor-pointer whitespace-nowrap self-start md:self-auto"
           >
-            <i className="ri-instagram-line"></i>
+            <i className="ri-instagram-line pt-1 sm:pt-0.5"></i>
             팔로우하기
           </a>
         </div>
 
         {/* Features row */}
-        <div className="flex flex-wrap gap-6 mb-10">
+        <div className="flex flex-wrap gap-3 sm:gap-8 mb-8">
           {['매일 업데이트', '시공 전/후 비교', '고객 후기 공유', '이벤트 & 프로모션'].map((label) => (
             <span key={label} className="text-stone-500 text-sm flex items-center gap-1.5">
-              <i className="ri-check-line text-stone-400"></i>
+              <i className="ri-check-line w-4 h-4 flex pl-[1px] justify-center items-center bg-green-600 text-white text-[14px] font-black rounded-full"></i>
               {label}
             </span>
           ))}
         </div>
 
         {/* Instagram Grid */}
-        <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 mb-10">
+        <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 mb-10">
           {INSTAGRAM_POSTS.map((post) => (
             <a
               key={post.id}
@@ -126,7 +127,7 @@ export default function InstagramSection() {
               rel="nofollow noreferrer"
               className="text-stone-900 font-semibold underline underline-offset-2 cursor-pointer hover:text-stone-700"
             >
-              @ssang_men 방문하기
+              @HousePick 방문하기
             </a>
           </p>
         </div>

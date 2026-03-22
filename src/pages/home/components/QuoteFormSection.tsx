@@ -135,10 +135,10 @@ export default function QuoteFormSection() {
   };
 
   return (
-    <section id="quote" className="py-24 px-6 md:px-12 lg:px-20 bg-stone-50">
+    <section id="quote" className="py-20 px-6 md:px-12 lg:px-20 bg-stone-50">
       <div className="max-w-4xl mx-auto">
         {/* Header */}
-        <div className="text-center mb-14">
+        <div className="text-center mb-10">
           <span className="text-xs font-semibold tracking-widest text-stone-400 uppercase">Free Estimate</span>
           <h2 className="text-4xl md:text-5xl font-black text-stone-900 mt-2">무료 견적 상담 신청</h2>
           <p className="text-stone-500 mt-3">양식을 작성하시면 24시간 내 연락드립니다</p>

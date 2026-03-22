@@ -27,7 +27,7 @@ export default function HeroSection() {
   const videoId = 'YOUR_VIDEO_ID'; // 실제 시공 영상 ID로 교체하세요
 
   return (
-    <section className="relative w-full h-screen min-h-[700px] overflow-hidden">
+    <section className="relative w-full overflow-hidden" style={{ height: '100dvh', minHeight: '600px' }}>
       {/* Background Image (Video Placeholder) */}
       <div className="absolute inset-0">
         <img
@@ -54,28 +54,40 @@ export default function HeroSection() {
       */}
 
       {/* Content */}
-      <div className="relative z-10 w-full h-full flex flex-col items-center justify-center pb-30 px-6 text-center">
-        <div className="mb-4 flex gap-3 justify-center flex-wrap">
-          <span className="inline-block bg-white/20 backdrop-blur-sm text-white text-xs font-light tracking-widest uppercase px-4 py-1.5 rounded-full border border-white/30">
+      <div className="relative z-10 w-full h-full flex flex-col items-center pt-[24dvh] sm:pt-[24dvh] pb-[20px] sm:pb-[60px] px-6 text-center">
+        <div className="mb-3 flex gap-2 justify-center flex-wrap text-xs md:text-sm font-medium md:font-light">
+          {/* <span className="inline-block bg-white/20 backdrop-blur-sm text-white tracking-widest uppercase px-4 py-1.5 rounded-full border border-white/30">
             업계 최초 가격 투명성 보장
-          </span>
-          <span className="inline-block bg-white/20 backdrop-blur-sm text-white text-xs font-light tracking-widest uppercase px-4 py-1.5 rounded-full border border-white/30">
-            케어플랜 3년 무상보장
+          </span> */}
+
+          {/* 반짝이는 효과 */}
+          <span className="shine-border text-white tracking-widest uppercase px-7 py-1.5 rounded-full bg-white/20 backdrop-blur-sm">
+          
+          {/* {이건 일반 버전 } */}
+          {/* <span className="inline-block bg-white/20 backdrop-blur-sm text-white tracking-widest uppercase px-4 py-1.5 rounded-full border border-white/30"> */}
+
+            케어 플랜 3년 무상보장
           </span>
         </div>
 
-        <h1 className="text-4xl md:text-6xl font-black text-white leading-tight mb-6 pb-3 tracking-tight"
-          style={{ lineHeight: '1.1' }}>
-          집요함이 만들어 내는<br />
-          <span className="text-stone-300">완벽함, 하우스픽</span>
+        <h1 className="text-3xl md:text-6xl font-black text-white leading-tight mb-3 pb-1 tracking-tight"
+          style={{ lineHeight: '1.3' }}>
+          디테일이 다른 공간의 시작<br />
+          <span className="text-stone-300">하우스픽</span>
         </h1>
-
-        <p className="text-white/80 text-lg md:text-xl mb-10 max-w-xl leading-relaxed">
-          1px의 디테일까지 완성하는 시공 <br className="hidden md:block" />
-          차원이 다른 마감을 경험하세요
+        
+        {/* pc에서 표기 */}
+        <p className="hidden md:block text-white/80 text-sm md:text-base mb-10 max-w-xl leading-relaxed">
+          1px의 디테일까지 완성하는 시공, 차원이 다른 마감을 경험하세요
         </p>
 
-        <div className="flex flex-col sm:flex-row gap-4 w-full justify-center pb-[60px]">
+        {/* mobile에서 표기 */}
+        <p className="block md:hidden text-white/80 text-sm md:text-base mb-10 max-w-xl leading-relaxed">
+          1px의 디테일까지 완성하는 시공, 차원이 다른 마감을 경험하세요
+        </p>
+
+
+        <div className="flex flex-row sm:flex-row gap-3 w-full justify-center">
           <button
             onClick={scrollToPortfolio}
             className="btn-primary"
@@ -93,24 +105,24 @@ export default function HeroSection() {
         {/* Scroll Down */}
         <button
           onClick={scrollToPortfolio}
-          className="absolute bottom-40 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 animate-bounce bg-transparent border-none cursor-pointer"
+          className="absolute bottom-[110px] flex flex-col items-center gap-1 animate-bounce bg-transparent border-none cursor-pointer pt-4"
         >
-          <span className="text-white/60 text-xs tracking-widest">SCROLL</span>
-          <i className="ri-arrow-down-line text-white/60 text-lg"></i>
+          <span className="text-white/40 text-xs tracking-widest">SCROLL</span>
+          <i className="ri-arrow-down-line text-white/40 text-lg"></i>
         </button>
       </div>
 
       {/* Stats Bar */}
       <div className="absolute bottom-0 left-0 right-0 z-10">
         <div className="bg-white/10 backdrop-blur-md border-t border-white/20">
-          <div className="max-w-5xl mx-auto px-6 py-5 grid grid-cols-3 divide-x divide-white/20">
+          <div className="max-w-3xl mx-auto px-1 sm:px-6 py-3 sm:py-5 grid grid-cols-3 divide-x divide-white/20">
             {[
               { value: count, label: '시공 완료', suffix: '+' },
               { value: '2년 AS', label: '무상 AS', suffix: '' },
               { value: '99.8%', label: '고객 만족도', suffix: '' },
             ].map((stat) => (
               <div key={stat.label} className="flex flex-col items-center px-4">
-                <span className="text-2xl md:text-3xl font-black text-white">
+                <span className="text-xl md:text-3xl font-black text-white">
                   {typeof stat.value === 'number' ? stat.value.toLocaleString() : stat.value}{stat.suffix}
                 </span>
                 <span className="text-white/60 text-xs mt-1">{stat.label}</span>

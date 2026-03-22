@@ -17,6 +17,7 @@ export default function Navbar() {
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 60);
+    handleScroll();
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
@@ -30,17 +31,17 @@ export default function Navbar() {
   return (
     <nav
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        scrolled ? 'bg-white shadow-sm' : 'bg-transparent'
+        scrolled ? 'bg-white shadow-sm' : 'bg-white shadow-sm md:bg-transparent md:shadow-none'
       }`}
     >
-      <div className="px-6 md:px-12 lg:px-20 py-4 flex items-center">
+      <div className="px-5 md:px-12 lg:px-20 h-12 md:h-auto md:py-4 flex items-center">
         {/* 좌측 - Logo */}
         <div className="flex-1">
           <a href="#" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })} className="flex items-center gap-3 cursor-pointer">
             <img
               src={logo}
               alt="줄눈시공 전문 로고"
-              className="h-10 w-auto object-contain"
+              className="h-8 md:h-10 w-auto object-contain"
             />
           </a>
         </div>
@@ -90,9 +91,9 @@ export default function Navbar() {
 
         {/* Mobile Hamburger */}
         <button
-          className={`md:hidden w-9 h-9 flex items-center justify-center cursor-pointer ml-auto ${
-            scrolled ? 'text-stone-800' : 'text-white'
-          }`}
+          className={`md:hidden w-8 h-8 flex items-center justify-center cursor-pointer ml-auto ${
+            'text-stone-800'
+    }`}
           onClick={() => setMenuOpen(!menuOpen)}
         >
           <i className={`text-2xl ${menuOpen ? 'ri-close-line' : 'ri-menu-line'}`}></i>
@@ -101,13 +102,13 @@ export default function Navbar() {
 
       {/* Mobile Menu */}
       {menuOpen && (
-        <div className="md:hidden bg-white border-t border-stone-100 px-6 py-4">
-          <ul className="flex flex-col gap-4">
+        <div className="md:hidden bg-stone-100 border-t border-stone-200 px-6 py-3 shadow-md">
+          <ul className="flex flex-col ">
             {NAV_LINKS.map((link) => (
-              <li key={link.href}>
+              <li key={link.href} className="border-b border-stone-100 py-3 border-stone-200">
                 <button
                   onClick={() => handleNavClick(link.href)}
-                  className="text-sm font-medium text-stone-700 hover:text-stone-900 cursor-pointer whitespace-nowrap"
+                  className="w-full text-sm font-medium text-stone-700 hover:text-stone-900 cursor-pointer whitespace-nowrap"
                 >
                   {link.label}
                 </button>
@@ -116,11 +117,16 @@ export default function Navbar() {
           </ul>
           <a
             href="tel:010-2422-7744"
-            className="mt-4 flex items-center gap-2 text-sm font-semibold text-stone-800 cursor-pointer"
+            className="justify-center mt-4 flex items-center text-sm font-semibold cursor-pointer pb-2
+            call-bg text-white tracking-widest uppercase px-7 py-1.5 rounded-full bg-[#967353]"
           >
-            <i className="ri-phone-line"></i>
-            010-2422-7744
+          
+          <i className="ri-phone-line pt-1"></i>
+              010-2422-7744
           </a>
+          <div className="text-center text-xs py-1 items-center font-normal text-stone-500">
+             번호를 누르면 전화 연결 됩니다.
+          </div>
         </div>
       )}
     </nav>
