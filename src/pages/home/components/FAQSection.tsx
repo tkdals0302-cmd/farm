@@ -62,11 +62,11 @@ export default function FAQSection() {
           <p className="text-stone-400 text-sm mb-6">전화 또는 카카오톡으로 편하게 문의해 주세요</p>
           <div className="flex flex-col sm:flex-row gap-3 justify-center">
             <a
-              href="tel:010-2422-7744"
+              href="tel:010-8005-6674"
               className="inline-flex h-12 sm:min-w-[180px] items-center justify-center gap-2 px-7 text-sm font-semibold cursor-pointer rounded-full bg-[#967353] text-white transition-all hover:bg-[#7a5c3d]"
             >
               <i className="ri-phone-line"></i>
-                010-2422-7744
+                010-8005-6674
             </a>
             <a
               href="https://pf.kakao.com"

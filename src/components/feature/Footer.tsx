@@ -28,17 +28,17 @@ export default function Footer() {
               className="h-10 w-auto object-contain mb-4 brightness-200"
             />
             <p className="text-stone-400 text-sm leading-relaxed mb-5">
-              집요함이 만들어 내는 완벽함, 하우스픽<br />
+              집요함이 만들어 내는 완벽함, 디테일라인<br />
               완벽한 마감을 약속드립니다.
             </p>
             <div className="space-y-2">
               <div className="flex items-center gap-2 text-stone-400 text-sm">
                 <i className="ri-phone-line text-stone-500"></i>
-                <a href="tel:010-1234-5678" className="hover:text-white transition-colors cursor-pointer">010-2422-7744</a>
+                <a href="tel:010-8005-6674" className="hover:text-white transition-colors cursor-pointer">010-8005-6674</a>
               </div>
               <div className="flex items-center gap-2 text-stone-400 text-sm">
                 <i className="ri-map-pin-line text-stone-500"></i>
-                <span>서울특별시 강남구</span>
+                <span>서울 서초구 본마을4길 11 1층 104호</span>
               </div>
               <div className="flex items-center gap-2 text-stone-400 text-sm">
                 <i className="ri-time-line text-stone-500"></i>
@@ -111,7 +111,7 @@ export default function Footer() {
             <div className="flex items-center gap-4">
               <span className="text-stone-500 text-xs">개인정보처리방침</span>
               <span className="text-stone-500 text-xs">이용약관</span>
-              <span className="text-stone-600 text-xs">사업자등록번호: 000-00-00000</span>
+              <span className="text-stone-600 text-xs">사업자등록번호: 609-33-19473</span>
             </div>
           </div>
         </div>

@@ -73,7 +73,7 @@ export default function HeroSection() {
         <h1 className="text-3xl md:text-6xl font-black text-white leading-tight mb-3 pb-1 tracking-tight"
           style={{ lineHeight: '1.3' }}>
           디테일이 다른 공간의 시작<br />
-          <span className="text-stone-300">하우스픽</span>
+          <span className="text-stone-300">디테일라인</span>
         </h1>
         
         {/* pc에서 표기 */}

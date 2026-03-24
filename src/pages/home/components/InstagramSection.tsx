@@ -127,7 +127,7 @@ export default function InstagramSection() {
               rel="nofollow noreferrer"
               className="text-stone-900 font-semibold underline underline-offset-2 cursor-pointer hover:text-stone-700"
             >
-              @HousePick 방문하기
+              @detail Line 방문하기
             </a>
           </p>
         </div>

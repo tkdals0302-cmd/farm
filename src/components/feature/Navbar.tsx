@@ -77,7 +77,7 @@ export default function Navbar() {
             <i className="ri-instagram-line text-xl"></i>
           </a>
           <a
-            href="tel:010-2422-7744"
+            href="tel:010-8005-6674"
             className={`flex items-center gap-2 text-sm font-semibold whitespace-nowrap transition-colors cursor-pointer ${
               scrolled
                 ? 'bg-[#967353] text-white px-4 py-2 rounded-full hover:bg-[#7a5c3d]'
@@ -85,7 +85,7 @@ export default function Navbar() {
             }`}
           >
             <i className="ri-phone-line text-sm"></i>
-            010-2422-7744
+            010-8005-6674
           </a>
         </div>
 
@@ -116,13 +116,13 @@ export default function Navbar() {
             ))}
           </ul>
           <a
-            href="tel:010-2422-7744"
+            href="tel:010-8005-6674"
             className="justify-center mt-4 flex items-center text-sm font-semibold cursor-pointer pb-2
             call-bg text-white tracking-widest uppercase px-7 py-1.5 rounded-full bg-[#967353]"
           >
           
           <i className="ri-phone-line pt-1"></i>
-              010-2422-7744
+              010-8005-6674
           </a>
           <div className="text-center text-xs py-1 items-center font-normal text-stone-500">
              번호를 누르면 전화 연결 됩니다.
