@@ -1,4 +1,4 @@
-import logo from '../../assets/logo.png';
+import logoDark from '../../assets/logo_d.png';
 const NAV_LINKS = [
   { label: '포트폴리오', href: '#portfolio' },
   { label: '시공범위', href: '#scope' },
@@ -23,7 +23,7 @@ export default function Footer() {
           {/* Brand */}
           <div className="lg:col-span-1">
             <img
-              src={logo}
+              src={logoDark}
               alt="줄눈시공 전문 로고"
               className="h-10 w-auto object-contain mb-4 brightness-200"
             />

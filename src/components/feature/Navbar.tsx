@@ -1,7 +1,7 @@
-import logo from '../../assets/logo.png';
-import { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
-
+import logoDark from '../../assets/logo_d.png';
+import logoLight from '../../assets/logo_w.png';
+import { useState, useEffect, useRef } from 'react';
+import { Link, useNavigate, useLocation } from 'react-router-dom';
 
 const NAV_LINKS = [
   { label: '포트폴리오', href: '#portfolio' },
@@ -11,39 +11,87 @@ const NAV_LINKS = [
   { label: '견적문의', href: '#quote' },
 ];
 
+const INFO_LINKS = [
+  { label: '케라폭시 줄눈이란?', href: '/info/kerafoxy' },
+  { label: '케라폭시 가격 안내', href: '/info/kerafoxy-price' },
+  { label: '케라폭시 제품 소개', href: '/info/kerafoxy-product' },
+  { label: '폴리우레아 vs 케라폭시 비교', href: '/info/comparison' },
+  { label: '줄눈시공 하는 이유', href: '/info/why-grout' },
+];
+
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
+  const [infoOpen, setInfoOpen] = useState(false);
+  const [mobileInfoOpen, setMobileInfoOpen] = useState(false);
+  const infoRef = useRef<HTMLLIElement>(null);
+  const navigate = useNavigate();
+  const location = useLocation();
+  const isHome = location.pathname === '/';
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 60);
-    handleScroll();
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  useEffect(() => {
+    const handleClickOutside = (e: MouseEvent) => {
+      if (infoRef.current && !infoRef.current.contains(e.target as Node)) {
+        setInfoOpen(false);
+      }
+    };
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => document.removeEventListener('mousedown', handleClickOutside);
+  }, []);
+
+  useEffect(() => {
+    const prevOverflow = document.body.style.overflow;
+    if (menuOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = prevOverflow || '';
+    }
+
+    return () => {
+      document.body.style.overflow = prevOverflow || '';
+    };
+  }, [menuOpen]);
+
   const handleNavClick = (href: string) => {
     setMenuOpen(false);
-    const el = document.querySelector(href);
-    if (el) el.scrollIntoView({ behavior: 'smooth' });
+    if (isHome) {
+      const el = document.querySelector(href);
+      if (el) el.scrollIntoView({ behavior: 'smooth' });
+    } else {
+      navigate('/');
+      setTimeout(() => {
+        const el = document.querySelector(href);
+        if (el) el.scrollIntoView({ behavior: 'smooth' });
+      }, 300);
+    }
   };
+
+  const isScrolled = scrolled || !isHome;
+  const textColor = isScrolled ? 'text-stone-700 hover:text-[#967353]' : 'text-white/50 hover:text-white';
+  const activeTextColor = isScrolled ? 'text-stone-900' : 'text-white';
 
   return (
     <nav
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        scrolled ? 'bg-white shadow-sm' : 'bg-white shadow-sm md:bg-transparent md:shadow-none'
+        isScrolled ? 'bg-white shadow-sm' : 'bg-transparent'
       }`}
     >
-      <div className="px-5 md:px-12 lg:px-20 h-12 md:h-auto md:py-4 flex items-center">
+      <div className={`px-5 md:px-12 lg:px-20 h-12 md:h-auto md:py-4 shadow-md flex items-center transition-all duration-300`}>
         {/* 좌측 - Logo */}
         <div className="flex-1">
-          <a href="#" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })} className="flex items-center gap-3 cursor-pointer">
+          <Link to="/" className="flex items-center gap-3 cursor-pointer" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}>
             <img
-              src={logo}
+              src={isScrolled ? logoLight : logoDark}
               alt="줄눈시공 전문 로고"
-              className="h-8 md:h-10 w-auto object-contain"
+              className="h-10 md:h-12 w-auto object-contain transition-opacity duration-300"
             />
-          </a>
+          </Link>
         </div>
 
         {/* 중앙 - Desktop Nav */}
@@ -53,14 +101,41 @@ export default function Navbar() {
               <li key={link.href}>
                 <button
                   onClick={() => handleNavClick(link.href)}
-                  className={`text-sm font-medium transition-colors cursor-pointer whitespace-nowrap ${
-                    scrolled ? 'text-stone-700 hover:text-[#967353]' : 'text-white/50 hover:text-white'
-                  }`}
+                  className={`text-sm font-medium transition-colors cursor-pointer whitespace-nowrap ${textColor}`}
                 >
                   {link.label}
                 </button>
               </li>
             ))}
+            {/* 줄눈 정보 Dropdown */}
+            <li ref={infoRef} className="relative">
+              <button
+                onClick={() => setInfoOpen(!infoOpen)}
+                className={`text-sm font-medium transition-colors cursor-pointer whitespace-nowrap flex items-center gap-1 ${
+                  location.pathname.startsWith('/info') ? activeTextColor : textColor
+                }`}
+              >
+                줄눈 정보
+                <i className={`ri-arrow-down-s-line text-lg transition-transform ${infoOpen ? 'rotate-180' : ''}`}></i>
+              </button>
+              {infoOpen && (
+                <div className="absolute top-full left-1/2 -translate-x-1/2 mt-3 bg-white rounded-2xl overflow-hidden w-56" style={{ boxShadow: '0 4px 24px 0 rgba(0,0,0,0.10)' }}>
+                  <ul className="py-2">
+                    {INFO_LINKS.map((link) => (
+                      <li key={link.href}>
+                        <Link
+                          to={link.href}
+                          onClick={() => setInfoOpen(false)}
+                          className="block px-5 py-3 text-sm text-stone-500 hover:bg-stone-100 hover:text-stone-900 transition-colors cursor-pointer"
+                        >
+                          {link.label}
+                        </Link>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              )}
+            </li>
           </ul>
         </div>
 
@@ -71,7 +146,7 @@ export default function Navbar() {
             target="_blank"
             rel="nofollow noreferrer"
             className={`w-9 h-9 flex items-center justify-center transition-colors cursor-pointer ${
-              scrolled ? 'text-stone-700 hover:text-stone-900' : 'text-white hover:text-white/80'
+              isScrolled ? 'text-stone-700 hover:text-stone-900' : 'text-white hover:text-white/80'
             }`}
           >
             <i className="ri-instagram-line text-xl"></i>
@@ -79,7 +154,7 @@ export default function Navbar() {
           <a
             href="tel:010-8005-6674"
             className={`flex items-center gap-2 text-sm font-semibold whitespace-nowrap transition-colors cursor-pointer ${
-              scrolled
+              isScrolled
                 ? 'bg-[#967353] text-white px-4 py-2 rounded-full hover:bg-[#7a5c3d]'
                 : 'bg-white/20 text-white px-4 py-2 rounded-full hover:bg-white/30 backdrop-blur-sm'
             }`}
@@ -92,43 +167,85 @@ export default function Navbar() {
         {/* Mobile Hamburger */}
         <button
           className={`md:hidden w-8 h-8 flex items-center justify-center cursor-pointer ml-auto ${
-            'text-stone-800'
-    }`}
+            isScrolled ? 'text-stone-800' : 'text-white'
+          }`}
           onClick={() => setMenuOpen(!menuOpen)}
         >
-          <i className={`text-2xl ${menuOpen ? 'ri-close-line' : 'ri-menu-line'}`}></i>
+          <i className={`text-xl ${menuOpen ? 'ri-close-line' : 'ri-menu-line'}`}></i>
         </button>
       </div>
 
-      {/* Mobile Menu */}
-      {menuOpen && (
-        <div className="md:hidden bg-stone-100 border-t border-stone-200 px-6 py-3 shadow-md">
-          <ul className="flex flex-col ">
-            {NAV_LINKS.map((link) => (
-              <li key={link.href} className="border-b border-stone-100 py-3 border-stone-200">
-                <button
-                  onClick={() => handleNavClick(link.href)}
-                  className="w-full text-sm font-medium text-stone-700 hover:text-stone-900 cursor-pointer whitespace-nowrap"
-                >
-                  {link.label}
-                </button>
-              </li>
-            ))}
-          </ul>
-          <a
-            href="tel:010-8005-6674"
-            className="justify-center mt-4 flex items-center text-sm font-semibold cursor-pointer pb-2
-            call-bg text-white tracking-widest uppercase px-7 py-1.5 rounded-full bg-[#967353]"
-          >
-          
-          <i className="ri-phone-line pt-1"></i>
-              010-8005-6674
-          </a>
-          <div className="text-center text-xs py-1 items-center font-normal text-stone-500">
-             번호를 누르면 전화 연결 됩니다.
+      {/* Mobile Menu - Sidebar from Right */}
+      <>
+        {/* Overlay */}
+        <div
+          className={`fixed inset-0 bg-black/60 z-40 md:hidden transition-opacity duration-300 ${
+            menuOpen ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'
+          }`}
+          onClick={() => setMenuOpen(false)}
+        ></div>
+
+        {/* Sidebar Menu */}
+        <div className={`fixed top-0 right-0 h-screen w-4/6 bg-stone-100 z-50 transform transition-transform duration-300 ease-in-out overflow-y-auto md:hidden ${
+          menuOpen ? 'translate-x-0' : 'translate-x-full'
+        }`}>
+            {/* Close Button */}
+            <div className="sticky top-0 bg-white h-12 px-5 flex items-center justify-end border-b border-stone-100">
+              <button
+                onClick={() => setMenuOpen(false)}
+                className="text-stone-700 hover:text-stone-900 cursor-pointer"
+              >
+                <i className="ri-close-line text-2xl"></i>
+              </button>
+            </div>
+
+            {/* Menu Content */}
+            <div className="px-6 py-4">
+              <ul className="space-y-5">
+                {NAV_LINKS.map((link) => (
+                  <li key={link.href}>
+                    <button
+                      onClick={() => handleNavClick(link.href)}
+                      className="w-full text-left text-sm font-medium text-stone-600 hover:text-[#967353] cursor-pointer transition-colors"
+                    >
+                      {link.label}
+                    </button>
+                  </li>
+                ))}
+
+                {/* 줄눈 정보 - Always Expanded */}
+                <li>
+                  <div className="text-sm font-medium text-stone-600 mb-4">줄눈 정보</div>
+                  <ul className="space-y-4 pl-3 border-stone-100">
+                    {INFO_LINKS.map((link) => (
+                      <li key={link.href}>
+                        <Link
+                          to={link.href}
+                          onClick={() => setMenuOpen(false)}
+                          className="text-sm font-medium text-stone-400 hover:text-[#967353] cursor-pointer transition-colors block"
+                        >
+                          {link.label}
+                        </Link>
+                      </li>
+                    ))}
+                  </ul>
+                </li>
+              </ul>
+
+              {/* Phone CTA */}
+              <a
+                href="tel:010-8005-6674"
+                className="call-bg mt-8 flex items-center justify-center gap-2 px-6 py-3 bg-[#967353] text-white text-sm font-semibold rounded-full hover:bg-[#7a5c3d] transition-colors cursor-pointer w-full"
+              >
+                <i className="ri-phone-line"></i>
+                010-8005-6674
+              </a>
+              <p className="text-center text-xs text-stone-500 mt-3">
+                번호를 누르면 전화 연결 됩니다.
+              </p>
+            </div>
           </div>
-        </div>
-      )}
+      </>
     </nav>
   );
 }

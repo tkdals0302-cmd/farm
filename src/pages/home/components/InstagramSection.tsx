@@ -120,7 +120,8 @@ export default function InstagramSection() {
         {/* CTA */}
         <div className="mt-10 text-center">
           <p className="text-stone-500 text-sm">
-            더 많은 시공 사례를 인스타그램에서 확인하세요 ·{' '}
+            더 많은 시공 사례를 인스타그램에서 확인하세요{' '}
+            <br />
             <a
               href="https://www.instagram.com/ssang_men"
               target="_blank"

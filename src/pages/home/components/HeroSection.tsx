@@ -118,7 +118,7 @@ export default function HeroSection() {
           <div className="max-w-3xl mx-auto px-1 sm:px-6 py-3 sm:py-5 grid grid-cols-3 divide-x divide-white/20">
             {[
               { value: count, label: '시공 완료', suffix: '+' },
-              { value: '2년 AS', label: '무상 AS', suffix: '' },
+              { value: '3년 AS', label: '무상 AS', suffix: '' },
               { value: '99.8%', label: '고객 만족도', suffix: '' },
             ].map((stat) => (
               <div key={stat.label} className="flex flex-col items-center px-4">
