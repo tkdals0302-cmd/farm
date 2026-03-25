@@ -62,7 +62,7 @@ export default function WorkScopeSection() {
         <div className="text-center mb-16">
           <span className="text-xs font-semibold tracking-widest text-stone-400 uppercase">What We Do</span>
           <h2 className="text-4xl md:text-5xl font-black text-white mt-2 leading-tight">
-            전문 시공 범위
+            시공 범위
           </h2>
           <p className="text-stone-500 text-sm font-medium leading-relaxed mt-4">
             주거 공간부터 대형 상업 시설까지,<br />

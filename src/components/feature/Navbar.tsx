@@ -6,7 +6,6 @@ import { Link, useNavigate, useLocation } from 'react-router-dom';
 const NAV_LINKS = [
   { label: '포트폴리오', href: '#portfolio' },
   { label: '시공범위', href: '#scope' },
-  { label: '고객후기', href: '#reviews' },
   { label: 'FAQ', href: '#faq' },
   { label: '견적문의', href: '#quote' },
 ];
@@ -190,7 +189,7 @@ export default function Navbar() {
           menuOpen ? 'translate-x-0' : 'translate-x-full'
         }`}>
             {/* Close Button */}
-            <div className="sticky top-0 bg-white h-12 px-5 flex items-center justify-end border-b border-stone-100">
+            <div className="sticky top-0 bg-white h-12 px-5 flex items-center justify-end border-b border-stone-300">
               <button
                 onClick={() => setMenuOpen(false)}
                 className="text-stone-700 hover:text-stone-900 cursor-pointer"
@@ -201,12 +200,12 @@ export default function Navbar() {
 
             {/* Menu Content */}
             <div className="px-6 py-4">
-              <ul className="space-y-5">
+              <ul className="space-y-3">
                 {NAV_LINKS.map((link) => (
                   <li key={link.href}>
                     <button
                       onClick={() => handleNavClick(link.href)}
-                      className="w-full text-left text-sm font-medium text-stone-600 hover:text-[#967353] cursor-pointer transition-colors"
+                      className="w-full border-b border-stone-200 pb-4 text-left text-sm font-medium text-stone-600 hover:text-[#967353] cursor-pointer transition-colors"
                     >
                       {link.label}
                     </button>
@@ -215,7 +214,10 @@ export default function Navbar() {
 
                 {/* 줄눈 정보 - Always Expanded */}
                 <li>
-                  <div className="text-sm font-medium text-stone-600 mb-4">줄눈 정보</div>
+                  <div className="flex flex-row w-full text-sm font-medium text-stone-600 mb-4 items-center justify-between">
+                    줄눈 정보
+                    <i className="ri-arrow-down-s-line text-xl"></i>
+                  </div>
                   <ul className="space-y-4 pl-3 border-stone-100">
                     {INFO_LINKS.map((link) => (
                       <li key={link.href}>

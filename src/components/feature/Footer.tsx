@@ -2,7 +2,6 @@ import logoDark from '../../assets/logo_d.png';
 const NAV_LINKS = [
   { label: '포트폴리오', href: '#portfolio' },
   { label: '시공범위', href: '#scope' },
-  { label: '고객후기', href: '#reviews' },
   { label: 'FAQ', href: '#faq' },
   { label: '견적문의', href: '#quote' },
 ];
