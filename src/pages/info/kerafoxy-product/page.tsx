@@ -70,22 +70,24 @@ export default function KerafoxyProductPage() {
           className="w-full h-full object-cover object-top"
         />
         <div className="absolute inset-0 bg-gradient-to-b from-black/50 via-black/40 to-black/60" />
-        <div className="absolute inset-0 flex flex-col items-center justify-center text-center px-4">
+        <div className="absolute inset-0 flex flex-col items-center justify-center text-center px-4 pt-10">
           <span className="text-stone-300 text-sm tracking-widest uppercase mb-3">제품 안내</span>
           <h1 className="text-white text-3xl md:text-5xl font-black mb-3 leading-tight">케라폭시 제품 소개</h1>
-          <p className="text-white/80 text-base md:text-lg max-w-xl">목적에 맞는 케라폭시 제품 라인업과 색상을 알아보세요</p>
+          <p className="text-white/80 text-sm md:text-base max-w-xl">목적에 맞는 케라폭시 제품 라인업과 색상을 알아보세요</p>
         </div>
       </section>
 
       {/* Breadcrumb */}
-      <div className="max-w-5xl mx-auto px-6 py-4">
-        <nav className="flex items-center gap-2 text-xs text-stone-400">
-          <Link to="/" className="hover:text-stone-600 cursor-pointer">홈</Link>
-          <i className="ri-arrow-right-s-line"></i>
-          <span className="text-stone-500">줄눈 정보</span>
-          <i className="ri-arrow-right-s-line"></i>
-          <span className="text-stone-700 font-medium">케라폭시 제품소개</span>
-        </nav>
+      <div className="w-full bg-stone-100">
+        <div className="max-w-5xl mx-auto px-6 py-4">
+          <nav className="flex items-center gap-2 text-xs text-stone-500">
+            <Link to="/" className="hover:text-stone-700 cursor-pointer">홈</Link>
+            <i className="ri-arrow-right-s-line"></i>
+            <span>줄눈 정보</span>
+            <i className="ri-arrow-right-s-line"></i>
+            <span className="text-stone-800 font-medium">케라폭시 제품소개</span>
+          </nav>
+        </div>
       </div>
 
       {/* Product Selector */}

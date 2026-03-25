@@ -70,22 +70,24 @@ export default function ComparisonPage() {
           className="w-full h-full object-cover object-top"
         />
         <div className="absolute inset-0 bg-gradient-to-b from-black/50 via-black/40 to-black/60" />
-        <div className="absolute inset-0 flex flex-col items-center justify-center text-center px-4">
+        <div className="absolute inset-0 flex flex-col items-center justify-center text-center px-4 pt-10">
           <span className="text-stone-300 text-sm tracking-widest uppercase mb-3">소재 비교 가이드</span>
           <h1 className="text-white text-3xl md:text-5xl font-black mb-3 leading-tight">폴리우레아 vs 케라폭시</h1>
-          <p className="text-white/80 text-base md:text-lg max-w-xl">두 소재의 차이점을 한눈에 비교해 최적의 선택을 하세요</p>
+          <p className="text-white/80 text-sm md:text-base max-w-xl">두 소재의 차이점을 한눈에 비교해 최적의 선택을 하세요</p>
         </div>
       </section>
 
       {/* Breadcrumb */}
-      <div className="max-w-5xl mx-auto px-6 py-4">
-        <nav className="flex items-center gap-2 text-xs text-stone-400">
-          <Link to="/" className="hover:text-stone-600 cursor-pointer">홈</Link>
-          <i className="ri-arrow-right-s-line"></i>
-          <span className="text-stone-500">줄눈 정보</span>
-          <i className="ri-arrow-right-s-line"></i>
-          <span className="text-stone-700 font-medium">폴리우레아 vs 케라폭시 비교</span>
-        </nav>
+      <div className="w-full bg-stone-100">
+        <div className="max-w-5xl mx-auto px-6 py-4">
+          <nav className="flex items-center gap-2 text-xs text-stone-500">
+            <Link to="/" className="hover:text-stone-700 cursor-pointer">홈</Link>
+            <i className="ri-arrow-right-s-line"></i>
+            <span>줄눈 정보</span>
+            <i className="ri-arrow-right-s-line"></i>
+            <span className="text-stone-800 font-medium">폴리우레아 vs 케라폭시 비교</span>
+          </nav>
+        </div>
       </div>
 
       {/* Intro */}
@@ -160,7 +162,7 @@ export default function ComparisonPage() {
           <p className="text-stone-500 text-sm mb-6">현장 상황과 요구 사항을 듣고 최적의 소재를 추천해 드립니다. 무료 현장 방문 후 소재별 견적을 함께 비교해 보세요.</p>
           <a
             href="/#quote"
-            className="inline-flex items-center gap-2 bg-stone-800 text-white text-sm font-bold px-7 py-3 rounded-full hover:bg-stone-700 transition-colors cursor-pointer whitespace-nowrap"
+            className="call-bg inline-flex items-center gap-2 bg-stone-800 text-white text-sm font-bold px-7 py-3 rounded-full hover:bg-stone-700 transition-colors cursor-pointer whitespace-nowrap"
           >
             <i className="ri-phone-line"></i>
             무료 상담 신청

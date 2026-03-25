@@ -5,7 +5,7 @@ import Footer from '../../../components/feature/Footer';
 
 const FEATURES = [
   { icon: 'ri-shield-check-line', title: '강력한 내수성', desc: '물에 강한 에폭시 성분으로 화장실·욕실의 지속적인 수분 노출에도 변형 없이 오래 유지됩니다.' },
-  { icon: 'ri-virus-off-line', title: '곰팡이·세균 차단', desc: '항균 성분이 배합되어 습한 환경에서도 곰팡이와 세균이 번식하지 않아 위생적인 공간을 유지합니다.' },
+  { icon: 'ri-bug-line', title: '곰팡이·세균 차단', desc: '항균 성분이 배합되어 습한 환경에서도 곰팡이와 세균이 번식하지 않아 위생적인 공간을 유지합니다.' },
   { icon: 'ri-palette-line', title: '다양한 색상 선택', desc: '화이트, 베이지, 그레이, 블랙 등 20여 가지 색상으로 인테리어 스타일에 맞는 선택이 가능합니다.' },
   { icon: 'ri-timer-line', title: '월등한 내구성', desc: '일반 시멘트 줄눈 대비 3~5배 긴 수명을 자랑하며, 균열·탈락 없이 깔끔한 마감이 오래 유지됩니다.' },
   { icon: 'ri-sparkling-line', title: '손쉬운 유지관리', desc: '표면이 매끄럽고 오염이 잘 스며들지 않아 간단한 물 청소만으로 항상 깨끗한 상태를 유지할 수 있습니다.' },
@@ -44,22 +44,24 @@ export default function KerafoxyPage() {
           className="w-full h-full object-cover object-top"
         />
         <div className="absolute inset-0 bg-gradient-to-b from-black/50 via-black/40 to-black/60" />
-        <div className="absolute inset-0 flex flex-col items-center justify-center text-center px-4">
+        <div className="absolute inset-0 flex flex-col items-center justify-center text-center px-4 pt-10">
           <span className="text-stone-300 text-sm tracking-widest uppercase mb-3">줄눈 소재 가이드</span>
           <h1 className="text-white text-3xl md:text-5xl font-black mb-3 leading-tight">케라폭시 줄눈이란?</h1>
-          <p className="text-white/80 text-base md:text-lg max-w-xl">에폭시 기반 고성능 줄눈 소재의 특징과 장점을 알아보세요</p>
+          <p className="text-white/80 text-sm md:text-base max-w-xl">에폭시 기반 고성능 줄눈 소재의 특징과 장점을 알아보세요</p>
         </div>
       </section>
 
       {/* Breadcrumb */}
-      <div className="max-w-5xl mx-auto px-6 py-4">
-        <nav className="flex items-center gap-2 text-xs text-stone-400">
-          <Link to="/" className="hover:text-stone-600 cursor-pointer">홈</Link>
-          <i className="ri-arrow-right-s-line"></i>
-          <span className="text-stone-500">줄눈 정보</span>
-          <i className="ri-arrow-right-s-line"></i>
-          <span className="text-stone-700 font-medium">케라폭시 줄눈</span>
-        </nav>
+      <div className="w-full bg-stone-100">
+        <div className="max-w-5xl mx-auto px-6 py-4">
+          <nav className="flex items-center gap-2 text-xs text-stone-500">
+            <Link to="/" className="hover:text-stone-700 cursor-pointer">홈</Link>
+            <i className="ri-arrow-right-s-line"></i>
+            <span>줄눈 정보</span>
+            <i className="ri-arrow-right-s-line"></i>
+            <span className="text-stone-800 font-medium">케라폭시 줄눈</span>
+          </nav>
+        </div>
       </div>
 
       {/* Intro */}
@@ -94,7 +96,7 @@ export default function KerafoxyPage() {
         <div className="max-w-5xl mx-auto px-6">
           <h2 className="text-2xl md:text-3xl font-black text-stone-800 mb-2 text-center">케라폭시 줄눈의 5가지 핵심 장점</h2>
           <p className="text-stone-500 text-center mb-10 text-sm">일반 시멘트 줄눈과 비교할 수 없는 성능 차이</p>
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-3">
             {FEATURES.map((f) => (
               <div key={f.title} className="bg-white rounded-2xl p-6">
                 <div className="w-12 h-12 flex items-center justify-center bg-stone-100 rounded-xl mb-4">
@@ -141,8 +143,8 @@ export default function KerafoxyPage() {
                   className="w-full h-full object-cover object-top"
                 />
               </div>
-              <div className="bg-stone-700 px-5 py-3">
-                <span className="text-stone-300 text-sm font-medium">시공 전 — 시멘트 줄눈</span>
+              <div className="bg-stone-900 px-5 py-3">
+                <span className="text-stone-300 text-base font-medium">시공 전 — 시멘트 줄눈</span>
                 <p className="text-stone-400 text-xs mt-1">변색·균열·곰팡이 발생, 청소 어려움</p>
               </div>
             </div>
@@ -155,8 +157,8 @@ export default function KerafoxyPage() {
                 />
               </div>
               <div className="bg-stone-600 px-5 py-3">
-                <span className="text-white text-sm font-medium">시공 후 — 케라폭시 줄눈</span>
-                <p className="text-stone-300 text-xs mt-1">깨끗하고 균일한 마감, 위생적인 공간 유지</p>
+                <span className="text-white text-base font-medium">시공 후 — 케라폭시 줄눈</span>
+                <p className="text-stone-200 text-xs mt-1">깨끗하고 균일한 마감, 위생적인 공간 유지</p>
               </div>
             </div>
           </div>

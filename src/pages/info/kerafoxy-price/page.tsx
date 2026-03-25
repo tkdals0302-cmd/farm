@@ -51,22 +51,24 @@ export default function KerafoxyPricePage() {
           className="w-full h-full object-cover object-top"
         />
         <div className="absolute inset-0 bg-gradient-to-b from-black/50 via-black/40 to-black/60" />
-        <div className="absolute inset-0 flex flex-col items-center justify-center text-center px-4">
+        <div className="absolute inset-0 flex flex-col items-center justify-center text-center px-4 pt-10">
           <span className="text-stone-300 text-sm tracking-widest uppercase mb-3">비용 안내</span>
           <h1 className="text-white text-3xl md:text-5xl font-black mb-3 leading-tight">케라폭시 가격 안내</h1>
-          <p className="text-white/80 text-base md:text-lg max-w-xl">시공 비용과 영향 요인을 투명하게 공개합니다</p>
+          <p className="text-white/80 text-sm md:text-base max-w-xl">시공 비용과 영향 요인을 투명하게 공개합니다</p>
         </div>
       </section>
 
       {/* Breadcrumb */}
-      <div className="max-w-5xl mx-auto px-6 py-4">
-        <nav className="flex items-center gap-2 text-xs text-stone-400">
-          <Link to="/" className="hover:text-stone-600 cursor-pointer">홈</Link>
-          <i className="ri-arrow-right-s-line"></i>
-          <span className="text-stone-500">줄눈 정보</span>
-          <i className="ri-arrow-right-s-line"></i>
-          <span className="text-stone-700 font-medium">케라폭시 가격</span>
-        </nav>
+      <div className="w-full bg-stone-100">
+        <div className="max-w-5xl mx-auto px-6 py-4">
+          <nav className="flex items-center gap-2 text-xs text-stone-500">
+            <Link to="/" className="hover:text-stone-700 cursor-pointer">홈</Link>
+            <i className="ri-arrow-right-s-line"></i>
+            <span>줄눈 정보</span>
+            <i className="ri-arrow-right-s-line"></i>
+            <span className="text-stone-800 font-medium">케라폭시 가격</span>
+          </nav>
+        </div>
       </div>
 
       {/* Intro */}

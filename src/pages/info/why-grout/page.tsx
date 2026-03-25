@@ -73,22 +73,24 @@ export default function WhyGroutPage() {
           className="w-full h-full object-cover object-top"
         />
         <div className="absolute inset-0 bg-gradient-to-b from-black/50 via-black/40 to-black/60" />
-        <div className="absolute inset-0 flex flex-col items-center justify-center text-center px-4">
+        <div className="absolute inset-0 flex flex-col items-center justify-center text-center px-4 pt-10">
           <span className="text-stone-300 text-sm tracking-widest uppercase mb-3">시공 필요성</span>
           <h1 className="text-white text-3xl md:text-5xl font-black mb-3 leading-tight">줄눈시공 하는 이유</h1>
-          <p className="text-white/80 text-base md:text-lg max-w-xl">위생·미관·방수까지, 줄눈시공이 반드시 필요한 4가지 이유</p>
+          <p className="text-white/80 text-sm md:text-base max-w-xl">위생·미관·방수까지, 줄눈시공이 반드시 필요한 4가지 이유</p>
         </div>
       </section>
 
       {/* Breadcrumb */}
-      <div className="max-w-5xl mx-auto px-6 py-4">
-        <nav className="flex items-center gap-2 text-xs text-stone-400">
-          <Link to="/" className="hover:text-stone-600 cursor-pointer">홈</Link>
-          <i className="ri-arrow-right-s-line"></i>
-          <span className="text-stone-500">줄눈 정보</span>
-          <i className="ri-arrow-right-s-line"></i>
-          <span className="text-stone-700 font-medium">줄눈시공 하는 이유</span>
-        </nav>
+      <div className="w-full bg-stone-100">
+        <div className="max-w-5xl mx-auto px-6 py-4">
+          <nav className="flex items-center gap-2 text-xs text-stone-500">
+            <Link to="/" className="hover:text-stone-700 cursor-pointer">홈</Link>
+            <i className="ri-arrow-right-s-line"></i>
+            <span>줄눈 정보</span>
+            <i className="ri-arrow-right-s-line"></i>
+            <span className="text-stone-800 font-medium">줄눈시공 하는 이유</span>
+          </nav>
+        </div>
       </div>
 
       {/* Intro */}
@@ -105,26 +107,25 @@ export default function WhyGroutPage() {
       </section>
 
       {/* 4 Reasons */}
-      <section className="max-w-5xl mx-auto px-6 pb-16">
-        <h2 className="text-2xl font-black text-stone-800 mb-8">줄눈시공을 해야 하는 4가지 이유</h2>
-        <div className="space-y-10">
-          {REASONS.map((r, i) => (
-            <div key={r.num} className={`grid md:grid-cols-2 gap-8 items-center ${i % 2 === 1 ? 'md:direction-rtl' : ''}`}>
-              <div className={i % 2 === 1 ? 'md:order-2' : ''}>
-                <div className="flex items-center gap-3 mb-4">
-                  <span className="text-4xl font-black text-stone-200">{r.num}</span>
-                  <div className="w-10 h-10 flex items-center justify-center bg-stone-100 rounded-xl">
-                    <i className={`${r.icon} text-xl text-stone-600`}></i>
+      <section className="bg-stone-50 py-16">
+        <div className="max-w-5xl mx-auto px-6">
+          <h2 className="text-3xl font-black text-stone-800 mb-12">줄눈시공을 해야 하는 4가지 이유</h2>
+          <div className="space-y-14">
+            {REASONS.map((r, i) => (
+              <div key={r.num} className={`grid md:grid-cols-2 gap-6 items-center ${i % 2 === 1 ? 'md:direction-rtl' : ''}`}>
+                <div className={i % 2 === 1 ? 'md:order-2' : ''}>
+                  <div className="mb-3">
+                    <span className="text-4xl font-black text-stone-300">{r.num}</span>
                   </div>
+                  <h3 className="text-lg font-black text-stone-800">{r.title}</h3>
+                  <p className="text-stone-500 text-sm leading-relaxed">{r.desc}</p>
                 </div>
-                <h3 className="text-lg font-black text-stone-800 mb-3">{r.title}</h3>
-                <p className="text-stone-500 text-sm leading-relaxed">{r.desc}</p>
+                <div className={`rounded-2xl overflow-hidden h-56 ${i % 2 === 1 ? 'md:order-1' : ''}`}>
+                  <img src={r.img} alt={r.title} className="w-full h-full object-cover object-top" />
+                </div>
               </div>
-              <div className={`rounded-2xl overflow-hidden h-56 ${i % 2 === 1 ? 'md:order-1' : ''}`}>
-                <img src={r.img} alt={r.title} className="w-full h-full object-cover object-top" />
-              </div>
-            </div>
-          ))}
+            ))}
+          </div>
         </div>
       </section>
 
