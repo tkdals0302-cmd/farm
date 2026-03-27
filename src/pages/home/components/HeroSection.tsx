@@ -28,7 +28,7 @@ export default function HeroSection() {
   const videoId = 'YOUR_VIDEO_ID'; // 실제 시공 영상 ID로 교체하세요
 
   return (
-    <section className="relative w-full overflow-hidden" style={{ height: '100dvh', minHeight: '600px' }}>
+    <section className="relative w-full overflow-hidden" style={{ height: '100svh', minHeight: '600px' }}>
       {/* Background Image (Video Placeholder) */}
       {/*
       <div className="absolute inset-0">
@@ -52,7 +52,7 @@ export default function HeroSection() {
       </div>
 
       {/* Content */}
-      <div className="relative z-10 w-full h-full flex flex-col items-center pt-[24dvh] sm:pt-[24dvh] pb-[20px] sm:pb-[60px] px-6 text-center">
+      <div className="relative z-10 w-full h-full flex flex-col items-center pt-[24svh] sm:pt-[24svh] pb-[20px] sm:pb-[60px] px-6 text-center">
         <div className="mb-3 flex gap-2 justify-center flex-wrap text-xs md:text-sm font-medium md:font-light">
           {/* <span className="inline-block bg-white/20 backdrop-blur-sm text-white tracking-widest uppercase px-4 py-1.5 rounded-full border border-white/30">
             업계 최초 가격 투명성 보장
@@ -123,11 +123,11 @@ export default function HeroSection() {
           <div className="max-w-3xl mx-auto px-1 sm:px-6 py-3 sm:py-5 grid grid-cols-3 divide-x divide-white/20">
             {[
               { value: count, label: '시공 완료', suffix: '+' },
-              { value: '3년 AS', label: '무상 AS', suffix: '' },
+              { value: '3년 무상 AS', label: '책임 보장', suffix: '' },
               { value: '99.8%', label: '고객 만족도', suffix: '' },
             ].map((stat) => (
               <div key={stat.label} className="flex flex-col items-center px-4">
-                <span className="text-xl md:text-3xl font-black text-white">
+                <span className="text-lg md:text-3xl font-black text-white">
                   {typeof stat.value === 'number' ? stat.value.toLocaleString() : stat.value}{stat.suffix}
                 </span>
                 <span className="text-white/60 text-xs mt-1">{stat.label}</span>

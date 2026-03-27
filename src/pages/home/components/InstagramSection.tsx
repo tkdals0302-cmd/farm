@@ -66,7 +66,7 @@ export default function InstagramSection() {
             </h2>
           </div>
           <a
-            href="https://www.instagram.com/ssang_men"
+            href="https://www.instagram.com/detailline_"
             target="_blank"
             rel="nofollow noreferrer"
             className="inline-flex items-center gap-2 px-10 py-3 bg-stone-900 text-white text-sm font-semibold rounded-full hover:bg-stone-700 transition-all cursor-pointer whitespace-nowrap self-start md:self-auto"
@@ -91,7 +91,7 @@ export default function InstagramSection() {
           {INSTAGRAM_POSTS.map((post) => (
             <a
               key={post.id}
-              href="https://www.instagram.com/ssang_men"
+              href="https://www.instagram.com/detailline_"
               target="_blank"
               rel="nofollow noreferrer"
               className="group relative rounded-2xl overflow-hidden cursor-pointer bg-stone-200"
@@ -123,7 +123,7 @@ export default function InstagramSection() {
             더 많은 시공 사례를 인스타그램에서 확인하세요{' '}
             <br />
             <a
-              href="https://www.instagram.com/ssang_men"
+              href="https://www.instagram.com/detailline_"
               target="_blank"
               rel="nofollow noreferrer"
               className="text-stone-900 font-semibold underline underline-offset-2 cursor-pointer hover:text-stone-700"
