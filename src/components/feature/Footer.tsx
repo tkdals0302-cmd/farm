@@ -24,7 +24,7 @@ export default function Footer() {
             <img
               src={logoDark}
               alt="줄눈시공 전문 로고"
-              className="h-10 w-auto object-contain mb-4 brightness-200"
+              className="h-10 w-auto object-contain mb-4"
             />
             <p className="text-stone-400 text-sm leading-relaxed mb-5">
               집요함이 만들어 내는 완벽함, 디테일라인<br />

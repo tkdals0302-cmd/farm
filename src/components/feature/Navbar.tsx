@@ -81,7 +81,7 @@ export default function Navbar() {
         isScrolled ? 'bg-white shadow-sm' : 'bg-transparent'
       }`}
     >
-      <div className={`px-5 md:px-12 lg:px-20 h-12 md:h-auto md:py-4 shadow-md flex items-center transition-all duration-300`}>
+      <div className={`px-5 md:px-12 lg:px-20 h-12 md:h-auto md:py-4 flex items-center transition-all duration-300`}>
         {/* 좌측 - Logo */}
         <div className="flex-1">
           <Link to="/" className="flex items-center gap-3 cursor-pointer" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}>

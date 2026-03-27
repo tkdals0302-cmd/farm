@@ -1,4 +1,5 @@
 import { useState, useRef, useEffect } from 'react';
+import mainVideo from '../../../assets/main_video.gif';
 
 export default function HeroSection() {
   const [isMuted, setIsMuted] = useState(true);
@@ -29,29 +30,26 @@ export default function HeroSection() {
   return (
     <section className="relative w-full overflow-hidden" style={{ height: '100dvh', minHeight: '600px' }}>
       {/* Background Image (Video Placeholder) */}
+      {/*
       <div className="absolute inset-0">
         <img
           src="https://readdy.ai/api/search-image?query=professional%20grout%20tile%20work%20worker%20applying%20white%20grout%20bathroom%20tiles%20close%20up%20dramatic%20lighting%20professional%20craftsmanship%20renovation%20interior%20construction%20dark%20moody%20tones%20high%20contrast%20detailed&width=1920&height=1080&seq=hero1&orientation=landscape"
           alt="줄눈시공 메인 배너"
           className="w-full h-full object-cover object-center"
         />
-        {/* Dark Overlay */}
-        <div className="absolute inset-0 bg-gradient-to-b from-black/50 via-black/40 to-black/70"></div>
-      </div>
-
-      {/* Video Embed (실제 영상 사용 시 주석 해제) */}
-      {/*
-      <div className="absolute inset-0 pointer-events-none">
-        <iframe
-          ref={iframeRef}
-          src={`https://www.youtube.com/embed/${videoId}?autoplay=1&mute=1&loop=1&playlist=${videoId}&controls=0&showinfo=0&rel=0&modestbranding=1`}
-          className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[177.77vh] h-[56.25vw] min-w-full min-h-full"
-          allow="autoplay; encrypted-media"
-          frameBorder="0"
-        ></iframe>
         <div className="absolute inset-0 bg-gradient-to-b from-black/50 via-black/40 to-black/70"></div>
       </div>
       */}
+
+      {/* GIF Embed */}
+      <div className="absolute inset-0 pointer-events-none">
+        <img
+          src={mainVideo}
+          alt="줄눈시공 메인 배너"
+          className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[177.77vh] h-[56.25vw] min-w-full min-h-full object-cover"
+        />
+        <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/60 to-black/70"></div>
+      </div>
 
       {/* Content */}
       <div className="relative z-10 w-full h-full flex flex-col items-center pt-[24dvh] sm:pt-[24dvh] pb-[20px] sm:pb-[60px] px-6 text-center">
@@ -66,24 +64,31 @@ export default function HeroSection() {
           {/* {이건 일반 버전 } */}
           {/* <span className="inline-block bg-white/20 backdrop-blur-sm text-white tracking-widest uppercase px-4 py-1.5 rounded-full border border-white/30"> */}
 
-            케어 플랜 3년 무상보장
+            케어 플랜 3년 무상 보장
           </span>
         </div>
 
-        <h1 className="text-3xl md:text-6xl font-black text-white leading-tight mb-3 pb-1 tracking-tight"
+        {/* <h1 className="text-3xl md:text-6xl font-black text-white leading-tight mb-3 pb-1 tracking-tight"
           style={{ lineHeight: '1.3' }}>
           디테일이 다른 공간의 시작<br />
           <span className="text-stone-300">디테일라인</span>
+        </h1> */}
+
+        <h1 className="text-3xl md:text-6xl font-black text-white leading-tight mb-3 pb-1 tracking-tight"
+          style={{ lineHeight: '1.3' }}>
+          낡은 줄눈, 하루만에<br />
+          <span className="shine-text">새것처럼, 디테일라인</span>
         </h1>
-        
+
         {/* pc에서 표기 */}
         <p className="hidden md:block text-white/80 text-sm md:text-base mb-10 max-w-xl leading-relaxed">
-          1px의 디테일까지 완성하는 시공, 차원이 다른 마감을 경험하세요
+          시공 전, 후 사진으로 먼저 확인하세요 ➡️ 무료견적 24시간 이내 답변드립니다 ❤️
         </p>
 
         {/* mobile에서 표기 */}
         <p className="block md:hidden text-white/80 text-sm md:text-base mb-10 max-w-xl leading-relaxed">
-          1px의 디테일까지 완성하는 시공, 차원이 다른 마감을 경험하세요
+          시공 전, 후 사진으로 먼저 확인하세요 ➡️ <br>
+          </br> 무료견적 24시간 이내 답변드립니다 ❤️
         </p>
 
 

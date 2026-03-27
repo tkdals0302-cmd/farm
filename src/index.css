@@ -67,6 +67,34 @@ html {
   mask-composite: exclude;
 }
 
+.shine-text {
+  background: linear-gradient(100deg, #b8b8b8 12%, #ffffff 45%, #b8b8b8 78%);
+  background-size: 220% auto;
+  animation: text-glow 2s ease-in-out infinite;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  -webkit-text-fill-color: transparent;
+  text-shadow: 0 0 8px rgba(255, 255, 255, 0.25);
+}
+
+@keyframes text-glow {
+  0%,
+  100% {
+    text-shadow:
+      0 0 8px rgba(255, 255, 255, 0.18),
+      0 0 16px rgba(255, 255, 255, 0.08);
+    filter: brightness(0.96);
+  }
+
+  50% {
+    text-shadow:
+      0 0 12px rgba(255, 255, 255, 0.32),
+      0 0 24px rgba(255, 255, 255, 0.18);
+    filter: brightness(1.08);
+  }
+}
+
 @keyframes bg-shine {
   0% { background-position: 0% center; }
   100% { background-position: 200% center; }
