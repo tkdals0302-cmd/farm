@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import Navbar from '../../../components/feature/Navbar';
 import Footer from '../../../components/feature/Footer';
+import PriceCalculator from '../../../components/feature/PriceCalculator';
 
 const PRICE_TABLE = [
   { area: '화장실 (3~5평)', range: '15만 ~ 25만 원', note: '소규모, 기본 시공' },
@@ -114,7 +115,7 @@ export default function KerafoxyPricePage() {
       {/* Price Table */}
       <section className="bg-stone-50 py-16">
         <div className="max-w-5xl mx-auto px-6">
-          <h2 className="text-2xl md:text-3xl font-black text-stone-800 mb-2">공간별 케라폭시 가격 예시</h2>
+          <h2 className="text-2xl md:text-3xl font-black text-stone-800 mb-2">공간별 시공 가격 예시</h2>
           <p className="text-stone-500 text-sm mb-10">실제 시공 사례를 바탕으로 한 참고 가격입니다</p>
           <div className="overflow-hidden rounded-2xl border border-stone-200 bg-white">
             <table className="w-full text-sm">
@@ -137,6 +138,7 @@ export default function KerafoxyPricePage() {
             </table>
           </div>
           <p className="text-stone-400 text-xs mt-3">※ 위 가격은 참고용이며, 정확한 견적은 현장 방문 후 안내드립니다.</p>
+          <PriceCalculator />
         </div>
       </section>
 
