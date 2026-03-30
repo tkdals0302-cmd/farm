@@ -132,6 +132,21 @@ export default function KerafoxyPricePage() {
         </div>
       </section>
 
+      {/* CTA Banner */}
+      <section className="bg-stone-50 py-12">
+        <div className="max-w-5xl mx-auto px-6 text-center">
+          <h2 className="text-xl font-black text-stone-800 mb-3">정확한 시공 비용이 궁금하신가요?</h2>
+          <p className="text-stone-500 text-sm mb-6">현장 상황에 따라 가격이 달라질 수 있습니다. 무료 현장 방문 후 공간별 맞춤 견적을 안내해 드립니다.</p>
+          <a
+            href="/#quote"
+            className="call-bg inline-flex items-center gap-2 bg-stone-800 text-white text-sm font-bold px-7 py-3 rounded-full hover:bg-stone-700 transition-colors cursor-pointer whitespace-nowrap"
+          >
+            <i className="ri-phone-line"></i>
+            무료 견적 신청
+          </a>
+        </div>
+      </section>
+
       {/* Related Articles */}
       <section className="max-w-5xl mx-auto px-6 py-16">
         <h2 className="text-xl font-black text-stone-800 mb-6">관련 정보 더 보기</h2>
