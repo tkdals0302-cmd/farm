@@ -89,9 +89,9 @@ export default function PriceCalculator() {
           value={r2}
           onChange={(e) => setR2(e.target.value)}
           disabled={!showR2 || !r1}
-          className={`pc-select ${!showR2 ? 'opacity-40' : ''}`}
+          className="pc-select"
         >
-          <option value="">{showR2 ? '시공 범위' : '-'}</option>
+          <option value="">{showR2 ? '시공 범위' : '시공 범위'}</option>
           {r2Options.map((o) => (
             <option key={o} value={o}>{o}</option>
           ))}
@@ -112,7 +112,7 @@ export default function PriceCalculator() {
       {/* 포함 항목 */}
       <div className="flex flex-wrap gap-3 mb-6">
         {INCLUDES.map((item) => (
-          <span key={item} className="inline-flex items-center gap-1.5 text-xs font-medium px-3 py-1.5 rounded-full bg-green-50 text-green-800">
+          <span key={item} className="inline-flex items-center gap-1.5 text-xs font-medium px-3 py-1.5 rounded-full bg-green-100 text-green-700">
             <i className="ri-check-line"></i>
             {item}
           </span>
@@ -121,8 +121,9 @@ export default function PriceCalculator() {
 
       {/* 가격 카드 */}
       {!isReady ? (
-        <div className="text-center py-16 text-stone-400 text-sm">
-          공간과 집 유형을 선택하면 견적이 나와요
+        <div className="text-center py-16 text-stone-500 text-base flex flex-col items-center gap-2">
+          <i className="ri-home-heart-line text-6xl text-stone-300" aria-hidden="true"></i>
+          <span className="font-bold">공간과 집 유형을 선택하면 견적이 나와요</span>
         </div>
       ) : (
         <>
@@ -175,7 +176,7 @@ export default function PriceCalculator() {
         }
         .pc-select:disabled {
           cursor: not-allowed;
-          background-color: #fafafa;
+          background-color: #e4e4e7;
           color: #a1a1aa;
         }
       `}</style>
