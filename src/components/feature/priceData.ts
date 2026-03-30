@@ -116,6 +116,7 @@ export const SET_CARDS = [
   {
     label: '세트 A · 절약 위주',
     name: '화장실 2개 + 현관 + 베란다',
+    spaces: ['화장실', '현관', '베란다'],
     items: [
       { name: '화장실 바닥 2개', price: 60 },
       { name: '현관', price: 5 },
@@ -128,6 +129,7 @@ export const SET_CARDS = [
   {
     label: '세트 B · 구축 리모델링',
     name: '화장실 전체 + 현관 + 외부화장실',
+    spaces: ['화장실', '현관', '외부화장실'],
     items: [
       { name: '화장실 전체 1개', price: 100 },
       { name: '현관', price: 10 },
@@ -140,6 +142,7 @@ export const SET_CARDS = [
   {
     label: '세트 C · 세인줄 (구축)',
     name: '화장실 2개 + 거실 + 현관 + 베란다 + 외부화장실',
+    spaces: ['화장실', '거실', '현관', '베란다', '외부화장실'],
     items: [
       { name: '화장실 전체 2개', price: 190 },
       { name: '거실', price: 150 },

@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import Navbar from '../../../components/feature/Navbar';
 import Footer from '../../../components/feature/Footer';
@@ -13,12 +13,6 @@ const FACTORS = [
   { icon: 'ri-map-pin-line', title: '지역·접근성', desc: '지방이나 접근이 어려운 고층 건물의 경우 추가 출장비가 반영될 수 있습니다.' },
 ];
 
-const FAQS = [
-  { q: '케라폭시 가격이 일반 줄눈보다 비싼 이유가 있나요?', a: '케라폭시는 2액형 에폭시 소재로 자재비 자체가 시멘트 줄눈보다 높고, 혼합·시공 기술이 필요해 전문 인건비가 함께 반영됩니다. 하지만 수명이 3~5배 길어 장기적으로는 경제적입니다.' },
-  { q: '추가 비용이 발생하는 경우는?', a: '기존 줄눈 제거, 타일 파손 부분 보수, 방수 추가 시공 등 상황에 따라 추가 비용이 발생할 수 있습니다. 현장 방문 시 정확히 안내해 드립니다.' },
-  { q: '부분 시공도 가능한가요?', a: '네, 특정 구역만 선택적으로 시공 가능합니다. 다만 최소 시공 비용이 적용될 수 있습니다.' },
-];
-
 const RELATED = [
   { href: '/info/kerafoxy', title: '케라폭시 줄눈이란?', desc: '에폭시 줄눈 소재의 특징과 장점' },
   { href: '/info/kerafoxy-product', title: '케라폭시 제품 소개', desc: '제품 라인업과 색상 가이드' },
@@ -27,8 +21,6 @@ const RELATED = [
 ];
 
 export default function KerafoxyPricePage() {
-  const [openFaq, setOpenFaq] = useState<number | null>(null);
-
   useEffect(() => {
     window.scrollTo(0, 0);
     document.title = '케라폭시 가격 안내 | 시공 비용과 영향 요인 총정리 | 줄눈시공 전문';
@@ -66,7 +58,23 @@ export default function KerafoxyPricePage() {
         </div>
       </div>
 
-      {/* Intro */}
+      {/* PriceTable */}
+      <section className="max-w-5xl mx-auto px-6 py-12">
+        <h2 className="text-2xl md:text-3xl font-black text-stone-800 mb-2">2026 가격 테이블</h2>
+        <PriceTable />
+      </section>
+
+      {/* Price Calculator */}
+      <section className="bg-stone-50 py-16">
+        <div className="max-w-5xl mx-auto px-6">
+          <h2 className="text-2xl md:text-3xl font-black text-stone-800 mb-2">공간별 시공 가격 예시</h2>
+          <p className="text-stone-500 text-sm mb-10">간편하게 시공 견적을 확인해보세요</p>
+          <PriceCalculator />
+        </div>
+      </section>
+
+      {/* Intro (주석 처리) */}
+      {/*
       <section className="max-w-5xl mx-auto px-6 py-12">
         <div className="grid md:grid-cols-2 gap-12 items-center">
           <div>
@@ -105,20 +113,11 @@ export default function KerafoxyPricePage() {
           </div>
         </div>
       </section>
-
-      {/* Price Table */}
-      <section className="bg-stone-50 py-16">
-        <div className="max-w-5xl mx-auto px-6">
-          <h2 className="text-2xl md:text-3xl font-black text-stone-800 mb-2">공간별 시공 가격 예시</h2>
-          <p className="text-stone-500 text-sm mb-10">실제 시공 사례를 바탕으로 한 참고 가격입니다</p>
-          <PriceCalculator />
-          <PriceTable />
-        </div>
-      </section>
+      */}
 
       {/* Factors */}
       <section className="max-w-5xl mx-auto px-6 py-16">
-        <h2 className="text-2xl md:text-3xl font-black text-stone-800 mb-2">케라폭시 가격에 영향을 주는 요인</h2>
+        <h2 className="text-2xl md:text-3xl font-black text-stone-800 mb-2">시공 가격에 영향을 주는 요인</h2>
         <p className="text-stone-500 text-sm mb-10">이런 요소들로 인해 견적이 달라집니다</p>
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-5">
           {FACTORS.map((f) => (
@@ -130,31 +129,6 @@ export default function KerafoxyPricePage() {
               <p className="text-stone-500 text-sm leading-relaxed">{f.desc}</p>
             </div>
           ))}
-        </div>
-      </section>
-
-      {/* FAQ */}
-      <section className="bg-stone-50 py-16">
-        <div className="max-w-5xl mx-auto px-6">
-          <h2 className="text-2xl font-black text-stone-800 mb-8">가격 관련 자주 묻는 질문</h2>
-          <div className="space-y-3">
-            {FAQS.map((faq, i) => (
-              <div key={i} className="bg-white rounded-2xl overflow-hidden">
-                <button
-                  onClick={() => setOpenFaq(openFaq === i ? null : i)}
-                  className="w-full px-6 py-5 flex items-center justify-between text-left cursor-pointer"
-                >
-                  <span className="font-semibold text-stone-800 text-base">{faq.q}</span>
-                  <i className={`ri-arrow-down-s-line text-stone-400 transition-transform ${openFaq === i ? 'rotate-180' : ''}`}></i>
-                </button>
-                {openFaq === i && (
-                  <div className="px-6 pb-5">
-                    <p className="text-stone-500 text-sm leading-relaxed">{faq.a}</p>
-                  </div>
-                )}
-              </div>
-            ))}
-          </div>
         </div>
       </section>
 

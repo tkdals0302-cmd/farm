@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { PRICE_DATA, SPACES, HOUSE_TYPES } from './priceData';
+import { PRICE_DATA, SPACES, HOUSE_TYPES, SET_CARDS } from './priceData';
 import type { HouseType } from './priceData';
 
 const INCLUDES = ['자재비 포함', '인건비 포함', '출장비 포함', '5년 무상 A/S'];
@@ -36,18 +36,19 @@ export default function PriceCalculator() {
   // 가격 조회
   const getPrice = (material: 'kera' | 'poly'): number | null | undefined => {
     if (!data || !r1) return undefined;
+    if (!(r1 in data.prices)) return undefined;
     const priceBlock = data.prices[r1];
     if (priceBlock === null) return null; // 별도 협의
 
     if (showR2) {
       if (!r2) return undefined;
-      const nested = (data.prices as any)[r1];
+      const nested = priceBlock as any;
       if (!nested || !nested[r2]) return undefined;
       const entry = nested[r2];
-      return entry[material]?.[houseType] ?? undefined;
+      return entry?.[material]?.[houseType] ?? undefined;
     }
 
-    return (priceBlock as any)[material]?.[houseType] ?? undefined;
+    return (priceBlock as any)?.[material]?.[houseType] ?? undefined;
   };
 
   const keraPrice = getPrice('kera');
@@ -144,13 +145,34 @@ export default function PriceCalculator() {
             />
           </div>
 
-          {/* 세트 할인 배너 */}
-          {data?.set && (
-            <div className="mt-4 rounded-xl border border-amber-300 bg-amber-50 px-5 py-4">
-              <p className="font-bold text-amber-900 text-sm mb-1">{data.set.title}</p>
-              <p className="text-amber-800 text-xs leading-relaxed">{data.set.desc}</p>
-            </div>
-          )}
+          {/* 매칭 세트 할인 */}
+          {(() => {
+            const matched = SET_CARDS.filter((c) => c.spaces.includes(space));
+            if (matched.length === 0) return null;
+            return (
+              <div className="mt-6">
+                <p className="text-sm font-bold text-stone-800 mb-3">
+                  <i className="ri-price-tag-3-line mr-1"></i>
+                  이 공간이 포함된 세트 할인
+                </p>
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                  {matched.map((card) => (
+                    <div key={card.label} className="rounded-xl border border-stone-200 bg-white p-4">
+                      <span className="text-xs font-bold text-stone-500">{card.label}</span>
+                      <p className="font-bold text-stone-800 text-sm mt-1 mb-2">{card.name}</p>
+                      <div className="flex items-center gap-2">
+                        <span className="text-stone-400 text-sm line-through">{card.original}만원</span>
+                        <span className="text-stone-800 text-base font-black">{card.final}만원</span>
+                        <span className="text-xs font-bold px-2 py-0.5 rounded-md bg-green-50 text-green-800">
+                          {card.save}만원 절약
+                        </span>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            );
+          })()}
         </>
       )}
 
@@ -198,11 +220,11 @@ function PriceCard({
   return (
     <div
       className={`relative rounded-xl p-6 ${
-        isRec ? 'border-2 border-stone-800 bg-white' : 'border border-stone-200 bg-white'
+        isRec ? 'border-2 border-green-600 bg-white' : 'border border-stone-200 bg-white'
       }`}
     >
       {isRec && (
-        <span className="absolute -top-3 left-5 bg-stone-800 text-white text-xs font-bold px-3 py-1 rounded-full">
+        <span className="absolute -top-3 left-5 bg-green-600 text-white text-xs font-bold px-3 py-1 rounded-full">
           {recLabel}
         </span>
       )}
