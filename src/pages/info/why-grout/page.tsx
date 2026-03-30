@@ -38,7 +38,7 @@ const PROBLEMS = [
   { icon: 'ri-alert-line', title: '곰팡이 대량 번식', desc: '검은 곰팡이가 타일 줄눈을 따라 번지며 제거가 점점 어려워집니다.' },
   { icon: 'ri-drop-line', title: '물이 벽·바닥 내부로 침투', desc: '균열된 줄눈을 통해 물이 내부로 스며들어 구조 손상이 시작됩니다.' },
   { icon: 'ri-grid-line', title: '타일 박리·탈락', desc: '수분 침투로 접착력이 약해지며 타일이 들뜨거나 깨져나갑니다.' },
-  { icon: 'ri-nose-line', title: '악취 발생', desc: '유기물과 습기가 결합해 욕실 특유의 불쾌한 냄새가 심해집니다.' },
+  { icon: 'ri-virus-line', title: '악취 발생', desc: '유기물과 습기가 결합해 욕실 특유의 불쾌한 냄새가 심해집니다.' },
 ];
 
 const TIMING = [
@@ -141,7 +141,7 @@ export default function WhyGroutPage() {
                   <i className={`${p.icon} text-xl text-stone-300`}></i>
                 </div>
                 <h3 className="font-bold text-white text-sm mb-2">{p.title}</h3>
-                <p className="text-stone-400 text-xs leading-relaxed">{p.desc}</p>
+                <p className="text-stone-400 text-sm leading-relaxed">{p.desc}</p>
               </div>
             ))}
           </div>
@@ -160,7 +160,7 @@ export default function WhyGroutPage() {
               </div>
               <div>
                 <h3 className="font-bold text-stone-800 mb-1 text-sm">{t.period}</h3>
-                <p className="text-stone-500 text-xs leading-relaxed">{t.desc}</p>
+                <p className="text-stone-500 text-sm leading-relaxed">{t.desc}</p>
               </div>
             </div>
           ))}

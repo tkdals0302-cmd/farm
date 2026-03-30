@@ -2,17 +2,18 @@ import { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import Navbar from '../../../components/feature/Navbar';
 import Footer from '../../../components/feature/Footer';
+import comparisonHero from '../../../assets/images/info/comparison/comparison-hero.jpg';
 
 const COMPARE_ROWS = [
   { category: '소재 성분', kerafoxy: '에폭시 수지 + 경화제 (2액형)', polyurea: '폴리우레아 수지 (1액형)' },
   { category: '경화 방식', kerafoxy: '화학 반응 경화 (수동 혼합)', polyurea: '자연 경화 (습기·공기 반응)' },
-  { category: '내수성', kerafoxy: '★★★★★ 탁월', polyurea: '★★★★☆ 우수' },
+  { category: '내수성', kerafoxy: '★★★★★ 탁월', polyurea: '★★★☆☆ 보통' },
   { category: '항균성', kerafoxy: '★★★★★ 탁월', polyurea: '★★★☆☆ 보통' },
-  { category: '내구성·수명', kerafoxy: '10~15년 이상', polyurea: '7~10년' },
-  { category: '탄성·신축성', kerafoxy: '★★☆☆☆ 낮음', polyurea: '★★★★★ 탁월' },
-  { category: '시공 난이도', kerafoxy: '중~고 (전문 기술 필요)', polyurea: '중 (비교적 간단)' },
-  { category: '가격', kerafoxy: '평당 5~8만 원', polyurea: '평당 4~6만 원' },
-  { category: '색상 선택', kerafoxy: '20여 가지', polyurea: '10여 가지' },
+  { category: '내구성·수명', kerafoxy: '10~15년 이상', polyurea: '2~4년' },
+  { category: '탄성·신축성', kerafoxy: '★★★★☆ 우수', polyurea: '★★★★★ 탁월' },
+  { category: '시공 난이도', kerafoxy: '전문 기술 필요', polyurea: '비교적 간단' },
+  { category: '가격', kerafoxy: '평균 30만 원', polyurea: '평균 20만 원' },
+  { category: '색상 선택', kerafoxy: '16여 가지', polyurea: '20여 가지' },
   { category: '적합 환경', kerafoxy: '욕실·주방·수영장 등 수분 多', polyurea: '베란다·외벽 등 진동·충격 多' },
 ];
 
@@ -65,7 +66,7 @@ export default function ComparisonPage() {
       {/* Hero */}
       <section className="relative h-80 md:h-96 overflow-hidden">
         <img
-          src="https://readdy.ai/api/search-image?query=two%20different%20tile%20grout%20material%20samples%20side%20by%20side%20comparison%20epoxy%20polyurea%20construction%20materials%20clean%20white%20studio%20background%20professional%20product%20photography%20neutral%20tones%20minimalist&width=1440&height=400&seq=comparison-hero-01&orientation=landscape"
+          src={comparisonHero}
           alt="폴리우레아 줄눈과 케라폭시 줄눈 비교"
           className="w-full h-full object-cover object-top"
         />
@@ -107,21 +108,21 @@ export default function ComparisonPage() {
       <section className="bg-stone-50 py-16">
         <div className="max-w-5xl mx-auto px-6">
           <h2 className="text-2xl font-black text-stone-800 mb-8">상세 비교표</h2>
-          <div className="overflow-x-auto rounded-2xl border border-stone-200 bg-white">
+          <div className="overflow-x-auto rounded-xl border border-stone-200 bg-white">
             <table className="w-full text-sm min-w-[600px]">
-              <thead>
-                <tr className="border-b border-stone-100">
-                  <th className="px-6 py-4 text-left font-bold text-stone-500 w-1/3">비교 항목</th>
-                  <th className="px-6 py-4 text-left font-bold text-stone-800">케라폭시 줄눈</th>
-                  <th className="px-6 py-4 text-left font-bold text-stone-500">폴리우레아 줄눈</th>
+              <thead className="bg-stone-800">
+                <tr>
+                  <th className="px-5 py-3.5 text-left font-bold text-white w-1/3">비교 항목</th>
+                  <th className="px-5 py-3.5 text-left font-bold text-white">케라폭시 줄눈</th>
+                  <th className="px-5 py-3.5 text-left font-bold text-white">폴리우레아 줄눈</th>
                 </tr>
               </thead>
               <tbody>
                 {COMPARE_ROWS.map((row, i) => (
-                  <tr key={row.category} className={`border-b border-stone-50 ${i % 2 === 0 ? 'bg-white' : 'bg-stone-50/50'}`}>
-                    <td className="px-6 py-4 font-medium text-stone-500 text-xs">{row.category}</td>
-                    <td className="px-6 py-4 text-stone-800 font-medium">{row.kerafoxy}</td>
-                    <td className="px-6 py-4 text-stone-500">{row.polyurea}</td>
+                  <tr key={row.category} className={i % 2 === 0 ? 'bg-white' : 'bg-stone-50/50'}>
+                    <td className="px-5 py-3.5 font-medium text-stone-800">{row.category}</td>
+                    <td className="px-5 py-3.5 text-stone-600 font-medium">{row.kerafoxy}</td>
+                    <td className="px-5 py-3.5 text-stone-600 font-medium">{row.polyurea}</td>
                   </tr>
                 ))}
               </tbody>
