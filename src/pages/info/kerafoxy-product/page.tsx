@@ -2,31 +2,43 @@ import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import Navbar from '../../../components/feature/Navbar';
 import Footer from '../../../components/feature/Footer';
+import kerafoxyImage from '../../../assets/images/info/kerafoxy-product/kerafoxy.jpg';
+import polyureaImage from '../../../assets/images/info/kerafoxy-product/Polyurea.jpg';
+import aspactoneImage from '../../../assets/images/info/kerafoxy-product/aspactone.jpg';
+import strikeevoImage from '../../../assets/images/info/kerafoxy-product/strikeevo.jpg';
 
 const PRODUCTS = [
   {
-    name: 'Kerafoxy Standard',
-    tag: '기본형',
-    tagColor: 'bg-stone-100 text-stone-600',
-    desc: '가장 많이 사용되는 기본형 케라폭시 제품. 화장실·욕실·주방에 적합하며 20여 가지 색상으로 제공됩니다.',
-    specs: [{ label: '경화 시간', value: '24~48시간' }, { label: '사용 면적', value: '실내 전 구역' }, { label: '수명', value: '10년 이상' }],
-    img: 'https://readdy.ai/api/search-image?query=white%20epoxy%20grout%20product%20packaging%20kerafoxy%20standard%20tile%20grout%20construction%20material%20clean%20white%20background%20minimalist%20product%20photography%20professional%20studio%20shot&width=500&height=350&seq=product-standard-01&orientation=landscape',
-  },
-  {
-    name: 'Kerafoxy Pro',
+    name: '케라폭시',
     tag: '프리미엄',
-    tagColor: 'bg-amber-50 text-amber-700',
-    desc: '고성능 항균 특수 배합 제품. 의료 시설, 수영장, 산업 시설에서도 사용할 수 있는 최상위 등급 줄눈재입니다.',
-    specs: [{ label: '경화 시간', value: '12~24시간' }, { label: '사용 면적', value: '실내외 전 구역' }, { label: '수명', value: '15년 이상' }],
-    img: 'https://readdy.ai/api/search-image?query=premium%20epoxy%20grout%20tile%20product%20kerafoxy%20pro%20high-end%20construction%20material%20elegant%20packaging%20neutral%20background%20professional%20product%20photography%20clean%20modern%20minimalist&width=500&height=350&seq=product-pro-01&orientation=landscape',
+    tagColor: 'bg-rose-100 text-rose-700',
+    desc: '가장 많이 사용되는 프리미엄 케라폭시 제품. 화장실·욕실·주방에 적합하며 20여 가지 색상으로 제공됩니다.',
+    specs: [{ label: '경화 시간', value: '24~96시간' }, { label: '추천 공간', value: '화장실, 거실, 주방' }, { label: '수명', value: '10년 이상' }],
+    img: kerafoxyImage,
   },
   {
-    name: 'Kerafoxy Exterior',
-    tag: '외부용',
-    tagColor: 'bg-green-50 text-green-700',
-    desc: '자외선과 기온 변화에 강한 외부 전용 케라폭시 제품. 베란다, 테라스, 외벽 타일에 적합합니다.',
-    specs: [{ label: '경화 시간', value: '24~72시간' }, { label: '사용 면적', value: '외부 전용' }, { label: '수명', value: '12년 이상' }],
-    img: 'https://readdy.ai/api/search-image?query=exterior%20grout%20product%20outdoor%20tile%20joint%20sealant%20construction%20material%20green%20accent%20packaging%20clean%20white%20background%20professional%20product%20shot%20minimalist%20studio%20photography&width=500&height=350&seq=product-exterior-01&orientation=landscape',
+    name: '폴리우레아',
+    tag: '저가형',
+    tagColor: 'bg-orange-100 text-orange-700',
+    desc: '경화 시간이 짧고 가격이 저렴하며 내구성과 광택이 낮아 되도록 물이 닿지 않는 장소에 추천하는 줄눈재입니다.',
+    specs: [{ label: '경화 시간', value: '12~24시간' }, { label: '추천 공간', value: '현관, 베란다' }, { label: '수명', value: '2년 이상' }],
+    img: polyureaImage,
+  },
+  {
+    name: '아스팍톤',
+    tag: '프리미엄',
+    tagColor: 'bg-rose-100 text-rose-700',
+    desc: '기존 무광 에폭시의 단점을 보완하여 무광, 무펄, 무수축, 무황변의 신소재 줄눈재입니다.',
+    specs: [{ label: '경화 시간', value: '24~36시간' }, { label: '추천 공간', value: '화장실, 어린이방' }, { label: '수명', value: '10년 이상' }],
+    img: aspactoneImage,
+  },
+  {
+    name: '스트라이크에보',
+    tag: '프리미엄',
+    tagColor: 'bg-rose-100 text-rose-700',
+    desc: '3세대 에폭시로 프리미엄 인테리어에 적합하며 무광/유광등 취향에 따라 선택할 수 있으며 변색이 거의 없습니다.',
+    specs: [{ label: '경화 시간', value: '5~7일' }, { label: '추천 공간', value: '거실, 화장실' }, { label: '수명', value: '10년 이상' }],
+    img: strikeevoImage,
   },
 ];
 

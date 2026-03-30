@@ -2,6 +2,8 @@ import { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import Navbar from '../../../components/feature/Navbar';
 import Footer from '../../../components/feature/Footer';
+import beforeImage from '../../../assets/images/info/kerafoxy/before.jpg';
+import afterImage from '../../../assets/images/info/kerafoxy/after.jpg';
 
 const FEATURES = [
   { icon: 'ri-shield-check-line', title: '강력한 내수성', desc: '물에 강한 에폭시 성분으로 화장실·욕실의 지속적인 수분 노출에도 변형 없이 오래 유지됩니다.' },
@@ -138,7 +140,7 @@ export default function KerafoxyPage() {
             <div className="rounded-2xl overflow-hidden">
               <div className="h-56">
                 <img
-                  src="https://readdy.ai/api/search-image?query=old%20dirty%20bathroom%20tile%20grout%20lines%20black%20mold%20stained%20cracked%20deteriorated%20cement%20grout%20before%20renovation%20gray%20discolored%20tiles%20worn%20floor%20realistic%20close-up%20photo%20neutral%20background&width=600&height=350&seq=before-grout-01&orientation=landscape"
+                  src={beforeImage}
                   alt="줄눈 시공 전 상태"
                   className="w-full h-full object-cover object-top"
                 />
@@ -151,7 +153,7 @@ export default function KerafoxyPage() {
             <div className="rounded-2xl overflow-hidden">
               <div className="h-56">
                 <img
-                  src="https://readdy.ai/api/search-image?query=beautiful%20clean%20modern%20bathroom%20floor%20tile%20with%20perfect%20white%20epoxy%20grout%20lines%20after%20professional%20kerafoxy%20renovation%20bright%20pristine%20glossy%20tiles%20uniform%20grout%20joints%20luxury%20interior%20warm%20light&width=600&height=350&seq=after-grout-01&orientation=landscape"
+                  src={afterImage}
                   alt="케라폭시 줄눈 시공 후 결과"
                   className="w-full h-full object-cover object-top"
                 />

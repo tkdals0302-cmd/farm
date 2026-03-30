@@ -150,8 +150,8 @@ export default function KerafoxyPricePage() {
               <div className="w-10 h-10 flex items-center justify-center bg-white rounded-xl mb-4">
                 <i className={`${f.icon} text-xl text-stone-600`}></i>
               </div>
-              <h3 className="font-bold text-stone-800 mb-2 text-sm">{f.title}</h3>
-              <p className="text-stone-500 text-xs leading-relaxed">{f.desc}</p>
+              <h3 className="font-bold text-stone-800 mb-2">{f.title}</h3>
+              <p className="text-stone-500 text-sm leading-relaxed">{f.desc}</p>
             </div>
           ))}
         </div>
@@ -168,7 +168,7 @@ export default function KerafoxyPricePage() {
                   onClick={() => setOpenFaq(openFaq === i ? null : i)}
                   className="w-full px-6 py-5 flex items-center justify-between text-left cursor-pointer"
                 >
-                  <span className="font-semibold text-stone-800 text-sm">{faq.q}</span>
+                  <span className="font-semibold text-stone-800 text-base">{faq.q}</span>
                   <i className={`ri-arrow-down-s-line text-stone-400 transition-transform ${openFaq === i ? 'rotate-180' : ''}`}></i>
                 </button>
                 {openFaq === i && (

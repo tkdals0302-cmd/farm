@@ -144,7 +144,7 @@ export default function QuoteFormSection() {
           <p className="text-stone-500 mt-3">양식을 작성하시면 24시간 내 연락드립니다</p>
         </div>
 
-        <div className="bg-white rounded-3xl p-8 md:p-12">
+        <div className="bg-white rounded-3xl pt-10 px-5 md:p-12">
           {submitted ? (
             <div className="text-center py-12">
               <div className="w-16 h-16 flex items-center justify-center bg-stone-900 rounded-full mx-auto mb-4">
@@ -190,7 +190,7 @@ export default function QuoteFormSection() {
                     onChange={handleNameChange}
                     maxLength={9}
                     placeholder="홍길동"
-                    className="w-full px-4 py-3 border border-stone-200 rounded-xl text-sm text-stone-800 placeholder-stone-300 focus:outline-none focus:border-stone-400 transition-colors"
+                    className="w-full px-4 py-3 border border-stone-200 rounded-xl text-base text-stone-800 placeholder-stone-300 focus:outline-none focus:border-stone-400 transition-colors"
                   />
                   {errors.name && <p className="mt-1 text-xs text-red-500">{errors.name}</p>}
                 </div>
@@ -208,7 +208,7 @@ export default function QuoteFormSection() {
                       inputMode="numeric"
                       maxLength={13}
                       placeholder="010-1234-5678"
-                      className="w-full px-4 py-3 border border-stone-200 rounded-xl text-sm text-stone-700 placeholder-stone-300 focus:outline-none focus:border-stone-400 transition-colors"
+                      className="w-full px-4 py-3 border border-stone-200 rounded-xl text-base text-stone-700 placeholder-stone-300 focus:outline-none focus:border-stone-400 transition-colors"
                     />
                     <span className={`absolute right-4 top-3 text-xs font-medium ${phone.length >= 10 ? 'text-green-600' : 'text-stone-400'}`}>
                       {phone.length}/11
@@ -232,7 +232,7 @@ export default function QuoteFormSection() {
                     onChange={handleLocationChange}
                     maxLength={39}
                     placeholder="예: 서울 강남구 역삼동"
-                    className="w-full px-4 py-3 border border-stone-200 rounded-xl text-sm text-stone-800 placeholder-stone-300 focus:outline-none focus:border-stone-400 transition-colors"
+                    className="w-full px-4 py-3 border border-stone-200 rounded-xl text-base text-stone-800 placeholder-stone-300 focus:outline-none focus:border-stone-400 transition-colors"
                   />
                   {errors.location && <p className="mt-1 text-xs text-red-500">{errors.location}</p>}
                 </div>
@@ -282,7 +282,7 @@ export default function QuoteFormSection() {
                     maxLength={MAX_CHARS}
                     onChange={(e) => setCharCount(e.target.value.length)}
                     placeholder="시공 면적, 현재 상태, 요청 사항 등을 자유롭게 작성해 주세요."
-                    className="w-full px-4 py-3 border border-stone-200 rounded-xl text-sm text-stone-800 placeholder-stone-300 focus:outline-none focus:border-stone-400 transition-colors resize-none"
+                    className="w-full px-4 py-3 border border-stone-200 rounded-xl text-base text-stone-800 placeholder-stone-300 focus:outline-none focus:border-stone-400 transition-colors resize-none"
                   />
                   <span className="absolute bottom-3 right-4 text-xs text-stone-400">
                     {charCount} / {MAX_CHARS}
@@ -304,7 +304,7 @@ export default function QuoteFormSection() {
                   value={email}
                   onChange={handleEmailChange}
                   placeholder="example@email.com"
-                  className="w-full px-4 py-3 border border-stone-200 rounded-xl text-sm text-stone-800 placeholder-stone-300 focus:outline-none focus:border-stone-400 transition-colors"
+                  className="w-full px-4 py-3 border border-stone-200 rounded-xl text-base text-stone-800 placeholder-stone-300 focus:outline-none focus:border-stone-400 transition-colors"
                 />
                 {errors.email && <p className="mt-1 text-xs text-red-500">{errors.email}</p>}
               </div>
