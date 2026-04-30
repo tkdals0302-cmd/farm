@@ -1,0 +1,88 @@
+{
+  "name": "디테일라인 카카오 챗봇",
+  "nodes": [
+    {
+      "id": "1",
+      "name": "카카오 메시지 수신",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 1,
+      "position": [240, 300],
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "kakao-chat",
+        "responseMode": "responseNode",
+        "responseData": "allEntries"
+      }
+    },
+    {
+      "id": "2",
+      "name": "Claude 상담 응답",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4,
+      "position": [460, 300],
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.anthropic.com/v1/messages",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            { "name": "x-api-key", "value": "YOUR_ANTHROPIC_API_KEY" },
+            { "name": "anthropic-version", "value": "2023-06-01" },
+            { "name": "content-type", "value": "application/json" }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"model\": \"claude-sonnet-4-20250514\",\n  \"max_tokens\": 500,\n  \"system\": \"당신은 디테일라인 줄눈 시공 전문 업체의 AI 상담 직원입니다. 케라폭시, 폴리우레아 줄눈 시공 전문이며 서울/경기 지역 서비스입니다. 친절하고 전문적으로 상담하며 최종적으로 전화 상담 또는 방문 견적을 유도하세요. 답변은 100자 이내로 간결하게 작성하세요.\",\n  \"messages\": [{\n    \"role\": \"user\",\n    \"content\": \"{{ $json.body.userRequest.utterance }}\"\n  }]\n}"
+      }
+    },
+    {
+      "id": "3",
+      "name": "카카오 응답 포맷",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3,
+      "position": [680, 300],
+      "parameters": {
+        "mode": "manual",
+        "fields": {
+          "values": [
+            {
+              "name": "version",
+              "stringValue": "2.0"
+            },
+            {
+              "name": "template",
+              "stringValue": "={{ JSON.stringify({ outputs: [{ simpleText: { text: $('Claude 상담 응답').item.json.content[0].text } }] }) }}"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "4",
+      "name": "응답 반환",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1,
+      "position": [900, 300],
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "={{ { version: '2.0', template: { outputs: [{ simpleText: { text: $('Claude 상담 응답').item.json.content[0].text } }] } } }}"
+      }
+    }
+  ],
+  "connections": {
+    "카카오 메시지 수신": {
+      "main": [[{ "node": "Claude 상담 응답", "type": "main", "index": 0 }]]
+    },
+    "Claude 상담 응답": {
+      "main": [[{ "node": "카카오 응답 포맷", "type": "main", "index": 0 }]]
+    },
+    "카카오 응답 포맷": {
+      "main": [[{ "node": "응답 반환", "type": "main", "index": 0 }]]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "active": false
+}

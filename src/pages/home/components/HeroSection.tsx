@@ -1,11 +1,8 @@
-import { useState, useRef, useEffect } from 'react';
-import mainVideo from '../../../assets/main_video.gif';
+import { useState, useEffect } from 'react';
+import mainVideoMp4 from '../../../assets/main_video.mp4';
 
 export default function HeroSection() {
-  const [isMuted, setIsMuted] = useState(true);
-  const [isPlaying, setIsPlaying] = useState(true);
   const [count, setCount] = useState(0);
-  const iframeRef = useRef<HTMLIFrameElement>(null);
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -24,9 +21,6 @@ export default function HeroSection() {
     if (el) el.scrollIntoView({ behavior: 'smooth' });
   };
 
-  // YouTube IFrame API video ID for grout work
-  const videoId = 'YOUR_VIDEO_ID'; // 실제 시공 영상 ID로 교체하세요
-
   return (
     <section className="relative w-full overflow-hidden" style={{ height: '100svh', minHeight: '600px' }}>
       {/* Background Image (Video Placeholder) */}
@@ -41,13 +35,18 @@ export default function HeroSection() {
       </div>
       */}
 
-      {/* GIF Embed */}
+      {/* Video Embed */}
       <div className="absolute inset-0 pointer-events-none">
-        <img
-          src={mainVideo}
-          alt="줄눈시공 메인 배너"
+        <video
+          autoPlay
+          muted
+          loop
+          playsInline
+          aria-hidden="true"
           className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[177.77vh] h-[56.25vw] min-w-full min-h-full object-cover"
-        />
+        >
+          <source src={mainVideoMp4} type="video/mp4" />
+        </video>
         <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/60 to-black/70"></div>
       </div>
 
@@ -92,18 +91,18 @@ export default function HeroSection() {
         </p>
 
 
-        <div className="flex flex-row sm:flex-row gap-3 w-full justify-center">
-          <button
-            onClick={scrollToPortfolio}
-            className="btn-primary"
-          >
-            포트폴리오 보기
-          </button>
+        <div className="flex flex-col sm:flex-row gap-3 w-full justify-center items-center">
           <button
             onClick={scrollToQuote}
-            className="btn-secondary"
+            className="px-10 py-4 bg-[#967353] text-white font-bold text-base rounded-full hover:bg-[#7a5c3d] transition-all shadow-lg shadow-black/20 cursor-pointer whitespace-nowrap"
           >
-            무료 견적 상담
+            1분 무료 견적받기 →
+          </button>
+          <button
+            onClick={scrollToPortfolio}
+            className="px-8 py-3 text-white/90 font-medium text-sm border border-white/30 rounded-full hover:bg-white/10 transition-all cursor-pointer whitespace-nowrap"
+          >
+            시공 사례 먼저 보기
           </button>
         </div>
 

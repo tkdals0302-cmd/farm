@@ -6,11 +6,16 @@ import KerafoxyPricePage from "../pages/info/kerafoxy-price/page";
 import KerafoxyProductPage from "../pages/info/kerafoxy-product/page";
 import ComparisonPage from "../pages/info/comparison/page";
 import WhyGroutPage from "../pages/info/why-grout/page";
+import PrivacyPage from "../pages/privacy/page";
 
 const routes: RouteObject[] = [
   {
     path: "/",
     element: <Home />,
+  },
+  {
+    path: "/privacy",
+    element: <PrivacyPage />,
   },
   {
     path: "/info/kerafoxy",

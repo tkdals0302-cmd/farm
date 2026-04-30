@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { faqItems } from '../../../mocks/faqData';
+import { Events } from '../../../lib/analytics';
 
 export default function FAQSection() {
   const [openId, setOpenId] = useState<number | null>(null);
@@ -63,6 +64,7 @@ export default function FAQSection() {
           <div className="flex flex-col sm:flex-row gap-3 justify-center">
             <a
               href="tel:010-8005-6674"
+              onClick={() => Events.phoneClick('faq')}
               className="inline-flex h-12 sm:min-w-[180px] items-center justify-center gap-2 px-7 text-sm font-semibold cursor-pointer rounded-full bg-[#967353] text-white transition-all hover:bg-[#7a5c3d]"
             >
               <i className="ri-phone-line"></i>
@@ -72,6 +74,7 @@ export default function FAQSection() {
               href="https://pf.kakao.com"
               target="_blank"
               rel="nofollow noreferrer"
+              onClick={() => Events.kakaoClick('faq')}
               className="inline-flex h-12 sm:min-w-[180px] items-center justify-center gap-2 px-7 text-sm font-semibold rounded-full bg-yellow-400 text-stone-900 hover:bg-yellow-300 transition-all cursor-pointer whitespace-nowrap"
             >
               <i className="ri-kakao-talk-fill"></i>

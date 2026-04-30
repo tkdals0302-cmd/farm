@@ -58,17 +58,13 @@ export default defineConfig({
             "Outlet",
           ],
         },
-        // React i18n
-        {
-          "react-i18next": ["useTranslation", "Trans"],
-        },
       ],
       dts: true,
     }),
   ],
   base,
   build: {
-    sourcemap: true,
+    sourcemap: process.env.NODE_ENV === 'production' ? 'hidden' : true,
     outDir: "out",
   },
   resolve: {

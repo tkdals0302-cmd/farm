@@ -1,0 +1,59 @@
+{
+  "name": "디테일라인 견적 자동화",
+  "nodes": [
+    {
+      "id": "1",
+      "name": "견적신청 웹훅",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 1,
+      "position": [240, 300],
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "detailline-quote",
+        "responseMode": "lastNode",
+        "responseData": "allEntries"
+      }
+    },
+    {
+      "id": "2",
+      "name": "Claude 메시지 생성",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4,
+      "position": [460, 300],
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.anthropic.com/v1/messages",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            { "name": "x-api-key", "value": "YOUR_ANTHROPIC_API_KEY" },
+            { "name": "anthropic-version", "value": "2023-06-01" },
+            { "name": "content-type", "value": "application/json" }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"model\": \"claude-sonnet-4-20250514\",\n  \"max_tokens\": 300,\n  \"messages\": [{\n    \"role\": \"user\",\n    \"content\": \"디테일라인 줄눈 시공 업체 상담 직원입니다. 고객 {{ $json.name }}님 (지역: {{ $json.location }}, 면적: {{ $json.areas }})께 첫 카카오톡 인사 메시지를 100자 이내로 작성해주세요. 상담 가능 시간 확인 유도, 친근하고 전문적인 톤, 이모지 1-2개.\"\n  }]\n}"
+      }
+    },
+    {
+      "id": "3",
+      "name": "응답 반환",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1,
+      "position": [680, 300],
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "={ \"status\": \"ok\" }"
+      }
+    }
+  ],
+  "connections": {
+    "견적신청 웹훅": {
+      "main": [[{ "node": "Claude 메시지 생성", "type": "main", "index": 0 }]]
+    },
+    "Claude 메시지 생성": {
+      "main": [[{ "node": "응답 반환", "type": "main", "index": 0 }]]
+    }
+  }
+}

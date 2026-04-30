@@ -2,6 +2,7 @@ import logoDark from '../../assets/logo_d.png';
 import logoLight from '../../assets/logo_w.png';
 import { useState, useEffect, useRef } from 'react';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
+import { Events } from '../../lib/analytics';
 
 const NAV_LINKS = [
   { label: '포트폴리오', href: '#portfolio' },
@@ -72,7 +73,9 @@ export default function Navbar() {
   };
 
   const isScrolled = scrolled || !isHome;
-  const textColor = isScrolled ? 'text-stone-700 hover:text-[#967353]' : 'text-white/50 hover:text-white';
+  const textColor = isScrolled
+    ? 'text-stone-700 hover:text-[#967353]'
+    : 'text-white/90 drop-shadow-[0_1px_2px_rgba(0,0,0,0.6)] hover:text-white';
   const activeTextColor = isScrolled ? 'text-stone-900' : 'text-white';
 
   return (
@@ -152,6 +155,7 @@ export default function Navbar() {
           </a>
           <a
             href="tel:010-8005-6674"
+            onClick={() => Events.phoneClick('navbar')}
             className={`flex items-center gap-2 text-sm font-semibold whitespace-nowrap transition-colors cursor-pointer ${
               isScrolled
                 ? 'bg-[#967353] text-white px-4 py-2 rounded-full hover:bg-[#7a5c3d]'
@@ -237,6 +241,7 @@ export default function Navbar() {
               {/* Phone CTA */}
               <a
                 href="tel:010-8005-6674"
+                onClick={() => Events.phoneClick('navbar')}
                 className="call-bg mt-8 flex items-center justify-center gap-2 px-6 py-3 bg-[#967353] text-white text-sm font-semibold rounded-full hover:bg-[#7a5c3d] transition-colors cursor-pointer w-full"
               >
                 <i className="ri-phone-line"></i>

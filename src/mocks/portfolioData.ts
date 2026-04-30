@@ -5,6 +5,8 @@ export interface PortfolioItem {
   description: string;
   location: string;
   image: string;
+  before?: string;
+  after?: string;
 }
 
 export const portfolioCategories = ['전체', '현관', '화장실', '베란다', '거실', '주방', '수영장', '목욕탕'];

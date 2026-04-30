@@ -1,4 +1,6 @@
+import { Link } from 'react-router-dom';
 import logoDark from '../../assets/logo_d.png';
+import { Events } from '../../lib/analytics';
 const NAV_LINKS = [
   { label: '포트폴리오', href: '#portfolio' },
   { label: '시공범위', href: '#scope' },
@@ -33,7 +35,7 @@ export default function Footer() {
             <div className="space-y-2">
               <div className="flex items-center gap-2 text-stone-400 text-sm">
                 <i className="ri-phone-line text-stone-500"></i>
-                <a href="tel:010-8005-6674" className="hover:text-white transition-colors cursor-pointer">010-8005-6674</a>
+                <a href="tel:010-8005-6674" onClick={() => Events.phoneClick('footer')} className="hover:text-white transition-colors cursor-pointer">010-8005-6674</a>
               </div>
               <div className="flex items-center gap-2 text-stone-400 text-sm">
                 <i className="ri-map-pin-line text-stone-500"></i>
@@ -108,8 +110,9 @@ export default function Footer() {
               © 2026 줄눈시공 전문. All rights reserved.
             </p>
             <div className="flex items-center gap-4">
-              <span className="text-stone-500 text-xs">개인정보처리방침</span>
-              <span className="text-stone-500 text-xs">이용약관</span>
+              <Link to="/privacy" className="text-stone-500 text-xs hover:text-white transition-colors cursor-pointer">
+                개인정보처리방침
+              </Link>
               <span className="text-stone-600 text-xs">사업자등록번호: 609-33-19473</span>
             </div>
           </div>

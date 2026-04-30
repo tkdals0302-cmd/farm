@@ -1,8 +1,11 @@
-import { useState, FormEvent } from 'react';
+import { useState, useEffect, useRef, FormEvent } from 'react';
+import { Link } from 'react-router-dom';
 import DatePicker from './DatePicker';
+import { Events } from '../../../lib/analytics';
 
 const AREAS = ['현관', '화장실', '베란다', '거실', '주방', '수영장', '목욕탕', '기타'];
 const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+const TURNSTILE_SITE_KEY = '0x4AAAAAADGHPfvxD-MhAQbY';
 
 function formatPhoneNumber(value: string) {
   if (value.length <= 3) return value;
@@ -22,7 +25,45 @@ export default function QuoteFormSection() {
   const [email, setEmail] = useState('');
   const [privacyAgreed, setPrivacyAgreed] = useState(false);
   const [errors, setErrors] = useState<Record<string, string>>({});
+  const [cfToken, setCfToken] = useState<string>('');
+  const turnstileRef = useRef<HTMLDivElement>(null);
+  const widgetIdRef = useRef<string | null>(null);
   const MAX_CHARS = 500;
+
+  useEffect(() => {
+    let cancelled = false;
+
+    const renderWidget = () => {
+      if (cancelled) return;
+      if (!turnstileRef.current) return;
+      // @ts-expect-error - turnstile is loaded via external script
+      if (typeof window.turnstile === 'undefined') {
+        setTimeout(renderWidget, 100);
+        return;
+      }
+      // @ts-expect-error - turnstile global
+      widgetIdRef.current = window.turnstile.render(turnstileRef.current, {
+        sitekey: TURNSTILE_SITE_KEY,
+        callback: (token: string) => setCfToken(token),
+        'error-callback': () => setCfToken(''),
+        'expired-callback': () => setCfToken(''),
+        theme: 'light',
+        size: 'normal',
+      });
+    };
+
+    renderWidget();
+
+    return () => {
+      cancelled = true;
+      // @ts-expect-error - turnstile global
+      if (widgetIdRef.current && window.turnstile) {
+        // @ts-expect-error - turnstile global
+        window.turnstile.remove(widgetIdRef.current);
+        widgetIdRef.current = null;
+      }
+    };
+  }, []);
 
   const handleNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value.replace(/[0-9]/g, '').slice(0, 9);
@@ -78,6 +119,7 @@ export default function QuoteFormSection() {
       nextErrors.email = '올바른 이메일 형식으로 입력해주세요. (예: example@domain.com)';
     }
     if (!privacyAgreed) nextErrors.privacy = '개인정보처리방침에 동의해주세요.';
+    if (!cfToken) nextErrors.cfToken = '봇 검증을 완료해주세요.';
 
     setErrors(nextErrors);
     return Object.keys(nextErrors).length === 0;
@@ -89,6 +131,7 @@ export default function QuoteFormSection() {
     location.trim().length > 0 &&
     date.length > 0 &&
     selectedAreas.length > 0 &&
+    cfToken.length > 0 &&
     privacyAgreed &&
     (!email || EMAIL_REGEX.test(email));
 
@@ -98,17 +141,25 @@ export default function QuoteFormSection() {
     if (!validateForm()) return;
 
     const form = e.currentTarget;
+
+    const honeypotVal = (form.querySelector('[name="company_website"]') as HTMLInputElement)?.value || '';
+    if (honeypotVal) {
+      setSubmitted(true);
+      return;
+    }
+
     const textareaVal = (form.querySelector('[name="message"]') as HTMLTextAreaElement)?.value || '';
     if (textareaVal.length > MAX_CHARS) return;
 
     const data = new FormData(form);
     const params = new URLSearchParams();
     data.forEach((value, key) => {
-      if (key !== 'phone') {
+      if (key !== 'phone' && key !== 'company_website') {
         params.append(key, value.toString());
       }
     });
     params.append('phone', phone);
+    params.append('cf_turnstile_token', cfToken);
 
     setLoading(true);
     try {
@@ -117,6 +168,7 @@ export default function QuoteFormSection() {
         headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
         body: params.toString(),
       });
+      Events.formSubmit(selectedAreas, location.split(' ')[0] || 'unknown');
       setSubmitted(true);
       setName('');
       setPhone('');
@@ -127,6 +179,12 @@ export default function QuoteFormSection() {
       setPrivacyAgreed(false);
       setCharCount(0);
       setErrors({});
+      setCfToken('');
+      // @ts-expect-error - turnstile global
+      if (widgetIdRef.current && window.turnstile) {
+        // @ts-expect-error - turnstile global
+        window.turnstile.reset(widgetIdRef.current);
+      }
     } catch {
       alert('제출 중 오류가 발생했습니다. 잠시 후 다시 시도해 주세요.');
     } finally {
@@ -176,6 +234,18 @@ export default function QuoteFormSection() {
               onSubmit={handleSubmit}
               className="space-y-6"
             >
+              <div aria-hidden="true" style={{ position: 'absolute', left: '-9999px', width: '1px', height: '1px', overflow: 'hidden' }}>
+                <label htmlFor="company_website">Website (do not fill)</label>
+                <input
+                  type="text"
+                  id="company_website"
+                  name="company_website"
+                  tabIndex={-1}
+                  autoComplete="off"
+                  defaultValue=""
+                />
+              </div>
+
               {/* Row 1 */}
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
@@ -309,6 +379,12 @@ export default function QuoteFormSection() {
                 {errors.email && <p className="mt-1 text-xs text-red-500">{errors.email}</p>}
               </div>
 
+              {/* Cloudflare Turnstile */}
+              <div>
+                <div ref={turnstileRef} className="flex justify-center"></div>
+                {errors.cfToken && <p className="mt-1 text-xs text-red-500 text-center">{errors.cfToken}</p>}
+              </div>
+
               {/* Privacy */}
               <div className="flex items-start gap-3">
                 <input
@@ -321,8 +397,18 @@ export default function QuoteFormSection() {
                   className="w-5 h-5 mt-0.5 cursor-pointer accent-[#967353]"
                 />
                 <label htmlFor="privacy" className="text-sm text-stone-400 leading-relaxed cursor-pointer">
-                  수집된 개인정보(이름, 연락처, 이메일)는 견적 상담 목적으로만 사용되며,
-                  상담 완료 후 즉시 폐기됩니다. <strong className="text-[#967353]">개인정보 처리방침</strong>에 동의합니다.
+                  수집된 개인정보(이름, 연락처, 이메일, 시공 위치, 희망 일정, 시공 공간, 상세 내용)는 견적 상담 목적으로만 사용되며,
+                  상담 완료 후 즉시 폐기됩니다.{' '}
+                  <Link
+                    to="/privacy"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    onClick={(e) => e.stopPropagation()}
+                    className="text-[#967353] font-semibold underline underline-offset-2 hover:opacity-80"
+                  >
+                    개인정보 처리방침
+                  </Link>
+                  에 동의합니다.
                 </label>
               </div>
               {errors.privacy && <p className="-mt-3 text-xs text-red-500">{errors.privacy}</p>}

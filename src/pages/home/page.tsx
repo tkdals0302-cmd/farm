@@ -1,5 +1,6 @@
 import Navbar from '../../components/feature/Navbar';
 import Footer from '../../components/feature/Footer';
+import FloatingCTA from '../../components/feature/FloatingCTA';
 import HeroSection from './components/HeroSection';
 import PortfolioAndReviews from './components/PortfolioAndReviews';
 import WorkScopeSection from './components/WorkScopeSection';
@@ -19,6 +20,7 @@ export default function HomePage() {
         <FAQSection />
         <QuoteFormSection />
       </main>
+      <FloatingCTA />
       <Footer />
     </div>
   );

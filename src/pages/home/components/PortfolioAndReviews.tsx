@@ -1,5 +1,7 @@
 import { useEffect, useState } from 'react';
+import { ReactCompareSlider, ReactCompareSliderImage } from 'react-compare-slider';
 import { portfolioItems, portfolioCategories, type PortfolioItem } from '../../../mocks/portfolioData';
+import { Events } from '../../../lib/analytics';
 
 const processSteps = [
   {
@@ -8,7 +10,7 @@ const processSteps = [
     summary: '마음편히 연락주세요',
     description: '전화, 카카오톡, 또는 홈페이지를 통해 간단히 시공 신청을 남겨주세요. 담당자가 24시간 내 연락드리며, 시공 범위와 예산에 맞는 최적의 방향을 안내해 드립니다.',
     tags: [
-      { label: '전화 상담', href: 'tel:010-2422-7744' },
+      { label: '전화 상담', href: 'tel:010-8005-6674' },
       { label: '카카오톡', href: 'https://pf.kakao.com/_TsIAE' },
       { label: '온라인 신청', href: '#quote' }
     ],
@@ -152,6 +154,12 @@ export default function PortfolioAndReviews() {
                   className="w-full h-full object-cover object-top transition-transform duration-500 group-hover:scale-105"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent"></div>
+                {item.before && item.after && (
+                  <span className="absolute top-2 right-2 inline-flex items-center gap-1 bg-[#967353] text-white text-[10px] font-bold px-2 py-0.5 rounded-full">
+                    <i className="ri-contrast-2-line"></i>
+                    시공 전·후
+                  </span>
+                )}
                 <div className="absolute bottom-0 left-0 right-0 p-4">
                   <span className="inline-block bg-white/20 backdrop-blur-sm text-white text-xs px-2.5 py-1 rounded-full mb-2">
                     {item.category}
@@ -184,12 +192,32 @@ export default function PortfolioAndReviews() {
               <i className="ri-close-line text-xl"></i>
             </button>
             <div className="rounded-2xl overflow-hidden shadow-2xl bg-black">
-              <img
-                src={selectedItem.image}
-                alt={selectedItem.title}
-                onClick={() => setSelectedItem(null)}
-                className="w-full max-h-[80vh] object-contain cursor-zoom-out"
-              />
+              {selectedItem.before && selectedItem.after ? (
+                <ReactCompareSlider
+                  itemOne={
+                    <ReactCompareSliderImage
+                      src={selectedItem.before}
+                      alt={`${selectedItem.title} 시공 전`}
+                      style={{ objectFit: 'cover' }}
+                    />
+                  }
+                  itemTwo={
+                    <ReactCompareSliderImage
+                      src={selectedItem.after}
+                      alt={`${selectedItem.title} 시공 후`}
+                      style={{ objectFit: 'cover' }}
+                    />
+                  }
+                  style={{ width: '100%', maxHeight: '80vh' }}
+                />
+              ) : (
+                <img
+                  src={selectedItem.image}
+                  alt={selectedItem.title}
+                  onClick={() => setSelectedItem(null)}
+                  className="w-full max-h-[80vh] object-contain cursor-zoom-out"
+                />
+              )}
             </div>
             <div className="mt-3 text-white">
               <p className="text-sm font-semibold">{selectedItem.title}</p>
@@ -281,6 +309,10 @@ export default function PortfolioAndReviews() {
                             e.preventDefault();
                             const el = document.querySelector(tag.href);
                             if (el) el.scrollIntoView({ behavior: 'smooth' });
+                          } else if (tag.href.startsWith('tel:')) {
+                            Events.phoneClick('process');
+                          } else if (tag.href.includes('kakao')) {
+                            Events.kakaoClick('process');
                           }
                         }}
                         target={tag.href.startsWith('http') ? '_blank' : undefined}
