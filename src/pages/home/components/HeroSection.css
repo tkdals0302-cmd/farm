@@ -1,0 +1,724 @@
+/* ============================================
+   Hero B — Tile Line (Craftsman)
+   ============================================ */
+
+.hero-b-wrap {
+  position: relative;
+  background: #0e0a08;
+  color: #f4edd8;
+  width: 100%;
+  min-height: 100vh;
+  overflow: hidden;
+}
+
+/* Matches portfolio's px-6 md:px-12 lg:px-20 */
+.hero-b__padded {
+  position: relative;
+  z-index: 5;
+  min-height: 100vh;
+  padding-left: 24px;
+  padding-right: 24px;
+}
+
+@media (min-width: 768px) {
+  .hero-b__padded {
+    padding-left: 48px;
+    padding-right: 48px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .hero-b__padded {
+    padding-left: 80px;
+    padding-right: 80px;
+  }
+}
+
+/* Matches portfolio's max-w-7xl mx-auto */
+.hero-b {
+  position: relative;
+  max-width: 1280px;
+  margin: 0 auto;
+  min-height: 100vh;
+}
+
+/* ------ Procedural tile floor ------ */
+
+.tile-floor {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+  perspective: 1650px;
+  perspective-origin: 50% 54%;
+  background: radial-gradient(ellipse 70% 50% at 50% 30%, #2c2823 0%, #1a1612 100%);
+}
+
+.tile-floor__plane {
+  position: absolute;
+  bottom: 0;
+  left: -100%;
+  width: 300%;
+  height: 260%;
+  transform-origin: 50% 100%;
+  transform: rotateX(50deg);
+  background:
+    radial-gradient(ellipse 22% 32% at 50% 58%,
+      rgba(200, 160, 110, 0.22) 0%,
+      rgba(200, 160, 110, 0.06) 30%,
+      transparent 65%),
+    repeating-linear-gradient(45deg,
+      transparent 0,
+      transparent calc(460px - 10px),
+      rgba(0, 0, 0, 0.5) calc(460px - 10px),
+      rgba(0, 0, 0, 0.5) calc(460px - 9px),
+      rgba(228, 216, 188, 0.6) calc(460px - 9px),
+      rgba(228, 216, 188, 0.6) calc(460px - 1px),
+      rgba(255, 240, 210, 0.5) calc(460px - 1px),
+      rgba(255, 240, 210, 0.5) 460px),
+    repeating-linear-gradient(-45deg,
+      transparent 0,
+      transparent calc(460px - 10px),
+      rgba(0, 0, 0, 0.5) calc(460px - 10px),
+      rgba(0, 0, 0, 0.5) calc(460px - 9px),
+      rgba(228, 216, 188, 0.6) calc(460px - 9px),
+      rgba(228, 216, 188, 0.6) calc(460px - 1px),
+      rgba(255, 240, 210, 0.5) calc(460px - 1px),
+      rgba(255, 240, 210, 0.5) 460px),
+    linear-gradient(180deg, #54504a 0%, #3e3a35 100%);
+}
+
+.tile-floor__plane::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(0deg,
+    transparent 0%,
+    transparent 35%,
+    rgba(20, 15, 10, 0.55) 65%,
+    rgba(14, 10, 8, 0.92) 88%,
+    #14100c 100%);
+  pointer-events: none;
+}
+
+/* Option 4 refactor: grout grid is now the static mask, the moving slice is a
+   transform-animated ::after. Mask clips the slice to grout-line positions, so the
+   "bright line glows when light passes" effect is preserved — but the animated
+   property is transform (GPU compositor fast path), not mask-position (paint-heavy). */
+.tile-floor__shine {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+  filter: blur(1.5px) drop-shadow(0 0 6px rgba(255, 240, 200, 0.6));
+  mix-blend-mode: screen;
+  -webkit-mask-image:
+    repeating-linear-gradient(45deg,
+      transparent 0,
+      transparent calc(460px - 9px),
+      #000 calc(460px - 9px),
+      #000 calc(460px - 1px),
+      transparent calc(460px - 1px),
+      transparent 460px),
+    repeating-linear-gradient(-45deg,
+      transparent 0,
+      transparent calc(460px - 9px),
+      #000 calc(460px - 9px),
+      #000 calc(460px - 1px),
+      transparent calc(460px - 1px),
+      transparent 460px);
+  mask-image:
+    repeating-linear-gradient(45deg,
+      transparent 0,
+      transparent calc(460px - 9px),
+      #000 calc(460px - 9px),
+      #000 calc(460px - 1px),
+      transparent calc(460px - 1px),
+      transparent 460px),
+    repeating-linear-gradient(-45deg,
+      transparent 0,
+      transparent calc(460px - 9px),
+      #000 calc(460px - 9px),
+      #000 calc(460px - 1px),
+      transparent calc(460px - 1px),
+      transparent 460px);
+}
+
+.tile-floor__shine::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(120deg,
+    transparent 0%, transparent 32%,
+    rgba(255, 250, 220, 0.95) 42%,
+    rgba(255, 250, 220, 1) 50%,
+    rgba(255, 250, 220, 0.95) 58%,
+    transparent 68%, transparent 100%);
+  transform: translateX(-100%);
+  animation: shineSweep 7s ease-in-out infinite;
+  animation-delay: 1s;
+  will-change: transform;
+}
+
+@keyframes shineSweep {
+  0%   { transform: translateX(-100%); }
+  100% { transform: translateX(100%); }
+}
+
+/* ------ Overlays ------ */
+
+.hero-b__tint {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  background: linear-gradient(180deg,
+    rgba(124, 86, 46, 0.55) 0%,
+    rgba(40, 20, 8, 0.65) 100%);
+  mix-blend-mode: multiply;
+  opacity: 0.3;
+}
+
+.hero-b__vignette {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  pointer-events: none;
+  background: radial-gradient(41% 45% at 60% 45%,
+    rgba(14, 10, 8, 0) 0%,
+    rgba(14, 10, 8, 0.24) 35%,
+    rgba(14, 10, 8, 0.84) 65%,
+    rgba(14, 10, 8, 1) 95%,
+    rgba(14, 10, 8, 1) 100%);
+}
+
+.hero-b__glow {
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  pointer-events: none;
+  mix-blend-mode: screen;
+  background: radial-gradient(36% 35% at 60% 62%,
+    rgba(244, 217, 168, 0.144) 0%,
+    rgba(244, 217, 168, 0.064) 30%,
+    transparent 70%);
+}
+
+.hero-b__grain {
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  pointer-events: none;
+  opacity: 0.12;
+  background-image:
+    radial-gradient(rgba(255, 255, 255, 0.4) 0.5px, transparent 0.5px),
+    radial-gradient(rgba(0, 0, 0, 0.4) 0.5px, transparent 0.5px);
+  background-size: 3px 3px, 5px 5px;
+  mix-blend-mode: overlay;
+}
+
+/* ------ Lead (left) ------ */
+
+.hero-b__lead {
+  position: absolute;
+  left: 0;
+  top: 170px;
+  max-width: 580px;
+  z-index: 10;
+}
+
+.hero-b__eyebrow {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  font-size: 13px;
+  letter-spacing: 3px;
+  color: #c8a674;
+  margin-bottom: 28px;
+}
+
+.hero-b__eyebrow-line {
+  display: inline-block;
+  width: 36px;
+  height: 1px;
+  background: #9c7a4b;
+}
+
+.hero-b__headline {
+  margin: 0;
+  font-family: 'Noto Serif KR', "Source Serif Pro", serif;
+  font-weight: 500;
+  font-size: clamp(54px, 6.5vw, 88px);
+  line-height: 1.02;
+  letter-spacing: -2.6px;
+  color: #f4edd8;
+  text-wrap: balance;
+  text-shadow: 0 2px 30px rgba(0, 0, 0, 0.5);
+}
+
+.hero-b__headline em {
+  font-family: inherit;
+  font-style: normal;
+  color: #c8a674;
+}
+
+.hero-b__sub {
+  margin: 32px 0 0;
+  max-width: 460px;
+  font-size: 15px;
+  line-height: 1.75;
+  color: rgba(244, 237, 216, 0.82);
+  text-shadow: 0 1px 12px rgba(0, 0, 0, 0.6);
+}
+
+.hero-b__cta-row {
+  display: flex;
+  align-items: center;
+  gap: 28px;
+  margin-top: 44px;
+  flex-wrap: wrap;
+}
+
+.hero-b__btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  padding: 16px 26px;
+  background: #f4edd8;
+  color: #1a1614;
+  border: 0;
+  border-radius: 0;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.4px;
+  cursor: pointer;
+  transition: background 0.15s, color 0.15s, transform 0.15s;
+}
+
+.hero-b__btn:hover {
+  background: #9c7a4b;
+  color: #1a1614;
+  transform: translateY(-1px);
+}
+
+.hero-b__btn-arrow {
+  font-size: 12px;
+  opacity: 0.7;
+  transition: transform 0.15s, opacity 0.15s;
+}
+
+.hero-b__btn:hover .hero-b__btn-arrow {
+  transform: translateX(4px);
+  opacity: 1;
+}
+
+.hero-b__btn-link {
+  font-size: 13px;
+  font-weight: 500;
+  color: #f4edd8;
+  padding-bottom: 4px;
+  border-bottom: 1px solid #f4edd8;
+  cursor: pointer;
+  background: transparent;
+  border-left: 0;
+  border-right: 0;
+  border-top: 0;
+  transition: color 0.15s, border-color 0.15s;
+}
+
+.hero-b__btn-link:hover {
+  color: #c8a674;
+  border-bottom-color: #c8a674;
+}
+
+/* ------ Caption (right top) ------ */
+
+.hero-b__caption {
+  position: absolute;
+  right: 0;
+  top: 200px;
+  max-width: 320px;
+  z-index: 10;
+  text-align: right;
+}
+
+.hero-b__caption-row {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 11px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: rgba(244, 237, 216, 0.65);
+}
+
+.hero-b__caption-dot {
+  width: 6px;
+  height: 6px;
+  background: #9c7a4b;
+  border-radius: 50%;
+}
+
+.hero-b__caption-after {
+  color: #c8a674;
+  font-weight: 500;
+}
+
+.hero-b__caption-meta {
+  margin-top: 10px;
+  font-size: 12px;
+  letter-spacing: 1.8px;
+  color: rgba(244, 237, 216, 0.45);
+  text-transform: uppercase;
+}
+
+/* ------ Signature (left bottom) ------ */
+
+.hero-b__signature {
+  position: absolute;
+  left: 0;
+  bottom: 80px;
+  z-index: 10;
+}
+
+.hero-b__signature-meta {
+  font-size: 12px;
+  letter-spacing: 2.5px;
+  color: rgba(244, 237, 216, 0.55);
+  text-transform: uppercase;
+}
+
+/* ------ Footer meta (right bottom) ------ */
+
+.hero-b__footer-meta {
+  position: absolute;
+  right: 0;
+  bottom: 60px;
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 16px;
+}
+
+.hero-b__footer-items {
+  display: flex;
+  gap: 22px;
+  font-size: 12px;
+  letter-spacing: 2px;
+  color: rgba(244, 237, 216, 0.55);
+  text-transform: uppercase;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.hero-b__scroll {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  font-size: 12px;
+  letter-spacing: 2.5px;
+  color: rgba(244, 237, 216, 0.45);
+  text-transform: uppercase;
+}
+
+.hero-b__scroll-bar {
+  width: 1px;
+  height: 40px;
+  background: linear-gradient(180deg, transparent 0%, #9c7a4b 50%, transparent 100%);
+  background-size: 100% 200%;
+  animation: scrollBar 2.2s ease-in-out infinite;
+}
+
+@keyframes scrollBar {
+  0% {
+    background-position: 0% 100%;
+    opacity: 0.2;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    background-position: 0% -100%;
+    opacity: 0.2;
+  }
+}
+
+/* ------ Entrance animations (LCP-safe: h1 has no opacity animation) ------ */
+
+.hero-b__eyebrow,
+.hero-b__sub,
+.hero-b__cta-row,
+.hero-b__caption,
+.hero-b__signature,
+.hero-b__footer-meta {
+  animation: heroBFadeUp 700ms cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+/* Headline animates transform only (no opacity) — keeps LCP measurable at first paint */
+.hero-b__headline {
+  animation: heroBSlideUp 700ms cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.hero-b__eyebrow { animation-delay: 200ms; }
+.hero-b__headline { animation-delay: 300ms; }
+.hero-b__sub { animation-delay: 460ms; }
+.hero-b__cta-row { animation-delay: 560ms; }
+.hero-b__signature { animation-delay: 700ms; }
+.hero-b__footer-meta { animation-delay: 820ms; }
+.hero-b__caption { animation-delay: 1200ms; }
+
+@keyframes heroBFadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes heroBSlideUp {
+  from {
+    transform: translateY(16px);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
+
+/* Respect reduced-motion preference */
+@media (prefers-reduced-motion: reduce) {
+  .hero-b__eyebrow,
+  .hero-b__headline,
+  .hero-b__sub,
+  .hero-b__cta-row,
+  .hero-b__caption,
+  .hero-b__signature,
+  .hero-b__footer-meta,
+  .tile-floor__shine,
+  .hero-b__scroll-bar {
+    animation: none;
+  }
+}
+
+/* =========================================================
+   MOBILE — Hero B
+   데스크탑 스타일에 영향 없음. 모든 변경은 미디어쿼리 안에만.
+   ========================================================= */
+
+/* iOS Safari / Android Chrome — 툴바 펼침/접힘에도 높이 고정
+   svh = 'small viewport height': 툴바가 보일 때 기준의 정적 값. 스크롤 중에도 변하지 않음. */
+.hero-b-wrap,
+.hero-b__padded,
+.hero-b {
+  min-height: 100svh;
+}
+
+/* ──────── ≤1100 (Caption hide — kept from before) ──────── */
+@media (max-width: 1100px) {
+  .hero-b__caption { display: none; }
+  .hero-b__headline { font-size: clamp(44px, 6vw, 72px); }
+}
+
+/* ──────── ≤900 (main mobile layout) ──────── */
+@media (max-width: 900px) {
+  /* Prevent horizontal scroll from any oversized child */
+  html, body { overflow-x: hidden; }
+  .hero-b-wrap { overflow-x: clip; }
+
+  /* TILE floor tuning — tile 460→280, perspective 1650→700, plane size 300%×260%→200%×200% */
+  .tile-floor {
+    perspective: 700px;
+    perspective-origin: 50% 54%;
+  }
+  .tile-floor__plane {
+    /* Option 5 — smaller raster area for mobile GPU */
+    width: 200%;
+    height: 200%;
+    left: -50%;
+    transform: rotateX(50deg);
+    background:
+      radial-gradient(ellipse 22% 32% at 50% 58%,
+        rgba(200, 160, 110, 0.22) 0%,
+        rgba(200, 160, 110, 0.06) 30%,
+        transparent 65%),
+      repeating-linear-gradient(45deg,
+        transparent 0,
+        transparent calc(280px - 10px),
+        rgba(0, 0, 0, 0.5) calc(280px - 10px),
+        rgba(0, 0, 0, 0.5) calc(280px - 9px),
+        rgba(228, 216, 188, 0.6) calc(280px - 9px),
+        rgba(228, 216, 188, 0.6) calc(280px - 1px),
+        rgba(255, 240, 210, 0.5) calc(280px - 1px),
+        rgba(255, 240, 210, 0.5) 280px),
+      repeating-linear-gradient(-45deg,
+        transparent 0,
+        transparent calc(280px - 10px),
+        rgba(0, 0, 0, 0.5) calc(280px - 10px),
+        rgba(0, 0, 0, 0.5) calc(280px - 9px),
+        rgba(228, 216, 188, 0.6) calc(280px - 9px),
+        rgba(228, 216, 188, 0.6) calc(280px - 1px),
+        rgba(255, 240, 210, 0.5) calc(280px - 1px),
+        rgba(255, 240, 210, 0.5) 280px),
+      linear-gradient(180deg, #54504a 0%, #3e3a35 100%);
+  }
+
+  /* Mobile: shine mask aligned to mobile tile size (280px), slower sweep */
+  .tile-floor__shine {
+    -webkit-mask-image:
+      repeating-linear-gradient(45deg,
+        transparent 0,
+        transparent calc(280px - 9px),
+        #000 calc(280px - 9px),
+        #000 calc(280px - 1px),
+        transparent calc(280px - 1px),
+        transparent 280px),
+      repeating-linear-gradient(-45deg,
+        transparent 0,
+        transparent calc(280px - 9px),
+        #000 calc(280px - 9px),
+        #000 calc(280px - 1px),
+        transparent calc(280px - 1px),
+        transparent 280px);
+    mask-image:
+      repeating-linear-gradient(45deg,
+        transparent 0,
+        transparent calc(280px - 9px),
+        #000 calc(280px - 9px),
+        #000 calc(280px - 1px),
+        transparent calc(280px - 1px),
+        transparent 280px),
+      repeating-linear-gradient(-45deg,
+        transparent 0,
+        transparent calc(280px - 9px),
+        #000 calc(280px - 9px),
+        #000 calc(280px - 1px),
+        transparent calc(280px - 1px),
+        transparent 280px);
+  }
+  .tile-floor__shine::after {
+    animation-duration: 12s;
+  }
+
+  /* Overlays — recenter on mobile (content shifts from 60% X to ~50%) */
+  .hero-b__vignette {
+    background: radial-gradient(50% 50% at 50% 55%,
+      rgba(14, 10, 8, 0) 0%,
+      rgba(14, 10, 8, 0.24) 35%,
+      rgba(14, 10, 8, 0.84) 65%,
+      rgba(14, 10, 8, 1) 95%,
+      rgba(14, 10, 8, 1) 100%);
+  }
+  .hero-b__glow {
+    background: radial-gradient(50% 50% at 50% 55%,
+      rgba(244, 217, 168, 0.144) 0%,
+      rgba(244, 217, 168, 0.064) 30%,
+      transparent 70%);
+  }
+
+  /* LEAD — natural flow. Horizontal padding handled by .hero-b__padded (matches portfolio) */
+  .hero-b__lead {
+    position: relative;
+    left: auto;
+    top: auto;
+    padding: 100px 0 0;
+    max-width: none;
+  }
+  .hero-b__eyebrow {
+    font-size: 12px;
+    letter-spacing: 2.5px;
+    gap: 10px;
+    margin-bottom: 18px;
+  }
+  .hero-b__eyebrow-line { width: 24px; }
+  .hero-b__headline {
+    font-size: 48px;
+    letter-spacing: -1.8px;
+    line-height: 1.04;
+  }
+  .hero-b__sub {
+    font-size: 14px;
+    line-height: 1.7;
+    margin-top: 20px;
+    max-width: none;
+  }
+
+  /* CTAs — stacked, primary full-width (touch target 52px) */
+  .hero-b__cta-row {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 16px;
+    margin-top: 26px;
+  }
+  .hero-b__btn {
+    width: 100%;
+    justify-content: center;
+    padding: 16px 0;
+    font-size: 14px;
+  }
+  .hero-b__btn-link {
+    align-self: flex-start;
+    font-size: 13px;
+  }
+
+  /* SIGNATURE — meta only. Horizontal alignment via parent padding */
+  .hero-b__signature {
+    position: relative;
+    left: auto;
+    bottom: auto;
+    margin: 48px 0 14px;
+  }
+  .hero-b__signature-meta {
+    margin-top: 0;
+    font-size: 12px;
+    letter-spacing: 2px;
+  }
+
+  /* FOOTER META — natural flow. Horizontal alignment via parent padding */
+  .hero-b__footer-meta {
+    position: relative;
+    right: auto;
+    bottom: auto;
+    align-items: flex-start;
+    padding: 0 0 32px;
+    gap: 12px;
+  }
+  .hero-b__footer-items {
+    font-size: 12px;
+    letter-spacing: 1.6px;
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+  .hero-b__scroll { display: none; }
+}
+
+/* ──────── ≤480 (small phone) ──────── */
+@media (max-width: 480px) {
+  .hero-b__headline {
+    font-size: 44px;
+    letter-spacing: -1.4px;
+  }
+  .hero-b__grain { opacity: 0.08; }
+
+  /* footer items vertical stack with brass bullet marker */
+  .hero-b__footer-items {
+    flex-direction: column;
+    gap: 6px;
+  }
+  .hero-b__footer-items li::before {
+    content: '·  ';
+    color: #c8a674;
+  }
+}
+
+/* ──────── ≤375 (iPhone SE) ──────── */
+@media (max-width: 375px) {
+  .hero-b__headline {
+    font-size: 40px;
+    letter-spacing: -1.2px;
+  }
+}
