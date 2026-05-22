@@ -113,8 +113,8 @@ export default function PriceCalculator() {
       {/* 포함 항목 */}
       <div className="flex flex-wrap gap-3 mb-6">
         {INCLUDES.map((item) => (
-          <span key={item} className="inline-flex items-center gap-1.5 text-xs font-medium px-3 py-1.5 rounded-full bg-green-100 text-green-700">
-            <i className="ri-check-line"></i>
+          <span key={item} className="inline-flex items-center gap-1.5 text-xs font-medium px-3 py-1.5 rounded-sm bg-[var(--bg-2)] text-[var(--ink-2)]">
+            <i className="ri-check-line text-[var(--accent)]"></i>
             {item}
           </span>
         ))}
@@ -157,13 +157,13 @@ export default function PriceCalculator() {
                 </p>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                   {matched.map((card) => (
-                    <div key={card.label} className="rounded-xl border border-stone-200 bg-white p-4">
-                      <span className="text-xs font-bold text-stone-500">{card.label}</span>
-                      <p className="font-bold text-stone-800 text-sm mt-1 mb-2">{card.name}</p>
+                    <div key={card.label} className="rounded-sm border border-[var(--line)] bg-[var(--paper)] p-4">
+                      <span className="text-xs font-medium text-[var(--muted-2)] uppercase tracking-[0.12em]">{card.label}</span>
+                      <p className="font-medium text-[var(--ink)] text-sm mt-1 mb-2">{card.name}</p>
                       <div className="flex items-center gap-2">
-                        <span className="text-stone-400 text-sm line-through">{card.original}만원</span>
-                        <span className="text-stone-800 text-base font-black">{card.final}만원</span>
-                        <span className="text-xs font-bold px-2 py-0.5 rounded-md bg-green-50 text-green-800">
+                        <span className="text-[var(--muted-2)] text-sm line-through">{card.original}만원</span>
+                        <span className="text-[var(--ink)] text-base font-medium">{card.final}만원</span>
+                        <span className="text-xs font-medium px-2 py-0.5 rounded-sm bg-[var(--accent)] text-white">
                           {card.save}만원 절약
                         </span>
                       </div>
@@ -179,14 +179,14 @@ export default function PriceCalculator() {
       <style>{`
         .pc-select {
           appearance: none;
-          background-color: #fff;
-          border: 1px solid #e4e4e7;
-          border-radius: 8px;
+          background-color: var(--paper);
+          border: 1px solid var(--line);
+          border-radius: 2px;
           padding: 10px 14px;
           font-size: 14px;
-          color: #18181b;
+          color: var(--ink);
           cursor: pointer;
-          background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='%2371717a' viewBox='0 0 16 16'%3E%3Cpath d='M4.646 5.646a.5.5 0 0 1 .708 0L8 8.293l2.646-2.647a.5.5 0 0 1 .708.708l-3 3a.5.5 0 0 1-.708 0l-3-3a.5.5 0 0 1 0-.708z'/%3E%3C/svg%3E");
+          background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='%238c8276' viewBox='0 0 16 16'%3E%3Cpath d='M4.646 5.646a.5.5 0 0 1 .708 0L8 8.293l2.646-2.647a.5.5 0 0 1 .708.708l-3 3a.5.5 0 0 1-.708 0l-3-3a.5.5 0 0 1 0-.708z'/%3E%3C/svg%3E");
           background-repeat: no-repeat;
           background-position: right 12px center;
           padding-right: 36px;
@@ -194,12 +194,12 @@ export default function PriceCalculator() {
         }
         .pc-select:focus {
           outline: none;
-          border-color: #18181b;
+          border-color: var(--line-strong);
         }
         .pc-select:disabled {
           cursor: not-allowed;
-          background-color: #e4e4e7;
-          color: #a1a1aa;
+          background-color: var(--bg-2);
+          color: var(--muted-2);
         }
       `}</style>
     </div>
@@ -219,23 +219,23 @@ function PriceCard({
 }) {
   return (
     <div
-      className={`relative rounded-xl p-6 ${
-        isRec ? 'border-2 border-green-600 bg-white' : 'border border-stone-200 bg-white'
+      className={`relative rounded-sm p-6 ${
+        isRec ? 'border-2 border-[var(--accent)] bg-[var(--paper)]' : 'border border-[var(--line)] bg-[var(--paper)]'
       }`}
     >
       {isRec && (
-        <span className="absolute -top-3 left-5 bg-green-600 text-white text-xs font-bold px-3 py-1 rounded-full">
+        <span className="absolute -top-3 left-5 bg-[var(--accent)] text-white text-xs font-medium px-3 py-1 rounded-sm uppercase tracking-[0.12em]">
           {recLabel}
         </span>
       )}
-      <p className="text-stone-500 text-sm mb-2">{label}</p>
+      <p className="text-[var(--muted)] text-sm mb-2">{label}</p>
       {price === null ? (
-        <p className="text-2xl font-black text-stone-800">별도 협의</p>
+        <p className="text-2xl font-medium text-[var(--ink)]">별도 협의</p>
       ) : price === undefined ? (
-        <p className="text-2xl font-black text-stone-300">-</p>
+        <p className="text-2xl font-medium text-[var(--muted-2)]">-</p>
       ) : (
-        <p className="text-2xl font-black text-stone-800">
-          {price}<span className="text-base font-bold text-stone-500">만원</span>
+        <p className="text-2xl font-medium text-[var(--ink)]">
+          {price}<span className="text-base font-medium text-[var(--muted)]">만원</span>
         </p>
       )}
     </div>

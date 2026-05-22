@@ -62,7 +62,7 @@ export default function WhyGroutPage() {
   }, []);
 
   return (
-    <div className="min-h-screen bg-white font-sans">
+    <div className="min-h-screen bg-[var(--paper)] font-sans">
       <Navbar />
 
       {/* Hero */}
@@ -74,53 +74,53 @@ export default function WhyGroutPage() {
         />
         <div className="absolute inset-0 bg-gradient-to-b from-black/50 via-black/40 to-black/60" />
         <div className="absolute inset-0 flex flex-col items-center justify-center text-center px-4 pt-10">
-          <span className="text-stone-300 text-sm tracking-widest uppercase mb-3">시공 필요성</span>
+          <span className="text-[var(--muted-2)] text-sm tracking-widest uppercase mb-3">시공 필요성</span>
           <h1 className="text-white text-3xl md:text-5xl font-black mb-3 leading-tight">줄눈시공 하는 이유</h1>
           <p className="text-white/80 text-sm md:text-base max-w-xl">위생·미관·방수까지, 줄눈시공이 반드시 필요한 4가지 이유</p>
         </div>
       </section>
 
       {/* Breadcrumb */}
-      <div className="w-full bg-stone-100">
+      <div className="w-full bg-[var(--bg-2)]">
         <div className="max-w-5xl mx-auto px-6 py-4">
-          <nav className="flex items-center gap-2 text-xs text-stone-500">
-            <Link to="/" className="hover:text-stone-700 cursor-pointer">홈</Link>
+          <nav className="flex items-center gap-2 text-xs text-[var(--muted)]">
+            <Link to="/" className="hover:text-[var(--ink-2)] cursor-pointer">홈</Link>
             <i className="ri-arrow-right-s-line"></i>
             <span>줄눈 정보</span>
             <i className="ri-arrow-right-s-line"></i>
-            <span className="text-stone-800 font-medium">줄눈시공 하는 이유</span>
+            <span className="text-[var(--ink)] font-medium">줄눈시공 하는 이유</span>
           </nav>
         </div>
       </div>
 
       {/* Intro */}
       <section className="max-w-5xl mx-auto px-6 py-12">
-        <h2 className="text-2xl md:text-3xl font-black text-stone-800 mb-5">
+        <h2 className="text-2xl md:text-3xl font-black text-[var(--ink)] mb-5">
           <strong>줄눈시공</strong>은 선택이 아니라 필수입니다
         </h2>
-        <p className="text-stone-600 text-base leading-relaxed mb-4">
+        <p className="text-[var(--muted)] text-base leading-relaxed mb-4">
           많은 분들이 줄눈을 단순한 타일 사이 채움재로 생각하지만, 실제로는 <strong>방수·위생·구조 보호</strong>를 담당하는 핵심 요소입니다. 줄눈이 낡으면 눈에 보이는 미관 문제를 넘어 심각한 주거 환경 문제로 이어집니다.
         </p>
-        <p className="text-stone-600 text-base leading-relaxed">
+        <p className="text-[var(--muted)] text-base leading-relaxed">
           특히 매일 물을 사용하는 욕실, 화장실, 주방에서 <strong>줄눈시공</strong>은 가장 효과적인 유지보수 방법 중 하나입니다. 작은 투자로 공간 수명을 크게 연장할 수 있습니다.
         </p>
       </section>
 
       {/* 4 Reasons */}
-      <section className="bg-stone-50 py-16">
+      <section className="bg-[var(--bg)] py-16">
         <div className="max-w-5xl mx-auto px-6">
-          <h2 className="text-3xl font-black text-stone-800 mb-12">줄눈시공을 해야 하는 4가지 이유</h2>
+          <h2 className="text-3xl font-black text-[var(--ink)] mb-12">줄눈시공을 해야 하는 4가지 이유</h2>
           <div className="space-y-14">
             {REASONS.map((r, i) => (
               <div key={r.num} className={`grid md:grid-cols-2 gap-6 items-center ${i % 2 === 1 ? 'md:direction-rtl' : ''}`}>
                 <div className={i % 2 === 1 ? 'md:order-2' : ''}>
                   <div className="mb-3">
-                    <span className="text-4xl font-black text-stone-300">{r.num}</span>
+                    <span className="text-4xl font-black text-[var(--muted-2)]">{r.num}</span>
                   </div>
-                  <h3 className="text-lg font-black text-stone-800">{r.title}</h3>
-                  <p className="text-stone-500 text-sm leading-relaxed">{r.desc}</p>
+                  <h3 className="text-lg font-black text-[var(--ink)]">{r.title}</h3>
+                  <p className="text-[var(--muted)] text-sm leading-relaxed">{r.desc}</p>
                 </div>
-                <div className={`rounded-2xl overflow-hidden h-56 ${i % 2 === 1 ? 'md:order-1' : ''}`}>
+                <div className={`rounded-sm overflow-hidden h-56 ${i % 2 === 1 ? 'md:order-1' : ''}`}>
                   <img src={r.img} alt={r.title} className="w-full h-full object-cover object-top" />
                 </div>
               </div>
@@ -130,18 +130,18 @@ export default function WhyGroutPage() {
       </section>
 
       {/* Problems When Not Done */}
-      <section className="bg-stone-800 py-16">
+      <section className="bg-[var(--dark)] py-16">
         <div className="max-w-5xl mx-auto px-6">
           <h2 className="text-white text-2xl font-black mb-2">줄눈시공을 미루면 생기는 문제</h2>
-          <p className="text-stone-400 text-sm mb-10">작은 균열이 큰 손상으로 이어집니다</p>
+          <p className="text-[var(--muted-2)] text-sm mb-10">작은 균열이 큰 손상으로 이어집니다</p>
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-5">
             {PROBLEMS.map((p) => (
-              <div key={p.title} className="bg-stone-700 rounded-2xl p-6">
-                <div className="w-10 h-10 flex items-center justify-center bg-stone-600 rounded-xl mb-4">
-                  <i className={`${p.icon} text-xl text-stone-300`}></i>
+              <div key={p.title} className="bg-[var(--dark)]/80 rounded-sm p-6">
+                <div className="w-10 h-10 flex items-center justify-center bg-[var(--dark)]/60 rounded-sm mb-4">
+                  <i className={`${p.icon} text-xl text-[var(--muted-2)]`}></i>
                 </div>
                 <h3 className="font-bold text-white text-sm mb-2">{p.title}</h3>
-                <p className="text-stone-400 text-sm leading-relaxed">{p.desc}</p>
+                <p className="text-[var(--muted-2)] text-sm leading-relaxed">{p.desc}</p>
               </div>
             ))}
           </div>
@@ -150,17 +150,17 @@ export default function WhyGroutPage() {
 
       {/* Right Timing */}
       <section className="max-w-5xl mx-auto px-6 py-16">
-        <h2 className="text-2xl font-black text-stone-800 mb-2">줄눈시공이 필요한 시점</h2>
-        <p className="text-stone-500 text-sm mb-10">이런 상황이라면 지금 당장 점검해 보세요</p>
+        <h2 className="text-2xl font-black text-[var(--ink)] mb-2">줄눈시공이 필요한 시점</h2>
+        <p className="text-[var(--muted)] text-sm mb-10">이런 상황이라면 지금 당장 점검해 보세요</p>
         <div className="grid md:grid-cols-2 gap-5">
           {TIMING.map((t) => (
-            <div key={t.period} className="flex items-start gap-5 bg-stone-50 rounded-2xl p-6">
-              <div className="w-12 h-12 flex items-center justify-center bg-white rounded-xl shrink-0">
-                <i className={`${t.icon} text-xl text-stone-600`}></i>
+            <div key={t.period} className="flex items-start gap-5 bg-[var(--bg)] rounded-sm p-6">
+              <div className="w-12 h-12 flex items-center justify-center bg-[var(--paper)] rounded-sm shrink-0">
+                <i className={`${t.icon} text-xl text-[var(--muted)]`}></i>
               </div>
               <div>
-                <h3 className="font-bold text-stone-800 mb-1 text-sm">{t.period}</h3>
-                <p className="text-stone-500 text-sm leading-relaxed">{t.desc}</p>
+                <h3 className="font-bold text-[var(--ink)] mb-1 text-sm">{t.period}</h3>
+                <p className="text-[var(--muted)] text-sm leading-relaxed">{t.desc}</p>
               </div>
             </div>
           ))}
@@ -169,13 +169,13 @@ export default function WhyGroutPage() {
 
       {/* Related Articles */}
       <section className="max-w-5xl mx-auto px-6 py-4 pb-16">
-        <h2 className="text-xl font-black text-stone-800 mb-6">관련 정보 더 보기</h2>
+        <h2 className="text-xl font-black text-[var(--ink)] mb-6">관련 정보 더 보기</h2>
         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-4">
           {RELATED.map((r) => (
-            <Link key={r.href} to={r.href} className="block bg-stone-50 hover:bg-stone-100 rounded-2xl p-5 transition-colors cursor-pointer">
-              <h3 className="font-bold text-stone-800 text-sm mb-1">{r.title}</h3>
-              <p className="text-stone-500 text-xs">{r.desc}</p>
-              <div className="flex items-center gap-1 mt-3 text-stone-400 text-xs">
+            <Link key={r.href} to={r.href} className="block bg-[var(--bg)] hover:bg-[var(--bg-2)] rounded-sm p-5 transition-colors cursor-pointer">
+              <h3 className="font-bold text-[var(--ink)] text-sm mb-1">{r.title}</h3>
+              <p className="text-[var(--muted)] text-xs">{r.desc}</p>
+              <div className="flex items-center gap-1 mt-3 text-[var(--muted-2)] text-xs">
                 <span>자세히 보기</span>
                 <i className="ri-arrow-right-s-line"></i>
               </div>

@@ -2,8 +2,31 @@
 @tailwind components;
 @tailwind utilities;
 
+:root {
+  /* Surface */
+  --bg: #f7f4ef;
+  --bg-2: #efeae1;
+  --paper: #fbf9f5;
+  /* Ink */
+  --ink: #1c1916;
+  --ink-2: #2d2926;
+  --muted: #6f665a;
+  --muted-2: #8c8276;
+  /* Line */
+  --line: rgba(28, 25, 22, 0.12);
+  --line-strong: rgba(28, 25, 22, 0.22);
+  /* Accent */
+  --accent: #8a6a4c;
+  --accent-deep: #5e4733;
+  /* Dark */
+  --dark: #18130e;
+  --on-dark: #f3ece1;
+  --dark-line: rgba(255, 255, 255, 0.1);
+  --dark-muted: rgba(255, 255, 255, 0.58);
+}
+
 body {
-  font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans KR', sans-serif;
+  font-family: 'Pretendard Variable', 'Pretendard', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans KR', sans-serif;
 }
 
 html {
@@ -30,7 +53,7 @@ html {
 }
 
 .call-bg {
-  background: linear-gradient(90deg, #70553b, #70553b, #967353, #70553b, #70553b);
+  background: linear-gradient(90deg, var(--accent-deep), var(--accent-deep), var(--accent), var(--accent-deep), var(--accent-deep));
   background-size: 200% auto;
   animation: bg-shine 4s linear infinite;
 }

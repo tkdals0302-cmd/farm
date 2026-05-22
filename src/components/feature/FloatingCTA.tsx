@@ -21,19 +21,9 @@ export default function FloatingCTA() {
       aria-hidden={!visible}
     >
       <a
-        href="https://pf.kakao.com/_TsIAE"
-        target="_blank"
-        rel="nofollow noreferrer"
-        onClick={() => Events.kakaoClick('floating')}
-        className="w-14 h-14 flex items-center justify-center rounded-full bg-yellow-400 text-stone-900 shadow-lg active:scale-95 transition-transform"
-        aria-label="카카오톡 문의"
-      >
-        <i className="ri-kakao-talk-fill text-2xl"></i>
-      </a>
-      <a
         href="tel:010-8005-6674"
         onClick={() => Events.phoneClick('floating')}
-        className="w-14 h-14 flex items-center justify-center rounded-full bg-[#967353] text-white shadow-lg active:scale-95 transition-transform"
+        className="w-14 h-14 flex items-center justify-center rounded-full bg-[var(--accent)] text-white shadow-lg active:scale-95 transition-transform"
         aria-label="전화 상담"
       >
         <i className="ri-phone-fill text-2xl"></i>

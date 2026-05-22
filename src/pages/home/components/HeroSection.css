@@ -233,7 +233,7 @@
   gap: 14px;
   font-size: 13px;
   letter-spacing: 3px;
-  color: #c8a674;
+  color: var(--accent);
   margin-bottom: 28px;
 }
 
@@ -241,7 +241,7 @@
   display: inline-block;
   width: 36px;
   height: 1px;
-  background: #9c7a4b;
+  background: var(--accent-deep);
 }
 
 .hero-b__headline {
@@ -259,7 +259,7 @@
 .hero-b__headline em {
   font-family: inherit;
   font-style: normal;
-  color: #c8a674;
+  color: var(--accent);
 }
 
 .hero-b__sub {
@@ -296,7 +296,7 @@
 }
 
 .hero-b__btn:hover {
-  background: #9c7a4b;
+  background: var(--accent-deep);
   color: #1a1614;
   transform: translateY(-1px);
 }
@@ -327,8 +327,8 @@
 }
 
 .hero-b__btn-link:hover {
-  color: #c8a674;
-  border-bottom-color: #c8a674;
+  color: var(--accent);
+  border-bottom-color: var(--accent);
 }
 
 /* ------ Caption (right top) ------ */
@@ -355,12 +355,12 @@
 .hero-b__caption-dot {
   width: 6px;
   height: 6px;
-  background: #9c7a4b;
+  background: var(--accent-deep);
   border-radius: 50%;
 }
 
 .hero-b__caption-after {
-  color: #c8a674;
+  color: var(--accent);
   font-weight: 500;
 }
 
@@ -427,7 +427,7 @@
 .hero-b__scroll-bar {
   width: 1px;
   height: 40px;
-  background: linear-gradient(180deg, transparent 0%, #9c7a4b 50%, transparent 100%);
+  background: linear-gradient(180deg, transparent 0%, var(--accent-deep) 50%, transparent 100%);
   background-size: 100% 200%;
   animation: scrollBar 2.2s ease-in-out infinite;
 }
@@ -711,7 +711,7 @@
   }
   .hero-b__footer-items li::before {
     content: '·  ';
-    color: #c8a674;
+    color: var(--accent);
   }
 }
 

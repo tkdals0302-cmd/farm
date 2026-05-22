@@ -74,7 +74,7 @@ export default function Navbar() {
 
   const isScrolled = scrolled || !isHome;
   const textColor = isScrolled
-    ? 'text-stone-700 hover:text-[#967353]'
+    ? 'text-stone-700 hover:text-[var(--accent)]'
     : 'text-white/90 drop-shadow-[0_1px_2px_rgba(0,0,0,0.6)] hover:text-white';
   const activeTextColor = isScrolled ? 'text-stone-900' : 'text-white';
 
@@ -144,22 +144,12 @@ export default function Navbar() {
         {/* 우측 - Icons */}
         <div className="flex-1 hidden md:flex items-center justify-end gap-4">
           <a
-            href="https://www.instagram.com"
-            target="_blank"
-            rel="nofollow noreferrer"
-            className={`w-9 h-9 flex items-center justify-center transition-colors cursor-pointer ${
-              isScrolled ? 'text-stone-700 hover:text-stone-900' : 'text-white hover:text-white/80'
-            }`}
-          >
-            <i className="ri-instagram-line text-xl"></i>
-          </a>
-          <a
             href="tel:010-8005-6674"
             onClick={() => Events.phoneClick('navbar')}
             className={`flex items-center gap-2 text-sm font-semibold whitespace-nowrap transition-colors cursor-pointer ${
               isScrolled
-                ? 'bg-[#967353] text-white px-4 py-2 rounded-full hover:bg-[#7a5c3d]'
-                : 'bg-white/20 text-white px-4 py-2 rounded-full hover:bg-white/30 backdrop-blur-sm'
+                ? 'bg-[var(--accent)] text-white px-5 py-2.5 rounded-full hover:bg-[var(--accent-deep)]'
+                : 'bg-white/10 text-white px-5 py-2.5 rounded-full border border-white/30 hover:bg-white/20 backdrop-blur-sm'
             }`}
           >
             <i className="ri-phone-line text-sm"></i>
@@ -209,7 +199,7 @@ export default function Navbar() {
                   <li key={link.href}>
                     <button
                       onClick={() => handleNavClick(link.href)}
-                      className="w-full border-b border-stone-200 pb-4 text-left text-sm font-medium text-stone-600 hover:text-[#967353] cursor-pointer transition-colors"
+                      className="w-full border-b border-stone-200 pb-4 text-left text-sm font-medium text-stone-600 hover:text-[var(--accent)] cursor-pointer transition-colors"
                     >
                       {link.label}
                     </button>
@@ -228,7 +218,7 @@ export default function Navbar() {
                         <Link
                           to={link.href}
                           onClick={() => setMenuOpen(false)}
-                          className="text-sm font-medium text-stone-400 hover:text-[#967353] cursor-pointer transition-colors block"
+                          className="text-sm font-medium text-stone-400 hover:text-[var(--accent)] cursor-pointer transition-colors block"
                         >
                           {link.label}
                         </Link>
@@ -242,7 +232,7 @@ export default function Navbar() {
               <a
                 href="tel:010-8005-6674"
                 onClick={() => Events.phoneClick('navbar')}
-                className="call-bg mt-8 flex items-center justify-center gap-2 px-6 py-3 bg-[#967353] text-white text-sm font-semibold rounded-full hover:bg-[#7a5c3d] transition-colors cursor-pointer w-full"
+                className="call-bg mt-8 flex items-center justify-center gap-2 px-6 py-3 bg-[var(--accent)] text-white text-sm font-semibold rounded-full hover:bg-[var(--accent-deep)] transition-colors cursor-pointer w-full"
               >
                 <i className="ri-phone-line"></i>
                 010-8005-6674

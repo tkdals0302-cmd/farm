@@ -17,7 +17,7 @@ export default function Footer() {
   };
 
   return (
-    <footer className="bg-stone-800 rounded-t-3xl mx-2 overflow-hidden">
+    <footer className="bg-[var(--dark)] mx-2 overflow-hidden">
       <div className="px-6 md:px-12 lg:px-16 pt-10 pb-8">
         {/* Top Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 mb-6 md:mb-12">
@@ -93,7 +93,7 @@ export default function Footer() {
                   rel="nofollow noreferrer"
                   className="flex items-center gap-3 text-stone-400 text-sm hover:text-white transition-colors cursor-pointer"
                 >
-                  <div className="w-8 h-8 flex items-center justify-center bg-stone-700 rounded-lg">
+                  <div className="w-8 h-8 flex items-center justify-center bg-white/10 rounded-sm">
                     <i className={`${social.icon} text-sm`}></i>
                   </div>
                   {social.label}

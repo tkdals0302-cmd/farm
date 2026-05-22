@@ -2,9 +2,13 @@ import { useState, useEffect, useRef, FormEvent } from 'react';
 import { Link } from 'react-router-dom';
 import DatePicker from './DatePicker';
 import { Events } from '../../../lib/analytics';
+import {
+  QUOTE_PREFILL_KEY,
+  QUOTE_PREFILL_EVENT,
+  type QuotePrefill,
+} from '../../../lib/quotePrefill';
 
 const AREAS = ['현관', '화장실', '베란다', '거실', '주방', '수영장', '목욕탕', '기타'];
-const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 const TURNSTILE_SITE_KEY = '0x4AAAAAADGHPfvxD-MhAQbY';
 
 function formatPhoneNumber(value: string) {
@@ -22,7 +26,7 @@ export default function QuoteFormSection() {
   const [location, setLocation] = useState('');
   const [date, setDate] = useState('');
   const [selectedAreas, setSelectedAreas] = useState<string[]>([]);
-  const [email, setEmail] = useState('');
+  const [message, setMessage] = useState('');
   const [privacyAgreed, setPrivacyAgreed] = useState(false);
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [cfToken, setCfToken] = useState<string>('');
@@ -65,6 +69,29 @@ export default function QuoteFormSection() {
     };
   }, []);
 
+  useEffect(() => {
+    const applyPrefill = () => {
+      try {
+        const raw = sessionStorage.getItem(QUOTE_PREFILL_KEY);
+        if (!raw) return;
+        const data = JSON.parse(raw) as QuotePrefill;
+        if (Array.isArray(data.areas) && data.areas.length > 0) {
+          setSelectedAreas(data.areas.filter(a => AREAS.includes(a)));
+        }
+        if (typeof data.message === 'string' && data.message.length > 0) {
+          setMessage(data.message);
+          setCharCount(data.message.length);
+        }
+        setErrors(prev => ({ ...prev, areas: '' }));
+      } catch {
+        /* ignore parse errors */
+      }
+    };
+    applyPrefill();
+    window.addEventListener(QUOTE_PREFILL_EVENT, applyPrefill);
+    return () => window.removeEventListener(QUOTE_PREFILL_EVENT, applyPrefill);
+  }, []);
+
   const handleNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value.replace(/[0-9]/g, '').slice(0, 9);
     setName(value);
@@ -96,11 +123,6 @@ export default function QuoteFormSection() {
     setErrors((prev) => ({ ...prev, areas: '' }));
   };
 
-  const handleEmailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setEmail(e.target.value);
-    setErrors((prev) => ({ ...prev, email: '' }));
-  };
-
   const handlePrivacyChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setPrivacyAgreed(e.target.checked);
     setErrors((prev) => ({ ...prev, privacy: '' }));
@@ -115,9 +137,6 @@ export default function QuoteFormSection() {
     if (!location.trim()) nextErrors.location = '시공위치를 입력해주세요.';
     if (!date) nextErrors.date = '희망날짜를 선택해주세요.';
     if (selectedAreas.length === 0) nextErrors.areas = '시공공간을 1개 이상 선택해주세요.';
-    if (email && !EMAIL_REGEX.test(email)) {
-      nextErrors.email = '올바른 이메일 형식으로 입력해주세요. (예: example@domain.com)';
-    }
     if (!privacyAgreed) nextErrors.privacy = '개인정보처리방침에 동의해주세요.';
     if (!cfToken) nextErrors.cfToken = '봇 검증을 완료해주세요.';
 
@@ -132,8 +151,7 @@ export default function QuoteFormSection() {
     date.length > 0 &&
     selectedAreas.length > 0 &&
     cfToken.length > 0 &&
-    privacyAgreed &&
-    (!email || EMAIL_REGEX.test(email));
+    privacyAgreed;
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -175,11 +193,12 @@ export default function QuoteFormSection() {
       setLocation('');
       setDate('');
       setSelectedAreas([]);
-      setEmail('');
+      setMessage('');
       setPrivacyAgreed(false);
       setCharCount(0);
       setErrors({});
       setCfToken('');
+      try { sessionStorage.removeItem(QUOTE_PREFILL_KEY); } catch { /* ignore */ }
       // @ts-expect-error - turnstile global
       if (widgetIdRef.current && window.turnstile) {
         // @ts-expect-error - turnstile global
@@ -193,23 +212,23 @@ export default function QuoteFormSection() {
   };
 
   return (
-    <section id="quote" className="py-20 px-6 md:px-12 lg:px-20 bg-stone-50">
+    <section id="quote" className="py-20 px-6 md:px-12 lg:px-20 bg-[var(--bg)]">
       <div className="max-w-4xl mx-auto">
         {/* Header */}
         <div className="text-center mb-10">
-          <span className="text-xs font-semibold tracking-widest text-stone-400 uppercase">Free Estimate</span>
-          <h2 className="text-4xl md:text-5xl font-black text-stone-900 mt-2">무료 견적 상담 신청</h2>
-          <p className="text-stone-500 mt-3">양식을 작성하시면 24시간 내 연락드립니다</p>
+          <span className="text-[11px] font-medium tracking-[0.16em] text-[var(--accent)] uppercase">Free Estimate</span>
+          <h2 className="text-4xl md:text-5xl font-black text-[var(--ink)] mt-2 leading-[1.25]">무료 견적 상담 신청</h2>
+          <p className="text-[var(--muted)] mt-3">양식을 작성하시면 24시간 내 연락드립니다</p>
         </div>
 
-        <div className="bg-white rounded-3xl pt-10 px-5 md:p-12">
+        <div className="bg-white rounded-sm pt-10 px-5 md:p-12 border border-[var(--line)]">
           {submitted ? (
             <div className="text-center py-12">
-              <div className="w-16 h-16 flex items-center justify-center bg-stone-900 rounded-full mx-auto mb-4">
-                <i className="ri-check-line text-white text-2xl"></i>
+              <div className="w-16 h-16 flex items-center justify-center bg-[var(--ink)] rounded-full mx-auto mb-4">
+                <i className="ri-check-line text-[var(--paper)] text-2xl"></i>
               </div>
-              <h3 className="text-xl font-bold text-stone-900 mb-2">신청이 완료되었습니다!</h3>
-              <p className="text-stone-500 text-sm">24시간 내에 담당자가 연락드릴 예정입니다.<br />감사합니다.</p>
+              <h3 className="text-xl font-medium text-[var(--ink)] mb-2">신청이 완료되었습니다!</h3>
+              <p className="text-[var(--muted)] text-sm">24시간 내에 담당자가 연락드릴 예정입니다.<br />감사합니다.</p>
               <button
                 onClick={() => {
                   setSubmitted(false);
@@ -218,10 +237,11 @@ export default function QuoteFormSection() {
                   setLocation('');
                   setDate('');
                   setSelectedAreas([]);
-                  setEmail('');
+                  setMessage('');
                   setPrivacyAgreed(false);
                   setCharCount(0);
                   setErrors({});
+                  try { sessionStorage.removeItem(QUOTE_PREFILL_KEY); } catch { /* ignore */ }
                 }}
                 className="mt-6 text-sm text-stone-400 underline cursor-pointer"
               >
@@ -249,7 +269,7 @@ export default function QuoteFormSection() {
               {/* Row 1 */}
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
-                  <label className="block text-sm font-medium text-stone-700 mb-1.5">
+                  <label className="block text-sm font-medium text-[var(--ink-2)] mb-1.5">
                     이름 <span className="text-red-400">*</span>
                   </label>
                   <input
@@ -260,12 +280,12 @@ export default function QuoteFormSection() {
                     onChange={handleNameChange}
                     maxLength={9}
                     placeholder="홍길동"
-                    className="w-full px-4 py-3 border border-stone-200 rounded-xl text-base text-stone-800 placeholder-stone-300 focus:outline-none focus:border-stone-400 transition-colors"
+                    className="w-full px-4 py-3 border border-[var(--line)] rounded-sm text-base text-stone-800 placeholder-stone-300 focus:outline-none focus:border-stone-400 transition-colors"
                   />
                   {errors.name && <p className="mt-1 text-xs text-red-500">{errors.name}</p>}
                 </div>
                 <div>
-                  <label className="block text-sm font-medium text-stone-700 mb-1.5">
+                  <label className="block text-sm font-medium text-[var(--ink-2)] mb-1.5">
                     연락처 <span className="text-red-400">*</span>
                   </label>
                   <div className="relative">
@@ -278,9 +298,9 @@ export default function QuoteFormSection() {
                       inputMode="numeric"
                       maxLength={13}
                       placeholder="010-1234-5678"
-                      className="w-full px-4 py-3 border border-stone-200 rounded-xl text-base text-stone-700 placeholder-stone-300 focus:outline-none focus:border-stone-400 transition-colors"
+                      className="w-full px-4 py-3 border border-[var(--line)] rounded-sm text-base text-stone-700 placeholder-stone-300 focus:outline-none focus:border-stone-400 transition-colors"
                     />
-                    <span className={`absolute right-4 top-3 text-xs font-medium ${phone.length >= 10 ? 'text-green-600' : 'text-stone-400'}`}>
+                    <span className={`absolute right-4 top-3 text-xs font-medium ${phone.length >= 10 ? 'text-[var(--accent)]' : 'text-[var(--muted-2)]'}`}>
                       {phone.length}/11
                     </span>
                   </div>
@@ -291,7 +311,7 @@ export default function QuoteFormSection() {
               {/* Row 2 */}
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
-                  <label className="block text-sm font-medium text-stone-700 mb-1.5">
+                  <label className="block text-sm font-medium text-[var(--ink-2)] mb-1.5">
                     시공 위치 <span className="text-red-400">*</span>
                   </label>
                   <input
@@ -302,12 +322,12 @@ export default function QuoteFormSection() {
                     onChange={handleLocationChange}
                     maxLength={39}
                     placeholder="예: 서울 강남구 역삼동"
-                    className="w-full px-4 py-3 border border-stone-200 rounded-xl text-base text-stone-800 placeholder-stone-300 focus:outline-none focus:border-stone-400 transition-colors"
+                    className="w-full px-4 py-3 border border-[var(--line)] rounded-sm text-base text-stone-800 placeholder-stone-300 focus:outline-none focus:border-stone-400 transition-colors"
                   />
                   {errors.location && <p className="mt-1 text-xs text-red-500">{errors.location}</p>}
                 </div>
                 <div>
-                  <label className="block text-sm font-medium text-stone-700 mb-1.5">
+                  <label className="block text-sm font-medium text-[var(--ink-2)] mb-1.5">
                     희망 날짜 <span className="text-red-400">*</span>
                   </label>
                   <DatePicker name="date" onChange={handleDateChange} />
@@ -331,7 +351,7 @@ export default function QuoteFormSection() {
                         onChange={() => toggleArea(area)}
                         className="sr-only peer"
                       />
-                      <span className="inline-block px-4 py-2 rounded-full border border-stone-200 text-sm text-stone-600 peer-checked:bg-[#967353] peer-checked:text-white peer-checked:border-[#967353] transition-all cursor-pointer whitespace-nowrap">
+                      <span className="inline-block px-5 py-2 rounded-sm text-sm font-medium bg-white text-[var(--muted)] border border-[var(--line)] hover:border-[var(--line-strong)] peer-checked:bg-[var(--accent)] peer-checked:text-white peer-checked:border-[var(--accent)] transition-all cursor-pointer whitespace-nowrap">
                         {area}
                       </span>
                     </label>
@@ -342,17 +362,21 @@ export default function QuoteFormSection() {
 
               {/* Message */}
               <div>
-                <label className="block text-sm font-medium text-stone-700 mb-1.5">
+                <label className="block text-sm font-medium text-[var(--ink-2)] mb-1.5">
                   상세 내용
                 </label>
                 <div className="relative">
                   <textarea
                     name="message"
-                    rows={4}
+                    rows={8}
                     maxLength={MAX_CHARS}
-                    onChange={(e) => setCharCount(e.target.value.length)}
+                    value={message}
+                    onChange={(e) => {
+                      setMessage(e.target.value);
+                      setCharCount(e.target.value.length);
+                    }}
                     placeholder="시공 면적, 현재 상태, 요청 사항 등을 자유롭게 작성해 주세요."
-                    className="w-full px-4 py-3 border border-stone-200 rounded-xl text-base text-stone-800 placeholder-stone-300 focus:outline-none focus:border-stone-400 transition-colors resize-none"
+                    className="w-full px-4 py-3 border border-[var(--line)] rounded-sm text-base text-stone-800 placeholder-stone-300 focus:outline-none focus:border-stone-400 transition-colors resize-none"
                   />
                   <span className="absolute bottom-3 right-4 text-xs text-stone-400">
                     {charCount} / {MAX_CHARS}
@@ -363,22 +387,6 @@ export default function QuoteFormSection() {
                     희망 날짜에 시공이 어려울 수 있는 점 양해 부탁드립니다. <br />
                     <span className= "font-bold text-red-400">정확한 시공 가능 일정은 상담 후 안내드리며,</span> 최대한 희망에 맞춰 드릴 수 있도록 노력하겠습니다.
                   </div>
-              {/* Email */}
-              <div>
-                <label className="block text-sm font-medium text-stone-700 mb-1.5">
-                  이메일
-                </label>
-                <input
-                  type="email"
-                  name="email"
-                  value={email}
-                  onChange={handleEmailChange}
-                  placeholder="example@email.com"
-                  className="w-full px-4 py-3 border border-stone-200 rounded-xl text-base text-stone-800 placeholder-stone-300 focus:outline-none focus:border-stone-400 transition-colors"
-                />
-                {errors.email && <p className="mt-1 text-xs text-red-500">{errors.email}</p>}
-              </div>
-
               {/* Cloudflare Turnstile */}
               <div>
                 <div ref={turnstileRef} className="flex justify-center"></div>
@@ -394,17 +402,17 @@ export default function QuoteFormSection() {
                   required
                   checked={privacyAgreed}
                   onChange={handlePrivacyChange}
-                  className="w-5 h-5 mt-0.5 cursor-pointer accent-[#967353]"
+                  className="w-5 h-5 mt-0.5 cursor-pointer accent-[var(--accent)]"
                 />
                 <label htmlFor="privacy" className="text-sm text-stone-400 leading-relaxed cursor-pointer">
-                  수집된 개인정보(이름, 연락처, 이메일, 시공 위치, 희망 일정, 시공 공간, 상세 내용)는 견적 상담 목적으로만 사용되며,
+                  수집된 개인정보(이름, 연락처, 시공 위치, 희망 일정, 시공 공간, 상세 내용)는 견적 상담 목적으로만 사용되며,
                   상담 완료 후 즉시 폐기됩니다.{' '}
                   <Link
                     to="/privacy"
                     target="_blank"
                     rel="noopener noreferrer"
                     onClick={(e) => e.stopPropagation()}
-                    className="text-[#967353] font-semibold underline underline-offset-2 hover:opacity-80"
+                    className="text-[var(--accent)] font-semibold underline underline-offset-2 hover:opacity-80"
                   >
                     개인정보 처리방침
                   </Link>
@@ -416,7 +424,7 @@ export default function QuoteFormSection() {
               <button
                 type="submit"
                 disabled={loading || !isFormValid}
-                className="w-full py-4 bg-stone-900 text-white font-semibold text-base rounded-full hover:bg-[#967353] transition-all cursor-pointer whitespace-nowrap disabled:opacity-60 disabled:cursor-not-allowed"
+                className="w-full py-4 bg-[var(--ink)] text-[var(--paper)] font-medium text-base rounded-sm hover:bg-[var(--accent-deep)] transition-all cursor-pointer whitespace-nowrap disabled:opacity-60 disabled:cursor-not-allowed"
               >
                 {loading ? '제출 중...' : '견적 신청하기'}
               </button>
