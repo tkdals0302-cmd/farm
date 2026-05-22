@@ -25,6 +25,7 @@ export default function Navbar() {
   const [infoOpen, setInfoOpen] = useState(false);
   const [mobileInfoOpen, setMobileInfoOpen] = useState(false);
   const infoRef = useRef<HTMLLIElement>(null);
+  const skipScrollRestoreRef = useRef(false);
   const navigate = useNavigate();
   const location = useLocation();
   const isHome = location.pathname === '/';
@@ -46,23 +47,53 @@ export default function Navbar() {
   }, []);
 
   useEffect(() => {
-    const prevOverflow = document.body.style.overflow;
-    if (menuOpen) {
-      document.body.style.overflow = 'hidden';
-    } else {
-      document.body.style.overflow = prevOverflow || '';
-    }
+    if (!menuOpen) return;
+
+    // iOS Safari–compatible scroll lock: preserve scroll position by
+    // fixing the body in place, then restore on close.
+    const scrollY = window.scrollY;
+    const html = document.documentElement;
+    const body = document.body;
+    const prev = {
+      htmlOverflow: html.style.overflow,
+      bodyOverflow: body.style.overflow,
+      bodyPosition: body.style.position,
+      bodyTop: body.style.top,
+      bodyWidth: body.style.width,
+    };
+
+    html.style.overflow = 'hidden';
+    body.style.overflow = 'hidden';
+    body.style.position = 'fixed';
+    body.style.top = `-${scrollY}px`;
+    body.style.width = '100%';
 
     return () => {
-      document.body.style.overflow = prevOverflow || '';
+      html.style.overflow = prev.htmlOverflow;
+      body.style.overflow = prev.bodyOverflow;
+      body.style.position = prev.bodyPosition;
+      body.style.top = prev.bodyTop;
+      body.style.width = prev.bodyWidth;
+      // Restore scroll only when the close was NOT an intentional navigation.
+      // Nav-link clicks set this ref so scrollIntoView (deferred below) can land cleanly.
+      if (skipScrollRestoreRef.current) {
+        skipScrollRestoreRef.current = false;
+      } else {
+        window.scrollTo(0, scrollY);
+      }
     };
   }, [menuOpen]);
 
   const handleNavClick = (href: string) => {
+    skipScrollRestoreRef.current = true;
     setMenuOpen(false);
     if (isHome) {
-      const el = document.querySelector(href);
-      if (el) el.scrollIntoView({ behavior: 'smooth' });
+      // Defer so the body unlock (in cleanup) runs first;
+      // otherwise scrollIntoView fights the position:fixed lock.
+      setTimeout(() => {
+        const el = document.querySelector(href);
+        if (el) el.scrollIntoView({ behavior: 'smooth' });
+      }, 0);
     } else {
       navigate('/');
       setTimeout(() => {
@@ -217,7 +248,10 @@ export default function Navbar() {
                       <li key={link.href}>
                         <Link
                           to={link.href}
-                          onClick={() => setMenuOpen(false)}
+                          onClick={() => {
+                            skipScrollRestoreRef.current = true;
+                            setMenuOpen(false);
+                          }}
                           className="text-sm font-medium text-stone-400 hover:text-[var(--accent)] cursor-pointer transition-colors block"
                         >
                           {link.label}

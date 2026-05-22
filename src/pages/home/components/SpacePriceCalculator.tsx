@@ -379,8 +379,11 @@ export default function SpacePriceCalculator() {
         {/* Header */}
         <div className="mb-10">
           <span className="text-[11px] font-medium tracking-[0.16em] text-[var(--accent)] uppercase">Price Calculator</span>
-          <h2 className="text-4xl md:text-5xl font-black text-[var(--ink)] mt-2 leading-[1.25] break-keep">
-            <span className="md:block">공간을 고르면,</span>{' '}
+          <h2
+            className="text-4xl md:text-5xl font-medium text-[var(--ink)] mt-2 leading-[1.25] tracking-[-0.01em] break-keep"
+            style={{ fontFamily: "'Noto Serif KR', serif" }}
+          >
+            <span className="md:block">공간을 고르면,<br></br></span>{' '}
             <span className="md:block">가격이 바로 보입니다</span>
           </h2>
           <p className="text-stone-500 mt-1 sm:mt-3 text-base max-w-[56ch]">필요한 공간만 골라 실시간 견적을 확인하세요</p>

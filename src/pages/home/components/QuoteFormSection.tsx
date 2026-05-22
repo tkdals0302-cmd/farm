@@ -217,11 +217,19 @@ export default function QuoteFormSection() {
         {/* Header */}
         <div className="text-center mb-10">
           <span className="text-[11px] font-medium tracking-[0.16em] text-[var(--accent)] uppercase">Free Estimate</span>
-          <h2 className="text-4xl md:text-5xl font-black text-[var(--ink)] mt-2 leading-[1.25]">무료 견적 상담 신청</h2>
+          <h2
+            className="text-4xl md:text-5xl font-medium text-[var(--ink)] mt-2 leading-[1.25] tracking-[-0.01em] break-keep"
+            style={{ fontFamily: "'Noto Serif KR', serif" }}
+          >
+            무료 견적 상담 신청
+          </h2>
           <p className="text-[var(--muted)] mt-3">양식을 작성하시면 24시간 내 연락드립니다</p>
         </div>
 
-        <div className="bg-white rounded-sm pt-10 px-5 md:p-12 border border-[var(--line)]">
+        <div
+          className="bg-white rounded-sm pt-10 px-5 md:p-12 border border-[var(--line)]"
+          style={{ colorScheme: 'light' }}
+        >
           {submitted ? (
             <div className="text-center py-12">
               <div className="w-16 h-16 flex items-center justify-center bg-[var(--ink)] rounded-full mx-auto mb-4">

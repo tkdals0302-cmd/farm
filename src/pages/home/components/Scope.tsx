@@ -72,8 +72,11 @@ export default function Scope() {
         {/* Header */}
         <div className="mb-10">
           <span className="text-[11px] font-medium tracking-[0.16em] text-[var(--accent)] uppercase">Scope</span>
-          <h2 className="text-4xl md:text-5xl font-black text-[var(--ink)] mt-2 leading-[1.25]">
-            줄눈이 필요한 <span className="text-[var(--accent)]">모든 곳에</span>
+          <h2
+            className="text-4xl md:text-5xl font-medium text-[var(--ink)] mt-2 leading-[1.25] tracking-[-0.01em] break-keep"
+            style={{ fontFamily: "'Noto Serif KR', serif" }}
+          >
+            줄눈이 필요한 <br></br><span className="text-[var(--accent)]">모든 곳에</span>
           </h2>
           <p className="text-[var(--muted)] mt-1 sm:mt-3 text-base max-w-[56ch]">
             주거 · 상업 · 시설까지. 디테일라인은 환경별로 자재와 시공 방식을 다르게 가져갑니다.<br />

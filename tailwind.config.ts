@@ -6,6 +6,10 @@ export default {
   ],
   theme: {
     extend: {
+      fontFamily: {
+        // Headings: Korean serif, mirrors info/* page title style
+        serif: ['Noto Serif KR', 'serif'],
+      },
       // Override font-size scale so each utility only sets `font-size`
       // (no built-in `line-height`). This makes `leading-*` always win
       // and removes the text-5xl/text-6xl line-height: 1 surprise.

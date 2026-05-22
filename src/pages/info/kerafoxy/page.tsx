@@ -6,16 +6,18 @@ import { Events } from '../../../lib/analytics';
 import beforeImage from '../../../assets/images/info/kerafoxy/before.jpg';
 import afterImage from '../../../assets/images/info/kerafoxy/after.jpg';
 import introImage from '../../../assets/images/info/kerafoxy/kerafoxy.jpg';
+import heroBgDesktop from '../../../assets/images/info/kerafoxy/bg.webp';
+import heroBgMobile from '../../../assets/images/info/kerafoxy/bg_m.webp';
 
 // ─────────────────────────────────────────────────────────────────────────────
 // Data
 // ─────────────────────────────────────────────────────────────────────────────
 
 const HERO_META = [
-  { k: '소재 분류', v: '에폭시 계열', small: '2액형' },
-  { k: '원산지', v: '이탈리아', small: 'Mapei' },
-  { k: '수명', v: '10년+', small: '시멘트 대비 3–5배' },
-  { k: 'A/S', v: '2년', small: '무상' },
+  { k: '소재 분류', v: '에폭시 계열' },
+  { k: '원산지', v: '이탈리아' },
+  { k: '수명', v: '10년+' },
+  { k: 'A/S', v: '2년', },
 ];
 
 const INTRO_STATS = [
@@ -205,34 +207,6 @@ const RELATED: RelatedItem[] = [
 // Sub-components
 // ─────────────────────────────────────────────────────────────────────────────
 
-function ImgPh({
-  ratio = '5 / 6',
-  corner,
-  label,
-  dark,
-  className = '',
-}: {
-  ratio?: string;
-  corner: string;
-  label: string;
-  dark?: boolean;
-  className?: string;
-}) {
-  return (
-    <div
-      className={`kf-imgph ${dark ? 'kf-imgph-dark' : ''} ${className}`}
-      style={{ aspectRatio: ratio }}
-      aria-hidden="true"
-    >
-      <div className="kf-ph-corner">{corner}</div>
-      <div className="kf-ph-label">
-        <span className="kf-ph-sq"></span>
-        <span>{label}</span>
-      </div>
-    </div>
-  );
-}
-
 function SecHead({
   num,
   ko,
@@ -301,12 +275,13 @@ export default function KerafoxyPage() {
 
       {/* ===== 01 Hero ===== */}
       <header className="kf-hero" data-screen-label="01 Hero">
-        <ImgPh
-          ratio="auto"
-          corner="HERO · 1920×900"
-          label="SHOT · 케라폭시 시공 디테일"
-          dark
+        <div
           className="kf-hero-bg"
+          style={{
+            '--hero-img-d': `url(${heroBgDesktop})`,
+            '--hero-img-m': `url(${heroBgMobile})`,
+          } as React.CSSProperties}
+          aria-hidden="true"
         />
         <div className="kf-container kf-hero-inner">
           <div className="kf-eyebrow kf-eyebrow-light">Grout Knowledge · 01</div>
@@ -323,7 +298,6 @@ export default function KerafoxyPage() {
               <li key={m.k}>
                 <span className="kf-meta-k">{m.k}</span>
                 <span className="kf-meta-v">{m.v}</span>
-                <span className="kf-meta-small">{m.small}</span>
               </li>
             ))}
           </ul>
@@ -526,34 +500,36 @@ export default function KerafoxyPage() {
         </div>
       </section>
 
-      {/* ===== 06 Related ===== */}
-      <section className="kf-section kf-bg-paper" data-screen-label="06 Related">
-        <div className="kf-container">
-          <SecHead
-            num="05"
-            ko="관련 정보 더 보기"
-            en="Related"
-            title={
-              <>
-                줄눈에 대해 알아야 할, 다른 <em>네 가지</em>.
-              </>
-            }
-            lede="가격 · 제품 · 비교 · 시공 — 네 가지 관점으로 줄눈을 더 깊이 살펴보세요."
-          />
-          <div className="kf-related-grid">
-            {RELATED.map((r) => (
-              <Link key={r.href} to={r.href} className="kf-related-card">
-                <span className="kf-related-idx">{r.idx}</span>
-                <h4 className="kf-related-title">{r.title}</h4>
-                <p className="kf-related-desc">{r.desc}</p>
-                <span className="kf-related-more">
-                  more <span className="kf-related-arr">→</span>
-                </span>
-              </Link>
-            ))}
+      {/* ===== 06 Related (temporarily hidden — flip `false` to `true` to restore) ===== */}
+      {false && (
+        <section className="kf-section kf-bg-paper" data-screen-label="06 Related">
+          <div className="kf-container">
+            <SecHead
+              num="05"
+              ko="관련 정보 더 보기"
+              en="Related"
+              title={
+                <>
+                  줄눈에 대해 알아야 할, 다른 <em>네 가지</em>.
+                </>
+              }
+              lede="가격 · 제품 · 비교 · 시공 — 네 가지 관점으로 줄눈을 더 깊이 살펴보세요."
+            />
+            <div className="kf-related-grid">
+              {RELATED.map((r) => (
+                <Link key={r.href} to={r.href} className="kf-related-card">
+                  <span className="kf-related-idx">{r.idx}</span>
+                  <h4 className="kf-related-title">{r.title}</h4>
+                  <p className="kf-related-desc">{r.desc}</p>
+                  <span className="kf-related-more">
+                    more <span className="kf-related-arr">→</span>
+                  </span>
+                </Link>
+              ))}
+            </div>
           </div>
-        </div>
-      </section>
+        </section>
+      )}
 
       {/* ===== CTA Band ===== */}
       <section className="kf-cta-band" data-screen-label="CTA Band">
@@ -647,18 +623,32 @@ em {
   .kf-hero { padding: 120px 0 64px; }
 }
 .kf-hero-bg {
-  position: absolute !important;
+  position: absolute;
   inset: 0;
   z-index: -1;
-  aspect-ratio: auto !important;
-  width: 100%;
-  height: 100%;
+  background:
+    /* Bottom fade — light top → strong dark near bottom for image blend */
+    linear-gradient(180deg, rgba(20,16,12,.25) 0%, rgba(20,16,12,.25) 35%, rgba(14,11,8,.95) 100%),
+    radial-gradient(120% 80% at 70% 20%, rgba(138,106,76,.18), transparent 60%),
+    /* Width-anchored, top-aligned */
+    var(--hero-img-d, none) center top / 100% auto no-repeat,
+    linear-gradient(180deg, #251d14 0%, #18130e 100%);
+}
+@media (max-width: 720px) {
+  /* Mobile uses dedicated mobile-optimized image with cover */
+  .kf-hero-bg {
+    background:
+      linear-gradient(180deg, rgba(20,16,12,.35) 0%, rgba(14,11,8,.78) 100%),
+      radial-gradient(120% 80% at 70% 20%, rgba(138,106,76,.18), transparent 60%),
+      var(--hero-img-m, none) center/cover no-repeat,
+      linear-gradient(180deg, #251d14 0%, #18130e 100%);
+  }
 }
 .kf-hero-bg::after {
   content: '';
   position: absolute;
   inset: 0;
-  background: radial-gradient(120% 100% at 50% 0%, rgba(0,0,0,.25), rgba(0,0,0,.65) 80%);
+  background: radial-gradient(120% 100% at 50% 0%, rgba(0,0,0,.15), rgba(0,0,0,.55) 80%);
   pointer-events: none;
 }
 .kf-hero-inner { position: relative; z-index: 1; }
@@ -719,6 +709,7 @@ em {
 @media (max-width: 720px) {
   .kf-hero-meta { grid-template-columns: repeat(2, 1fr); }
   .kf-hero-meta li:nth-child(2) { border-right: none; }
+  .kf-hero-meta li:nth-child(3) { padding-left: 0; }
   .kf-hero-meta li:nth-child(3), .kf-hero-meta li:nth-child(4) {
     border-top: 1px solid rgba(255,255,255,.16);
   }
@@ -1298,6 +1289,7 @@ em {
 .kf-ba-bottom li:not(:first-child) { padding-left: 18px; }
 @media (max-width: 820px) {
   .kf-ba-bottom li:nth-child(2) { border-right: none; }
+  .kf-ba-bottom li:nth-child(3) { padding-left: 0; }
 }
 .kf-ba-bot-k {
   font-size: 10.5px;
@@ -1312,6 +1304,9 @@ em {
   font-size: 18px;
   color: var(--on-dark);
   letter-spacing: -0.005em;
+}
+@media (max-width: 820px) {
+  .kf-ba-bot-v { font-size: 16px; }
 }
 
 /* ===== Related ===== */
@@ -1424,7 +1419,19 @@ em {
   justify-content: flex-end;
 }
 @media (max-width: 820px) {
-  .kf-cta-actions { justify-content: flex-start; }
+  .kf-cta-actions {
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+    gap: 8px;
+  }
+  .kf-cta-actions .kf-btn {
+    flex: 1 1 0;
+    min-width: 0;
+    padding: 14px 12px;
+    font-size: 13px;
+    white-space: nowrap;
+    justify-content: center;
+  }
 }
 
 /* ===== Buttons ===== */
