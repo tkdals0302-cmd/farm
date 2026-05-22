@@ -9,6 +9,10 @@
   width: 100%;
   min-height: 100vh;
   overflow: hidden;
+  /* Android/Samsung Internet: opt out of automatic dark-mode inversion
+     so dark hero stays dark on phones with forced dark theme */
+  color-scheme: dark;
+  forced-color-adjust: none;
 }
 
 /* Matches portfolio's px-6 md:px-12 lg:px-20 */
