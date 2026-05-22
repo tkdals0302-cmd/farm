@@ -2,106 +2,58 @@
 @tailwind components;
 @tailwind utilities;
 
-* {
-  font-family: 'Noto Sans KR', sans-serif;
+:root {
+  /* Surface */
+  --bg: #f7f4ef;
+  --bg-2: #efeae1;
+  --paper: #fbf9f5;
+  /* Ink */
+  --ink: #1c1916;
+  --ink-2: #2d2926;
+  --muted: #6f665a;
+  --muted-2: #8c8276;
+  /* Line */
+  --line: rgba(28, 25, 22, 0.12);
+  --line-strong: rgba(28, 25, 22, 0.22);
+  /* Accent */
+  --accent: #8a6a4c;
+  --accent-deep: #5e4733;
+  /* Dark */
+  --dark: #18130e;
+  --on-dark: #f3ece1;
+  --dark-line: rgba(255, 255, 255, 0.1);
+  --dark-muted: rgba(255, 255, 255, 0.58);
+}
+
+body {
+  font-family: 'Pretendard Variable', 'Pretendard', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans KR', sans-serif;
 }
 
 html {
   scroll-behavior: smooth;
 }
 
-/* Button Styles */
-.btn-primary {
-  @apply px-6 py-3 bg-white text-stone-900 text-sm font-semibold rounded-full transition-all cursor-pointer whitespace-nowrap flex-1 sm:flex-none sm:px-14;
-}
-
-.btn-primary:hover {
-  @apply bg-[#967353] text-white;
-}
-
-.btn-primary:active {
-  @apply bg-stone-300;
-}
-
-.btn-primary:focus {
-  @apply ring-1 ring-stone-300 ring-offset-2;
-}
-
-.btn-secondary {
-  @apply px-6 py-3 bg-transparent border-2 border-white text-white text-sm font-semibold rounded-full transition-all cursor-pointer whitespace-nowrap flex-1 sm:flex-none sm:px-14;
-}
-
-.btn-secondary:hover {
-  @apply bg-[#967353]/10 border-[#967353];
-}
-
-.btn-secondary:active {
-  @apply bg-white/20 border-white;
-}
-
-.btn-secondary:focus {
-  @apply ring-2 ring-white ring-offset-2 ring-offset-transparent;
-}
-
-@keyframes shine {
-  0% { background-position: -200% center; }
-  100% { background-position: 200% center; }
-}
-
-.shine-border {
-  position: relative;
-  display: inline-block;
-}
-
-.shine-border::before {
-  content: '';
+/* Visually hidden — for SEO/screen-reader-only text */
+.sr-only {
   position: absolute;
-  inset: 0;
-  border-radius: 9999px;
-  padding: 1px;
-  background: linear-gradient(90deg, #292929, #3f3f3f, #e2e2e2, #3f3f3f, #292929);
-  background-size: 200% auto;
-  animation: shine 8s linear infinite;
-  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-  -webkit-mask-composite: xor;
-  mask-composite: exclude;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
 }
 
-.shine-text {
-  background: linear-gradient(100deg, #b8b8b8 12%, #ffffff 45%, #b8b8b8 78%);
-  background-size: 220% auto;
-  animation: text-glow 2s ease-in-out infinite;
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
-  -webkit-text-fill-color: transparent;
-  text-shadow: 0 0 8px rgba(255, 255, 255, 0.25);
-}
-
-@keyframes text-glow {
-  0%,
-  100% {
-    text-shadow:
-      0 0 8px rgba(255, 255, 255, 0.18),
-      0 0 16px rgba(255, 255, 255, 0.08);
-    filter: brightness(0.96);
-  }
-
-  50% {
-    text-shadow:
-      0 0 12px rgba(255, 255, 255, 0.32),
-      0 0 24px rgba(255, 255, 255, 0.18);
-    filter: brightness(1.08);
-  }
-}
-
+/* Phone button shine (used by Navbar mobile sidebar CTA) */
 @keyframes bg-shine {
   0% { background-position: 0% center; }
   100% { background-position: 200% center; }
 }
 
 .call-bg {
-  background: linear-gradient(90deg, #70553b, #70553b, #967353, #70553b, #70553b);
+  background: linear-gradient(90deg, var(--accent-deep), var(--accent-deep), var(--accent), var(--accent-deep), var(--accent-deep));
   background-size: 200% auto;
   animation: bg-shine 4s linear infinite;
 }

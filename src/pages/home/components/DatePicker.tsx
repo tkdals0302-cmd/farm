@@ -67,9 +67,9 @@ export default function DatePicker({ name = 'date', onChange }: DatePickerProps)
       <button
         type="button"
         onClick={() => setIsOpen((v) => !v)}
-        className="w-full flex items-center justify-between px-4 py-3 rounded-xl border border-stone-200 bg-white hover:border-stone-400 transition-all duration-150"
+        className="w-full flex items-center justify-between px-4 py-3 rounded-sm border border-[var(--line)] bg-[var(--paper)] hover:border-[var(--line-strong)] transition-all duration-150"
       >
-        <span className={`text-sm ${selectedDate ? 'text-stone-800' : 'text-stone-400'}`}>
+        <span className={`text-sm ${selectedDate ? 'text-[var(--ink)]' : 'text-[var(--muted-2)]'}`}>
           {selectedDate ? formatDateKo(selectedDate) : '날짜를 선택해 주세요'}
         </span>
         <i className="ri-calendar-line text-stone-400 text-base"></i>
@@ -78,7 +78,7 @@ export default function DatePicker({ name = 'date', onChange }: DatePickerProps)
       <input type="hidden" name={name} value={selectedDate ? formatDate(selectedDate) : ''} />
 
       {isOpen && (
-        <div className="absolute z-50 mt-2 w-full bg-white border border-stone-100 rounded-2xl shadow-xl overflow-hidden">
+        <div className="absolute z-50 mt-2 w-full bg-[var(--paper)] border border-[var(--line)] rounded-sm shadow-xl overflow-hidden">
           <div className="flex items-center justify-between px-5 pt-5 pb-3">
             <button
               type="button"
@@ -104,7 +104,7 @@ export default function DatePicker({ name = 'date', onChange }: DatePickerProps)
               <div
                 key={day}
                 className={`text-center text-xs font-medium py-1 ${
-                  i === 0 ? 'text-red-400' : i === 6 ? 'text-blue-400' : 'text-stone-400'
+                  i === 0 || i === 6 ? 'text-[var(--accent)]' : 'text-[var(--muted-2)]'
                 }`}
               >
                 {day}
@@ -126,17 +126,17 @@ export default function DatePicker({ name = 'date', onChange }: DatePickerProps)
                 'w-9 h-9 mx-auto flex items-center justify-center rounded-full text-sm transition-all duration-100 ';
 
               if (isSelected) {
-                cls += 'bg-stone-900 text-white font-medium';
+                cls += 'bg-[var(--ink)] text-[var(--paper)] font-medium';
               } else if (isPast) {
-                cls += 'text-stone-200 cursor-not-allowed';
+                cls += 'text-[var(--muted-2)]/50 cursor-not-allowed';
               } else if (isToday) {
-                cls += 'border border-[#967353] text-[#967353] font-medium hover:bg-[#967353]/10';
+                cls += 'border border-[var(--accent)] text-[var(--accent)] font-medium hover:bg-[var(--accent)]/10';
               } else if (isSun) {
-                cls += 'text-red-400 hover:bg-red-50';
+                cls += 'text-[var(--muted-2)] hover:bg-[var(--bg-2)]';
               } else if (isSat) {
-                cls += 'text-blue-400 hover:bg-blue-50';
+                cls += 'text-[var(--muted-2)] hover:bg-[var(--bg-2)]';
               } else {
-                cls += 'text-stone-700 hover:bg-stone-100';
+                cls += 'text-[var(--ink-2)] hover:bg-[var(--bg-2)]';
               }
 
               return (
@@ -153,18 +153,18 @@ export default function DatePicker({ name = 'date', onChange }: DatePickerProps)
             })}
           </div>
 
-          <div className="border-t border-stone-100 px-4 py-3 flex justify-between items-center">
+          <div className="border-t border-[var(--line)] px-4 py-3 flex justify-between items-center">
             <button
               type="button"
               onClick={clearDate}
-              className="text-xs text-stone-400 hover:text-stone-600 transition-colors"
+              className="text-xs text-[var(--muted-2)] hover:text-[var(--ink-2)] transition-colors"
             >
               초기화
             </button>
             <button
               type="button"
               onClick={goToday}
-              className="text-xs font-medium text-[#967353] hover:text-[#7f5f45] transition-colors"
+              className="text-xs font-medium text-[var(--accent)] hover:text-[var(--accent-deep)] transition-colors"
             >
               오늘
             </button>

@@ -28,8 +28,8 @@ const RECOMMENDATIONS = [
       '오랫동안 재시공 없이 사용하고 싶은 경우',
       '다양한 색상으로 인테리어를 연출하고 싶은 경우',
     ],
-    color: 'bg-stone-800 text-white',
-    btnColor: 'bg-white text-stone-800',
+    color: 'bg-[var(--dark)] text-[var(--on-dark)]',
+    btnColor: 'bg-[var(--paper)] text-[var(--ink)]',
   },
   {
     icon: 'ri-sun-line',
@@ -41,8 +41,8 @@ const RECOMMENDATIONS = [
       '빠른 시공과 조기 경화가 필요한 경우',
       '비용을 절감하면서도 품질을 원하는 경우',
     ],
-    color: 'bg-stone-100',
-    btnColor: 'bg-stone-800 text-white',
+    color: 'bg-[var(--bg-2)]',
+    btnColor: 'bg-[var(--dark)] text-[var(--on-dark)]',
   },
 ];
 
@@ -72,45 +72,45 @@ export default function ComparisonPage() {
         />
         <div className="absolute inset-0 bg-gradient-to-b from-black/50 via-black/40 to-black/60" />
         <div className="absolute inset-0 flex flex-col items-center justify-center text-center px-4 pt-10">
-          <span className="text-stone-300 text-sm tracking-widest uppercase mb-3">소재 비교 가이드</span>
+          <span className="text-[var(--muted-2)] text-sm tracking-widest uppercase mb-3">소재 비교 가이드</span>
           <h1 className="text-white text-3xl md:text-5xl font-black mb-3 leading-tight">폴리우레아 vs 케라폭시</h1>
           <p className="text-white/80 text-sm md:text-base max-w-xl">두 소재의 차이점을 한눈에 비교해 최적의 선택을 하세요</p>
         </div>
       </section>
 
       {/* Breadcrumb */}
-      <div className="w-full bg-stone-100">
+      <div className="w-full bg-[var(--bg-2)]">
         <div className="max-w-5xl mx-auto px-6 py-4">
-          <nav className="flex items-center gap-2 text-xs text-stone-500">
-            <Link to="/" className="hover:text-stone-700 cursor-pointer">홈</Link>
+          <nav className="flex items-center gap-2 text-xs text-[var(--muted)]">
+            <Link to="/" className="hover:text-[var(--ink-2)] cursor-pointer">홈</Link>
             <i className="ri-arrow-right-s-line"></i>
             <span>줄눈 정보</span>
             <i className="ri-arrow-right-s-line"></i>
-            <span className="text-stone-800 font-medium">폴리우레아 vs 케라폭시 비교</span>
+            <span className="text-[var(--ink)] font-medium">폴리우레아 vs 케라폭시 비교</span>
           </nav>
         </div>
       </div>
 
       {/* Intro */}
       <section className="max-w-5xl mx-auto px-6 py-12">
-        <h2 className="text-2xl md:text-3xl font-black text-stone-800 mb-5">
+        <h2 className="text-2xl md:text-3xl font-black text-[var(--ink)] mb-5">
           <strong>폴리우레아 줄눈</strong>과 <strong>케라폭시 줄눈</strong>, 어떻게 다를까?
         </h2>
-        <p className="text-stone-600 text-base leading-relaxed mb-4">
+        <p className="text-[var(--muted)] text-base leading-relaxed mb-4">
           줄눈 시공을 알아보다 보면 <strong>폴리우레아 줄눈</strong>과 <strong>케라폭시 줄눈</strong> 두 가지 선택지를 마주하게 됩니다. 두 소재 모두 기존 시멘트 줄눈보다 월등히 우수한 성능을 자랑하지만, 각자 강점이 다릅니다.
         </p>
-        <p className="text-stone-600 text-base leading-relaxed">
+        <p className="text-[var(--muted)] text-base leading-relaxed">
           간단히 말하면, 케라폭시는 <strong>방수·항균 성능</strong>이 극강이고 폴리우레아는 <strong>탄성·신축성</strong>이 뛰어납니다. 공간의 특성에 따라 알맞은 소재를 선택하는 것이 핵심입니다.
         </p>
       </section>
 
       {/* Comparison Table */}
-      <section className="bg-stone-50 py-16">
+      <section className="bg-[var(--bg)] py-16">
         <div className="max-w-5xl mx-auto px-6">
-          <h2 className="text-2xl font-black text-stone-800 mb-8">상세 비교표</h2>
-          <div className="overflow-x-auto rounded-xl border border-stone-200 bg-white">
+          <h2 className="text-2xl font-black text-[var(--ink)] mb-8">상세 비교표</h2>
+          <div className="overflow-x-auto rounded-sm border border-[var(--line)] bg-white">
             <table className="w-full text-sm min-w-[600px]">
-              <thead className="bg-stone-800">
+              <thead className="bg-[var(--dark)]">
                 <tr>
                   <th className="px-5 py-3.5 text-left font-bold text-white w-1/3">비교 항목</th>
                   <th className="px-5 py-3.5 text-left font-bold text-white">케라폭시 줄눈</th>
@@ -119,10 +119,10 @@ export default function ComparisonPage() {
               </thead>
               <tbody>
                 {COMPARE_ROWS.map((row, i) => (
-                  <tr key={row.category} className={i % 2 === 0 ? 'bg-white' : 'bg-stone-50/50'}>
-                    <td className="px-5 py-3.5 font-medium text-stone-800">{row.category}</td>
-                    <td className="px-5 py-3.5 text-stone-600 font-medium">{row.kerafoxy}</td>
-                    <td className="px-5 py-3.5 text-stone-600 font-medium">{row.polyurea}</td>
+                  <tr key={row.category} className={i % 2 === 0 ? 'bg-white' : 'bg-[var(--bg)]/50'}>
+                    <td className="px-5 py-3.5 font-medium text-[var(--ink)]">{row.category}</td>
+                    <td className="px-5 py-3.5 text-[var(--muted)] font-medium">{row.kerafoxy}</td>
+                    <td className="px-5 py-3.5 text-[var(--muted)] font-medium">{row.polyurea}</td>
                   </tr>
                 ))}
               </tbody>
@@ -133,21 +133,21 @@ export default function ComparisonPage() {
 
       {/* Recommendations */}
       <section className="max-w-5xl mx-auto px-6 py-16">
-        <h2 className="text-2xl font-black text-stone-800 mb-2">어떤 소재를 선택해야 할까요?</h2>
-        <p className="text-stone-500 text-sm mb-10">공간 용도와 목적에 따라 최적의 줄눈 소재를 선택하세요</p>
+        <h2 className="text-2xl font-black text-[var(--ink)] mb-2">어떤 소재를 선택해야 할까요?</h2>
+        <p className="text-[var(--muted)] text-sm mb-10">공간 용도와 목적에 따라 최적의 줄눈 소재를 선택하세요</p>
         <div className="grid md:grid-cols-2 gap-6">
           {RECOMMENDATIONS.map((rec) => (
-            <div key={rec.title} className={`rounded-2xl p-8 ${rec.color}`}>
-              <div className={`w-12 h-12 flex items-center justify-center rounded-xl mb-5 ${rec.color.includes('stone-800') ? 'bg-white/20' : 'bg-stone-200'}`}>
-                <i className={`${rec.icon} text-2xl ${rec.color.includes('stone-800') ? 'text-white' : 'text-stone-600'}`}></i>
+            <div key={rec.title} className={`rounded-sm p-8 ${rec.color}`}>
+              <div className={`w-12 h-12 flex items-center justify-center rounded-sm mb-5 ${rec.color.includes('--dark') ? 'bg-white/20' : 'bg-[var(--line)]'}`}>
+                <i className={`${rec.icon} text-2xl ${rec.color.includes('--dark') ? 'text-white' : 'text-[var(--muted)]'}`}></i>
               </div>
-              <h3 className={`text-xl font-black mb-1 ${rec.color.includes('stone-800') ? 'text-white' : 'text-stone-800'}`}>{rec.title}</h3>
-              <p className={`text-sm mb-5 ${rec.color.includes('stone-800') ? 'text-stone-300' : 'text-stone-500'}`}>{rec.subtitle}</p>
+              <h3 className={`text-xl font-black mb-1 ${rec.color.includes('--dark') ? 'text-white' : 'text-[var(--ink)]'}`}>{rec.title}</h3>
+              <p className={`text-sm mb-5 ${rec.color.includes('--dark') ? 'text-[var(--muted-2)]' : 'text-[var(--muted)]'}`}>{rec.subtitle}</p>
               <ul className="space-y-2">
                 {rec.items.map((item) => (
                   <li key={item} className="flex items-start gap-2 text-sm">
-                    <i className={`ri-check-line mt-0.5 ${rec.color.includes('stone-800') ? 'text-stone-300' : 'text-stone-400'}`}></i>
-                    <span className={rec.color.includes('stone-800') ? 'text-stone-200' : 'text-stone-600'}>{item}</span>
+                    <i className={`ri-check-line mt-0.5 ${rec.color.includes('--dark') ? 'text-[var(--muted-2)]' : 'text-[var(--muted-2)]'}`}></i>
+                    <span className={rec.color.includes('--dark') ? 'text-[var(--muted-2)]' : 'text-[var(--muted)]'}>{item}</span>
                   </li>
                 ))}
               </ul>
@@ -157,13 +157,13 @@ export default function ComparisonPage() {
       </section>
 
       {/* CTA Banner */}
-      <section className="bg-stone-50 py-12">
+      <section className="bg-[var(--bg)] py-12">
         <div className="max-w-5xl mx-auto px-6 text-center">
-          <h2 className="text-xl font-black text-stone-800 mb-3">어떤 소재가 맞을지 아직 고민되시나요?</h2>
-          <p className="text-stone-500 text-sm mb-6">현장 상황과 요구 사항을 듣고 최적의 소재를 추천해 드립니다. 무료 현장 방문 후 소재별 견적을 함께 비교해 보세요.</p>
+          <h2 className="text-xl font-black text-[var(--ink)] mb-3">어떤 소재가 맞을지 아직 고민되시나요?</h2>
+          <p className="text-[var(--muted)] text-sm mb-6">현장 상황과 요구 사항을 듣고 최적의 소재를 추천해 드립니다. 무료 현장 방문 후 소재별 견적을 함께 비교해 보세요.</p>
           <a
             href="/#quote"
-            className="call-bg inline-flex items-center gap-2 bg-stone-800 text-white text-sm font-bold px-7 py-3 rounded-full hover:bg-stone-700 transition-colors cursor-pointer whitespace-nowrap"
+            className="call-bg inline-flex items-center gap-2 bg-[var(--dark)] text-white text-sm font-bold px-7 py-3 rounded-full hover:bg-[var(--accent-deep)] transition-colors cursor-pointer whitespace-nowrap"
           >
             <i className="ri-phone-line"></i>
             무료 상담 신청
@@ -173,13 +173,13 @@ export default function ComparisonPage() {
 
       {/* Related Articles */}
       <section className="max-w-5xl mx-auto px-6 py-16">
-        <h2 className="text-xl font-black text-stone-800 mb-6">관련 정보 더 보기</h2>
+        <h2 className="text-xl font-black text-[var(--ink)] mb-6">관련 정보 더 보기</h2>
         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-4">
           {RELATED.map((r) => (
-            <Link key={r.href} to={r.href} className="block bg-stone-50 hover:bg-stone-100 rounded-2xl p-5 transition-colors cursor-pointer">
-              <h3 className="font-bold text-stone-800 text-sm mb-1">{r.title}</h3>
-              <p className="text-stone-500 text-xs">{r.desc}</p>
-              <div className="flex items-center gap-1 mt-3 text-stone-400 text-xs">
+            <Link key={r.href} to={r.href} className="block bg-[var(--bg)] hover:bg-[var(--bg-2)] rounded-sm p-5 transition-colors cursor-pointer">
+              <h3 className="font-bold text-[var(--ink)] text-sm mb-1">{r.title}</h3>
+              <p className="text-[var(--muted)] text-xs">{r.desc}</p>
+              <div className="flex items-center gap-1 mt-3 text-[var(--muted-2)] text-xs">
                 <span>자세히 보기</span>
                 <i className="ri-arrow-right-s-line"></i>
               </div>

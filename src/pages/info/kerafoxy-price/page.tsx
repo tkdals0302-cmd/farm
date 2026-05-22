@@ -27,7 +27,7 @@ export default function KerafoxyPricePage() {
   }, []);
 
   return (
-    <div className="min-h-screen bg-white font-sans">
+    <div className="min-h-screen bg-[var(--paper)] font-sans">
       <Navbar />
 
       {/* Hero */}
@@ -39,36 +39,36 @@ export default function KerafoxyPricePage() {
         />
         <div className="absolute inset-0 bg-gradient-to-b from-black/50 via-black/40 to-black/60" />
         <div className="absolute inset-0 flex flex-col items-center justify-center text-center px-4 pt-10">
-          <span className="text-stone-300 text-sm tracking-widest uppercase mb-3">비용 안내</span>
+          <span className="text-[var(--muted-2)] text-sm tracking-widest uppercase mb-3">비용 안내</span>
           <h1 className="text-white text-3xl md:text-5xl font-black mb-3 leading-tight">케라폭시 가격 안내</h1>
           <p className="text-white/80 text-sm md:text-base max-w-xl">시공 비용과 영향 요인을 투명하게 공개합니다</p>
         </div>
       </section>
 
       {/* Breadcrumb */}
-      <div className="w-full bg-stone-100">
+      <div className="w-full bg-[var(--bg-2)]">
         <div className="max-w-5xl mx-auto px-6 py-4">
-          <nav className="flex items-center gap-2 text-xs text-stone-500">
-            <Link to="/" className="hover:text-stone-700 cursor-pointer">홈</Link>
+          <nav className="flex items-center gap-2 text-xs text-[var(--muted)]">
+            <Link to="/" className="hover:text-[var(--ink-2)] cursor-pointer">홈</Link>
             <i className="ri-arrow-right-s-line"></i>
             <span>줄눈 정보</span>
             <i className="ri-arrow-right-s-line"></i>
-            <span className="text-stone-800 font-medium">케라폭시 가격</span>
+            <span className="text-[var(--ink)] font-medium">케라폭시 가격</span>
           </nav>
         </div>
       </div>
 
       {/* PriceTable */}
       <section className="max-w-5xl mx-auto px-6 py-12">
-        <h2 className="text-2xl md:text-3xl font-black text-stone-800 mb-2">2026 가격 테이블</h2>
+        <h2 className="text-2xl md:text-3xl font-black text-[var(--ink)] mb-2">2026 가격 테이블</h2>
         <PriceTable />
       </section>
 
       {/* Price Calculator */}
-      <section className="bg-stone-50 py-16">
+      <section className="bg-[var(--bg)] py-16">
         <div className="max-w-5xl mx-auto px-6">
-          <h2 className="text-2xl md:text-3xl font-black text-stone-800 mb-2">공간별 시공 가격 예시</h2>
-          <p className="text-stone-500 text-sm mb-10">간편하게 시공 견적을 확인해보세요</p>
+          <h2 className="text-2xl md:text-3xl font-black text-[var(--ink)] mb-2">공간별 시공 가격 예시</h2>
+          <p className="text-[var(--muted)] text-sm mb-10">간편하게 시공 견적을 확인해보세요</p>
           <PriceCalculator />
         </div>
       </section>
@@ -78,38 +78,38 @@ export default function KerafoxyPricePage() {
       <section className="max-w-5xl mx-auto px-6 py-12">
         <div className="grid md:grid-cols-2 gap-12 items-center">
           <div>
-            <h2 className="text-2xl md:text-3xl font-black text-stone-800 mb-5 leading-snug">
+            <h2 className="text-2xl md:text-3xl font-black text-[var(--ink)] mb-5 leading-snug">
               <strong>케라폭시 가격</strong>, 어떻게 책정되나요?
             </h2>
-            <p className="text-stone-600 text-base leading-relaxed mb-4">
+            <p className="text-[var(--muted)] text-base leading-relaxed mb-4">
               <strong>케라폭시 시공 가격</strong>은 시공 면적, 타일 종류, 기존 줄눈 상태에 따라 달라집니다. 일반적으로 화장실 기준 15~25만 원 선에서 시작하며, 아파트 전체 시공 시 50~80만 원 수준입니다.
             </p>
-            <p className="text-stone-600 text-base leading-relaxed">
+            <p className="text-[var(--muted)] text-base leading-relaxed">
               저렴한 시멘트 줄눈과 비교하면 초기 비용이 높지만, 케라폭시는 수명이 길고 재시공 주기가 훨씬 길어 <strong>장기적으로는 더 경제적인 선택</strong>입니다.
             </p>
           </div>
-          <div className="bg-stone-50 rounded-2xl p-8">
+          <div className="bg-[var(--bg)] rounded-sm p-8">
             <div className="flex items-center gap-3 mb-6">
-              <div className="w-10 h-10 flex items-center justify-center bg-stone-800 rounded-xl">
+              <div className="w-10 h-10 flex items-center justify-center bg-[var(--dark)] rounded-sm">
                 <i className="ri-money-dollar-circle-line text-white text-xl"></i>
               </div>
-              <h3 className="font-black text-stone-800">평균 시공 단가</h3>
+              <h3 className="font-black text-[var(--ink)]">평균 시공 단가</h3>
             </div>
             <div className="space-y-4">
-              <div className="flex justify-between items-center py-3 border-b border-stone-200">
-                <span className="text-stone-600 text-sm">케라폭시 줄눈</span>
-                <span className="font-bold text-stone-800">평당 5~8만 원</span>
+              <div className="flex justify-between items-center py-3 border-b border-[var(--line)]">
+                <span className="text-[var(--muted)] text-sm">케라폭시 줄눈</span>
+                <span className="font-bold text-[var(--ink)]">평당 5~8만 원</span>
               </div>
-              <div className="flex justify-between items-center py-3 border-b border-stone-200">
-                <span className="text-stone-600 text-sm">폴리우레아 줄눈</span>
-                <span className="font-bold text-stone-800">평당 4~6만 원</span>
+              <div className="flex justify-between items-center py-3 border-b border-[var(--line)]">
+                <span className="text-[var(--muted)] text-sm">폴리우레아 줄눈</span>
+                <span className="font-bold text-[var(--ink)]">평당 4~6만 원</span>
               </div>
               <div className="flex justify-between items-center py-3">
-                <span className="text-stone-600 text-sm">일반 시멘트 줄눈</span>
-                <span className="font-bold text-stone-800">평당 2~4만 원</span>
+                <span className="text-[var(--muted)] text-sm">일반 시멘트 줄눈</span>
+                <span className="font-bold text-[var(--ink)]">평당 2~4만 원</span>
               </div>
             </div>
-            <p className="text-stone-400 text-xs mt-4">※ 현장 상황에 따라 가격이 달라질 수 있습니다</p>
+            <p className="text-[var(--muted-2)] text-xs mt-4">※ 현장 상황에 따라 가격이 달라질 수 있습니다</p>
           </div>
         </div>
       </section>
@@ -117,29 +117,29 @@ export default function KerafoxyPricePage() {
 
       {/* Factors */}
       <section className="max-w-5xl mx-auto px-6 py-16">
-        <h2 className="text-2xl md:text-3xl font-black text-stone-800 mb-2">시공 가격에 영향을 주는 요인</h2>
-        <p className="text-stone-500 text-sm mb-10">이런 요소들로 인해 견적이 달라집니다</p>
+        <h2 className="text-2xl md:text-3xl font-black text-[var(--ink)] mb-2">시공 가격에 영향을 주는 요인</h2>
+        <p className="text-[var(--muted)] text-sm mb-10">이런 요소들로 인해 견적이 달라집니다</p>
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-5">
           {FACTORS.map((f) => (
-            <div key={f.title} className="bg-stone-50 rounded-2xl p-6">
-              <div className="w-10 h-10 flex items-center justify-center bg-white rounded-xl mb-4">
-                <i className={`${f.icon} text-xl text-stone-600`}></i>
+            <div key={f.title} className="bg-[var(--bg)] rounded-sm p-6">
+              <div className="w-10 h-10 flex items-center justify-center bg-[var(--paper)] rounded-sm mb-4">
+                <i className={`${f.icon} text-xl text-[var(--muted)]`}></i>
               </div>
-              <h3 className="font-bold text-stone-800 mb-2">{f.title}</h3>
-              <p className="text-stone-500 text-sm leading-relaxed">{f.desc}</p>
+              <h3 className="font-bold text-[var(--ink)] mb-2">{f.title}</h3>
+              <p className="text-[var(--muted)] text-sm leading-relaxed">{f.desc}</p>
             </div>
           ))}
         </div>
       </section>
 
       {/* CTA Banner */}
-      <section className="bg-stone-50 py-12">
+      <section className="bg-[var(--bg)] py-12">
         <div className="max-w-5xl mx-auto px-6 text-center">
-          <h2 className="text-xl font-black text-stone-800 mb-3">정확한 시공 비용이 궁금하신가요?</h2>
-          <p className="text-stone-500 text-sm mb-6">현장 상황에 따라 가격이 달라질 수 있습니다. 무료 현장 방문 후 공간별 맞춤 견적을 안내해 드립니다.</p>
+          <h2 className="text-xl font-black text-[var(--ink)] mb-3">정확한 시공 비용이 궁금하신가요?</h2>
+          <p className="text-[var(--muted)] text-sm mb-6">현장 상황에 따라 가격이 달라질 수 있습니다. 무료 현장 방문 후 공간별 맞춤 견적을 안내해 드립니다.</p>
           <a
             href="/#quote"
-            className="call-bg inline-flex items-center gap-2 bg-stone-800 text-white text-sm font-bold px-7 py-3 rounded-full hover:bg-stone-700 transition-colors cursor-pointer whitespace-nowrap"
+            className="call-bg inline-flex items-center gap-2 bg-[var(--dark)] text-white text-sm font-bold px-7 py-3 rounded-full hover:bg-[var(--accent-deep)] transition-colors cursor-pointer whitespace-nowrap"
           >
             <i className="ri-phone-line"></i>
             무료 견적 신청
@@ -149,13 +149,13 @@ export default function KerafoxyPricePage() {
 
       {/* Related Articles */}
       <section className="max-w-5xl mx-auto px-6 py-16">
-        <h2 className="text-xl font-black text-stone-800 mb-6">관련 정보 더 보기</h2>
+        <h2 className="text-xl font-black text-[var(--ink)] mb-6">관련 정보 더 보기</h2>
         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-4">
           {RELATED.map((r) => (
-            <Link key={r.href} to={r.href} className="block bg-stone-50 hover:bg-stone-100 rounded-2xl p-5 transition-colors cursor-pointer">
-              <h3 className="font-bold text-stone-800 text-sm mb-1">{r.title}</h3>
-              <p className="text-stone-500 text-xs">{r.desc}</p>
-              <div className="flex items-center gap-1 mt-3 text-stone-400 text-xs">
+            <Link key={r.href} to={r.href} className="block bg-[var(--bg)] hover:bg-[var(--bg-2)] rounded-sm p-5 transition-colors cursor-pointer">
+              <h3 className="font-bold text-[var(--ink)] text-sm mb-1">{r.title}</h3>
+              <p className="text-[var(--muted)] text-xs">{r.desc}</p>
+              <div className="flex items-center gap-1 mt-3 text-[var(--muted-2)] text-xs">
                 <span>자세히 보기</span>
                 <i className="ri-arrow-right-s-line"></i>
               </div>

@@ -1,139 +1,114 @@
-import { useState, useEffect } from 'react';
-import mainVideoMp4 from '../../../assets/main_video.mp4';
+import './HeroSection.css';
+
+const COPY = {
+  eyebrow: '오직 줄눈, 6년간 한 길',
+  headlineL1: '손끝이 남기는',
+  headlineAccent: '줄눈시공',
+  headlineTail: '',
+  headlineL3: '디테일라인',
+  subL1: '시공 전, 후 사진으로 먼저 확인하고 결정하세요.',
+  subL2: '무료 견적은 24시간 실시간 답변 드립니다.',
+  ctaPrimary: '실시간 무료 견적 상담',
+  ctaSecondary: '시공 포트폴리오 →',
+  captionTag: 'KERAPOXY',
+  captionMeta: '프리미엄 줄눈 시공',
+  signatureMeta: '모든 주거공간, 상업공간 시공 가능',
+  footerItems: ['2,000세대 이상 시공 경력', '하루 한집 시공', '2년 무상 AS'],
+  scrollLabel: 'SCROLL',
+  // SEO-only — visually hidden, indexed by crawlers
+  srHeading: '서울·경기 줄눈시공 전문 디테일라인 — 화장실·주방·베란다·현관 케라폭시 줄눈 시공',
+};
+
+function scrollTo(selector: string) {
+  const el = document.querySelector(selector);
+  if (el) el.scrollIntoView({ behavior: 'smooth' });
+}
 
 export default function HeroSection() {
-  const [count, setCount] = useState(0);
-
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setCount((prev) => (prev < 2400 ? prev + 30 : 2400));
-    }, 30);
-    return () => clearInterval(interval);
-  }, []);
-
-  const scrollToQuote = () => {
-    const el = document.querySelector('#quote');
-    if (el) el.scrollIntoView({ behavior: 'smooth' });
-  };
-
-  const scrollToPortfolio = () => {
-    const el = document.querySelector('#portfolio');
-    if (el) el.scrollIntoView({ behavior: 'smooth' });
-  };
-
   return (
-    <section className="relative w-full overflow-hidden" style={{ height: '100svh', minHeight: '600px' }}>
-      {/* Background Image (Video Placeholder) */}
-      {/*
-      <div className="absolute inset-0">
-        <img
-          src="https://readdy.ai/api/search-image?query=professional%20grout%20tile%20work%20worker%20applying%20white%20grout%20bathroom%20tiles%20close%20up%20dramatic%20lighting%20professional%20craftsmanship%20renovation%20interior%20construction%20dark%20moody%20tones%20high%20contrast%20detailed&width=1920&height=1080&seq=hero1&orientation=landscape"
-          alt="줄눈시공 메인 배너"
-          className="w-full h-full object-cover object-center"
-        />
-        <div className="absolute inset-0 bg-gradient-to-b from-black/50 via-black/40 to-black/70"></div>
-      </div>
-      */}
-
-      {/* Video Embed */}
-      <div className="absolute inset-0 pointer-events-none">
-        <video
-          autoPlay
-          muted
-          loop
-          playsInline
-          aria-hidden="true"
-          className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[177.77vh] h-[56.25vw] min-w-full min-h-full object-cover"
-        >
-          <source src={mainVideoMp4} type="video/mp4" />
-        </video>
-        <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/60 to-black/70"></div>
-      </div>
-
-      {/* Content */}
-      <div className="relative z-10 w-full h-full flex flex-col items-center pt-[24svh] sm:pt-[24svh] pb-[20px] sm:pb-[60px] px-6 text-center">
-        <div className="mb-3 flex gap-2 justify-center flex-wrap text-xs md:text-sm font-medium md:font-light">
-          {/* <span className="inline-block bg-white/20 backdrop-blur-sm text-white tracking-widest uppercase px-4 py-1.5 rounded-full border border-white/30">
-            업계 최초 가격 투명성 보장
-          </span> */}
-
-          {/* 반짝이는 효과 */}
-          <span className="shine-border text-white tracking-widest uppercase px-7 py-1.5 rounded-full bg-white/20 backdrop-blur-sm">
-          
-          {/* {이건 일반 버전 } */}
-          {/* <span className="inline-block bg-white/20 backdrop-blur-sm text-white tracking-widest uppercase px-4 py-1.5 rounded-full border border-white/30"> */}
-
-            케어 플랜 3년 무상 보장
-          </span>
+    <section className="hero-b-wrap" aria-label="히어로">
+      {/* Full-bleed decorative layers */}
+      <div className="tile-floor" aria-hidden="true">
+        <div className="tile-floor__plane">
+          <div className="tile-floor__shine" />
         </div>
-
-        {/* <h1 className="text-3xl md:text-6xl font-black text-white leading-tight mb-3 pb-1 tracking-tight"
-          style={{ lineHeight: '1.3' }}>
-          디테일이 다른 공간의 시작<br />
-          <span className="text-stone-300">디테일라인</span>
-        </h1> */}
-
-        <h1 className="text-3xl md:text-6xl font-black text-white leading-tight mb-3 pb-1 tracking-tight"
-          style={{ lineHeight: '1.3' }}>
-          낡은 줄눈, 하루만에<br />
-          <span className="shine-text">새것처럼, 디테일라인</span>
-        </h1>
-
-        {/* pc에서 표기 */}
-        <p className="hidden md:block text-white/80 text-sm md:text-base mb-10 max-w-xl leading-relaxed">
-          시공 전, 후 사진으로 먼저 확인하세요 ➡️ 무료견적 24시간 이내 답변드립니다 ❤️
-        </p>
-
-        {/* mobile에서 표기 */}
-        <p className="block md:hidden text-white/80 text-sm md:text-base mb-10 max-w-xl leading-relaxed">
-          시공 전, 후 사진으로 먼저 확인하세요 ➡️ <br>
-          </br> 무료견적 24시간 이내 답변드립니다 ❤️
-        </p>
-
-
-        <div className="flex flex-col sm:flex-row gap-3 w-full justify-center items-center">
-          <button
-            onClick={scrollToQuote}
-            className="px-10 py-4 bg-[#967353] text-white font-bold text-base rounded-full hover:bg-[#7a5c3d] transition-all shadow-lg shadow-black/20 cursor-pointer whitespace-nowrap"
-          >
-            1분 무료 견적받기 →
-          </button>
-          <button
-            onClick={scrollToPortfolio}
-            className="px-8 py-3 text-white/90 font-medium text-sm border border-white/30 rounded-full hover:bg-white/10 transition-all cursor-pointer whitespace-nowrap"
-          >
-            시공 사례 먼저 보기
-          </button>
-        </div>
-
-        {/* Scroll Down */}
-        <button
-          onClick={scrollToPortfolio}
-          className="absolute bottom-[110px] flex flex-col items-center gap-1 animate-bounce bg-transparent border-none cursor-pointer pt-4"
-        >
-          <span className="text-white/40 text-xs tracking-widest">SCROLL</span>
-          <i className="ri-arrow-down-line text-white/40 text-lg"></i>
-        </button>
       </div>
+      <div className="hero-b__tint" aria-hidden="true" />
+      <div className="hero-b__vignette" aria-hidden="true" />
+      <div className="hero-b__glow" aria-hidden="true" />
+      <div className="hero-b__grain" aria-hidden="true" />
 
-      {/* Stats Bar */}
-      <div className="absolute bottom-0 left-0 right-0 z-10">
-        <div className="bg-white/10 backdrop-blur-md border-t border-white/20">
-          <div className="max-w-3xl mx-auto px-1 sm:px-6 py-3 sm:py-5 grid grid-cols-3 divide-x divide-white/20">
-            {[
-              { value: count, label: '시공 완료', suffix: '+' },
-              { value: '3년 무상 AS', label: '책임 보장', suffix: '' },
-              { value: '99.8%', label: '고객 만족도', suffix: '' },
-            ].map((stat) => (
-              <div key={stat.label} className="flex flex-col items-center px-4">
-                <span className="text-lg md:text-3xl font-black text-white">
-                  {typeof stat.value === 'number' ? stat.value.toLocaleString() : stat.value}{stat.suffix}
-                </span>
-                <span className="text-white/60 text-xs mt-1">{stat.label}</span>
-              </div>
-            ))}
+      {/* Content — matches portfolio's px-6 md:px-12 lg:px-20 + max-w-7xl pattern */}
+      <div className="hero-b__padded">
+        <div className="hero-b">
+          {/* Hidden keyword-rich heading for crawlers; visual headline below is brand voice */}
+          <h2 className="sr-only">{COPY.srHeading}</h2>
+
+          {/* Lead (left) */}
+        <div className="hero-b__lead">
+          <div className="hero-b__eyebrow">
+            <span className="hero-b__eyebrow-line" aria-hidden="true" />
+            <span>{COPY.eyebrow}</span>
+          </div>
+          <h1 className="hero-b__headline">
+            {COPY.headlineL1}
+            <br />
+            <em>{COPY.headlineAccent}</em>
+            {COPY.headlineTail}
+            <br />
+            {COPY.headlineL3}
+          </h1>
+          <p className="hero-b__sub">
+            {COPY.subL1}
+            <br />
+            {COPY.subL2}
+          </p>
+          <div className="hero-b__cta-row">
+            <button
+              type="button"
+              className="hero-b__btn"
+              onClick={() => scrollTo('#quote')}
+            >
+              {COPY.ctaPrimary}
+              <span className="hero-b__btn-arrow" aria-hidden="true">→</span>
+            </button>
+            <button
+              type="button"
+              className="hero-b__btn-link"
+              onClick={() => scrollTo('#portfolio')}
+            >
+              {COPY.ctaSecondary}
+            </button>
           </div>
         </div>
+
+        {/* Caption (right top) */}
+        <div className="hero-b__caption">
+          <div className="hero-b__caption-row">
+            <span className="hero-b__caption-dot" aria-hidden="true" />
+            <span className="hero-b__caption-after">{COPY.captionTag}</span>
+          </div>
+          <div className="hero-b__caption-meta">{COPY.captionMeta}</div>
+        </div>
+
+        {/* Signature (left bottom) */}
+        <div className="hero-b__signature">
+          <div className="hero-b__signature-meta">{COPY.signatureMeta}</div>
+        </div>
+
+        {/* Footer meta (right bottom) */}
+        <div className="hero-b__footer-meta">
+          <ul className="hero-b__footer-items">
+            {COPY.footerItems.map((item) => (
+              <li key={item}>{item}</li>
+            ))}
+          </ul>
+          <div className="hero-b__scroll" aria-hidden="true">
+            <span>{COPY.scrollLabel}</span>
+            <span className="hero-b__scroll-bar" />
+          </div>
+        </div>
+      </div>
       </div>
     </section>
   );

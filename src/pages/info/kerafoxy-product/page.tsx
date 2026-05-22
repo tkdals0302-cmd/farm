@@ -71,7 +71,7 @@ export default function KerafoxyProductPage() {
   }, []);
 
   return (
-    <div className="min-h-screen bg-white font-sans">
+    <div className="min-h-screen bg-[var(--paper)] font-sans">
       <Navbar />
 
       {/* Hero */}
@@ -83,55 +83,55 @@ export default function KerafoxyProductPage() {
         />
         <div className="absolute inset-0 bg-gradient-to-b from-black/50 via-black/40 to-black/60" />
         <div className="absolute inset-0 flex flex-col items-center justify-center text-center px-4 pt-10">
-          <span className="text-stone-300 text-sm tracking-widest uppercase mb-3">제품 안내</span>
+          <span className="text-[var(--muted-2)] text-sm tracking-widest uppercase mb-3">제품 안내</span>
           <h1 className="text-white text-3xl md:text-5xl font-black mb-3 leading-tight">케라폭시 제품 소개</h1>
           <p className="text-white/80 text-sm md:text-base max-w-xl">목적에 맞는 케라폭시 제품 라인업과 색상을 알아보세요</p>
         </div>
       </section>
 
       {/* Breadcrumb */}
-      <div className="w-full bg-stone-100">
+      <div className="w-full bg-[var(--bg-2)]">
         <div className="max-w-5xl mx-auto px-6 py-4">
-          <nav className="flex items-center gap-2 text-xs text-stone-500">
-            <Link to="/" className="hover:text-stone-700 cursor-pointer">홈</Link>
+          <nav className="flex items-center gap-2 text-xs text-[var(--muted)]">
+            <Link to="/" className="hover:text-[var(--ink-2)] cursor-pointer">홈</Link>
             <i className="ri-arrow-right-s-line"></i>
             <span>줄눈 정보</span>
             <i className="ri-arrow-right-s-line"></i>
-            <span className="text-stone-800 font-medium">케라폭시 제품소개</span>
+            <span className="text-[var(--ink)] font-medium">케라폭시 제품소개</span>
           </nav>
         </div>
       </div>
 
       {/* Product Selector */}
       <section className="max-w-5xl mx-auto px-6 py-12">
-        <h2 className="text-2xl md:text-3xl font-black text-stone-800 mb-2">제품 라인업</h2>
-        <p className="text-stone-500 text-sm mb-8">시공 환경에 맞는 최적의 케라폭시 제품을 선택하세요</p>
+        <h2 className="text-2xl md:text-3xl font-black text-[var(--ink)] mb-2">제품 라인업</h2>
+        <p className="text-[var(--muted)] text-sm mb-8">시공 환경에 맞는 최적의 케라폭시 제품을 선택하세요</p>
         <div className="flex gap-3 mb-8 flex-wrap">
           {PRODUCTS.map((p, i) => (
             <button
               key={p.name}
               onClick={() => setSelected(i)}
-              className={`px-5 py-2 rounded-full text-sm font-semibold transition-all cursor-pointer whitespace-nowrap ${selected === i ? 'bg-stone-800 text-white' : 'bg-stone-100 text-stone-600 hover:bg-stone-200'}`}
+              className={`px-5 py-2 rounded-full text-sm font-semibold transition-all cursor-pointer whitespace-nowrap ${selected === i ? 'bg-[var(--dark)] text-white' : 'bg-[var(--bg-2)] text-[var(--muted)] hover:bg-[var(--line)]'}`}
             >
               {p.name}
             </button>
           ))}
         </div>
-        <div className="grid md:grid-cols-2 gap-8 items-start bg-stone-50 rounded-2xl p-8">
-          <div className="rounded-xl overflow-hidden h-56">
+        <div className="grid md:grid-cols-2 gap-8 items-start bg-[var(--bg)] rounded-sm p-8">
+          <div className="rounded-sm overflow-hidden h-56">
             <img src={PRODUCTS[selected].img} alt={PRODUCTS[selected].name} className="w-full h-full object-cover object-top" />
           </div>
           <div>
             <div className="flex items-center gap-3 mb-3">
-              <h3 className="text-xl font-black text-stone-800">{PRODUCTS[selected].name}</h3>
+              <h3 className="text-xl font-black text-[var(--ink)]">{PRODUCTS[selected].name}</h3>
               <span className={`text-xs font-semibold px-3 py-1 rounded-full ${PRODUCTS[selected].tagColor}`}>{PRODUCTS[selected].tag}</span>
             </div>
-            <p className="text-stone-600 text-sm leading-relaxed mb-6">{PRODUCTS[selected].desc}</p>
+            <p className="text-[var(--muted)] text-sm leading-relaxed mb-6">{PRODUCTS[selected].desc}</p>
             <div className="space-y-3">
               {PRODUCTS[selected].specs.map((s) => (
-                <div key={s.label} className="flex items-center justify-between py-2 border-b border-stone-200">
-                  <span className="text-stone-500 text-sm">{s.label}</span>
-                  <span className="font-bold text-stone-800 text-sm">{s.value}</span>
+                <div key={s.label} className="flex items-center justify-between py-2 border-b border-[var(--line)]">
+                  <span className="text-[var(--muted)] text-sm">{s.label}</span>
+                  <span className="font-bold text-[var(--ink)] text-sm">{s.value}</span>
                 </div>
               ))}
             </div>
@@ -140,10 +140,10 @@ export default function KerafoxyProductPage() {
       </section>
 
       {/* Color Guide */}
-      <section className="bg-stone-50 py-16">
+      <section className="bg-[var(--bg)] py-16">
         <div className="max-w-5xl mx-auto px-6">
-          <h2 className="text-2xl md:text-3xl font-black text-stone-800 mb-2">색상 선택 가이드</h2>
-          <p className="text-stone-500 text-sm mb-10">케라폭시 제품은 20여 가지 색상을 제공합니다. 타일 색상과 인테리어 스타일에 맞게 선택하세요.</p>
+          <h2 className="text-2xl md:text-3xl font-black text-[var(--ink)] mb-2">색상 선택 가이드</h2>
+          <p className="text-[var(--muted)] text-sm mb-10">케라폭시 제품은 20여 가지 색상을 제공합니다. 타일 색상과 인테리어 스타일에 맞게 선택하세요.</p>
           <div className="grid grid-cols-5 md:grid-cols-10 gap-3 mb-8">
             {COLORS.map((c) => (
               <div key={c.name} className="flex flex-col items-center gap-2">
@@ -151,23 +151,23 @@ export default function KerafoxyProductPage() {
                   className="w-10 h-10 rounded-full"
                   style={{ backgroundColor: c.hex, border: c.border ? '1px solid #e7e5e4' : 'none' }}
                 />
-                <span className="text-stone-500 text-xs text-center leading-tight">{c.name.split('(')[0]}</span>
+                <span className="text-[var(--muted)] text-xs text-center leading-tight">{c.name.split('(')[0]}</span>
               </div>
             ))}
           </div>
-          <div className="bg-white rounded-2xl p-6">
-            <h3 className="font-bold text-stone-800 mb-4">색상 선택 팁</h3>
+          <div className="bg-[var(--paper)] rounded-sm p-6">
+            <h3 className="font-bold text-[var(--ink)] mb-4">색상 선택 팁</h3>
             <ul className="space-y-3">
-              <li className="flex items-start gap-3 text-sm text-stone-600">
-                <i className="ri-checkbox-circle-line text-stone-400 mt-0.5"></i>
+              <li className="flex items-start gap-3 text-sm text-[var(--muted)]">
+                <i className="ri-checkbox-circle-line text-[var(--muted-2)] mt-0.5"></i>
                 <span><strong>화이트 계열</strong>은 타일 색상과 통일감을 주어 깔끔하고 넓어 보이는 효과가 있습니다.</span>
               </li>
-              <li className="flex items-start gap-3 text-sm text-stone-600">
-                <i className="ri-checkbox-circle-line text-stone-400 mt-0.5"></i>
+              <li className="flex items-start gap-3 text-sm text-[var(--muted)]">
+                <i className="ri-checkbox-circle-line text-[var(--muted-2)] mt-0.5"></i>
                 <span><strong>그레이 계열</strong>은 오염이 덜 눈에 띄어 유지관리가 편하고, 모던한 분위기를 연출합니다.</span>
               </li>
-              <li className="flex items-start gap-3 text-sm text-stone-600">
-                <i className="ri-checkbox-circle-line text-stone-400 mt-0.5"></i>
+              <li className="flex items-start gap-3 text-sm text-[var(--muted)]">
+                <i className="ri-checkbox-circle-line text-[var(--muted-2)] mt-0.5"></i>
                 <span><strong>다크 계열</strong>은 타일과 대비를 주어 인테리어 포인트로 활용할 수 있습니다.</span>
               </li>
             </ul>
@@ -177,13 +177,13 @@ export default function KerafoxyProductPage() {
 
       {/* Related Articles */}
       <section className="max-w-5xl mx-auto px-6 py-16">
-        <h2 className="text-xl font-black text-stone-800 mb-6">관련 정보 더 보기</h2>
+        <h2 className="text-xl font-black text-[var(--ink)] mb-6">관련 정보 더 보기</h2>
         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-4">
           {RELATED.map((r) => (
-            <Link key={r.href} to={r.href} className="block bg-stone-50 hover:bg-stone-100 rounded-2xl p-5 transition-colors cursor-pointer">
-              <h3 className="font-bold text-stone-800 text-sm mb-1">{r.title}</h3>
-              <p className="text-stone-500 text-xs">{r.desc}</p>
-              <div className="flex items-center gap-1 mt-3 text-stone-400 text-xs">
+            <Link key={r.href} to={r.href} className="block bg-[var(--bg)] hover:bg-[var(--bg-2)] rounded-sm p-5 transition-colors cursor-pointer">
+              <h3 className="font-bold text-[var(--ink)] text-sm mb-1">{r.title}</h3>
+              <p className="text-[var(--muted)] text-xs">{r.desc}</p>
+              <div className="flex items-center gap-1 mt-3 text-[var(--muted-2)] text-xs">
                 <span>자세히 보기</span>
                 <i className="ri-arrow-right-s-line"></i>
               </div>

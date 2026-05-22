@@ -50,7 +50,7 @@ const SECTIONS = [
         <ul className="list-disc pl-5 mt-3 space-y-1">
           <li><strong>Google LLC (Google Workspace · Apps Script)</strong> — 견적 신청 데이터 저장 및 처리. 데이터 처리 위치: 미국</li>
         </ul>
-        <p className="mt-3 text-stone-500 text-sm">
+        <p className="mt-3 text-[var(--muted)] text-sm">
           위 위탁업체는 Google이 제공하는 표준 데이터 보호 약관에 따라 운영되며, 회사는 위탁 처리 과정을 정기적으로 점검합니다.
         </p>
       </>
@@ -104,7 +104,7 @@ const SECTIONS = [
     body: (
       <>
         <p>회사는 개인정보 처리에 관한 업무를 총괄해서 책임지고, 개인정보 처리와 관련한 정보주체의 불만 처리 및 피해 구제 등을 위하여 아래와 같이 개인정보 보호 책임자를 지정하고 있습니다.</p>
-        <div className="mt-3 p-4 bg-stone-50 rounded-xl text-sm space-y-1">
+        <div className="mt-3 p-4 bg-[var(--bg)] rounded-sm text-sm space-y-1">
           <p><strong>상호</strong>: 디테일라인</p>
           <p><strong>사업자등록번호</strong>: 609-33-19473</p>
           <p><strong>주소</strong>: 서울 서초구 본마을4길 11 1층 104호</p>
@@ -143,33 +143,33 @@ export default function PrivacyPage() {
   }, []);
 
   return (
-    <div className="min-h-screen bg-white">
+    <div className="min-h-screen bg-[var(--paper)]">
       <Navbar />
       <main className="pt-28 pb-20 px-6 md:px-12 lg:px-20">
         <div className="max-w-3xl mx-auto">
           <div className="mb-10">
-            <span className="text-xs font-semibold tracking-widest text-stone-400 uppercase">Privacy Policy</span>
-            <h1 className="text-4xl md:text-5xl font-black text-stone-900 mt-2">개인정보 처리방침</h1>
-            <p className="text-stone-500 mt-3 text-sm">시행일: 2026년 4월 29일</p>
+            <span className="text-[11px] font-medium tracking-[0.16em] text-[var(--accent)] uppercase">Privacy Policy</span>
+            <h1 className="text-4xl md:text-5xl font-black text-[var(--ink)] mt-2">개인정보 처리방침</h1>
+            <p className="text-[var(--muted)] mt-3 text-sm">시행일: 2026년 4월 29일</p>
           </div>
 
-          <p className="text-stone-600 leading-relaxed mb-12">
+          <p className="text-[var(--muted)] leading-relaxed mb-12">
             디테일라인(이하 "회사")은 「개인정보 보호법」 제30조에 따라 정보주체의 개인정보를 보호하고 이와 관련한 고충을 신속하고 원활하게 처리할 수 있도록 다음과 같이 개인정보 처리방침을 수립·공개합니다.
           </p>
 
           <div className="space-y-10">
             {SECTIONS.map((section) => (
               <section key={section.title}>
-                <h2 className="text-xl md:text-2xl font-bold text-stone-900 mb-3">{section.title}</h2>
-                <div className="text-stone-600 leading-relaxed text-sm md:text-base">{section.body}</div>
+                <h2 className="text-xl md:text-2xl font-bold text-[var(--ink)] mb-3">{section.title}</h2>
+                <div className="text-[var(--muted)] leading-relaxed text-sm md:text-base">{section.body}</div>
               </section>
             ))}
           </div>
 
-          <div className="mt-16 pt-8 border-t border-stone-200 text-center">
+          <div className="mt-16 pt-8 border-t border-[var(--line)] text-center">
             <Link
               to="/"
-              className="inline-flex items-center gap-2 text-sm text-stone-600 hover:text-stone-900 transition-colors"
+              className="inline-flex items-center gap-2 text-sm text-[var(--muted)] hover:text-[var(--ink)] transition-colors"
             >
               <i className="ri-arrow-left-line"></i>
               홈으로 돌아가기

@@ -26,23 +26,23 @@ export default function PriceTable() {
             <button
               key={f}
               onClick={() => setFilter(f)}
-              className={`px-4 py-2 rounded-full text-sm font-medium transition-colors cursor-pointer ${
+              className={`px-4 py-2 rounded-sm text-sm font-medium transition-colors cursor-pointer ${
                 filter === f
-                  ? 'bg-stone-800 text-white'
-                  : 'bg-white border border-stone-200 text-stone-600 hover:bg-stone-100'
+                  ? 'bg-[var(--ink)] text-[var(--paper)]'
+                  : 'bg-[var(--paper)] border border-[var(--line)] text-[var(--muted)] hover:bg-[var(--bg-2)]'
               }`}
             >
               {f}
             </button>
           ))}
         </div>
-        <div className="ml-auto flex bg-stone-200/80 rounded-full p-0.5">
+        <div className="ml-auto flex bg-[var(--bg-2)] rounded-sm p-0.5">
           {(['신축', '구축'] as HouseType[]).map((h) => (
             <button
               key={h}
               onClick={() => setHouseType(h)}
-              className={`px-4 py-1.5 rounded-full text-sm font-medium transition-colors cursor-pointer ${
-                houseType === h ? 'bg-white text-stone-800 shadow-sm' : 'text-stone-500'
+              className={`px-4 py-1.5 rounded-sm text-sm font-medium transition-colors cursor-pointer ${
+                houseType === h ? 'bg-[var(--paper)] text-[var(--ink)] shadow-sm' : 'text-[var(--muted)]'
               }`}
             >
               {h}
@@ -52,31 +52,31 @@ export default function PriceTable() {
       </div>
 
       {/* [2] 가격 테이블 — 데스크톱 */}
-      <div className="pt-table-wrap overflow-hidden rounded-xl border border-stone-200 bg-white">
+      <div className="pt-table-wrap overflow-hidden rounded-sm border border-[var(--line)] bg-[var(--paper)]">
         <table className="w-full text-sm">
-          <thead className="bg-stone-800 border-b border-stone-200">
+          <thead className="bg-[var(--dark)] border-b border-[var(--line)]">
             <tr>
-              <th className="px-5 py-3.5 text-left font-bold text-white">공간</th>
-              <th className="px-5 py-3.5 text-left font-bold text-white">범위</th>
-              <th className="px-5 py-3.5 text-left font-bold text-white">케라폭시</th>
-              <th className="px-5 py-3.5 text-left font-bold text-white">폴리우레아</th>
+              <th className="px-5 py-3.5 text-left font-medium text-[var(--on-dark)]">공간</th>
+              <th className="px-5 py-3.5 text-left font-medium text-[var(--on-dark)]">범위</th>
+              <th className="px-5 py-3.5 text-left font-medium text-[var(--on-dark)]">케라폭시</th>
+              <th className="px-5 py-3.5 text-left font-medium text-[var(--on-dark)]">폴리우레아</th>
             </tr>
           </thead>
           <tbody>
             {filtered.map((row, i) => (
-              <tr key={`${row.space}-${row.range}`} className={i % 2 === 0 ? 'bg-white' : 'bg-stone-50/50'}>
-                <td className="px-5 py-3.5 font-medium text-stone-800">{row.space}</td>
-                <td className="px-5 py-3.5 text-stone-600">{row.range}</td>
-                <td className="px-5 py-3.5 font-medium text-stone-600">
+              <tr key={`${row.space}-${row.range}`} className={i % 2 === 0 ? 'bg-[var(--paper)]' : 'bg-[var(--bg)]'}>
+                <td className="px-5 py-3.5 font-medium text-[var(--ink)]">{row.space}</td>
+                <td className="px-5 py-3.5 text-[var(--ink-2)]">{row.range}</td>
+                <td className="px-5 py-3.5 font-medium text-[var(--ink-2)]">
                   {row.kera === null ? (
-                    <span className="text-red-400 font-medium">별도 협의</span>
+                    <span className="text-[var(--accent)] font-medium">별도 협의</span>
                   ) : (
                     <>{row.kera[houseType]}만원</>
                   )}
                 </td>
-                <td className="px-5 py-3.5 font-medium text-stone-600">
+                <td className="px-5 py-3.5 font-medium text-[var(--ink-2)]">
                   {row.poly === null ? (
-                    <span className="text-red-400 font-medium">별도 협의</span>
+                    <span className="text-[var(--accent)] font-medium">별도 협의</span>
                   ) : (
                     <>{row.poly[houseType]}만원</>
                   )}
@@ -88,36 +88,36 @@ export default function PriceTable() {
       </div>
 
       {/* [2-m] 가격 카드 리스트 — 모바일 */}
-      <div className="pt-card-list rounded-xl border border-stone-200 overflow-hidden">
+      <div className="pt-card-list rounded-sm border border-[var(--line)] overflow-hidden">
         {filtered.map((row, i) => (
           <div
             key={`m-${row.space}-${row.range}`}
-            className={`flex items-center px-3.5 py-3 ${i !== 0 ? 'border-t border-stone-100' : ''} ${i % 2 === 0 ? 'bg-white' : 'bg-stone-50/50'}`}
+            className={`flex items-center px-3.5 py-3 ${i !== 0 ? 'border-t border-[var(--line)]' : ''} ${i % 2 === 0 ? 'bg-[var(--paper)]' : 'bg-[var(--bg)]'}`}
           >
             <div className="flex-1 min-w-0 mr-3">
-              <div className="text-xs text-stone-400">{row.space}</div>
-              <div className="text-sm text-stone-800 font-medium truncate">{row.range}</div>
+              <div className="text-xs text-[var(--muted-2)]">{row.space}</div>
+              <div className="text-sm text-[var(--ink)] font-medium truncate">{row.range}</div>
             </div>
             <div className="flex items-center gap-0 shrink-0">
               {/* 케라폭시 */}
               <div className="min-w-[58px] text-center">
-                <div className="text-[10px] text-stone-400 mb-0.5">케라폭시</div>
-                <div className={`text-[13px] font-medium ${row.recMat !== 'kera' ? 'text-stone-600' : 'text-stone-600'}`}>
+                <div className="text-[10px] text-[var(--muted-2)] mb-0.5">케라폭시</div>
+                <div className="text-[13px] font-medium text-[var(--ink-2)]">
                   {row.kera === null ? (
-                    <span className="text-red-400 font-medium text-[13px]">별도 협의</span>
+                    <span className="text-[var(--accent)] font-medium text-[13px]">별도 협의</span>
                   ) : (
                     <>{row.kera[houseType]}만원</>
                   )}
                 </div>
               </div>
               {/* 구분선 */}
-              <div className="w-px h-8 bg-stone-300 mx-2" />
+              <div className="w-px h-8 bg-[var(--line-strong)] mx-2" />
               {/* 폴리우레아 */}
               <div className="min-w-[58px] text-center">
-                <div className="text-[10px] text-stone-400 mb-0.5">폴리우레아</div>
-                <div className={`text-[13px] font-medium ${row.recMat !== 'poly' ? 'text-stone-600' : 'text-stone-600'}`}>
+                <div className="text-[10px] text-[var(--muted-2)] mb-0.5">폴리우레아</div>
+                <div className="text-[13px] font-medium text-[var(--ink-2)]">
                   {row.poly === null ? (
-                    <span className="text-red-400 font-medium text-[13px]">별도 협의</span>
+                    <span className="text-[var(--accent)] font-medium text-[13px]">별도 협의</span>
                   ) : (
                     <>{row.poly[houseType]}만원</>
                   )}
@@ -129,26 +129,26 @@ export default function PriceTable() {
       </div>
 
       {/* [3] 세트 할인 카드 */}
-      <h3 className="text-lg font-black text-stone-800 mt-12 mb-5">세트 할인 패키지</h3>
+      <h3 className="text-lg font-medium text-[var(--ink)] mt-12 mb-5">세트 할인 패키지</h3>
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
         {SET_CARDS.map((card) => (
-          <div key={card.label} className="rounded-xl border border-stone-200 bg-white p-5">
-            <span className="text-xs font-bold text-stone-500">{card.label}</span>
-            <p className="font-bold text-stone-800 mt-1 mb-3 text-sm">{card.name}</p>
+          <div key={card.label} className="rounded-sm border border-[var(--line)] bg-[var(--paper)] p-5">
+            <span className="text-xs font-medium text-[var(--muted-2)] uppercase tracking-[0.12em]">{card.label}</span>
+            <p className="font-medium text-[var(--ink)] mt-1 mb-3 text-sm">{card.name}</p>
             <ul className="space-y-1.5 mb-4">
               {card.items.map((item) => (
-                <li key={item.name} className="flex justify-between text-sm text-stone-600">
+                <li key={item.name} className="flex justify-between text-sm text-[var(--muted)]">
                   <span>{item.name}</span>
-                  <span className="font-medium">{item.price}만원</span>
+                  <span className="font-medium text-[var(--ink-2)]">{item.price}만원</span>
                 </li>
               ))}
             </ul>
-            <div className="border-t border-stone-100 pt-3 flex items-center justify-between">
+            <div className="border-t border-[var(--line)] pt-3 flex items-center justify-between">
               <div>
-                <span className="text-stone-400 text-sm line-through mr-2">{card.original}만원</span>
-                <span className="text-stone-800 text-lg font-black">{card.final}만원</span>
+                <span className="text-[var(--muted-2)] text-sm line-through mr-2">{card.original}만원</span>
+                <span className="text-[var(--ink)] text-lg font-medium">{card.final}만원</span>
               </div>
-              <span className="text-xs font-bold px-2.5 py-1 rounded-lg bg-green-50 text-green-800">
+              <span className="text-xs font-medium px-2.5 py-1 rounded-sm bg-[var(--accent)] text-white uppercase tracking-[0.1em]">
                 {card.save}만원 절약
               </span>
             </div>
@@ -157,37 +157,37 @@ export default function PriceTable() {
       </div>
 
       {/* [4] 소재 비교 카드 */}
-      <h3 className="text-lg font-black text-stone-800 mt-12 mb-5">소재별 비교</h3>
+      <h3 className="text-lg font-medium text-[var(--ink)] mt-12 mb-5">소재별 비교</h3>
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
         {MAT_CARDS.map((card) => (
           <div
             key={card.name}
-            className={`rounded-xl p-5 ${
+            className={`rounded-sm p-5 ${
               card.highlight
-                ? 'border-2 border-green-600 bg-white'
-                : 'border border-stone-200 bg-white'
+                ? 'border-2 border-[var(--accent)] bg-[var(--paper)]'
+                : 'border border-[var(--line)] bg-[var(--paper)]'
             }`}
           >
             <span
-              className={`inline-block text-xs font-bold px-2.5 py-1 rounded-lg mb-3 ${
-                card.highlight ? 'bg-green-600 text-white' : 'bg-stone-200 text-stone-500'
+              className={`inline-block text-xs font-medium px-2.5 py-1 rounded-sm mb-3 uppercase tracking-[0.12em] ${
+                card.highlight ? 'bg-[var(--accent)] text-white' : 'bg-[var(--bg-2)] text-[var(--muted)]'
               }`}
             >
               {card.badge}
             </span>
-            <p className="font-black text-stone-800 text-base">{card.name}</p>
-            <p className="text-stone-500 text-xs mt-1 mb-4">{card.life}</p>
+            <p className="font-medium text-[var(--ink)] text-base">{card.name}</p>
+            <p className="text-[var(--muted)] text-xs mt-1 mb-4">{card.life}</p>
             <div className="flex gap-4 mb-4">
               <div>
-                <span className="text-stone-400 text-sm">신축</span>
-                <p className="font-bold text-stone-800 text-base">{card.prices.신축}</p>
+                <span className="text-[var(--muted-2)] text-sm">신축</span>
+                <p className="font-medium text-[var(--ink)] text-base">{card.prices.신축}</p>
               </div>
               <div>
-                <span className="text-stone-400 text-sm">구축</span>
-                <p className="font-bold text-stone-800 text-base">{card.prices.구축}</p>
+                <span className="text-[var(--muted-2)] text-sm">구축</span>
+                <p className="font-medium text-[var(--ink)] text-base">{card.prices.구축}</p>
               </div>
             </div>
-            <p className="text-stone-500 text-sm leading-relaxed whitespace-pre-line">{card.pros}</p>
+            <p className="text-[var(--muted)] text-sm leading-relaxed whitespace-pre-line">{card.pros}</p>
           </div>
         ))}
       </div>

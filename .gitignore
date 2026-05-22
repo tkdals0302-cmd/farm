@@ -1,1 +1,15 @@
 node_modules
+dist
+.DS_Store
+
+# Local tool configs
+.claude/
+
+# Project planning docs (not for production)
+_TASK_*.md
+*_2026*.md
+관리자페이지_*.md
+디자인_*.md
+리뉴얼_*.md
+기능명세_*.md
+가격표_*.md
