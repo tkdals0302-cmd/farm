@@ -10,8 +10,10 @@ import SpacePriceCalculator from './components/SpacePriceCalculator';
 import AboutDetailline from './components/AboutDetailline';
 import FAQSection from './components/FAQSection';
 import QuoteFormSection from './components/QuoteFormSection';
+import { useSeo } from '../../lib/useSeo';
 
 export default function HomePage() {
+  useSeo();
   return (
     <div className="min-h-screen bg-white">
       <Navbar />

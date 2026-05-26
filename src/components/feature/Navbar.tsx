@@ -121,7 +121,7 @@ export default function Navbar() {
           <Link to="/" className="flex items-center gap-3 cursor-pointer" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}>
             <img
               src={isScrolled ? logoLight : logoDark}
-              alt="줄눈시공 전문 로고"
+              alt="디테일라인 - 서울·경기 줄눈시공 전문"
               className="h-10 md:h-12 w-auto object-contain transition-opacity duration-300"
             />
           </Link>

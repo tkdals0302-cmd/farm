@@ -90,7 +90,7 @@ export default function Scope() {
             <article className="scope-card" key={it.n}>
               <div className={`scope-imgph ${it.photo ? 'has-photo' : ''}`}>
                 {it.photo ? (
-                  <img src={it.photo} alt={it.t} className="scope-imgph-img" loading="lazy" />
+                  <img src={it.photo} alt={`${it.t} 줄눈시공 - 디테일라인`} className="scope-imgph-img" loading="lazy" />
                 ) : (
                   <span className="scope-imgph-label" aria-hidden="true">{it.en.toUpperCase()}</span>
                 )}

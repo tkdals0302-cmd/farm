@@ -2,6 +2,7 @@ import { useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import Navbar from '../../../components/feature/Navbar';
 import Footer from '../../../components/feature/Footer';
+import { useSeo } from '../../../lib/useSeo';
 import { Events } from '../../../lib/analytics';
 
 // ─────────────────────────────────────────────────────────────────────────────
@@ -112,6 +113,40 @@ const TIMING: TimingItem[] = [
   },
 ];
 
+interface RelatedItem {
+  idx: string;
+  href: string;
+  title: string;
+  desc: string;
+}
+
+const RELATED: RelatedItem[] = [
+  {
+    idx: 'No. 01 · Kerafoxy',
+    href: '/info/kerafoxy',
+    title: '케라폭시 줄눈이란?',
+    desc: '에폭시 계열 고성능 줄눈 소재 케라폭시의 5가지 핵심 장점을 정리했습니다.',
+  },
+  {
+    idx: 'No. 02 · Pricing',
+    href: '/info/kerafoxy-price',
+    title: '케라폭시 가격 안내',
+    desc: '시공 비용에 영향을 주는 요인과 평형별 표준 가격을 한눈에.',
+  },
+  {
+    idx: 'No. 03 · Product',
+    href: '/info/kerafoxy-product',
+    title: '케라폭시 계열 제품 소개',
+    desc: '케라폭시·스타라이크·푸가리테 등 주요 제품 라인업과 색상 가이드.',
+  },
+  {
+    idx: 'No. 04 · Compare',
+    href: '/info/comparison',
+    title: '폴리우레아 vs 케라폭시',
+    desc: '두 소재의 차이점과, 어떤 공간에 어떤 소재가 적합한지.',
+  },
+];
+
 // ─────────────────────────────────────────────────────────────────────────────
 // Sub-components
 // ─────────────────────────────────────────────────────────────────────────────
@@ -156,18 +191,10 @@ function SecHead({
 export default function WhyGroutPage() {
   const navigate = useNavigate();
 
+  useSeo();
+
   useEffect(() => {
     window.scrollTo(0, 0);
-    document.title = '줄눈시공 하는 이유 — 디테일라인';
-    const meta = document.querySelector('meta[name="description"]');
-    const original = meta?.getAttribute('content') ?? '';
-    meta?.setAttribute(
-      'content',
-      '줄눈시공이 왜 필요한지, 미루면 어떤 문제가 생기는지, 언제 시공해야 하는지 — 위생·미관·방수·비용 절감 관점에서 4가지 이유로 정리했습니다.',
-    );
-    return () => {
-      if (meta && original) meta.setAttribute('content', original);
-    };
   }, []);
 
   const goQuote = () => {
@@ -326,6 +353,35 @@ export default function WhyGroutPage() {
                 <h3 className="wg-timing-title">{t.title}</h3>
                 <p className="wg-timing-body">{t.body}</p>
               </article>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ===== 04 Related ===== */}
+      <section className="wg-section wg-bg-paper" data-screen-label="04 Related">
+        <div className="wg-container">
+          <SecHead
+            num="04"
+            ko="관련 정보 더 보기"
+            en="Related"
+            title={
+              <>
+                줄눈에 대해 알아야 할, 다른 <em>네 가지</em>.
+              </>
+            }
+            lede="자재 · 가격 · 제품 · 비교 — 네 가지 관점으로 줄눈을 더 깊이 살펴보세요."
+          />
+          <div className="wg-related-grid">
+            {RELATED.map((r) => (
+              <Link key={r.href} to={r.href} className="wg-related-card">
+                <span className="wg-related-idx">{r.idx}</span>
+                <h4 className="wg-related-title">{r.title}</h4>
+                <p className="wg-related-desc">{r.desc}</p>
+                <span className="wg-related-more">
+                  more <span className="wg-related-arr">→</span>
+                </span>
+              </Link>
             ))}
           </div>
         </div>
@@ -819,6 +875,75 @@ const WG_CSS = `
   margin: 0;
   word-break: keep-all;
 }
+
+/* ===== Related ===== */
+.wg-related-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 24px;
+}
+@media (max-width: 900px) {
+  .wg-related-grid { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 560px) {
+  .wg-related-grid { grid-template-columns: 1fr; }
+}
+.wg-related-card {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  background: var(--paper);
+  border: 1px solid var(--line);
+  padding: 32px 28px 28px;
+  min-height: 220px;
+  color: inherit;
+  text-decoration: none;
+  transition: background .25s ease, color .25s ease, border-color .25s ease;
+}
+.wg-related-card:hover {
+  background: var(--ink);
+  color: var(--paper);
+  border-color: var(--ink);
+}
+.wg-related-idx {
+  font-size: 10.5px;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--muted-2);
+}
+.wg-related-card:hover .wg-related-idx { color: #d9b790; }
+.wg-related-title {
+  font-family: 'Noto Serif KR', serif;
+  font-weight: 500;
+  font-size: 21px;
+  line-height: 1.35;
+  color: var(--ink);
+  margin: 0;
+  letter-spacing: -0.005em;
+}
+.wg-related-card:hover .wg-related-title { color: #fff; }
+.wg-related-desc {
+  font-size: 13px;
+  line-height: 1.7;
+  color: var(--muted);
+  margin: 0;
+}
+.wg-related-card:hover .wg-related-desc { color: rgba(255,255,255,.75); }
+.wg-related-more {
+  margin-top: auto;
+  font-size: 11.5px;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--muted-2);
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+.wg-related-card:hover .wg-related-more { color: #d9b790; }
+.wg-related-arr { transition: transform .3s ease; }
+.wg-related-card:hover .wg-related-arr { transform: translateX(4px); }
 
 /* ===== CTA Band ===== */
 .wg-cta-band {

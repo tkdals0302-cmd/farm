@@ -3,6 +3,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import Navbar from '../../../components/feature/Navbar';
 import Footer from '../../../components/feature/Footer';
 import { Events } from '../../../lib/analytics';
+import { useSeo } from '../../../lib/useSeo';
 import kerafoxyImage from '../../../assets/images/info/kerafoxy-product/kerafoxy.jpg';
 import strikeevoImage from '../../../assets/images/info/kerafoxy-product/strikeevo.jpg';
 import aspactoneImage from '../../../assets/images/info/kerafoxy-product/aspactone.jpg';
@@ -227,18 +228,10 @@ export default function EpoxyProductsPage() {
   const [groupFilter, setGroupFilter] = useState<GroupFilter>('all');
   const [tileShade, setTileShade] = useState<TileShade>('white');
 
+  useSeo();
+
   useEffect(() => {
     window.scrollTo(0, 0);
-    document.title = '에폭시 계열 제품 소개 — 디테일라인';
-    const meta = document.querySelector('meta[name="description"]');
-    const original = meta?.getAttribute('content') ?? '';
-    meta?.setAttribute(
-      'content',
-      '케라폭시·스트라이크 에보·아스팍톤·폴리우레아 등 디테일라인이 시공하는 에폭시 계열 줄눈 제품 라인업과, 줄눈 색상을 미리 보는 인터랙티브 시뮬레이터.',
-    );
-    return () => {
-      if (meta && original) meta.setAttribute('content', original);
-    };
   }, []);
 
   const goQuote = () => {
@@ -482,8 +475,8 @@ export default function EpoxyProductsPage() {
         </div>
       </section>
 
-      {/* ===== 03 Related (temporarily hidden — flip `false` to `true` to restore) ===== */}
-      {false && (
+      {/* ===== 03 Related ===== */}
+      {(
         <section className="ep-section" data-screen-label="03 Related">
           <div className="ep-container">
             <SecHead

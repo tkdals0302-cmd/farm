@@ -3,6 +3,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import Navbar from '../../../components/feature/Navbar';
 import Footer from '../../../components/feature/Footer';
 import { Events } from '../../../lib/analytics';
+import { useSeo } from '../../../lib/useSeo';
 import heroBgDesktop from '../../../assets/images/info/kerafoxy-price/bg.webp';
 import heroBgMobile from '../../../assets/images/info/kerafoxy-price/bg_m.webp';
 
@@ -267,18 +268,10 @@ export default function KerafoxyPricePage() {
   const [ptFilter, setPtFilter] = useState<PriceFilter>('all');
   const [ptType, setPtType] = useState<PriceType>('new');
 
+  useSeo();
+
   useEffect(() => {
     window.scrollTo(0, 0);
-    document.title = '케라폭시 가격 안내 — 디테일라인';
-    const meta = document.querySelector('meta[name="description"]');
-    const original = meta?.getAttribute('content') ?? '';
-    meta?.setAttribute(
-      'content',
-      '2026년 케라폭시 줄눈 시공 가격표. 공간별 표준 단가, 세트 할인 패키지, 폴리우레아·일반 줄눈 비교와 가격에 영향을 주는 요인을 정리했습니다.',
-    );
-    return () => {
-      if (meta && original) meta.setAttribute('content', original);
-    };
   }, []);
 
   const goQuote = () => {
@@ -572,8 +565,8 @@ export default function KerafoxyPricePage() {
         </div>
       </section>
 
-      {/* ===== 04 Related (temporarily hidden — flip `false` to `true` to restore) ===== */}
-      {false && (
+      {/* ===== 04 Related ===== */}
+      {(
         <section className="kp-section kp-bg-paper" data-screen-label="04 Related">
           <div className="kp-container">
             <SecHead

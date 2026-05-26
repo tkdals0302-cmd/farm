@@ -5,9 +5,9 @@ export default function NotFound() {
   
   return (
     <div className="relative flex flex-col items-center justify-center h-screen text-center px-4 bg-[var(--bg)]">
-      <h1 className="absolute bottom-0 text-9xl md:text-[12rem] font-black text-[var(--bg-2)] select-none pointer-events-none z-0">
+      <div aria-hidden="true" className="absolute bottom-0 text-9xl md:text-[12rem] font-black text-[var(--bg-2)] select-none pointer-events-none z-0">
         404
-      </h1>
+      </div>
       <div className="relative z-10">
         <h1 className="text-xl md:text-2xl font-medium mt-6 text-[var(--ink)]">This page has not been generated</h1>
         <p className="mt-2 text-base text-[var(--muted-2)] tracking-[0.04em]">{location.pathname}</p>

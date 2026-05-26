@@ -1,9 +1,18 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { faqItems } from '../../../mocks/faqData';
 import { Events } from '../../../lib/analytics';
+import { faqJsonLd, injectJsonLd } from '../../../lib/structuredData';
 
 export default function FAQSection() {
   const [openId, setOpenId] = useState<number | null>(null);
+
+  useEffect(() => {
+    const cleanup = injectJsonLd(
+      'faq-jsonld',
+      faqJsonLd(faqItems.map((f) => ({ q: f.question, a: f.answer })))
+    );
+    return cleanup;
+  }, []);
 
   const toggle = (id: number) => {
     setOpenId((prev) => (prev === id ? null : id));

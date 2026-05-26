@@ -3,6 +3,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import Navbar from '../../../components/feature/Navbar';
 import Footer from '../../../components/feature/Footer';
 import { Events } from '../../../lib/analytics';
+import { useSeo } from '../../../lib/useSeo';
 import beforeImage from '../../../assets/images/info/kerafoxy/before.jpg';
 import afterImage from '../../../assets/images/info/kerafoxy/after.jpg';
 import introImage from '../../../assets/images/info/kerafoxy/kerafoxy.jpg';
@@ -247,18 +248,10 @@ function SecHead({
 export default function KerafoxyPage() {
   const navigate = useNavigate();
 
+  useSeo();
+
   useEffect(() => {
     window.scrollTo(0, 0);
-    document.title = '케라폭시 줄눈이란? — 디테일라인';
-    const meta = document.querySelector('meta[name="description"]');
-    const original = meta?.getAttribute('content') ?? '';
-    meta?.setAttribute(
-      'content',
-      '에폭시 수지·경화제 2액형 고성능 줄눈 소재 케라폭시. 시멘트 줄눈과의 차이, 5가지 핵심 장점, 적합한 공간, 시공 전·후 변화를 정리했습니다.',
-    );
-    return () => {
-      if (meta && original) meta.setAttribute('content', original);
-    };
   }, []);
 
   const goQuote = () => {
@@ -500,8 +493,8 @@ export default function KerafoxyPage() {
         </div>
       </section>
 
-      {/* ===== 06 Related (temporarily hidden — flip `false` to `true` to restore) ===== */}
-      {false && (
+      {/* ===== 06 Related ===== */}
+      {(
         <section className="kf-section kf-bg-paper" data-screen-label="06 Related">
           <div className="kf-container">
             <SecHead

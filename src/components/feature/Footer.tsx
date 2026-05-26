@@ -25,7 +25,7 @@ export default function Footer() {
           <div className="lg:col-span-1">
             <img
               src={logoDark}
-              alt="줄눈시공 전문 로고"
+              alt="디테일라인 - 서울·경기 줄눈시공 전문"
               className="h-10 w-auto object-contain mb-4"
             />
             <p className="text-stone-400 text-sm leading-relaxed mb-5">

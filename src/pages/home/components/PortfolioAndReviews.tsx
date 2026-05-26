@@ -92,7 +92,7 @@ export default function PortfolioAndReviews() {
               >
                 <img
                   src={item.image}
-                  alt={item.title}
+                  alt={`${item.title} 줄눈시공 사례 - 디테일라인`}
                   className="w-full h-full object-cover object-top transition-transform duration-500 group-hover:scale-105"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent"></div>
@@ -155,7 +155,7 @@ export default function PortfolioAndReviews() {
               ) : (
                 <img
                   src={selectedItem.image}
-                  alt={selectedItem.title}
+                  alt={`${selectedItem.title} 줄눈시공 사례 - 디테일라인`}
                   onClick={() => setSelectedItem(null)}
                   className="w-full max-h-[80vh] object-contain cursor-zoom-out"
                 />

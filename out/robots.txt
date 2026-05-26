@@ -1,0 +1,9 @@
+User-agent: *
+Allow: /
+
+# Naver crawler — gentle crawl-delay
+User-agent: Yeti
+Allow: /
+Crawl-delay: 1
+
+Sitemap: https://www.detailline.kr/sitemap.xml

@@ -3,6 +3,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import Navbar from '../../../components/feature/Navbar';
 import Footer from '../../../components/feature/Footer';
 import { Events } from '../../../lib/analytics';
+import { useSeo } from '../../../lib/useSeo';
 
 // ─────────────────────────────────────────────────────────────────────────────
 // Data
@@ -156,6 +157,40 @@ const RECO: RecoCard[] = [
   },
 ];
 
+interface RelatedItem {
+  idx: string;
+  href: string;
+  title: string;
+  desc: string;
+}
+
+const RELATED: RelatedItem[] = [
+  {
+    idx: 'No. 01 · Kerafoxy',
+    href: '/info/kerafoxy',
+    title: '케라폭시 줄눈이란?',
+    desc: '에폭시 계열 고성능 줄눈 소재 케라폭시의 5가지 핵심 장점.',
+  },
+  {
+    idx: 'No. 02 · Product',
+    href: '/info/kerafoxy-product',
+    title: '케라폭시 계열 제품 소개',
+    desc: '케라폭시·스타라이크·푸가리테 등 주요 제품 라인업과 색상 가이드.',
+  },
+  {
+    idx: 'No. 03 · Pricing',
+    href: '/info/kerafoxy-price',
+    title: '케라폭시 가격 안내',
+    desc: '시공 비용에 영향을 주는 요인과 평형별 표준 가격을 한눈에.',
+  },
+  {
+    idx: 'No. 04 · Why',
+    href: '/info/why-grout',
+    title: '줄눈시공 하는 이유',
+    desc: '위생·미관·내구성을 위한 필수 시공인 이유를 정리했습니다.',
+  },
+];
+
 // ─────────────────────────────────────────────────────────────────────────────
 // Sub-components
 // ─────────────────────────────────────────────────────────────────────────────
@@ -198,18 +233,10 @@ function SecHead({
 export default function ComparisonPage() {
   const navigate = useNavigate();
 
+  useSeo();
+
   useEffect(() => {
     window.scrollTo(0, 0);
-    document.title = '폴리우레아 vs 케라폭시 — 디테일라인';
-    const meta = document.querySelector('meta[name="description"]');
-    const original = meta?.getAttribute('content') ?? '';
-    meta?.setAttribute(
-      'content',
-      '폴리우레아 줄눈과 케라폭시 줄눈, 두 소재의 차이점과 장단점을 비교하고 공간에 맞는 최적의 선택을 안내합니다.',
-    );
-    return () => {
-      if (meta && original) meta.setAttribute('content', original);
-    };
   }, []);
 
   const goQuote = () => {
@@ -386,6 +413,35 @@ export default function ComparisonPage() {
                   ))}
                 </ul>
               </article>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ===== 03 Related ===== */}
+      <section className="cp-section cp-bg-paper" data-screen-label="03 Related">
+        <div className="cp-container">
+          <SecHead
+            num="03"
+            ko="관련 정보 더 보기"
+            en="Related"
+            title={
+              <>
+                줄눈에 대해 알아야 할, 다른 <em>네 가지</em>.
+              </>
+            }
+            lede="자재 · 제품 · 가격 · 시공 이유 — 네 가지 관점으로 줄눈을 더 깊이 살펴보세요."
+          />
+          <div className="cp-related-grid">
+            {RELATED.map((r) => (
+              <Link key={r.href} to={r.href} className="cp-related-card">
+                <span className="cp-related-idx">{r.idx}</span>
+                <h4 className="cp-related-title">{r.title}</h4>
+                <p className="cp-related-desc">{r.desc}</p>
+                <span className="cp-related-more">
+                  more <span className="cp-related-arr">→</span>
+                </span>
+              </Link>
             ))}
           </div>
         </div>
@@ -943,6 +999,75 @@ const CP_CSS = `
 .cp-reco-kp .cp-reco-list li { color: rgba(255,255,255,.82); }
 .cp-reco-kp .cp-reco-list li::before { color: #d9b790; }
 .cp-reco-pu .cp-reco-list li::before { color: var(--accent); }
+
+/* ===== Related ===== */
+.cp-related-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 24px;
+}
+@media (max-width: 900px) {
+  .cp-related-grid { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 560px) {
+  .cp-related-grid { grid-template-columns: 1fr; }
+}
+.cp-related-card {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  background: var(--paper);
+  border: 1px solid var(--line);
+  padding: 32px 28px 28px;
+  min-height: 220px;
+  color: inherit;
+  text-decoration: none;
+  transition: background .25s ease, color .25s ease, border-color .25s ease;
+}
+.cp-related-card:hover {
+  background: var(--ink);
+  color: var(--paper);
+  border-color: var(--ink);
+}
+.cp-related-idx {
+  font-size: 10.5px;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--muted-2);
+}
+.cp-related-card:hover .cp-related-idx { color: #d9b790; }
+.cp-related-title {
+  font-family: 'Noto Serif KR', serif;
+  font-weight: 500;
+  font-size: 21px;
+  line-height: 1.35;
+  color: var(--ink);
+  margin: 0;
+  letter-spacing: -0.005em;
+}
+.cp-related-card:hover .cp-related-title { color: #fff; }
+.cp-related-desc {
+  font-size: 13px;
+  line-height: 1.7;
+  color: var(--muted);
+  margin: 0;
+}
+.cp-related-card:hover .cp-related-desc { color: rgba(255,255,255,.75); }
+.cp-related-more {
+  margin-top: auto;
+  font-size: 11.5px;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--muted-2);
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+.cp-related-card:hover .cp-related-more { color: #d9b790; }
+.cp-related-arr { transition: transform .3s ease; }
+.cp-related-card:hover .cp-related-arr { transform: translateX(4px); }
 
 /* ===== CTA Band ===== */
 .cp-cta-band {

@@ -2,6 +2,7 @@ import { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import Navbar from '../../components/feature/Navbar';
 import Footer from '../../components/feature/Footer';
+import { useSeo } from '../../lib/useSeo';
 
 const SECTIONS = [
   {
@@ -138,6 +139,7 @@ const SECTIONS = [
 ];
 
 export default function PrivacyPage() {
+  useSeo();
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: 'instant' });
   }, []);
