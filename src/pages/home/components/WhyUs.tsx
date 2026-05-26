@@ -34,8 +34,8 @@ export default function WhyUs() {
         <div className="mb-10">
           <span className="text-[11px] font-medium tracking-[0.16em] text-[var(--accent)] uppercase">Why Detailline</span>
           <h2
-            className="text-4xl md:text-5xl font-medium text-[var(--on-dark)] mt-2 leading-[1.25] tracking-[-0.01em] break-keep"
-            style={{ fontFamily: "'Noto Serif KR', serif" }}
+            className="text-4xl md:text-5xl text-[var(--on-dark)] mt-2 leading-[1.25] tracking-[-0.01em] break-keep"
+            style={{ fontFamily: "'Noto Serif KR', serif", fontWeight: 500 }}
           >
             싸지 않습니다. 대신<br />
             10년 후에도 그 자리에 있습니다.

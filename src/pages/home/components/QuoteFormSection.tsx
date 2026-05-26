@@ -212,14 +212,14 @@ export default function QuoteFormSection() {
   };
 
   return (
-    <section id="quote" className="py-20 px-6 md:px-12 lg:px-20 bg-[var(--bg)]">
+    <section id="quote" className="py-10 px-6 md:px-12 lg:px-20 bg-[var(--bg)]">
       <div className="max-w-4xl mx-auto">
         {/* Header */}
         <div className="text-center mb-10">
           <span className="text-[11px] font-medium tracking-[0.16em] text-[var(--accent)] uppercase">Free Estimate</span>
           <h2
-            className="text-4xl md:text-5xl font-medium text-[var(--ink)] mt-2 leading-[1.25] tracking-[-0.01em] break-keep"
-            style={{ fontFamily: "'Noto Serif KR', serif" }}
+            className="text-4xl md:text-5xl text-[var(--ink)] mt-2 leading-[1.25] tracking-[-0.01em] break-keep"
+            style={{ fontFamily: "'Noto Serif KR', serif", fontWeight: 500 }}
           >
             무료 견적 상담 신청
           </h2>
@@ -227,7 +227,7 @@ export default function QuoteFormSection() {
         </div>
 
         <div
-          className="bg-white rounded-sm pt-10 px-5 md:p-12 border border-[var(--line)]"
+          className="bg-white rounded-sm pt-5 px-5 pb-6 md:p-12 border border-[var(--line)]"
           style={{ colorScheme: 'light' }}
         >
           {submitted ? (
@@ -320,7 +320,7 @@ export default function QuoteFormSection() {
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
                   <label className="block text-sm font-medium text-[var(--ink-2)] mb-1.5">
-                    시공 위치 <span className="text-red-400">*</span>
+                    시공 아파트 <span className="text-red-400">*</span>
                   </label>
                   <input
                     type="text"
@@ -329,7 +329,7 @@ export default function QuoteFormSection() {
                     value={location}
                     onChange={handleLocationChange}
                     maxLength={39}
-                    placeholder="예: 서울 강남구 역삼동"
+                    placeholder="예 : 서초구 반포동 자이아파트"
                     className="w-full px-4 py-3 border border-[var(--line)] rounded-sm text-base text-stone-800 placeholder-stone-300 focus:outline-none focus:border-stone-400 transition-colors"
                   />
                   {errors.location && <p className="mt-1 text-xs text-red-500">{errors.location}</p>}

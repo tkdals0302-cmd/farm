@@ -16,8 +16,8 @@ export default function FAQSection() {
         <div className="text-center mb-10">
           <span className="text-[11px] font-medium tracking-[0.16em] text-[var(--accent)] uppercase">FAQ</span>
           <h2
-            className="text-4xl md:text-5xl font-medium text-[var(--ink)] mt-2 leading-[1.25] tracking-[-0.01em] break-keep"
-            style={{ fontFamily: "'Noto Serif KR', serif" }}
+            className="text-4xl md:text-5xl text-[var(--ink)] mt-2 leading-[1.25] tracking-[-0.01em] break-keep"
+            style={{ fontFamily: "'Noto Serif KR', serif", fontWeight: 500 }}
           >
             자주 묻는 질문
           </h2>

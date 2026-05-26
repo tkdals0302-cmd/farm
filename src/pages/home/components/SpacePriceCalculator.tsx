@@ -60,9 +60,9 @@ const PRICE_DATA: Record<string, SpaceDef> = {
     typeAxis:  { lbl: '타입', options: ['욕조형', '샤워부스형'] },
     scopeAxis: { lbl: '범위', options: ['바닥만', '전체(바닥+벽)'] },
     variants: [
-      { id: 'bt-floor', label: '욕조형 · 바닥만',         type: '욕조형',   scope: '바닥만',        kera: { 신축: 30, 구축: 40  }, poly: null },
+      { id: 'bt-floor', label: '욕조형 · 바닥만',         type: '욕조형',   scope: '바닥만',        kera: { 신축: 40, 구축: 50  }, poly: null },
       { id: 'bt-full',  label: '욕조형 · 전체 (바닥+벽)', type: '욕조형',   scope: '전체(바닥+벽)', kera: { 신축: 90, 구축: 100 }, poly: null },
-      { id: 'sh-floor', label: '샤워부스형 · 바닥만',       type: '샤워부스형', scope: '바닥만',        kera: { 신축: 35, 구축: 45  }, poly: null },
+      { id: 'sh-floor', label: '샤워부스형 · 바닥만',       type: '샤워부스형', scope: '바닥만',        kera: { 신축: 45, 구축: 55  }, poly: null },
       { id: 'sh-full',  label: '샤워부스형 · 전체 (바닥+벽)', type: '샤워부스형', scope: '전체(바닥+벽)', kera: { 신축: 95, 구축: 105 }, poly: null },
     ],
   },
@@ -99,7 +99,7 @@ const SETS: Record<string, SetDef> = {
   '1': {
     name: '세트 1', sub: '기본',
     desc: '화장실 바닥 ×2 + 현관',
-    prices: { 신축: 80, 구축: 100 },
+    prices: { 신축: 100, 구축: 120 },
     components: [
       { space: '화장실', variantId: 'bt-floor', material: 'kera' },
       { space: '화장실', variantId: 'sh-floor', material: 'kera' },
@@ -110,7 +110,7 @@ const SETS: Record<string, SetDef> = {
   '2': {
     name: '세트 2', sub: '표준',
     desc: '세트 1 + 양조벽 or 샤워벽 3면 ×1곳',
-    prices: { 신축: 115, 구축: 135 },
+    prices: { 신축: 125, 구축: 145 },
     components: [
       { space: '화장실', variantId: 'bt-full',  material: 'kera' },
       { space: '화장실', variantId: 'sh-floor', material: 'kera' },
@@ -132,7 +132,7 @@ const SETS: Record<string, SetDef> = {
   '4': {
     name: '세트 4', sub: '확장',
     desc: '세트 2 + 세탁실',
-    prices: { 신축: 130, 구축: 150 },
+    prices: { 신축: 140, 구축: 160 },
     components: [
       { space: '화장실', variantId: 'bt-full',  material: 'kera' },
       { space: '화장실', variantId: 'sh-floor', material: 'kera' },
@@ -380,8 +380,8 @@ export default function SpacePriceCalculator() {
         <div className="mb-10">
           <span className="text-[11px] font-medium tracking-[0.16em] text-[var(--accent)] uppercase">Price Calculator</span>
           <h2
-            className="text-4xl md:text-5xl font-medium text-[var(--ink)] mt-2 leading-[1.25] tracking-[-0.01em] break-keep"
-            style={{ fontFamily: "'Noto Serif KR', serif" }}
+            className="text-4xl md:text-5xl text-[var(--ink)] mt-2 leading-[1.25] tracking-[-0.01em] break-keep"
+            style={{ fontFamily: "'Noto Serif KR', serif", fontWeight: 500 }}
           >
             <span className="md:block">공간을 고르면,<br></br></span>{' '}
             <span className="md:block">가격이 바로 보입니다</span>

@@ -61,8 +61,8 @@ export default function Reviews() {
         <div className="mb-10">
           <span className="text-[11px] font-medium tracking-[0.16em] text-[var(--accent)] uppercase">Reviews</span>
           <h2
-            className="text-4xl md:text-5xl font-medium text-[var(--ink)] mt-2 leading-[1.25] tracking-[-0.01em] break-keep"
-            style={{ fontFamily: "'Noto Serif KR', serif" }}
+            className="text-4xl md:text-5xl text-[var(--ink)] mt-2 leading-[1.25] tracking-[-0.01em] break-keep"
+            style={{ fontFamily: "'Noto Serif KR', serif", fontWeight: 500 }}
           >
             <span className="md:block text-[var(--accent)]">지금까지 2,000세대 이상의</span>{' '}
             <span className="md:block">가족이 맡겨 주셨습니다</span>

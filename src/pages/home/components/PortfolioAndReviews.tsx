@@ -56,8 +56,8 @@ export default function PortfolioAndReviews() {
           <div className="mb-10">
             <span className="text-[11px] font-medium tracking-[0.16em] text-[var(--accent)] uppercase">Our Work</span>
             <h2
-              className="text-4xl md:text-5xl font-medium text-[var(--ink)] mt-2 leading-[1.25] tracking-[-0.01em] break-keep"
-              style={{ fontFamily: "'Noto Serif KR', serif" }}
+              className="text-4xl md:text-5xl text-[var(--ink)] mt-2 leading-[1.25] tracking-[-0.01em] break-keep"
+              style={{ fontFamily: "'Noto Serif KR', serif", fontWeight: 500 }}
             >
               완성된 프로젝트
             </h2>

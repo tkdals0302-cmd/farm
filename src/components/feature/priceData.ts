@@ -20,11 +20,11 @@ export const PRICE_DATA: Record<string, SpaceData> = {
     },
     prices: {
       '양변기 화장실': {
-        '바닥만': { kera: { 신축: 30, 구축: 35 }, poly: { 신축: 20, 구축: 25 } },
+        '바닥만': { kera: { 신축: 40, 구축: 45 }, poly: { 신축: 30, 구축: 35 } },
         '전체(바닥+벽)': { kera: { 신축: 90, 구축: 100 }, poly: { 신축: 65, 구축: 75 } },
       },
       '샤워부스 화장실': {
-        '바닥만': { kera: { 신축: 35, 구축: 40 }, poly: { 신축: 25, 구축: 30 } },
+        '바닥만': { kera: { 신축: 45, 구축: 50 }, poly: { 신축: 35, 구축: 40 } },
         '전체(바닥+벽)': { kera: { 신축: 95, 구축: 105 }, poly: { 신축: 70, 구축: 80 } },
       },
     } as any,
@@ -57,7 +57,7 @@ export const PRICE_DATA: Record<string, SpaceData> = {
     rec: 'poly',
     set: {
       title: '💡 화장실과 함께 시공하면 더 저렴해요',
-      desc: '절약 위주 세트: 화장실 바닥 2개 + 현관 + 베란다 → 80만원 → 75만원',
+      desc: '절약 위주 세트: 화장실 바닥 2개 + 현관 + 베란다 → 100만원 → 95만원',
     },
   },
   베란다: {
@@ -76,7 +76,7 @@ export const PRICE_DATA: Record<string, SpaceData> = {
     r1: ['바닥'],
     r2: null,
     prices: {
-      바닥: { kera: { 신축: 20, 구축: 25 }, poly: { 신축: 15, 구축: 15 } },
+      바닥: { kera: { 신축: 30, 구축: 35 }, poly: { 신축: 25, 구축: 25 } },
     },
     rec: 'poly',
     set: {
@@ -101,15 +101,15 @@ export interface TableRow {
 }
 
 export const TABLE_ROWS: TableRow[] = [
-  { space: '화장실', range: '양변기 · 바닥만',          kera: { 신축: 30, 구축: 35 },   poly: { 신축: 20, 구축: 25 },   recMat: 'kera' },
+  { space: '화장실', range: '양변기 · 바닥만',          kera: { 신축: 40, 구축: 45 },   poly: { 신축: 30, 구축: 35 },   recMat: 'kera' },
   { space: '화장실', range: '양변기 · 전체(바닥+벽)',    kera: { 신축: 90, 구축: 100 },  poly: { 신축: 65, 구축: 75 },   recMat: 'kera' },
-  { space: '화장실', range: '샤워부스 · 바닥만',        kera: { 신축: 35, 구축: 40 },   poly: { 신축: 25, 구축: 30 },   recMat: 'kera' },
+  { space: '화장실', range: '샤워부스 · 바닥만',        kera: { 신축: 45, 구축: 50 },   poly: { 신축: 35, 구축: 40 },   recMat: 'kera' },
   { space: '화장실', range: '샤워부스 · 전체(바닥+벽)',  kera: { 신축: 95, 구축: 105 },  poly: { 신축: 70, 구축: 80 },   recMat: 'kera' },
   { space: '거실',   range: '바닥 · 20평대',           kera: { 신축: 150, 구축: 150 }, poly: { 신축: 100, 구축: 100 }, recMat: 'kera' },
   { space: '거실',   range: '바닥 · 30평대+',          kera: null,                     poly: null,                     recMat: 'kera' },
   { space: '현관',   range: '바닥',                    kera: { 신축: 15, 구축: 20 },   poly: { 신축: 5, 구축: 10 },    recMat: 'poly' },
   { space: '베란다', range: '바닥',                    kera: { 신축: 20, 구축: 25 },   poly: { 신축: 15, 구축: 15 },   recMat: 'poly' },
-  { space: '외부화장실', range: '바닥',                 kera: { 신축: 20, 구축: 25 },   poly: { 신축: 15, 구축: 15 },   recMat: 'poly' },
+  { space: '외부화장실', range: '바닥',                 kera: { 신축: 30, 구축: 35 },   poly: { 신축: 25, 구축: 25 },   recMat: 'poly' },
 ];
 
 export const SET_CARDS = [
@@ -118,12 +118,12 @@ export const SET_CARDS = [
     name: '화장실 2개 + 현관 + 베란다',
     spaces: ['화장실', '현관', '베란다'],
     items: [
-      { name: '화장실 바닥 2개', price: 60 },
+      { name: '화장실 바닥 2개', price: 80 },
       { name: '현관', price: 5 },
       { name: '베란다', price: 15 },
     ],
-    original: 80,
-    final: 75,
+    original: 100,
+    final: 95,
     save: 5,
   },
   {
@@ -133,10 +133,10 @@ export const SET_CARDS = [
     items: [
       { name: '화장실 전체 1개', price: 100 },
       { name: '현관', price: 10 },
-      { name: '외부화장실', price: 15 },
+      { name: '외부화장실', price: 25 },
     ],
-    original: 125,
-    final: 115,
+    original: 135,
+    final: 125,
     save: 10,
   },
   {
@@ -146,10 +146,10 @@ export const SET_CARDS = [
     items: [
       { name: '화장실 전체 2개', price: 190 },
       { name: '거실', price: 150 },
-      { name: '현관·베란다·외부화장실', price: 35 },
+      { name: '현관·베란다·외부화장실', price: 45 },
     ],
-    original: 375,
-    final: 350,
+    original: 385,
+    final: 360,
     save: 25,
   },
 ];
@@ -159,7 +159,7 @@ export const MAT_CARDS = [
     badge: '프리미엄 추천',
     name: '케라폭시',
     life: '내구성 10년+',
-    prices: { 신축: '30만원~', 구축: '35만원~' },
+    prices: { 신축: '40만원~', 구축: '45만원~' },
     pros: '항균 기능 · 색상 다양\n고광택 · 수분 완전 차단',
     highlight: true,
   },
@@ -167,7 +167,7 @@ export const MAT_CARDS = [
     badge: '가성비 추천',
     name: '폴리우레아',
     life: '내구성 5년+',
-    prices: { 신축: '20만원~', 구축: '25만원~' },
+    prices: { 신축: '30만원~', 구축: '35만원~' },
     pros: '빠른 경화 2~4시간\n현관·베란다에 최적',
     highlight: false,
   },

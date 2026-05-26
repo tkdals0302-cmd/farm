@@ -38,9 +38,9 @@ const PRICING: PriceGroup[] = [
     label: '화장실',
     group: 'bath',
     rows: [
-      { scope: '욕조형 · 바닥만', new: [30, 20], old: [20, 15] },
+      { scope: '욕조형 · 바닥만', new: [40, 30], old: [30, 25] },
       { scope: '욕조형 · 전체 (바닥+벽)', new: [90, 65], old: [75, 55] },
-      { scope: '샤워부스형 · 바닥만', new: [35, 25], old: [28, 20] },
+      { scope: '샤워부스형 · 바닥만', new: [45, 35], old: [38, 30] },
       { scope: '샤워부스형 · 전체 (바닥+벽)', new: [95, 70], old: [80, 60] },
     ],
   },
@@ -65,7 +65,7 @@ const PRICING: PriceGroup[] = [
   {
     label: '외부 화장실',
     group: 'etc',
-    rows: [{ scope: '바닥', new: [20, 15], old: [18, 13] }],
+    rows: [{ scope: '바닥', new: [30, 25], old: [28, 23] }],
   },
 ];
 
@@ -90,8 +90,8 @@ const SETS: SetPackage[] = [
     name: '세트 1',
     sub: '· 기본',
     desc: '화장실 바닥 ×2 + 현관',
-    newPrice: 80,
-    oldPrice: 100,
+    newPrice: 100,
+    oldPrice: 120,
     services: [],
     emptyLabel: '기본 시공 패키지',
   },
@@ -100,8 +100,8 @@ const SETS: SetPackage[] = [
     name: '세트 2',
     sub: '· 표준',
     desc: '세트 1 + 양조벽 or 샤워벽 3면 ×1곳',
-    newPrice: 115,
-    oldPrice: 135,
+    newPrice: 135,
+    oldPrice: 155,
     services: [
       { text: '젠 다이 실리콘 ×2' },
       { text: '세면대 실리콘 ×2' },
@@ -112,8 +112,8 @@ const SETS: SetPackage[] = [
     name: '세트 3',
     sub: '· 완성',
     desc: '화장실 바닥 ×2 + 전체벽 ×2 + 현관',
-    newPrice: 220,
-    oldPrice: 240,
+    newPrice: 240,
+    oldPrice: 260,
     services: [
       { text: '젠 다이 실리콘 ×2' },
       { text: '세면대 실리콘 ×2' },
@@ -126,8 +126,8 @@ const SETS: SetPackage[] = [
     name: '세트 4',
     sub: '· 확장',
     desc: '세트 2 + 세탁실',
-    newPrice: 130,
-    oldPrice: 150,
+    newPrice: 150,
+    oldPrice: 170,
     services: [
       { text: '젠 다이 실리콘 ×2' },
       { text: '세면대 실리콘 ×2' },
