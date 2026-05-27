@@ -83,35 +83,54 @@ export default function PortfolioAndReviews() {
           </div>
 
           {/* Grid */}
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-2 sm:gap-4">
-            {filtered.map((item) => (
-              <div
-                key={item.id}
-                onClick={() => setSelectedItem(item)}
-                className="group relative rounded-sm overflow-hidden cursor-pointer aspect-[3/4]"
-              >
-                <img
-                  src={item.image}
-                  alt={`${item.title} 줄눈시공 사례 - 디테일라인`}
-                  className="w-full h-full object-cover object-top transition-transform duration-500 group-hover:scale-105"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent"></div>
-                {item.before && item.after && (
-                  <span className="absolute top-2 right-2 inline-flex items-center gap-1 bg-[var(--accent)] text-white text-[10px] font-medium px-2 py-0.5 rounded-sm uppercase tracking-[0.12em]">
-                    <i className="ri-contrast-2-line"></i>
-                    시공 전·후
-                  </span>
-                )}
-                <div className="absolute bottom-0 left-0 right-0 p-4">
-                  <span className="inline-block bg-white/20 backdrop-blur-sm text-white text-xs px-2.5 py-1 rounded-sm mb-2">
-                    {item.category}
-                  </span>
-                  <h3 className="text-white font-bold text-sm leading-snug">{item.title}</h3>
-                  <p className="text-white/70 text-xs mt-1">{item.location}</p>
+          {filtered.length > 0 ? (
+            <div className="grid grid-cols-2 lg:grid-cols-4 gap-2 sm:gap-4">
+              {filtered.map((item) => (
+                <div
+                  key={item.id}
+                  onClick={() => setSelectedItem(item)}
+                  className="group relative rounded-sm overflow-hidden cursor-pointer aspect-[3/4]"
+                >
+                  <img
+                    src={item.image}
+                    alt={`${item.title} 줄눈시공 사례 - 디테일라인`}
+                    className="w-full h-full object-cover object-top transition-transform duration-500 group-hover:scale-105"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent"></div>
+                  {item.before && item.after && (
+                    <span className="absolute top-2 right-2 inline-flex items-center gap-1 bg-[var(--accent)] text-white text-[10px] font-medium px-2 py-0.5 rounded-sm uppercase tracking-[0.12em]">
+                      <i className="ri-contrast-2-line"></i>
+                      시공 전·후
+                    </span>
+                  )}
+                  <div className="absolute bottom-0 left-0 right-0 p-4">
+                    <span className="inline-block bg-white/20 backdrop-blur-sm text-white text-xs px-2.5 py-1 rounded-sm mb-2">
+                      {item.category}
+                    </span>
+                    <h3 className="text-white font-bold text-sm leading-snug">{item.title}</h3>
+                    <p className="text-white/70 text-xs mt-1">{item.location}</p>
+                  </div>
                 </div>
-              </div>
-            ))}
-          </div>
+              ))}
+            </div>
+          ) : (
+            <div className="border border-dashed border-[var(--line-strong)] rounded-sm py-16 px-6 text-center bg-white/40">
+              <i className="ri-image-line text-4xl text-[var(--muted-2)] mb-4 block" aria-hidden="true"></i>
+              <h3
+                className="text-2xl text-[var(--ink)] mb-3"
+                style={{ fontFamily: "'Noto Serif KR', serif", fontWeight: 500 }}
+              >
+                시공 사례 — 곧 공개됩니다
+              </h3>
+              <p className="text-[var(--muted)] text-sm leading-relaxed max-w-md mx-auto">
+                현재 자체 촬영 시공 사례를 정리 중입니다.<br />
+                실제 현장의 Before / After 사진과 시공 디테일을 곧 보여드리겠습니다.
+              </p>
+              <p className="text-[var(--muted-2)] text-xs mt-6">
+                시공 사례가 필요하시면 카카오톡·전화로 즉시 안내해 드립니다.
+              </p>
+            </div>
+          )}
         </div>
       </section>
 
