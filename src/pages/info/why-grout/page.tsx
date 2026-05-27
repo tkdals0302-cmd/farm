@@ -395,7 +395,7 @@ export default function WhyGroutPage() {
               지금 우리 집 줄눈이 <em>괜찮은지</em> 점검받아 보세요.
             </h3>
             <p className="wg-cta-sub">
-              사진 한 장만 보내주시면 현재 상태와 시공 필요 여부를 안내해 드립니다.
+              사진 한 장만 보내주시면 현재 상태와 시공 필요 여부를 안내해 드립니다. 강남·서초·송파·분당 등 서울·경기 전 지역 디테일라인 무료 견적.
             </p>
           </div>
           <div className="wg-cta-actions">

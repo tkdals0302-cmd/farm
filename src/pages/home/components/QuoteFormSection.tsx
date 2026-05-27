@@ -32,7 +32,26 @@ export default function QuoteFormSection() {
   const [cfToken, setCfToken] = useState<string>('');
   const turnstileRef = useRef<HTMLDivElement>(null);
   const widgetIdRef = useRef<string | null>(null);
+  const sectionRef = useRef<HTMLElement>(null);
+  const viewTrackedRef = useRef(false);
   const MAX_CHARS = 500;
+
+  // 폼 섹션이 뷰포트에 처음 들어올 때 1회 발화 — 폼 노출 → 제출 퍼널 측정용
+  useEffect(() => {
+    if (!sectionRef.current) return;
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (entries[0]?.isIntersecting && !viewTrackedRef.current) {
+          viewTrackedRef.current = true;
+          Events.quoteSectionView();
+          observer.disconnect();
+        }
+      },
+      { threshold: 0.3 }
+    );
+    observer.observe(sectionRef.current);
+    return () => observer.disconnect();
+  }, []);
 
   useEffect(() => {
     let cancelled = false;
@@ -205,6 +224,7 @@ export default function QuoteFormSection() {
         window.turnstile.reset(widgetIdRef.current);
       }
     } catch {
+      Events.formSubmitFail('network');
       alert('제출 중 오류가 발생했습니다. 잠시 후 다시 시도해 주세요.');
     } finally {
       setLoading(false);
@@ -212,7 +232,7 @@ export default function QuoteFormSection() {
   };
 
   return (
-    <section id="quote" className="py-10 px-6 md:px-12 lg:px-20 bg-[var(--bg)]">
+    <section ref={sectionRef} id="quote" className="py-10 px-6 md:px-12 lg:px-20 bg-[var(--bg)]">
       <div className="max-w-4xl mx-auto">
         {/* Header */}
         <div className="text-center mb-10">

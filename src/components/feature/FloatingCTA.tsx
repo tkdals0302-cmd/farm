@@ -1,6 +1,8 @@
 import { useEffect, useState } from 'react';
 import { Events } from '../../lib/analytics';
 
+const KAKAO_URL = 'https://pf.kakao.com/_TsIAE';
+
 export default function FloatingCTA() {
   const [visible, setVisible] = useState(false);
 
@@ -20,6 +22,16 @@ export default function FloatingCTA() {
       }`}
       aria-hidden={!visible}
     >
+      <a
+        href={KAKAO_URL}
+        target="_blank"
+        rel="noopener noreferrer"
+        onClick={() => Events.kakaoClick('floating')}
+        className="w-14 h-14 flex items-center justify-center rounded-full bg-[#FEE500] text-[#191600] shadow-lg active:scale-95 transition-transform"
+        aria-label="카카오톡 상담"
+      >
+        <i className="ri-kakao-talk-fill text-2xl"></i>
+      </a>
       <a
         href="tel:010-8005-6674"
         onClick={() => Events.phoneClick('floating')}

@@ -20,6 +20,8 @@ export function trackEvent(name: string, params?: Record<string, unknown>): void
 export const Events = {
   formSubmit: (areas: string[], region: string) =>
     trackEvent('form_submit', { areas: areas.join(','), region }),
+  formSubmitFail: (reason: 'network' | 'validation' | 'turnstile' | 'unknown') =>
+    trackEvent('form_submit_fail', { reason }),
   phoneClick: (source: 'hero' | 'navbar' | 'faq' | 'footer' | 'floating' | 'process' | 'info_cta') =>
     trackEvent('phone_click', { source }),
   kakaoClick: (source: 'faq' | 'process' | 'floating') =>
