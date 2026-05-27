@@ -605,7 +605,7 @@ export default function KerafoxyPricePage() {
               정확한 시공 비용이 <em>궁금하신가요?</em>
             </h3>
             <p className="kp-cta-sub">
-              현장 상황에 따라 가격이 달라질 수 있습니다. 공간별 맞춤 견적을 안내해 드립니다. 강남·서초·송파·분당 등 서울·경기 전 지역 디테일라인 무료 견적.
+              현장 상황에 따라 가격이 달라질 수 있습니다. 공간별 맞춤 견적을 안내해 드립니다. 강남구·서초구·송파구 욕실·베란다·현관 줄눈 무료 견적.
             </p>
           </div>
           <div className="kp-cta-actions">

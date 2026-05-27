@@ -455,7 +455,7 @@ export default function ComparisonPage() {
               어떤 소재가 맞을지 <em>아직 고민되시나요?</em>
             </h3>
             <p className="cp-cta-sub">
-              현장 상황과 요구 사항을 듣고 최적의 소재를 추천해 드립니다. 강남·서초·송파·분당 등 서울·경기 전 지역 디테일라인 무료 견적.
+              현장 상황과 요구 사항을 듣고 최적의 소재를 추천해 드립니다. 강남구·서초구·송파구 욕실·베란다·현관 줄눈 무료 견적.
             </p>
           </div>
           <div className="cp-cta-actions">

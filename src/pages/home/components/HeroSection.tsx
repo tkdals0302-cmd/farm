@@ -16,7 +16,7 @@ const COPY = {
   footerItems: ['2,000세대 이상 시공 경력', '하루 한집 시공', '2년 무상 AS'],
   scrollLabel: 'SCROLL',
   // SEO-only — visually hidden, indexed by crawlers
-  srHeading: '서울·경기 줄눈시공 전문 디테일라인 — 화장실·주방·베란다·현관 케라폭시 줄눈 시공',
+  srHeading: '강남·서초·송파 욕실 줄눈시공 전문 디테일라인 — 노후 아파트 보수·신축 입주·리모델링 욕실·베란다·현관 케라폭시 줄눈',
 };
 
 function scrollTo(selector: string) {

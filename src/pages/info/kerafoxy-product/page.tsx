@@ -514,7 +514,7 @@ export default function EpoxyProductsPage() {
               어떤 제품·색이 우리 집에 맞을지 <em>고민되신다면</em>?
             </h3>
             <p className="ep-cta-sub">
-              공간 사진 한 장만 보내주시면, 가장 잘 어울리는 제품과 색을 추천해 드립니다. 강남·서초·송파·분당 등 서울·경기 전 지역 디테일라인 무료 견적.
+              공간 사진 한 장만 보내주시면, 가장 잘 어울리는 제품과 색을 추천해 드립니다. 강남구·서초구·송파구 욕실·베란다·현관 줄눈 무료 견적.
             </p>
           </div>
           <div className="ep-cta-actions">
