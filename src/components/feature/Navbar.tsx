@@ -12,11 +12,12 @@ const NAV_LINKS = [
 ];
 
 const INFO_LINKS = [
+  { label: '줄눈시공 하는 이유', href: '/info/why-grout' },
   { label: '케라폭시 줄눈이란?', href: '/info/kerafoxy' },
+  { label: '폴리우레아 줄눈이란?', href: '/info/polyurea' },
   { label: '케라폭시 가격 안내', href: '/info/kerafoxy-price' },
   { label: '케라폭시 제품 소개', href: '/info/kerafoxy-product' },
   { label: '폴리우레아 vs 케라폭시 비교', href: '/info/comparison' },
-  { label: '줄눈시공 하는 이유', href: '/info/why-grout' },
 ];
 
 export default function Navbar() {

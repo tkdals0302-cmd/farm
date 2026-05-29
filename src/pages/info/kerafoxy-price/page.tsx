@@ -4,6 +4,8 @@ import Navbar from '../../../components/feature/Navbar';
 import Footer from '../../../components/feature/Footer';
 import { Events } from '../../../lib/analytics';
 import { useSeo } from '../../../lib/useSeo';
+import { articleJsonLd, breadcrumbJsonLd, injectJsonLd } from '../../../lib/structuredData';
+import { SITE_URL, PAGE_META } from '../../../lib/seo';
 import heroBgDesktop from '../../../assets/images/info/kerafoxy-price/bg.webp';
 import heroBgMobile from '../../../assets/images/info/kerafoxy-price/bg_m.webp';
 
@@ -269,6 +271,38 @@ export default function KerafoxyPricePage() {
   const [ptType, setPtType] = useState<PriceType>('new');
 
   useSeo();
+
+  useEffect(() => {
+    const pathname = '/info/kerafoxy-price';
+    const meta = PAGE_META[pathname];
+    const url = `${SITE_URL}${pathname}`;
+
+    const cleanupArticle = injectJsonLd(
+      'article-jsonld',
+      articleJsonLd({
+        title: meta.title,
+        description: meta.description,
+        url,
+        image: `${SITE_URL}/og_banner.jpg`,
+        datePublished: '2026-03-01',
+        dateModified: '2026-05-29',
+      })
+    );
+
+    const cleanupCrumb = injectJsonLd(
+      'breadcrumb-jsonld',
+      breadcrumbJsonLd([
+        { name: '홈', url: SITE_URL },
+        { name: '줄눈 정보', url: `${SITE_URL}/#info` },
+        { name: '케라폭시 가격 안내', url },
+      ])
+    );
+
+    return () => {
+      cleanupArticle();
+      cleanupCrumb();
+    };
+  }, []);
 
   useEffect(() => {
     window.scrollTo(0, 0);
