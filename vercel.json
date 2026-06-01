@@ -1,11 +1,11 @@
 {
   "redirects": [
     {
-      "source": "/:path*",
+      "source": "/(.*)",
       "has": [
         { "type": "host", "value": "farm-five-omega.vercel.app" }
       ],
-      "destination": "https://www.detailline.kr/:path*",
+      "destination": "https://www.detailline.kr/$1",
       "permanent": true
     }
   ],
