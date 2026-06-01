@@ -15,13 +15,13 @@
 // A/S: 디테일라인 기본 2년 무상 (브랜드 사실, design_guide §08)
 // ─────────────────────────────────────────────────────────────────────────────
 
-export type Space = '화장실' | '욕실' | '베란다' | '현관' | '거실' | '주방' | '수영장' | '목욕탕';
-export type Material = '케라폭시' | '폴리우레아';
+export type Space = '화장실' | '욕실' | '베란다' | '현관' | '거실' | '주방' | '세탁실' | '수영장' | '목욕탕';
+export type Material = '케라폭시' | '폴리우레아' | '실리콘';
 export type Region = '서울' | '경기' | '인천' | '기타';
 
-export const SPACES: readonly Space[] = ['화장실', '욕실', '베란다', '현관', '거실', '주방', '수영장', '목욕탕'] as const;
+export const SPACES: readonly Space[] = ['화장실', '욕실', '베란다', '현관', '거실', '주방', '세탁실', '수영장', '목욕탕'] as const;
 export const REGIONS: readonly Region[] = ['서울', '경기', '인천', '기타'] as const;
-export const MATERIALS: readonly Material[] = ['케라폭시', '폴리우레아'] as const;
+export const MATERIALS: readonly Material[] = ['케라폭시', '폴리우레아', '실리콘'] as const;
 
 export type PortfolioImage = {
   src: string;
@@ -113,6 +113,118 @@ export const PORTFOLIO_ITEMS: PortfolioItem[] = [
         '바닥 전체와 샤워공간 벽에 케라폭시 줄눈을 시공해 줄눈선을 균일하게 정리했습니다. 화이트와 베이지 타일 사이의 줄눈이 깨끗하게 살아나면서 체크무늬 패턴이 더 또렷하게 표현되었고, 샤워공간의 위생 환경도 함께 회복되었습니다. 케라폭시의 항균 성분으로 향후 5~10년간 곰팡이 재발 걱정 없이 유지가 가능합니다. 시공 후 48시간이 지나면 정상 사용이 가능하며, 디테일라인은 시공 후 2년 무상 A/S를 보장합니다.',
     },
     createdAt: '2024-08-15T00:00:00.000Z',
+  },
+  {
+    slug: 'seoul-gangdong-heritage-xi-bathroom-33py',
+    apartment: '강동헤리티지자이',
+    region: '서울',
+    district: '강동구',
+    area: 33, // TODO: 정확한 평수 확인 필요
+    space: '화장실',
+    spaceDetail: '전체',
+    material: '케라폭시',
+    extraSpaces: [
+      { space: '현관', material: '폴리우레아' },
+      { space: '베란다', material: '폴리우레아' },
+      { space: '세탁실', material: '폴리우레아' },
+    ],
+    duration: '1일',
+    date: '2024-06-29',
+    asPeriod: '2년',
+    images: [
+      { src: '/portfolio/seoul-gangdong-heritage-xi-bathroom-33py/before_01.jpg', alt: '서울 강동구 강동헤리티지자이 화장실 줄눈시공 시공 전', type: 'before' },
+      { src: '/portfolio/seoul-gangdong-heritage-xi-bathroom-33py/before_02.jpg', alt: '강동헤리티지자이 화장실 줄눈 변색·곰팡이 상태', type: 'before' },
+      { src: '/portfolio/seoul-gangdong-heritage-xi-bathroom-33py/before_03.jpg', alt: '강동헤리티지자이 현관·베란다 줄눈 시공 전 상태', type: 'before' },
+      { src: '/portfolio/seoul-gangdong-heritage-xi-bathroom-33py/after_01.jpg', alt: '서울 강동구 강동헤리티지자이 화장실 케라폭시 줄눈시공 시공 후 대표', type: 'after' },
+      { src: '/portfolio/seoul-gangdong-heritage-xi-bathroom-33py/after_02.jpg', alt: '강동헤리티지자이 화장실 케라폭시 줄눈 디테일', type: 'after' },
+      { src: '/portfolio/seoul-gangdong-heritage-xi-bathroom-33py/after_03.jpg', alt: '강동헤리티지자이 현관·베란다·세탁실 폴리우레아 줄눈 마감', type: 'after' },
+    ],
+    title: '강동헤리티지자이 화장실·현관·베란다·세탁실 줄눈시공 사례 | 디테일라인',
+    description: '서울 강동구 강동헤리티지자이 화장실 케라폭시 + 현관·베란다·세탁실 폴리우레아 줄눈시공 사례. 공간별 맞춤 자재 통합 시공, 시공 후 2년 무상 A/S.',
+    excerpt: '화장실은 케라폭시, 현관·베란다·세탁실은 폴리우레아로 한 번에 정리한 통합 시공 사례.',
+    body: {
+      beforeText:
+        '서울 강동구 강동헤리티지자이의 화장실은 사용 연한이 누적되며 줄눈선이 변색되고 코너 부분에 곰팡이가 발생한 상태였습니다. 더불어 현관·베란다·세탁실 등 외부 공간의 줄눈도 균열과 들뜸이 진행 중이었습니다. 고객께서는 공간별로 따로 의뢰하지 않고 한 번에 통합 시공으로 정리하기를 원하셨습니다.',
+      afterText:
+        '화장실은 내수성·항균 성능이 강한 케라폭시로 시공해 위생 환경을 회복하고, 현관·베란다·세탁실 등 외부 공간은 자외선·온도 변화에 강하면서도 가성비가 좋은 폴리우레아로 시공했습니다. 공간 특성에 맞춰 자재를 다르게 적용함으로써 내구성과 비용의 균형을 모두 잡았습니다. 시공 후 48시간이 지나면 정상 사용이 가능하며, 디테일라인은 시공 후 2년 무상 A/S를 보장합니다.',
+    },
+    createdAt: '2024-06-29T00:00:00.000Z',
+  },
+  {
+    slug: 'gyeonggi-suwon-hanil-town-bathroom-32py',
+    apartment: '한일타운아파트',
+    region: '경기',
+    district: '수원시 장안구',
+    area: 32, // TODO: 정확한 평수 확인 필요
+    space: '화장실',
+    spaceDetail: '전체',
+    material: '케라폭시',
+    duration: '1일',
+    date: '2024-04-07',
+    asPeriod: '2년',
+    images: [
+      { src: '/portfolio/gyeonggi-suwon-hanil-town-bathroom-32py/before_01.jpg', alt: '경기 수원시 장안구 한일타운아파트 화장실 줄눈시공 시공 전', type: 'before' },
+      { src: '/portfolio/gyeonggi-suwon-hanil-town-bathroom-32py/before_02.jpg', alt: '한일타운아파트 화장실 줄눈 변색 상태', type: 'before' },
+      { src: '/portfolio/gyeonggi-suwon-hanil-town-bathroom-32py/before_03.jpg', alt: '한일타운아파트 화장실 코너 줄눈 시공 전 디테일', type: 'before' },
+      { src: '/portfolio/gyeonggi-suwon-hanil-town-bathroom-32py/before_04.jpg', alt: '한일타운아파트 화장실 샤워공간 줄눈 시공 전 상태', type: 'before' },
+      { src: '/portfolio/gyeonggi-suwon-hanil-town-bathroom-32py/before_05.jpg', alt: '한일타운아파트 화장실 바닥 줄눈 시공 전 상태', type: 'before' },
+      { src: '/portfolio/gyeonggi-suwon-hanil-town-bathroom-32py/after_01.jpg', alt: '경기 수원시 장안구 한일타운아파트 화장실 케라폭시 줄눈시공 시공 후 대표', type: 'after' },
+      { src: '/portfolio/gyeonggi-suwon-hanil-town-bathroom-32py/after_02.jpg', alt: '한일타운아파트 화장실 케라폭시 줄눈 디테일', type: 'after' },
+      { src: '/portfolio/gyeonggi-suwon-hanil-town-bathroom-32py/after_03.jpg', alt: '한일타운아파트 화장실 케라폭시 줄눈 코너 마감', type: 'after' },
+      { src: '/portfolio/gyeonggi-suwon-hanil-town-bathroom-32py/after_04.jpg', alt: '한일타운아파트 화장실 케라폭시 줄눈 샤워공간 마감', type: 'after' },
+      { src: '/portfolio/gyeonggi-suwon-hanil-town-bathroom-32py/after_05.jpg', alt: '한일타운아파트 화장실 케라폭시 줄눈 균일 마감 디테일', type: 'after' },
+    ],
+    title: '수원 한일타운아파트 화장실 케라폭시 줄눈시공 사례 | 디테일라인',
+    description: '경기 수원시 장안구 한일타운아파트 화장실 케라폭시 줄눈시공 사례. 변색·곰팡이 해결, 시공 후 2년 무상 A/S.',
+    excerpt: '한일타운아파트 화장실 줄눈을 케라폭시로 새것처럼 정리한 사례.',
+    body: {
+      beforeText:
+        '경기 수원시 장안구 한일타운아파트 화장실은 사용 연한이 쌓이며 줄눈선이 누렇게 변색되고 코너와 샤워공간 주변에는 곰팡이가 자리잡아 일반 세제로 회복이 어려운 상태였습니다. 타일 자체의 손상은 없어 리모델링 대신 줄눈만 교체하여 위생과 미관을 한 번에 회복하기로 했습니다.',
+      afterText:
+        '화장실 전체에 케라폭시 줄눈을 시공해 균일한 줄눈선을 만들었습니다. 케라폭시의 강한 내수성과 항균 성분으로 향후 5~10년간 곰팡이 재발 걱정 없이 위생 유지가 가능하며, 청소 한 번으로 새것처럼 회복됩니다. 시공 후 48시간이 지나면 정상 사용이 가능하고, 디테일라인은 시공 후 2년 무상 A/S를 보장합니다.',
+    },
+    createdAt: '2024-04-07T00:00:00.000Z',
+  },
+  {
+    slug: 'seoul-songpa-helio-city-bathroom-39py',
+    apartment: '송파 헬리오시티',
+    region: '서울',
+    district: '송파구',
+    area: 39, // TODO: 정확한 평수 확인 필요
+    space: '화장실',
+    spaceDetail: '바닥',
+    material: '케라폭시',
+    extraSpaces: [
+      { space: '주방', material: '실리콘' },
+      { space: '현관', material: '폴리우레아' },
+    ],
+    duration: '1일',
+    date: '2024-04-07',
+    asPeriod: '2년',
+    images: [
+      { src: '/portfolio/seoul-songpa-helio-city-bathroom-39py/before_01.jpg', alt: '서울 송파구 헬리오시티 화장실 바닥 줄눈시공 시공 전', type: 'before' },
+      { src: '/portfolio/seoul-songpa-helio-city-bathroom-39py/before_02.jpg', alt: '헬리오시티 화장실 바닥 줄눈 변색 상태', type: 'before' },
+      { src: '/portfolio/seoul-songpa-helio-city-bathroom-39py/before_03.jpg', alt: '헬리오시티 주방 실리콘 코킹 시공 전 상태', type: 'before' },
+      { src: '/portfolio/seoul-songpa-helio-city-bathroom-39py/before_04.jpg', alt: '헬리오시티 주방 싱크대 주변 시공 전 상태', type: 'before' },
+      { src: '/portfolio/seoul-songpa-helio-city-bathroom-39py/before_05.jpg', alt: '헬리오시티 현관 바닥 줄눈 시공 전 상태', type: 'before' },
+      { src: '/portfolio/seoul-songpa-helio-city-bathroom-39py/before_06.jpg', alt: '헬리오시티 현관 코너 시공 전 디테일', type: 'before' },
+      { src: '/portfolio/seoul-songpa-helio-city-bathroom-39py/after_01.jpg', alt: '서울 송파구 헬리오시티 화장실 바닥 케라폭시 줄눈시공 시공 후 대표', type: 'after' },
+      { src: '/portfolio/seoul-songpa-helio-city-bathroom-39py/after_02.jpg', alt: '헬리오시티 화장실 바닥 케라폭시 줄눈 디테일', type: 'after' },
+      { src: '/portfolio/seoul-songpa-helio-city-bathroom-39py/after_03.jpg', alt: '헬리오시티 주방 실리콘 코킹 마감 디테일', type: 'after' },
+      { src: '/portfolio/seoul-songpa-helio-city-bathroom-39py/after_04.jpg', alt: '헬리오시티 주방 싱크대 실리콘 코킹 마감', type: 'after' },
+      { src: '/portfolio/seoul-songpa-helio-city-bathroom-39py/after_05.jpg', alt: '헬리오시티 현관 폴리우레아 줄눈 마감', type: 'after' },
+      { src: '/portfolio/seoul-songpa-helio-city-bathroom-39py/after_06.jpg', alt: '헬리오시티 현관 코너 폴리우레아 줄눈 디테일', type: 'after' },
+    ],
+    title: '송파 헬리오시티 화장실·주방·현관 줄눈시공 사례 | 디테일라인',
+    description: '서울 송파구 헬리오시티 화장실 바닥 케라폭시 + 주방 실리콘 코킹 + 현관 폴리우레아 줄눈시공 사례. 공간별 맞춤 자재 통합 시공, 시공 후 2년 무상 A/S.',
+    excerpt: '화장실 바닥·주방·현관을 자재별로 맞춤 시공한 통합 사례.',
+    body: {
+      beforeText:
+        '서울 송파구 헬리오시티는 입주 후 사용 연한이 누적되며 화장실 바닥 줄눈이 변색되고, 주방 싱크대 주변의 실리콘은 들뜸과 곰팡이가 발생한 상태였습니다. 현관 바닥의 줄눈선도 균열이 진행 중이었습니다. 고객께서는 공간별 특성에 맞춰 적합한 자재로 한 번에 정리하길 원하셨습니다.',
+      afterText:
+        '화장실 바닥은 내수성이 핵심이라 케라폭시로 시공해 위생 환경을 회복했고, 주방 싱크대 주변은 들뜸이 있던 기존 실리콘을 깨끗하게 제거하고 새로 코킹해 곰팡이 발생 가능성을 차단했습니다. 현관 바닥은 자외선·온도 변화에 강한 폴리우레아로 가성비 시공을 진행했습니다. 공간별 자재 매칭으로 내구성과 비용을 모두 합리적으로 잡았습니다. 디테일라인은 시공 후 2년 무상 A/S를 보장합니다.',
+    },
+    createdAt: '2024-04-07T00:00:00.000Z',
   },
 ];
 
