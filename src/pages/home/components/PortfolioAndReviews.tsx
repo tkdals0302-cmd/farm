@@ -1,10 +1,48 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
+import { Link } from 'react-router-dom';
 import { ReactCompareSlider, ReactCompareSliderImage } from 'react-compare-slider';
-import { portfolioItems, portfolioCategories, type PortfolioItem } from '../../../mocks/portfolioData';
+import { PORTFOLIO_ITEMS, SPACES } from '../../../data/portfolio';
+
+// 홈 카드용 view-model — data/portfolio.ts의 PORTFOLIO_ITEMS에서 변환
+type PortfolioItem = {
+  id: string;        // slug
+  slug: string;
+  category: string;  // space
+  title: string;
+  location: string;
+  image: string;     // after-main 또는 첫 after
+  before?: string;
+  after?: string;
+};
+
+const portfolioCategories = ['전체', ...SPACES] as const;
+type Category = (typeof portfolioCategories)[number];
 
 export default function PortfolioAndReviews() {
-  const [activeCategory, setActiveCategory] = useState('전체');
+  const [activeCategory, setActiveCategory] = useState<Category>('전체');
   const [selectedItem, setSelectedItem] = useState<PortfolioItem | null>(null);
+
+  // PORTFOLIO_ITEMS → 홈 카드 view-model
+  const portfolioItems: PortfolioItem[] = useMemo(
+    () =>
+      PORTFOLIO_ITEMS.map((p) => {
+        const afterMain =
+          p.images.find((i) => i.type === 'after-main') ??
+          p.images.find((i) => i.type === 'after');
+        const firstBefore = p.images.find((i) => i.type === 'before');
+        return {
+          id: p.slug,
+          slug: p.slug,
+          category: p.space,
+          title: `${p.apartment} ${p.area}평 ${p.space}`,
+          location: p.district ? `${p.region} ${p.district}` : p.region,
+          image: afterMain?.src ?? '',
+          before: firstBefore?.src,
+          after: afterMain?.src,
+        };
+      }),
+    []
+  );
 
   useEffect(() => {
     if (!selectedItem) return;
@@ -43,10 +81,13 @@ export default function PortfolioAndReviews() {
     };
   }, [selectedItem]);
 
-  const filtered =
-    activeCategory === '전체'
-      ? portfolioItems
-      : portfolioItems.filter((item) => item.category === activeCategory);
+  const filtered = useMemo(
+    () =>
+      activeCategory === '전체'
+        ? portfolioItems
+        : portfolioItems.filter((item) => item.category === activeCategory),
+    [activeCategory, portfolioItems]
+  );
 
   return (
     <>
@@ -131,6 +172,16 @@ export default function PortfolioAndReviews() {
               </p>
             </div>
           )}
+
+          {/* v2 §8: 전체 사례 보기 */}
+          <div className="text-center mt-10">
+            <Link
+              to="/portfolio"
+              className="inline-flex items-center gap-2 px-6 py-2.5 border border-[var(--line-strong)] rounded-[2px] text-sm text-[var(--ink)] hover:bg-[var(--ink)] hover:text-[var(--paper)] hover:border-[var(--ink)] transition-colors cursor-pointer"
+            >
+              전체 시공사례 보기 <span>→</span>
+            </Link>
+          </div>
         </div>
       </section>
 

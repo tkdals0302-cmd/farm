@@ -7,6 +7,8 @@ import KerafoxyProductPage from "../pages/info/kerafoxy-product/page";
 import ComparisonPage from "../pages/info/comparison/page";
 import WhyGroutPage from "../pages/info/why-grout/page";
 import PolyureaPage from "../pages/info/polyurea/page";
+import PortfolioListPage from "../pages/portfolio/list";
+import PortfolioDetailPage from "../pages/portfolio/detail";
 import PrivacyPage from "../pages/privacy/page";
 
 const routes: RouteObject[] = [
@@ -41,6 +43,14 @@ const routes: RouteObject[] = [
   {
     path: "/info/polyurea",
     element: <PolyureaPage />,
+  },
+  {
+    path: "/portfolio",
+    element: <PortfolioListPage />,
+  },
+  {
+    path: "/portfolio/:slug",
+    element: <PortfolioDetailPage />,
   },
   {
     path: "*",

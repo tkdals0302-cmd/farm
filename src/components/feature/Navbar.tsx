@@ -5,7 +5,7 @@ import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { Events } from '../../lib/analytics';
 
 const NAV_LINKS = [
-  { label: '포트폴리오', href: '#portfolio' },
+  { label: '포트폴리오', href: '/portfolio' },
   { label: '시공범위', href: '#scope' },
   { label: 'FAQ', href: '#faq' },
   { label: '견적문의', href: '#quote' },
@@ -88,6 +88,13 @@ export default function Navbar() {
   const handleNavClick = (href: string) => {
     skipScrollRestoreRef.current = true;
     setMenuOpen(false);
+
+    // 절대 경로는 페이지 이동
+    if (href.startsWith('/')) {
+      navigate(href);
+      return;
+    }
+
     if (isHome) {
       // Defer so the body unlock (in cleanup) runs first;
       // otherwise scrollIntoView fights the position:fixed lock.

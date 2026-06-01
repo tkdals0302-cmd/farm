@@ -1,8 +1,8 @@
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import logoDark from '../../assets/logo_d.png';
 import { Events } from '../../lib/analytics';
 const NAV_LINKS = [
-  { label: '포트폴리오', href: '#portfolio' },
+  { label: '포트폴리오', href: '/portfolio' },
   { label: '시공범위', href: '#scope' },
   { label: 'FAQ', href: '#faq' },
   { label: '견적문의', href: '#quote' },
@@ -11,7 +11,12 @@ const NAV_LINKS = [
 const SERVICES = ['화장실 줄눈', '주방 줄눈', '베란다 줄눈', '현관 줄눈', '수영장 줄눈', '목욕탕 줄눈'];
 
 export default function Footer() {
+  const navigate = useNavigate();
   const handleNavClick = (href: string) => {
+    if (href.startsWith('/')) {
+      navigate(href);
+      return;
+    }
     const el = document.querySelector(href);
     if (el) el.scrollIntoView({ behavior: 'smooth' });
   };
