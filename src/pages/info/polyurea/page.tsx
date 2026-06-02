@@ -536,7 +536,7 @@ export default function PolyureaPage() {
             <h3 className="pu-cta-title">
               베란다·외부 공간 줄눈, <em>무료 견적</em>으로 시작하세요.
             </h3>
-            <p className="pu-cta-sub">평형 · 공간을 알려주시면 24시간 내에 회신드립니다. 강남구·서초구·송파구 베란다·외부화장실·현관 폴리우레아 줄눈 무료 견적.</p>
+            <p className="pu-cta-sub">평형 · 공간을 알려주시면 24시간 내에 회신드립니다. 서울·경기·인천 베란다·외부화장실·현관 폴리우레아 줄눈 무료 견적 상담.</p>
           </div>
           <div className="pu-cta-actions">
             <button type="button" className="pu-btn pu-btn-primary" onClick={goQuote}>

@@ -30,7 +30,7 @@ export default function PortfolioCard({ item }: { item: PortfolioItem }) {
       onMouseEnter={enter}
       onMouseLeave={leave}
       onClick={handleTouchClick}
-      className="block group"
+      className="block group transition-[transform,box-shadow] duration-300 ease-out hover:-translate-y-1 hover:shadow-[0_18px_36px_-20px_rgba(28,25,22,0.22)]"
     >
       {/* 4:3 이미지 영역 */}
       <div className="relative aspect-[4/3] overflow-hidden border border-[var(--line)] bg-[var(--bg-2)]">
@@ -82,26 +82,26 @@ export default function PortfolioCard({ item }: { item: PortfolioItem }) {
         <span
           className={`absolute top-3 left-3 text-[10.5px] font-medium tracking-[0.14em] uppercase px-2.5 py-1 rounded-[2px] transition-colors ${
             showBefore
-              ? 'bg-[var(--ink)] text-white'
-              : 'bg-white/95 text-[var(--ink)]'
+              ? 'bg-black/40 text-white'
+              : 'bg-white/40 text-[var(--ink)]'
           }`}
         >
           {showBefore ? 'Before' : 'After'}
         </span>
       </div>
 
-      {/* 정보 영역 — design_guide §05 reason/case 카드 톤 */}
-      <div className="pt-3.5">
-        <span className="text-[10.5px] font-medium tracking-[0.14em] text-[var(--muted-2)] uppercase">
+      {/* 정보 영역 — design_guide §02 Surface(--paper) 적용 */}
+      <div className="bg-[var(--paper)] border border-t-0 border-[var(--line)] px-5 py-3">
+        <span className="text-[11px] font-medium tracking-[0.14em] text-[var(--muted-2)] uppercase">
           {getRegionLabel(item)}
         </span>
         <h3
-          className="text-[17px] text-[var(--ink)] mt-1 leading-[1.35] tracking-[-0.005em] group-hover:text-[var(--accent)] transition-colors break-keep"
+          className="text-[17px] text-[var(--ink)] leading-[1.35] tracking-[-0.005em] group-hover:text-[var(--accent)] transition-colors break-keep"
           style={{ fontFamily: "'Noto Serif KR', serif", fontWeight: 500 }}
         >
           {item.apartment} {item.area}평
         </h3>
-        <p className="text-[13px] text-[var(--muted)] mt-1">
+        <p className="text-[13px] text-[var(--muted)] mt-3">
           {item.space} · {item.material}
           {item.materialDetail ? ` ${item.materialDetail}` : ''}
         </p>

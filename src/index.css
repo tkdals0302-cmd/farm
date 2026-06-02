@@ -57,3 +57,31 @@ html {
   background-size: 200% auto;
   animation: bg-shine 4s linear infinite;
 }
+
+/* ─────────────────────────────────────────────────────────────────────────────
+   Breadcrumb sticky — 모든 페이지 일괄 적용 (페이지 내 sub-nav 역할)
+   top 값은 fixed Navbar 높이와 동일 — 모바일 48px, ≥768px 80px
+   각 페이지의 ~~-crumb 인라인 CSS는 background/border만 정의하므로 충돌 없음
+   ───────────────────────────────────────────────────────────────────────────── */
+.pf-crumb,
+.wg-crumb,
+.kf-crumb,
+.ep-crumb,
+.kp-crumb,
+.cp-crumb,
+.pu-crumb {
+  position: sticky;
+  top: 48px;
+  z-index: 40;
+}
+@media (min-width: 768px) {
+  .pf-crumb,
+  .wg-crumb,
+  .kf-crumb,
+  .ep-crumb,
+  .kp-crumb,
+  .cp-crumb,
+  .pu-crumb {
+    top: 80px;
+  }
+}

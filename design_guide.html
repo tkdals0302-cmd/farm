@@ -1,0 +1,905 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>디테일라인 디자인 시스템 — 통합 가이드</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+<link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.css" />
+
+<style>
+  :root{
+    --bg:#f7f4ef;--bg-2:#efeae1;--paper:#fbf9f5;
+    --ink:#1c1916;--ink-2:#2d2926;
+    --muted:#6f665a;--muted-2:#8c8276;
+    --line:rgba(28,25,22,.12);--line-strong:rgba(28,25,22,.22);
+    --accent:#8a6a4c;--accent-deep:#5e4733;--accent-soft:#d9b790;
+    --dark:#18130e;--dark-2:#221b14;
+    --on-dark:#f3ece1;--dark-line:rgba(255,255,255,.1);--dark-muted:rgba(255,255,255,.58);
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  html,body{margin:0;padding:0;background:var(--bg);color:var(--ink);
+    font-family:'Pretendard Variable',Pretendard,-apple-system,system-ui,sans-serif;
+    font-size:16px;line-height:1.6;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;
+    font-feature-settings:"ss03","cv11"}
+  img{max-width:100%;display:block}
+  a{color:inherit;text-decoration:none}
+  p,h1,h2,h3,h4{margin:0}
+  h1,h2,h3,h4{font-weight:500;letter-spacing:-.02em;line-height:1.1}
+  .serif{font-family:'Noto Serif KR',serif;font-weight:400;font-feature-settings:"liga","dlig"}
+  .mono{font-family:'Pretendard Variable',Pretendard,sans-serif;letter-spacing:.06em;font-variant-numeric:tabular-nums}
+  ::selection{background:var(--accent);color:#fff}
+
+  .eyebrow{font-family:'Pretendard Variable',Pretendard,sans-serif;font-size:11px;font-weight:500;
+    letter-spacing:.18em;text-transform:uppercase;color:var(--accent);display:inline-flex;align-items:center;gap:10px}
+  .eyebrow::before{content:"";width:6px;height:6px;background:var(--accent);display:inline-block}
+
+  /* ── Doc shell: sticky sidebar + content ── */
+  .shell{display:grid;grid-template-columns:280px 1fr;max-width:1480px;margin:0 auto;min-height:100vh}
+  @media (max-width:1080px){ .shell{grid-template-columns:1fr} }
+
+  /* Sidebar */
+  .side{position:sticky;top:0;align-self:start;height:100vh;overflow-y:auto;
+    border-right:1px solid var(--line);background:var(--paper);padding:40px 34px}
+  @media (max-width:1080px){ .side{position:static;height:auto;border-right:0;border-bottom:1px solid var(--line)} }
+  .side .brand{display:flex;align-items:baseline;gap:10px;margin-bottom:8px}
+  .side .brand .nm{font-family:'Noto Serif KR',serif;font-size:24px;letter-spacing:-.01em}
+  .side .brand .ko{font-size:10px;letter-spacing:.16em;color:var(--muted-2);text-transform:uppercase}
+  .side .tag{font-size:12px;color:var(--muted);line-height:1.6;margin-bottom:30px;padding-bottom:24px;border-bottom:1px solid var(--line)}
+  .toc-lbl{font-size:9.5px;letter-spacing:.18em;color:var(--muted-2);text-transform:uppercase;margin:0 0 12px}
+  .toc{list-style:none;margin:0 0 28px;padding:0;display:flex;flex-direction:column;gap:2px}
+  .toc a{display:flex;align-items:baseline;gap:11px;padding:7px 10px;font-size:13px;color:var(--ink-2);border-radius:2px;transition:background .2s,color .2s}
+  .toc a:hover{background:var(--bg-2);color:var(--accent)}
+  .toc a .n{font-size:10px;letter-spacing:.08em;color:var(--accent);flex:0 0 20px;font-variant-numeric:tabular-nums}
+
+  /* Content */
+  .doc{padding:64px 72px 120px;max-width:1040px}
+  @media (max-width:1080px){ .doc{padding:48px 28px 80px} }
+  @media (max-width:560px){ .doc{padding:36px 20px 64px} }
+
+  .block{padding:60px 0;border-top:1px solid var(--line)}
+  .block:first-of-type{border-top:0;padding-top:0}
+  .block-head{margin-bottom:40px}
+  .block-head .bar{display:flex;align-items:center;gap:16px;margin-bottom:22px}
+  .block-head .bar .n{font-family:'Noto Serif KR',serif;font-style:italic;font-size:19px;color:var(--accent);font-weight:300;line-height:1}
+  .block-head .bar .rule{flex:0 0 48px;height:1px;background:var(--accent);opacity:.55}
+  .block-head .bar .lbl{font-size:11px;font-weight:500;letter-spacing:.18em;text-transform:uppercase;color:var(--ink-2)}
+  .block-head h2{font-family:'Noto Serif KR',serif;font-size:clamp(26px,3.4vw,40px);font-weight:400;line-height:1.18;letter-spacing:-.02em}
+  .block-head h2 em{font-style:normal;color:var(--accent)}
+  .block-head .lede{color:var(--muted);font-size:15.5px;line-height:1.75;max-width:60ch;margin-top:18px}
+
+  h3.sub{font-family:'Noto Serif KR',serif;font-size:21px;font-weight:500;letter-spacing:-.01em;margin:48px 0 18px}
+  h3.sub:first-child{margin-top:0}
+  h3.sub .tk{font-family:'Pretendard Variable',Pretendard,sans-serif;font-size:11px;letter-spacing:.14em;color:var(--accent);text-transform:uppercase;font-weight:500;margin-left:12px;vertical-align:middle}
+  .p{color:var(--ink-2);font-size:15px;line-height:1.85;max-width:64ch;margin-bottom:14px}
+  .p b{font-weight:500;color:var(--ink)}
+  .p code,.inl{font-family:'Pretendard Variable',Pretendard,sans-serif;font-size:12.5px;letter-spacing:.01em;
+    background:var(--bg-2);padding:2px 7px;border-radius:2px;color:var(--accent-deep);font-weight:500;font-variant-numeric:tabular-nums}
+
+  /* Code block */
+  .code{background:var(--dark);color:var(--on-dark);border-radius:3px;padding:24px 26px;margin:18px 0;
+    overflow-x:auto;font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:12.5px;line-height:1.75;letter-spacing:.01em}
+  .code .cap{display:block;font-family:'Pretendard Variable',Pretendard,sans-serif;font-size:10px;letter-spacing:.16em;
+    text-transform:uppercase;color:var(--accent-soft);margin-bottom:14px}
+  .code pre{margin:0;white-space:pre;color:rgba(243,236,225,.92)}
+  .code .c{color:rgba(243,236,225,.45)}
+  .code .k{color:#d9b790}
+  .code .v{color:#cfd8c5}
+
+  /* Swatch grid */
+  .swatches{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;margin:8px 0 8px}
+  @media (max-width:820px){ .swatches{grid-template-columns:repeat(2,1fr)} }
+  @media (max-width:480px){ .swatches{grid-template-columns:1fr} }
+  .sw{border:1px solid var(--line);border-radius:2px;overflow:hidden;background:var(--paper)}
+  .sw .block-color{aspect-ratio:16/10;display:flex;align-items:flex-end;padding:12px;border-bottom:1px solid rgba(0,0,0,.05)}
+  .sw .block-color .lab{font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;opacity:.55}
+  .sw .m{padding:13px 15px 15px;display:flex;flex-direction:column;gap:4px}
+  .sw .tok{font-size:11.5px;letter-spacing:.03em;color:var(--accent);font-weight:500}
+  .sw .nm{font-size:14px;font-weight:500;color:var(--ink)}
+  .sw .hex{font-size:11px;color:var(--muted-2);letter-spacing:.02em}
+  .sw .ds{font-size:11.5px;color:var(--muted);line-height:1.5;margin-top:3px}
+
+  /* Spec table */
+  .spec{width:100%;border-collapse:collapse;margin:18px 0;border-top:1px solid var(--line-strong);border-bottom:1px solid var(--line-strong)}
+  .spec th{text-align:left;font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted-2);font-weight:500;padding:13px 16px 13px 0;border-bottom:1px solid var(--line)}
+  .spec td{padding:15px 16px 15px 0;border-bottom:1px solid var(--line);font-size:13.5px;color:var(--ink-2);vertical-align:top;line-height:1.6}
+  .spec td:last-child,.spec th:last-child{padding-right:0}
+  .spec tr:last-child td{border-bottom:0}
+  .spec .t{font-size:12.5px;color:var(--accent-deep);font-weight:500;white-space:nowrap}
+  .spec .muted{color:var(--muted)}
+
+  /* Example frame */
+  .ex{border:1px solid var(--line);border-radius:3px;overflow:hidden;margin:18px 0}
+  .ex .ex-top{display:flex;align-items:center;justify-content:space-between;padding:10px 16px;background:var(--bg-2);border-bottom:1px solid var(--line)}
+  .ex .ex-top .lab{font-size:9.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--muted-2)}
+  .ex .ex-top .cls{font-size:11px;color:var(--accent);letter-spacing:.02em}
+  .ex .ex-body{padding:32px;background:var(--bg)}
+  .ex .ex-body.on-paper{background:var(--paper)}
+  .ex .ex-body.on-dark{background:var(--dark)}
+
+  /* Callouts */
+  .note{padding:18px 22px;background:var(--bg-2);border-left:3px solid var(--accent);font-size:13.5px;line-height:1.75;color:var(--ink-2);margin:16px 0;border-radius:0 2px 2px 0}
+  .note b{font-weight:500;color:var(--ink)}
+  .note.warn{border-left-color:#bc6b54}
+  .note.warn b{color:#9b4d35}
+  .note.ok{border-left-color:#5e7a52}
+  .note.ok b{color:#46603c}
+
+  .grid-2c{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin:16px 0}
+  @media (max-width:720px){ .grid-2c{grid-template-columns:1fr} }
+  .rules{list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:0;border-top:1px solid var(--line)}
+  .rules li{display:grid;grid-template-columns:26px 1fr;gap:12px;padding:14px 4px;border-bottom:1px solid var(--line);font-size:13.5px;color:var(--ink-2);line-height:1.6}
+  .rules li .mk{font-weight:600}
+  .rules.do li .mk{color:#46603c}
+  .rules.dont li .mk{color:#9b4d35}
+  .rules li b{font-weight:500;color:var(--ink)}
+
+  /* ===== Real component CSS (mirrors live pages) ===== */
+  .btn{display:inline-flex;align-items:center;gap:10px;padding:16px 22px;border-radius:2px;
+    font-size:14px;font-weight:500;letter-spacing:-.005em;
+    transition:transform .25s ease, background .25s ease, color .25s ease, border-color .25s ease;
+    border:0;cursor:pointer;font-family:inherit}
+  .btn .arr{display:inline-block;transition:transform .3s ease}
+  .btn:hover .arr{transform:translateX(4px)}
+  .btn-primary{background:var(--ink);color:var(--paper)}
+  .btn-primary:hover{background:var(--accent-deep)}
+  .btn-ghost{border:1px solid var(--line-strong);color:var(--ink);background:transparent}
+  .btn-ghost:hover{border-color:var(--ink);background:var(--ink);color:var(--paper)}
+  .btn-accent{background:var(--accent);color:#fff}
+  .btn-accent:hover{background:var(--accent-deep)}
+  .btn-on-dark{background:var(--on-dark);color:var(--dark)}
+  .btn-on-dark:hover{background:#fff}
+  .btn-ghost-dark{border:1px solid var(--dark-line);color:var(--on-dark);background:transparent}
+  .btn-ghost-dark:hover{background:rgba(255,255,255,.06)}
+
+  .chip-accent{display:inline-flex;align-items:center;padding:6px 11px;background:var(--accent);color:#fff;
+    font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;border-radius:2px;font-weight:500}
+  .chip-info{display:inline-flex;align-items:center;padding:6px 11px;background:var(--bg-2);border:1px solid var(--line);
+    font-size:11px;letter-spacing:.06em;color:var(--ink-2);border-radius:2px;font-weight:500}
+  .chip-alt{display:inline-flex;align-items:center;padding:5px 10px;background:transparent;color:var(--muted);
+    border:1px solid var(--line-strong);font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;border-radius:2px}
+
+  /* section header demo */
+  .sec-bar{display:flex;align-items:center;gap:18px;padding-bottom:22px;margin-bottom:24px;border-bottom:1px solid var(--line)}
+  .sec-bar .n{font-family:'Noto Serif KR',serif;font-style:italic;font-size:20px;color:var(--accent);font-weight:300;line-height:1}
+  .sec-bar .rule{flex:0 0 56px;height:1px;background:var(--accent);opacity:.6}
+  .sec-bar .lbl{font-size:11.5px;font-weight:500;letter-spacing:.18em;text-transform:uppercase}
+  .sec-bar .lbl .ko{color:var(--ink-2)}
+  .sec-bar .lbl .en{color:var(--muted-2);margin-left:10px}
+  .sec-demo-h2{font-family:'Noto Serif KR',serif;font-size:28px;font-weight:400;line-height:1.18;letter-spacing:-.02em}
+  .sec-demo-h2 em{font-style:normal;color:var(--accent)}
+
+  /* image placeholder */
+  .imgph{position:relative;overflow:hidden;background:var(--bg-2);border:1px solid var(--line)}
+  .imgph::before{content:"";position:absolute;inset:0;
+    background:repeating-linear-gradient(135deg,transparent 0 14px,rgba(28,25,22,.022) 14px 28px);pointer-events:none}
+  .imgph::after{content:"";position:absolute;inset:0;
+    background:radial-gradient(120% 80% at 50% 100%, rgba(28,25,22,.07), transparent 60%);pointer-events:none}
+  .imgph .ph-label{position:absolute;left:16px;bottom:14px;display:flex;align-items:center;gap:10px;
+    font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted-2);z-index:1}
+  .imgph .ph-label .sq{width:6px;height:6px;background:var(--accent);display:inline-block}
+  .imgph .ph-corner{position:absolute;right:14px;top:12px;font-size:9.5px;letter-spacing:.12em;color:var(--muted-2);opacity:.75}
+  .imgph-dark{background:#1f1a14;border-color:var(--dark-line);color:var(--dark-muted)}
+  .imgph-dark::before{background:repeating-linear-gradient(135deg,transparent 0 14px,rgba(255,255,255,.022) 14px 28px)}
+  .imgph-dark::after{background:radial-gradient(120% 80% at 50% 100%, rgba(0,0,0,.5), transparent 60%)}
+  .imgph-dark .ph-label,.imgph-dark .ph-corner{color:var(--dark-muted)}
+
+  /* type ladder */
+  .type-row{display:flex;align-items:baseline;gap:18px;padding:16px 0;border-bottom:1px solid var(--line)}
+  .type-row:last-child{border-bottom:0}
+  .type-label{flex:0 0 150px;font-size:10px;color:var(--muted-2);letter-spacing:.1em;text-transform:uppercase}
+  @media (max-width:560px){ .type-row{flex-direction:column;gap:6px} .type-label{flex:none} }
+</style>
+</head>
+<body>
+<div class="shell">
+
+  <!-- ───────── SIDEBAR ───────── -->
+  <aside class="side">
+    <div class="brand">
+      <span class="nm">Detailline</span>
+      <span class="ko">디테일라인</span>
+    </div>
+    <div class="tag">디자인 시스템 통합 가이드 · v1<br/>줄눈시공 프리미엄 브랜드 — 단일 기준 문서</div>
+
+    <div class="toc-lbl">Reference</div>
+    <ul class="toc">
+      <li><a href="#use"><span class="n">00</span><span>이 문서 사용법 · Claude Code</span></a></li>
+      <li><a href="#tokens"><span class="n">01</span><span>토큰 — CSS 변수</span></a></li>
+      <li><a href="#color"><span class="n">02</span><span>컬러</span></a></li>
+      <li><a href="#type"><span class="n">03</span><span>타이포그래피</span></a></li>
+      <li><a href="#layout"><span class="n">04</span><span>레이아웃 · 스페이싱</span></a></li>
+      <li><a href="#components"><span class="n">05</span><span>컴포넌트</span></a></li>
+      <li><a href="#page"><span class="n">06</span><span>페이지 구조 · 템플릿</span></a></li>
+      <li><a href="#prefix"><span class="n">07</span><span>CSS prefix 컨벤션</span></a></li>
+      <li><a href="#brand"><span class="n">08</span><span>브랜드 사실 — 불변</span></a></li>
+      <li><a href="#req"><span class="n">09</span><span>SEO · 법적 · 마케팅</span></a></li>
+      <li><a href="#rules"><span class="n">10</span><span>Do · Don't</span></a></li>
+    </ul>
+
+    <div class="toc-lbl">살아있는 예시</div>
+    <ul class="toc">
+      <li><a href="../index.html"><span class="n">↗</span><span>홈 (index.html)</span></a></li>
+      <li><a href="../bathroom-grout.html"><span class="n">↗</span><span>욕실 줄눈 가이드</span></a></li>
+      <li><a href="colors.html"><span class="n">↗</span><span>컬러 가이드 (원본)</span></a></li>
+    </ul>
+  </aside>
+
+  <!-- ───────── CONTENT ───────── -->
+  <main class="doc">
+
+    <!-- Title -->
+    <header style="padding-bottom:8px">
+      <div class="eyebrow" style="margin-bottom:22px">Design System · 통합 가이드</div>
+      <h1 class="serif" style="font-size:clamp(38px,5.4vw,68px);font-weight:300;line-height:1.08;letter-spacing:-.02em">
+        하나의 시스템,<br/><em style="font-style:italic;color:var(--accent)">한 번에 짓는 페이지.</em>
+      </h1>
+      <p class="p" style="font-size:16.5px;margin-top:26px;max-width:62ch">
+        디테일라인 웹사이트의 모든 페이지가 따르는 단일 기준 문서입니다. <b>토큰 · 타이포 · 레이아웃 · 컴포넌트 · 페이지 구조 · 브랜드 사실</b>을 한곳에 모았습니다.
+        Claude Code는 이 문서만으로 기존 페이지와 동일한 품질·일관성의 새 페이지를 구현할 수 있습니다.
+      </p>
+    </header>
+    <!-- ════════ 00 · HOW TO USE ════════ -->
+    <section class="block" id="use">
+      <div class="block-head">
+        <div class="bar"><span class="n">00</span><span class="rule"></span><span class="lbl">For Claude Code</span></div>
+        <h2>이 문서 <em>사용법.</em></h2>
+        <p class="lede">새 페이지·섹션을 구현하기 전 반드시 읽습니다. 이 시스템은 "절제가 곧 일관성"이라는 원칙 위에 세워졌습니다. 새 색·새 폰트·새 그림자를 발명하지 않는 것이 핵심입니다.</p>
+      </div>
+
+      <ul class="rules do">
+        <li><span class="mk">1</span><span><b>토큰만 사용</b> — 모든 색·보더는 §01 CSS 변수로. 하드코딩된 hex(<span class="inl">#000</span>·<span class="inl">#fff</span> 포함)·새 회색 금지.</span></li>
+        <li><span class="mk">2</span><span><b>두 폰트만</b> — Pretendard(본문·UI) + Noto Serif KR(디스플레이). 그 외 폰트 도입 금지.</span></li>
+        <li><span class="mk">3</span><span><b>기존 클래스 재사용</b> — §05 컴포넌트 카탈로그의 클래스(<span class="inl">.btn</span>·<span class="inl">.sec-bar</span>·<span class="inl">.imgph</span> …)를 그대로 사용. 새 페이지엔 §07 prefix로 고유 클래스만 추가.</span></li>
+        <li><span class="mk">4</span><span><b>페이지 골격 고정</b> — Nav → Hero → Breadcrumb → 섹션 → 관련 콘텐츠 → CTA Band → Footer (§06).</span></li>
+        <li><span class="mk">5</span><span><b>브랜드 사실은 불변</b> — 전화·슬로건·주소·신뢰지표는 §08 값을 그대로 (절대 변경·창작 금지).</span></li>
+        <li><span class="mk">6</span><span><b>사진은 placeholder</b> — 자체 촬영 자료 입수 전 모든 이미지 자리는 <span class="inl">.imgph</span> 처리. AI·도용 사진 절대 금지.</span></li>
+        <li><span class="mk">7</span><span><b>SEO·법적·마케팅 필수 항목</b>(§09)이 화면에 자연스럽게 녹아 있을 것 — H1 1개, breadcrumb, alt, 동의 체크박스, 플로팅 CTA 등.</span></li>
+      </ul>
+
+      <div class="note"><b>기술 스택.</b> 실서비스는 React 19 + TypeScript + Tailwind 3 SPA(Vite·Vercel). 단, 이 가이드의 모든 토큰·클래스는 프레임워크 독립적인 순수 CSS 변수/클래스로 정의되어 있어 <b>HTML 시안·React 컴포넌트 어디서나 동일하게 적용</b>됩니다. 컴포넌트화 시 클래스명·토큰명을 그대로 유지하세요.</div>
+    </section>
+
+    <!-- ════════ 01 · TOKENS ════════ -->
+    <section class="block" id="tokens">
+      <div class="block-head">
+        <div class="bar"><span class="n">01</span><span class="rule"></span><span class="lbl">Tokens</span></div>
+        <h2>모든 것의 출발점 —<br/><em>CSS 변수.</em></h2>
+        <p class="lede">아래 <span class="inl">:root</span> 블록을 모든 페이지 최상단에 동일하게 선언합니다. 17개 토큰이 전부이며, 페이지마다 새 토큰을 추가하지 않습니다.</p>
+      </div>
+
+      <div class="code">
+        <span class="cap">— 전 페이지 공통 · 복사해서 그대로 사용</span>
+<pre>:root{
+  <span class="c">/* Surface · 배경 */</span>
+  <span class="k">--bg</span>:        <span class="v">#f7f4ef</span>;            <span class="c">/* 페이지 기본 배경 (warm cream) */</span>
+  <span class="k">--bg-2</span>:      <span class="v">#efeae1</span>;            <span class="c">/* 살짝 진한 surface · info · hover */</span>
+  <span class="k">--paper</span>:     <span class="v">#fbf9f5</span>;            <span class="c">/* 카드 · 콘텐츠 surface */</span>
+
+  <span class="c">/* Ink · 텍스트 (4단계) */</span>
+  <span class="k">--ink</span>:       <span class="v">#1c1916</span>;            <span class="c">/* 제목 · 본문 기본 */</span>
+  <span class="k">--ink-2</span>:     <span class="v">#2d2926</span>;            <span class="c">/* 강조 보조 본문 · 인라인 b */</span>
+  <span class="k">--muted</span>:     <span class="v">#6f665a</span>;            <span class="c">/* 보조 본문 · 리드 카피 */</span>
+  <span class="k">--muted-2</span>:   <span class="v">#8c8276</span>;            <span class="c">/* 캡션 · 메타 라벨 */</span>
+
+  <span class="c">/* Line · 보더 (반투명 잉크) */</span>
+  <span class="k">--line</span>:       <span class="v">rgba(28,25,22,.12)</span>; <span class="c">/* 일반 divider · 카드 보더 */</span>
+  <span class="k">--line-strong</span>:<span class="v">rgba(28,25,22,.22)</span>; <span class="c">/* 강조 보더 · ghost 버튼 */</span>
+
+  <span class="c">/* Accent · 브랜드 (warm brown) */</span>
+  <span class="k">--accent</span>:     <span class="v">#8a6a4c</span>;            <span class="c">/* 시그니처 · 라벨 · 강조 */</span>
+  <span class="k">--accent-deep</span>:<span class="v">#5e4733</span>;            <span class="c">/* hover · pressed */</span>
+  <span class="k">--accent-soft</span>:<span class="v">#d9b790</span>;            <span class="c">/* 다크 위 accent (밝은 변형) */</span>
+
+  <span class="c">/* Dark · 다크 섹션 */</span>
+  <span class="k">--dark</span>:       <span class="v">#18130e</span>;            <span class="c">/* 다크 섹션 · CTA · footer */</span>
+  <span class="k">--dark-2</span>:     <span class="v">#221b14</span>;            <span class="c">/* 다크 보조 surface */</span>
+  <span class="k">--on-dark</span>:    <span class="v">#f3ece1</span>;            <span class="c">/* 다크 위 텍스트 */</span>
+  <span class="k">--dark-line</span>:  <span class="v">rgba(255,255,255,.10)</span>;<span class="c">/* 다크 내 divider */</span>
+  <span class="k">--dark-muted</span>: <span class="v">rgba(255,255,255,.58)</span>;<span class="c">/* 다크 위 보조 텍스트 */</span>
+}</pre>
+      </div>
+      <div class="note"><b>웹폰트 2종도 함께 로드.</b> Noto Serif KR(Google Fonts) + Pretendard Variable(jsDelivr CDN). 두 <span class="inl">&lt;link&gt;</span>를 모든 페이지 <span class="inl">&lt;head&gt;</span>에 포함합니다. (실제 코드는 §03 참고)</div>
+    </section>
+
+    <!-- ════════ 02 · COLOR ════════ -->
+    <section class="block" id="color">
+      <div class="block-head">
+        <div class="bar"><span class="n">02</span><span class="rule"></span><span class="lbl">Color</span></div>
+        <h2>Warm cream,<br/><em>warm brown.</em></h2>
+        <p class="lede">따뜻한 크림 베이스 + 깊이를 위한 잉크 + 강조를 위한 단일 brown accent. 세 계열만으로 모든 UI를 만듭니다. 상세 사용처·대비 데모는 <a href="colors.html" style="color:var(--accent);text-decoration:underline;text-underline-offset:3px">컬러 가이드 원본</a> 참고.</p>
+      </div>
+
+      <h3 class="sub">Surface <span class="tk">배경 3종</span></h3>
+      <div class="swatches">
+        <div class="sw"><div class="block-color" style="background:#f7f4ef"><span class="lab">Page</span></div><div class="m"><span class="tok">--bg</span><span class="nm">Warm cream</span><span class="hex">#f7f4ef</span><span class="ds">전체 페이지 기본 배경.</span></div></div>
+        <div class="sw"><div class="block-color" style="background:#fbf9f5"><span class="lab">Card</span></div><div class="m"><span class="tok">--paper</span><span class="nm">Paper</span><span class="hex">#fbf9f5</span><span class="ds">카드·콘텐츠 surface.</span></div></div>
+        <div class="sw"><div class="block-color" style="background:#efeae1"><span class="lab">Tinted</span></div><div class="m"><span class="tok">--bg-2</span><span class="nm">Tinted</span><span class="hex">#efeae1</span><span class="ds">info·hover·CTA band.</span></div></div>
+        <div class="sw"><div class="block-color" style="background:#18130e"><span class="lab" style="color:rgba(255,255,255,.5)">Dark</span></div><div class="m"><span class="tok">--dark</span><span class="nm">Dark</span><span class="hex">#18130e</span><span class="ds">다크 섹션·footer.</span></div></div>
+      </div>
+
+      <h3 class="sub">Ink <span class="tk">텍스트 4단계</span></h3>
+      <div class="swatches">
+        <div class="sw"><div class="block-color" style="background:#1c1916"><span class="lab" style="color:rgba(255,255,255,.5)">Body</span></div><div class="m"><span class="tok">--ink</span><span class="nm">Ink</span><span class="hex">#1c1916</span><span class="ds">제목·본문 기본.</span></div></div>
+        <div class="sw"><div class="block-color" style="background:#2d2926"><span class="lab" style="color:rgba(255,255,255,.5)">Body 2</span></div><div class="m"><span class="tok">--ink-2</span><span class="nm">Ink 2</span><span class="hex">#2d2926</span><span class="ds">강조 본문·인라인 b.</span></div></div>
+        <div class="sw"><div class="block-color" style="background:#6f665a"><span class="lab" style="color:rgba(255,255,255,.5)">Muted</span></div><div class="m"><span class="tok">--muted</span><span class="nm">Muted</span><span class="hex">#6f665a</span><span class="ds">보조 본문·리드.</span></div></div>
+        <div class="sw"><div class="block-color" style="background:#8c8276"><span class="lab" style="color:rgba(255,255,255,.5)">Caption</span></div><div class="m"><span class="tok">--muted-2</span><span class="nm">Muted 2</span><span class="hex">#8c8276</span><span class="ds">캡션·메타·breadcrumb.</span></div></div>
+      </div>
+
+      <h3 class="sub">Accent <span class="tk">브랜드 3종</span></h3>
+      <div class="swatches">
+        <div class="sw"><div class="block-color" style="background:#8a6a4c"><span class="lab" style="color:rgba(255,255,255,.6)">Brand</span></div><div class="m"><span class="tok">--accent</span><span class="nm">Warm brown</span><span class="hex">#8a6a4c</span><span class="ds">라벨·강조·칩.</span></div></div>
+        <div class="sw"><div class="block-color" style="background:#5e4733"><span class="lab" style="color:rgba(255,255,255,.6)">Hover</span></div><div class="m"><span class="tok">--accent-deep</span><span class="nm">Deep brown</span><span class="hex">#5e4733</span><span class="ds">hover·pressed.</span></div></div>
+        <div class="sw"><div class="block-color" style="background:#d9b790"><span class="lab" style="color:rgba(0,0,0,.4)">On dark</span></div><div class="m"><span class="tok">--accent-soft</span><span class="nm">Soft brown</span><span class="hex">#d9b790</span><span class="ds">다크 위 accent.</span></div></div>
+        <div class="sw"><div class="block-color" style="background:linear-gradient(180deg,#fbf9f5 60%,rgba(28,25,22,.12) 60%)"><span class="lab">12% ink</span></div><div class="m"><span class="tok">--line</span><span class="nm">Line</span><span class="hex">rgba(28,25,22,.12)</span><span class="ds">보더·divider.</span></div></div>
+      </div>
+
+      <div class="grid-2c" style="margin-top:32px">
+        <div class="note ok"><b>✓ 권장.</b> accent는 eyebrow 라벨·카드 번호·권장 칩·hover에만. 한 화면에 다크 섹션 1~2개로 제한. 보더는 무조건 line 토큰.</div>
+        <div class="note warn"><b>✗ 금지.</b> 그라데이션 배경 · 순색 #000/#fff · 가격/강조에 빨강·초록·노랑 의미색 · 두 번째 브랜드 색 도입.</div>
+      </div>
+    </section>
+
+    <!-- ════════ 03 · TYPE ════════ -->
+    <section class="block" id="type">
+      <div class="block-head">
+        <div class="bar"><span class="n">03</span><span class="rule"></span><span class="lbl">Typography</span></div>
+        <h2>두 폰트면<br/><em>충분합니다.</em></h2>
+        <p class="lede">Pretendard Variable(산세리프)이 95%의 텍스트를 담당하고, Noto Serif KR(세리프)은 디스플레이에만 절제해 씁니다.</p>
+      </div>
+
+      <div class="code">
+        <span class="cap">— &lt;head&gt; 웹폰트 로드</span>
+<pre><span class="c">&lt;!-- Noto Serif KR (Google Fonts) --&gt;</span>
+&lt;link href=<span class="v">"https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@300;400;500;600;700&amp;display=swap"</span> rel="stylesheet" /&gt;
+<span class="c">&lt;!-- Pretendard Variable (jsDelivr) --&gt;</span>
+&lt;link rel="stylesheet" href=<span class="v">"https://cdn.jsdelivr.net/gh/orioncactus/<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="b0c0c2d5c4d5ded4d1c2d4f0c6819e839e89">[email&#160;protected]</a>/dist/web/variable/pretendardvariable-dynamic-subset.css"</span> /&gt;</pre>
+      </div>
+
+      <div class="grid-2c">
+        <div>
+          <h3 class="sub" style="margin-top:24px">Pretendard <span class="tk">Sans · 본문 · UI</span></h3>
+          <p class="p" style="font-size:13.5px">본문·제목·버튼·메타 라벨·테이블 숫자까지. 가변 폰트로 100–900 모든 무게 사용. <b>별도 mono 폰트 없이</b> letter-spacing + tabular-nums로 숫자/라벨 톤 표현.</p>
+          <div style="font-size:26px;font-weight:300;letter-spacing:-.01em">집요함이 만들어 내는 완벽함</div>
+          <div style="font-size:16px;margin-top:8px">디테일라인은 줄눈시공 전문 브랜드입니다.</div>
+          <div style="font-size:16px;font-weight:500;margin-top:6px">2년 무상 A/S · 케라폭시 시공</div>
+          <div class="mono" style="font-size:17px;margin-top:8px;color:var(--ink)">010-8005-6674 · ₩2,400,000</div>
+        </div>
+        <div>
+          <h3 class="sub" style="margin-top:24px">Noto Serif KR <span class="tk">Serif · 디스플레이</span></h3>
+          <p class="p" style="font-size:13.5px">H2 디스플레이·인용·큰 숫자·세트명에만. 본문엔 절대 사용 금지(페이지당 5~10회 이내). 작은 크기(20px↓) 합성 이탤릭은 어색하니 지양.</p>
+          <div class="serif" style="font-size:32px;font-weight:300;font-style:italic;letter-spacing:-.01em">가족이 맡겨 주셨습니다.</div>
+          <div class="serif" style="font-size:19px;font-style:italic;color:var(--ink-2);margin-top:10px">"줄눈은 결국 손이 합니다."</div>
+          <div class="serif" style="font-size:40px;font-weight:400;margin-top:8px">115<span style="font-family:'Pretendard Variable',sans-serif;font-size:14px;color:var(--muted);margin-left:6px">만원</span></div>
+        </div>
+      </div>
+
+      <h3 class="sub">위계 스케일 <span class="tk">Scale</span></h3>
+      <div class="ex">
+        <div class="ex-top"><span class="lab">Type scale</span><span class="cls">h1 / h2 / h3 / lede / body / caption / mono</span></div>
+        <div class="ex-body on-paper">
+          <div class="type-row"><span class="type-label">H1 · Hero</span><span style="font-size:clamp(40px,5vw,64px);font-weight:300;line-height:1;letter-spacing:-.02em">집요함이 만드는 완벽함</span></div>
+          <div class="type-row"><span class="type-label">H2 · Section</span><span class="serif" style="font-size:38px;font-weight:400;line-height:1.1;letter-spacing:-.02em">두 폰트로 <em style="font-style:normal;color:var(--accent)">충분합니다.</em></span></div>
+          <div class="type-row"><span class="type-label">H3 · Card</span><span class="serif" style="font-size:22px;font-weight:500;letter-spacing:-.01em">카드 제목 — Serif 500</span></div>
+          <div class="type-row"><span class="type-label">Lede · 16–18px</span><span style="font-size:17px;color:var(--muted);line-height:1.65">섹션 헤더 아래 리드 카피. muted 색 + 큰 본문.</span></div>
+          <div class="type-row"><span class="type-label">Body · 15–16px</span><span style="font-size:15.5px;color:var(--ink-2);line-height:1.7">본문 텍스트. 카드 본문·설명·일반 paragraph.</span></div>
+          <div class="type-row"><span class="type-label">Caption · 13px</span><span style="font-size:13px;color:var(--muted)">메타·캡션·작은 설명.</span></div>
+          <div class="type-row"><span class="type-label">Mono · 10–11px</span><span class="mono" style="font-size:10.5px;letter-spacing:.16em;color:var(--accent);text-transform:uppercase;font-weight:500">— Eyebrow · Numbered · Label</span></div>
+        </div>
+      </div>
+
+      <table class="spec">
+        <thead><tr><th>요소</th><th>패밀리 · 무게</th><th>크기 (clamp)</th><th>특성</th></tr></thead>
+        <tbody>
+          <tr><td class="t">h1</td><td>Pretendard / Serif · 300</td><td>clamp(34px, 4.8vw, 68px)</td><td class="muted">letter-spacing -.022em · line-height 1.1</td></tr>
+          <tr><td class="t">h2</td><td>Noto Serif KR · 400</td><td>clamp(28px, 3.4vw, 46px)</td><td class="muted">em 강조는 normal+accent</td></tr>
+          <tr><td class="t">h3</td><td>Noto Serif KR · 500</td><td>22px</td><td class="muted">카드·서브 제목</td></tr>
+          <tr><td class="t">lede</td><td>Pretendard · 400</td><td>16–18px</td><td class="muted">color --muted · line-height 1.75</td></tr>
+          <tr><td class="t">body</td><td>Pretendard · 400</td><td>15–16px</td><td class="muted">color --ink-2 · line-height 1.6–1.9</td></tr>
+          <tr><td class="t">.eyebrow</td><td>Pretendard · 500</td><td>11px</td><td class="muted">tracking .18em · uppercase · --accent · dot ::before</td></tr>
+          <tr><td class="t">.mono</td><td>Pretendard · 400</td><td>10–11px</td><td class="muted">tracking .06–.16em · tabular-nums (별도 mono 폰트 아님)</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <!-- ════════ 04 · LAYOUT ════════ -->
+    <section class="block" id="layout">
+      <div class="block-head">
+        <div class="bar"><span class="n">04</span><span class="rule"></span><span class="lbl">Layout · Spacing</span></div>
+        <h2>넓은 여백,<br/><em>고정된 리듬.</em></h2>
+        <p class="lede">컨테이너 한 종류, 섹션 패딩 한 쌍, 명확한 4개 breakpoint. 정보 밀도를 낮추고 여백을 크게 두는 것이 프리미엄 톤의 핵심입니다.</p>
+      </div>
+
+      <div class="code">
+        <span class="cap">— 레이아웃 기본</span>
+<pre><span class="c">/* 컨테이너 — 전 페이지 동일 */</span>
+.container{ <span class="k">max-width</span>:<span class="v">1360px</span>; margin:0 auto; <span class="k">padding</span>:<span class="v">0 32px</span>; }
+@media (max-width:720px){ .container{ padding:<span class="v">0 20px</span>; } }
+
+<span class="c">/* 섹션 수직 패딩 + 상단 hairline */</span>
+section{ <span class="k">padding</span>:<span class="v">120px 0</span>; border-top:1px solid var(--line); }
+@media (max-width:720px){ section{ padding:<span class="v">72px 0</span>; } }
+
+<span class="c">/* 섹션 배경 변주 — 이 둘만 사용 */</span>
+.bg-paper{ background:var(--paper); }   <span class="c">/* 살짝 밝은 카드 톤 */</span>
+.bg-2{ background:var(--bg-2); }         <span class="c">/* 살짝 진한 톤 */</span>
+<span class="c">/* 다크 섹션은 background:var(--dark); border-top:0 */</span></pre>
+      </div>
+
+      <table class="spec">
+        <thead><tr><th>토큰</th><th>값</th><th>용도</th></tr></thead>
+        <tbody>
+          <tr><td class="t">Container</td><td>max-width 1360px · padding 32→20px</td><td class="muted">모든 콘텐츠 폭. (컬러 가이드 원본은 1320px)</td></tr>
+          <tr><td class="t">Section pad</td><td>120px (데스크탑) / 72px (≤720)</td><td class="muted">섹션 수직 리듬</td></tr>
+          <tr><td class="t">Section gap</td><td>border-top 1px var(--line)</td><td class="muted">섹션 간 구분은 색이 아닌 hairline</td></tr>
+          <tr><td class="t">Radius</td><td>2px (거의 모든 요소) · 999px (pill·fab)</td><td class="muted">날카로운 직각에 가까운 절제된 라운드</td></tr>
+          <tr><td class="t">Shadow</td><td>0 18px 36px -20px rgba(28,25,22,.22)</td><td class="muted">카드 hover에만. 평상시 그림자 없음</td></tr>
+          <tr><td class="t">Sec head gap</td><td>margin-bottom 56px / 36px(≤820)</td><td class="muted">섹션 헤더와 본문 사이</td></tr>
+          <tr><td class="t">Card padding</td><td>28–48px</td><td class="muted">카드 내부 여백 (크기별)</td></tr>
+        </tbody>
+      </table>
+
+      <h3 class="sub">반응형 Breakpoints</h3>
+      <table class="spec">
+        <thead><tr><th>BP</th><th>전환</th><th>대표 변화</th></tr></thead>
+        <tbody>
+          <tr><td class="t">≤ 980px</td><td>태블릿·모바일 nav</td><td class="muted">.nav-links 숨김 → 햄버거/축약</td></tr>
+          <tr><td class="t">≤ 900px</td><td>그리드 붕괴</td><td class="muted">2~4열 → 1~2열, footer 4열 → 2열</td></tr>
+          <tr><td class="t">≤ 820px</td><td>섹션 본문 1열</td><td class="muted">.sec-body 2열 → 1열, 타임라인 세로</td></tr>
+          <tr><td class="t">≤ 720px</td><td>모바일 패딩</td><td class="muted">container 20px · section 72px</td></tr>
+          <tr><td class="t">≤ 560px</td><td>완전 단일열</td><td class="muted">카드 그리드 1열</td></tr>
+        </tbody>
+      </table>
+      <div class="note"><b>모바일 우선.</b> Hero 헤드라인은 항상 <span class="inl">clamp()</span>로 가변, 320px에서도 잘리지 않게. 모든 이미지에 width/height 명시(CLS 방지). 모바일 하단 floating 전화 CTA 유지.</div>
+    </section>
+
+    <!-- ════════ 05 · COMPONENTS ════════ -->
+    <section class="block" id="components">
+      <div class="block-head">
+        <div class="bar"><span class="n">05</span><span class="rule"></span><span class="lbl">Components</span></div>
+        <h2>이미 만들어진<br/><em>부품들.</em></h2>
+        <p class="lede">아래 컴포넌트의 클래스를 그대로 재사용합니다. 모든 예시는 실제 페이지(<span class="inl">index.html</span> · <span class="inl">bathroom-grout.html</span>)와 동일한 CSS로 렌더됩니다.</p>
+      </div>
+
+      <!-- Buttons -->
+      <h3 class="sub">버튼 <span class="tk">.btn — 6종</span></h3>
+      <div class="ex">
+        <div class="ex-top"><span class="lab">Light surface</span><span class="cls">.btn-primary · .btn-ghost · .btn-accent</span></div>
+        <div class="ex-body" style="display:flex;gap:12px;flex-wrap:wrap">
+          <button class="btn btn-primary">무료 견적 받기 <span class="arr">→</span></button>
+          <button class="btn btn-ghost">상세 보기</button>
+          <button class="btn btn-accent">케라폭시 보기 <span class="arr">→</span></button>
+        </div>
+      </div>
+      <div class="ex">
+        <div class="ex-top"><span class="lab">Dark surface</span><span class="cls">.btn-on-dark · .btn-ghost-dark</span></div>
+        <div class="ex-body on-dark" style="display:flex;gap:12px;flex-wrap:wrap">
+          <button class="btn btn-on-dark">무료 견적 받기 <span class="arr">→</span></button>
+          <button class="btn btn-ghost-dark" style="color:var(--on-dark)">전화 상담</button>
+          <button class="btn btn-accent">케라폭시 보기 <span class="arr">→</span></button>
+        </div>
+      </div>
+      <table class="spec">
+        <thead><tr><th>클래스</th><th>bg / fg</th><th>hover</th><th>용도</th></tr></thead>
+        <tbody>
+          <tr><td class="t">.btn-primary</td><td>--ink / --paper</td><td>bg → --accent-deep</td><td class="muted">기본 Primary CTA</td></tr>
+          <tr><td class="t">.btn-ghost</td><td>투명 / --ink · 보더 --line-strong</td><td>--ink 채움</td><td class="muted">보조 액션</td></tr>
+          <tr><td class="t">.btn-accent</td><td>--accent / #fff</td><td>bg → --accent-deep</td><td class="muted">자재·정보 강조 링크</td></tr>
+          <tr><td class="t">.btn-on-dark</td><td>--on-dark / --dark</td><td>bg → #fff</td><td class="muted">다크 섹션 Primary</td></tr>
+          <tr><td class="t">.btn-ghost-dark</td><td>투명 / --on-dark · 보더 --dark-line</td><td>흰색 6% 채움</td><td class="muted">다크 섹션 보조</td></tr>
+        </tbody>
+      </table>
+      <div class="note"><b>패턴.</b> 화살표는 <span class="inl">&lt;span class="arr"&gt;→&lt;/span&gt;</span>로 감싸면 hover 시 4px 우측 이동. 패딩 <span class="inl">16px 22px</span>(기본) / <span class="inl">20px 28px</span>(<span class="inl">.btn-lg</span>). Primary CTA 문구는 전 사이트 <b>"무료 견적 받기"</b>로 통일.</div>
+
+      <!-- Eyebrow + Chips -->
+      <div class="grid-2c">
+        <div>
+          <h3 class="sub">Eyebrow <span class="tk">.eyebrow</span></h3>
+          <div class="ex"><div class="ex-top"><span class="lab">Label</span><span class="cls">.eyebrow</span></div>
+            <div class="ex-body on-paper"><span class="eyebrow">Bathroom Grout · 욕실 줄눈</span></div></div>
+          <p class="p" style="font-size:13px">모든 섹션의 시작 신호. 11px·tracking .18em·uppercase·accent + 6px 사각 <span class="inl">::before</span> 닷. 다크 위에선 색을 <span class="inl">--accent-soft</span>로.</p>
+        </div>
+        <div>
+          <h3 class="sub">Chips <span class="tk">.chip-* — 3종</span></h3>
+          <div class="ex"><div class="ex-top"><span class="lab">Chips</span><span class="cls">.chip-accent · .chip-info · .chip-alt</span></div>
+            <div class="ex-body on-paper" style="display:flex;gap:8px;flex-wrap:wrap;align-items:center">
+              <span class="chip-accent">권장 자재</span>
+              <span class="chip-info">34평 이하 기준</span>
+              <span class="chip-alt">대안 옵션</span>
+            </div></div>
+          <p class="p" style="font-size:13px"><b>accent</b>=핫 라벨/권장 · <b>info</b>=정보성 메타 · <b>alt</b>=secondary 옵션.</p>
+        </div>
+      </div>
+
+      <!-- Section header -->
+      <h3 class="sub">섹션 헤더 <span class="tk">.sec-bar + .sec-body</span></h3>
+      <div class="ex">
+        <div class="ex-top"><span class="lab">Section head</span><span class="cls">.sec-bar (번호+rule+라벨) · h2 + .lede</span></div>
+        <div class="ex-body on-paper">
+          <div class="sec-bar">
+            <span class="n">02</span><span class="rule"></span>
+            <span class="lbl"><span class="ko">욕실에 맞는 자재</span><span class="en">Right Material</span></span>
+          </div>
+          <h2 class="sec-demo-h2">욕실이라면, 망설일 것 없이 <em>케라폭시</em>입니다.</h2>
+          <p class="p" style="color:var(--muted);margin-top:14px">디테일라인의 결론은 단순합니다. 항시 수분·세제에 노출되는 공간엔 케라폭시.</p>
+        </div>
+      </div>
+      <div class="code">
+        <span class="cap">— 섹션 헤더 마크업</span>
+<pre>&lt;div class="sec-head"&gt;
+  &lt;div class="sec-bar"&gt;
+    &lt;span class="n"&gt;<span class="v">02</span>&lt;/span&gt;&lt;span class="rule"&gt;&lt;/span&gt;
+    &lt;span class="lbl"&gt;&lt;span class="ko"&gt;<span class="v">한글 라벨</span>&lt;/span&gt;&lt;span class="en"&gt;<span class="v">English</span>&lt;/span&gt;&lt;/span&gt;
+  &lt;/div&gt;
+  &lt;div class="sec-body"&gt;  <span class="c">/* grid 1.05fr 1fr — 좌 제목 / 우 lede */</span>
+    &lt;h2&gt;...&lt;em&gt;<span class="v">강조</span>&lt;/em&gt;...&lt;/h2&gt;
+    &lt;p class="lede"&gt;...&lt;/p&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</pre>
+      </div>
+      <div class="note"><b>섹션 번호 매김.</b> 페이지 내 본 섹션은 <span class="inl">01 · 02 · 03 …</span> 순차. 보조 섹션은 <span class="inl">03b</span>처럼 접미. 번호는 Noto Serif KR 이탤릭 + accent. 다크 섹션에선 <span class="inl">.n/.rule</span>을 <span class="inl">--accent-soft</span>, 라벨을 흰색으로 오버라이드.</div>
+
+      <!-- Image placeholder -->
+      <h3 class="sub">이미지 플레이스홀더 <span class="tk">.imgph</span></h3>
+      <div class="grid-2c">
+        <div class="imgph" style="aspect-ratio:4/3">
+          <div class="ph-corner">CASE · 1200×900</div>
+          <div class="ph-label"><span class="sq"></span><span>SHOT · 강남구 30평 욕실</span></div>
+        </div>
+        <div class="imgph imgph-dark" style="aspect-ratio:4/3">
+          <div class="ph-corner">BEFORE · 1200×900</div>
+          <div class="ph-label"><span class="sq"></span><span>SHOT · 시공 전 · 변색</span></div>
+        </div>
+      </div>
+      <p class="p" style="font-size:13.5px"><b>자체 촬영 사진 입수 전 모든 이미지 자리는 이걸로.</b> 톤 다운된 surface + 대각 스트라이프 + 우상단 규격 라벨(<span class="inl">.ph-corner</span>) + 좌하단 내용 라벨(<span class="inl">.ph-label</span>). 다크 배경엔 <span class="inl">.imgph-dark</span> 추가. AI·도용 사진은 절대 채우지 않습니다.</p>
+      <div class="code">
+        <span class="cap">— 플레이스홀더 마크업</span>
+<pre>&lt;div class="imgph" style="aspect-ratio:4/3"&gt;
+  &lt;div class="ph-corner"&gt;<span class="v">CASE · 1200×900</span>&lt;/div&gt;
+  &lt;div class="ph-label"&gt;&lt;span class="sq"&gt;&lt;/span&gt;&lt;span&gt;<span class="v">SHOT · 설명</span>&lt;/span&gt;&lt;/div&gt;
+&lt;/div&gt;</pre>
+      </div>
+
+      <!-- Nav + Breadcrumb -->
+      <h3 class="sub">Nav · Breadcrumb · Floating CTA</h3>
+      <table class="spec">
+        <thead><tr><th>요소</th><th>스펙</th></tr></thead>
+        <tbody>
+          <tr><td class="t">Nav (fixed)</td><td>높이 72px · 스크롤 시 <span class="muted">rgba(247,244,239,.86) + blur(14px) + 하단 hairline</span>. 좌: Serif 로고 "Detailline" + mono "디테일라인". 우: 전화 pill(<span class="inl">.nav-tel</span>, accent 배경). ≤980px에서 링크 숨김.</td></tr>
+          <tr><td class="t">Dropdown</td><td><span class="inl">.nav-dd</span> hover 메뉴 — 공간별 가이드/자재 정보 그룹. 현재 페이지 <span class="inl">.is-active</span>(ink 배경).</td></tr>
+          <tr><td class="t">Breadcrumb</td><td>Hero 직후 <span class="inl">.crumb-wrap</span>(paper 배경) → <span class="inl">홈 / 카테고리 / 현재</span>. 현재는 <span class="inl">.here</span>(ink 500). 모든 서브페이지 필수(SEO).</td></tr>
+          <tr><td class="t">Floating CTA</td><td>우하단 고정 60px 원형 전화 FAB(ink 배경). 전 페이지·모바일 유지.</td></tr>
+        </tbody>
+      </table>
+
+      <!-- Cards -->
+      <h3 class="sub">카드 패턴 <span class="tk">reason · case · related</span></h3>
+      <p class="p" style="font-size:13.5px">세 가지 카드 골격. 모두 paper 배경 + line 보더 + 2px radius. hover 시 살짝 떠오르거나(case) 다크로 반전(related).</p>
+      <div class="ex">
+        <div class="ex-top"><span class="lab">Reason card</span><span class="cls">.idx (label + serif num) · icn · h3 · p · .note</span></div>
+        <div class="ex-body on-paper">
+          <div style="background:var(--bg);padding:36px 32px;display:flex;flex-direction:column;gap:16px;max-width:340px;border:1px solid var(--line)">
+            <div style="display:flex;align-items:center;justify-content:space-between;font-size:10.5px;letter-spacing:.18em;color:var(--accent);text-transform:uppercase"><span>Reason</span><span class="serif" style="font-style:italic;font-size:28px;font-weight:300">01</span></div>
+            <div style="width:48px;height:48px;display:flex;align-items:center;justify-content:center;border:1px solid var(--line-strong);color:var(--accent)">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 2s7 8 7 13a7 7 0 1 1-14 0c0-5 7-13 7-13z"/></svg>
+            </div>
+            <h3 class="serif" style="font-size:21px;font-weight:500;letter-spacing:-.01em">위생 — 곰팡이의 출입구</h3>
+            <p style="color:var(--muted);font-size:14px;line-height:1.8">미세 다공질 구조라 수분·비누때를 흡수. 시멘트 줄눈은 6개월~1년이면 검게 변합니다.</p>
+            <div style="padding-top:16px;border-top:1px solid var(--line);font-size:12px;color:var(--muted-2);line-height:1.6">노후 보수 의뢰 중 <b style="color:var(--accent-deep);font-weight:500">74%가 곰팡이·변색</b>이 1순위.</div>
+          </div>
+        </div>
+      </div>
+      <div class="ex">
+        <div class="ex-top"><span class="lab">Related card</span><span class="cls">.rcard — hover 시 다크 반전</span></div>
+        <div class="ex-body on-paper">
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:18px;max-width:560px">
+            <div style="background:var(--paper);border:1px solid var(--line);padding:28px 24px;display:flex;flex-direction:column;gap:12px;min-height:180px">
+              <span style="font-size:10.5px;letter-spacing:.18em;color:var(--accent);text-transform:uppercase">Guide 02</span>
+              <h4 class="serif" style="font-size:20px;font-weight:500;letter-spacing:-.01em;line-height:1.35">강남·서초·송파 베란다 줄눈</h4>
+              <p style="font-size:13px;color:var(--muted);line-height:1.65">외부 노출·UV·결로에 강한 폴리우레아 방수 줄눈.</p>
+              <div style="margin-top:auto;font-size:12px;letter-spacing:.06em;color:var(--muted-2);display:flex;align-items:center;gap:8px">자세히 보기 <span class="arr">→</span></div>
+            </div>
+            <div style="background:var(--ink);color:var(--paper);border:1px solid var(--ink);padding:28px 24px;display:flex;flex-direction:column;gap:12px;min-height:180px">
+              <span style="font-size:10.5px;letter-spacing:.18em;color:var(--accent-soft);text-transform:uppercase">Guide 03 · hover</span>
+              <h4 class="serif" style="font-size:20px;font-weight:500;letter-spacing:-.01em;line-height:1.35">강남·서초·송파 현관 줄눈</h4>
+              <p style="font-size:13px;color:rgba(255,255,255,.65);line-height:1.65">첫인상을 좌우하는 한 평, 폴리우레아 빠른 경화.</p>
+              <div style="margin-top:auto;font-size:12px;letter-spacing:.06em;color:var(--accent-soft);display:flex;align-items:center;gap:8px">자세히 보기 <span class="arr">→</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <table class="spec">
+        <thead><tr><th>카드</th><th>그리드</th><th>hover</th><th>구성</th></tr></thead>
+        <tbody>
+          <tr><td class="t">Reason</td><td>3열 (1px gap, line 배경)</td><td>bg → paper</td><td class="muted">idx(라벨+serif 번호) · 아이콘 박스 · h3 · p · 하단 note</td></tr>
+          <tr><td class="t">Case</td><td>3→2→1열 (gap 24)</td><td>translateY(-2px) + shadow</td><td class="muted">imgph 4/3 · 메타 row · serif h4 · p · 하단 row</td></tr>
+          <tr><td class="t">Related</td><td>4→2→1열 (gap 24)</td><td>다크 반전(ink 배경)</td><td class="muted">idx · serif h4 · p · "자세히 보기 →"</td></tr>
+        </tbody>
+      </table>
+      <div class="note"><b>아이콘.</b> Lucide 스타일 1.6 stroke 선 아이콘만, 단색 accent. 절제해서 — reason 카드·메타 정도. 아이콘 도배 금지. SVG를 직접 그리지 말고 단순 선 아이콘만.</div>
+
+      <!-- Material / dark feature -->
+      <h3 class="sub">자재 추천 블록 <span class="tk">.bg-mat — 다크 feature</span></h3>
+      <div class="ex">
+        <div class="ex-top"><span class="lab">Primary + alternatives</span><span class="cls">ink 배경 primary + paper alt 리스트</span></div>
+        <div class="ex-body on-paper">
+          <div style="display:grid;grid-template-columns:1.4fr 1fr;gap:20px">
+            <div style="background:var(--ink);color:var(--on-dark);padding:36px 32px;display:flex;flex-direction:column;gap:16px">
+              <div style="font-size:10.5px;letter-spacing:.2em;color:var(--accent-soft);text-transform:uppercase">Primary · 디테일라인 권장</div>
+              <h3 class="serif" style="font-size:28px;color:#fff;font-weight:400;line-height:1.2">케라폭시 줄눈<br/><em style="font-style:normal;color:var(--accent-soft)">— 욕실에 가장 알맞은 답.</em></h3>
+              <p style="color:rgba(255,255,255,.78);font-size:14px;line-height:1.8">2액형 에폭시. 물·세균·세제·시간 모두에 강합니다.</p>
+              <div style="margin-top:8px;padding-top:18px;border-top:1px solid rgba(255,255,255,.12);font-size:13px;color:var(--accent-soft);display:flex;gap:10px;align-items:center">케라폭시 자세히 보기 <span class="arr">→</span></div>
+            </div>
+            <div style="display:flex;flex-direction:column;gap:1px;background:var(--line);border:1px solid var(--line)">
+              <div style="background:var(--paper);padding:22px 24px;flex:1"><div class="serif" style="font-size:17px">빅라이언<small style="display:block;font-family:'Pretendard Variable',sans-serif;font-size:10px;letter-spacing:.16em;color:var(--muted-2);text-transform:uppercase;margin-top:4px">국산 가성비</small></div></div>
+              <div style="background:var(--paper);padding:22px 24px;flex:1"><div class="serif" style="font-size:17px">폴리우레아<small style="display:block;font-family:'Pretendard Variable',sans-serif;font-size:10px;letter-spacing:.16em;color:var(--muted-2);text-transform:uppercase;margin-top:4px">외부 공간용</small></div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Before/After + checklist + timeline summary -->
+      <h3 class="sub">콘텐츠 블록 모음</h3>
+      <table class="spec">
+        <thead><tr><th>블록</th><th>스펙 · 클래스</th></tr></thead>
+        <tbody>
+          <tr><td class="t">Before / After</td><td>다크 밴드(<span class="inl">.ba</span>, --dark 배경) 안 2열 <span class="inl">.imgph-dark</span> 4/3 + 좌상단 라벨 칩 + 캡션. 하단 4칸 지표 divider(시공시간·건조·사용가능·A/S).</td></tr>
+          <tr><td class="t">Checklist</td><td><span class="inl">.bg-check</span> — 번호(serif)·체크박스·제목·설명 3그리드 리스트 + sticky 다크 사이드 카드(<span class="inl">.bg-check-side</span>). hover 시 좌측 padding 증가.</td></tr>
+          <tr><td class="t">Timeline</td><td><span class="inl">.bg-timeline</span> — 5단계 가로 stepper(원형 dot + 라인). 현재 단계 <span class="inl">.is-detail</span>(accent dot). ≤820px 세로 전환.</td></tr>
+          <tr><td class="t">Stat rail</td><td>2~4칸 가로 지표. <span class="inl">.k</span>(mono 라벨) + <span class="inl">.v</span>(serif 숫자 + small 단위). 칸 사이 line 보더.</td></tr>
+        </tbody>
+      </table>
+
+      <!-- Price table -->
+      <h3 class="sub">가격표 <span class="tk">.bg-price-table</span></h3>
+      <div class="ex">
+        <div class="ex-top"><span class="lab">Price table</span><span class="cls">ink 헤더 · serif 숫자 · 권장 열 강조</span></div>
+        <div class="ex-body on-paper" style="overflow-x:auto">
+          <table style="width:100%;min-width:520px;border-collapse:collapse;background:var(--paper);border:1px solid var(--line)">
+            <thead><tr>
+              <th style="background:var(--ink);color:#fff;text-align:left;font-weight:500;font-size:13px;padding:16px 22px">구분</th>
+              <th style="background:var(--ink);color:#fff;text-align:left;font-weight:500;font-size:13px;padding:16px 22px">케라폭시 <span style="display:block;font-size:10px;letter-spacing:.14em;color:rgba(255,255,255,.55);text-transform:uppercase;margin-top:3px;font-weight:400">권장</span></th>
+              <th style="background:var(--ink);color:#fff;text-align:left;font-weight:500;font-size:13px;padding:16px 22px">빅라이언 <span style="display:block;font-size:10px;letter-spacing:.14em;color:rgba(255,255,255,.55);text-transform:uppercase;margin-top:3px;font-weight:400">가성비</span></th>
+            </tr></thead>
+            <tbody>
+              <tr><td style="padding:18px 22px;border-bottom:1px solid var(--line);font-size:13px;color:var(--muted)">신축 입주 · 욕실 1칸</td><td style="padding:18px 22px;border-bottom:1px solid var(--line);background:rgba(217,183,144,.06)"><span class="serif" style="font-size:18px">28~32<small style="font-size:11.5px;color:var(--muted-2);font-family:'Pretendard Variable',sans-serif">만원</small></span></td><td style="padding:18px 22px;border-bottom:1px solid var(--line)"><span class="serif" style="font-size:18px">22~26<small style="font-size:11.5px;color:var(--muted-2);font-family:'Pretendard Variable',sans-serif">만원</small></span></td></tr>
+              <tr><td style="padding:18px 22px;font-size:13px;color:var(--muted)">노후 보수 · 욕실 1칸</td><td style="padding:18px 22px;background:rgba(217,183,144,.06)"><span class="serif" style="font-size:18px">32~38<small style="font-size:11.5px;color:var(--muted-2);font-family:'Pretendard Variable',sans-serif">만원</small></span></td><td style="padding:18px 22px"><span class="serif" style="font-size:18px">26~30<small style="font-size:11.5px;color:var(--muted-2);font-family:'Pretendard Variable',sans-serif">만원</small></span></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="note"><b>가격 원칙.</b> 헤더는 ink 배경 흰 텍스트, 권장 열은 <span class="inl">rgba(217,183,144,.06)</span> 미세 강조. 숫자는 serif + small 단위. <b>항상 범위(28~32만원)로 표기</b>하고 "현장별 변동 가능" 명시(분쟁 방지). 모바일은 가로 스크롤. (전체 정찰표는 <span class="inl">price-table.html</span>)</div>
+
+      <!-- FAQ -->
+      <h3 class="sub">FAQ 아코디언 <span class="tk">&lt;details&gt;</span></h3>
+      <div class="ex">
+        <div class="ex-top"><span class="lab">FAQ</span><span class="cls">번호(serif) · serif 질문 · 원형 +/− 토글</span></div>
+        <div class="ex-body on-paper" style="padding:0">
+          <div style="border-top:1px solid var(--line)">
+            <details open style="border-bottom:1px solid var(--line)">
+              <summary style="list-style:none;padding:24px 22px;cursor:pointer;display:grid;grid-template-columns:40px 1fr 28px;gap:16px;align-items:start">
+                <span class="serif" style="font-style:italic;color:var(--accent);font-size:16px;font-weight:300">01</span>
+                <span class="serif" style="font-size:17px;font-weight:500;letter-spacing:-.005em;line-height:1.45">시공 기간은 얼마나 걸리나요?</span>
+                <span style="width:24px;height:24px;border:1px solid var(--accent);background:var(--accent);display:flex;align-items:center;justify-content:center;border-radius:50%;color:#fff;font-size:14px">−</span>
+              </summary>
+              <div style="grid-column:2/3;padding:0 22px 26px 78px;font-size:14px;color:var(--muted);line-height:1.85">욕실 1칸 기준 <b style="color:var(--ink-2);font-weight:500">반나절~1일</b>이면 시공이 끝납니다. 완전 경화는 24시간, 물 사용은 48시간 후 가능합니다.</div>
+            </details>
+            <details style="border-bottom:1px solid var(--line)">
+              <summary style="list-style:none;padding:24px 22px;cursor:pointer;display:grid;grid-template-columns:40px 1fr 28px;gap:16px;align-items:start">
+                <span class="serif" style="font-style:italic;color:var(--accent);font-size:16px;font-weight:300">02</span>
+                <span class="serif" style="font-size:17px;font-weight:500;letter-spacing:-.005em;line-height:1.45">A/S 범위는 어떻게 되나요?</span>
+                <span style="width:24px;height:24px;border:1px solid var(--line-strong);display:flex;align-items:center;justify-content:center;border-radius:50%;color:var(--muted);font-size:14px">+</span>
+              </summary>
+            </details>
+          </div>
+        </div>
+      </div>
+      <div class="note"><b>SEO.</b> FAQ 섹션은 <span class="inl">FAQPage</span> JSON-LD로도 주입(코드). 펼침 토글은 <span class="inl">+</span>→<span class="inl">−</span>, open 시 accent 배경.</div>
+
+      <!-- Form -->
+      <h3 class="sub">견적 폼 <span class="tk">.est-form</span></h3>
+      <table class="spec">
+        <thead><tr><th>요소</th><th>스펙</th></tr></thead>
+        <tbody>
+          <tr><td class="t">입력 필드</td><td>밑줄형(border-bottom만) · 포커스 시 보더 accent. 성함·연락처(필수) · 이메일·희망일 · 시공 위치.</td></tr>
+          <tr><td class="t">선택 칩</td><td><span class="inl">.chip</span> 토글 — 시공 공간/자재 다중 옵션. 선택 시 <span class="inl">.chip-on</span>(ink).</td></tr>
+          <tr><td class="t">Turnstile</td><td>제출 버튼 위 점선 박스 placeholder — Cloudflare Turnstile 위젯 자리(법적 필수).</td></tr>
+          <tr><td class="t">동의 체크박스</td><td><b>필수.</b> "수집 항목: 이름·연락처·이메일·시공 위치·희망 일정·시공 내역" 전부 명시 + <span class="inl">/privacy</span> 클릭 가능 링크. accentColor=accent.</td></tr>
+          <tr><td class="t">3채널</td><td>폼 + 전화(010-8005-6674) + 카카오 채널. 좌측 contact-line에 serif 전화번호 강조.</td></tr>
+        </tbody>
+      </table>
+
+      <!-- CTA band + Footer -->
+      <h3 class="sub">CTA Band · Footer</h3>
+      <div class="ex">
+        <div class="ex-top"><span class="lab">CTA Band</span><span class="cls">.cta-band — 모든 서브페이지 하단 통일</span></div>
+        <div class="ex-body" style="background:var(--bg-2);text-align:center;padding:56px 32px">
+          <h3 class="serif" style="font-size:30px;font-weight:400;letter-spacing:-.015em">강남·서초·송파 욕실 줄눈,<br/><em style="font-style:normal;color:var(--accent)">디테일라인에 맡기세요.</em></h3>
+          <p style="color:var(--muted);font-size:14px;margin-top:14px;line-height:1.75">대표가 직접 상담하고, 직접 시공합니다.</p>
+          <div style="display:flex;gap:12px;justify-content:center;margin-top:28px;flex-wrap:wrap">
+            <button class="btn btn-primary">무료 견적 받기 <span class="arr">→</span></button>
+            <button class="btn btn-ghost">010-8005-6674</button>
+          </div>
+        </div>
+      </div>
+      <table class="spec">
+        <thead><tr><th>요소</th><th>스펙</th></tr></thead>
+        <tbody>
+          <tr><td class="t">CTA Band</td><td>--bg-2 배경 · 중앙 정렬 · serif h3(em accent) · sub · 버튼 2종(Primary + Ghost). 모든 서브페이지 최하단 통일, 카피만 페이지별 변경.</td></tr>
+          <tr><td class="t">Footer</td><td>--dark 배경 4열 그리드(로고+슬로건 / Contact / Studio / Sitemap). 하단 fine print: 사업자정보(L4) + 신뢰지표 집계 기준(L5). ≤900px 2열.</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <!-- ════════ 06 · PAGE STRUCTURE ════════ -->
+    <section class="block" id="page">
+      <div class="block-head">
+        <div class="bar"><span class="n">06</span><span class="rule"></span><span class="lbl">Page Anatomy</span></div>
+        <h2>모든 페이지가<br/><em>같은 골격.</em></h2>
+        <p class="lede">서브페이지(공간별·페르소나·자재 가이드)는 아래 순서를 따릅니다. 섹션 수만 6~8개로 변하고, 골격·진입·종료는 동일합니다.</p>
+      </div>
+
+      <div class="code">
+        <span class="cap">— 서브페이지 골격 (위 → 아래)</span>
+<pre><span class="k">Nav</span>            <span class="c">고정 헤더 · 로고 + 드롭다운 + 전화 pill</span>
+<span class="k">Hero</span>           <span class="c">다크 풀블리드 imgph + eyebrow + h1(serif) + lede + 배지 + 4칸 meta</span>
+<span class="k">Breadcrumb</span>     <span class="c">홈 / 카테고리 / 현재 (SEO 필수)</span>
+<span class="k">Intro</span>          <span class="c">들어가며 — 2열(본문 + 세로 imgph) + stat-rail</span>
+<span class="k">Section 01…N</span>   <span class="c">sec-head + 콘텐츠. 배경 .bg-paper / .bg-2 / dark 교차로 리듬</span>
+   <span class="c">└ 자재 추천 · 사례(B/A) · 체크리스트 · 타임라인 · 가격표 · FAQ …</span>
+<span class="k">관련 콘텐츠</span>      <span class="c">.related-grid 4개 카드 — 교차 내부 링크 (SEO)</span>
+<span class="k">CTA Band</span>       <span class="c">--bg-2 · "무료 견적 받기" + 전화</span>
+<span class="k">Footer</span>         <span class="c">--dark 4열 + 사업자정보 fine print</span>
+<span class="k">Floating CTA</span>   <span class="c">우하단 고정 전화 FAB</span></pre>
+      </div>
+
+      <table class="spec">
+        <thead><tr><th>배경 리듬</th><th>권장 사용</th></tr></thead>
+        <tbody>
+          <tr><td class="t">기본 (--bg)</td><td>대부분 섹션. Intro·가격·FAQ 등</td></tr>
+          <tr><td class="t">.bg-paper</td><td>한 칸 띄우고 싶은 섹션 (reasons·사례 카드)</td></tr>
+          <tr><td class="t">.bg-2</td><td>CTA Band · info 영역</td></tr>
+          <tr><td class="t">dark (--dark)</td><td>시그니처 1~2개만 — Hero · Before/After 밴드 · 사이드 카드. 전체 다크 금지.</td></tr>
+        </tbody>
+      </table>
+      <div class="note"><b>페이지별 비주얼 시그니처.</b> 베이스는 동일, 액센트만 변주. 욕실=기본 accent(흰 타일·물방울) · 베란다=자연 톤(외부 빛·식물) · 현관=우드 톤(대리석) · 사전점검=cool 톤(체크리스트) · 리모델=따뜻 톤(B/A 대비). Hero imgph 모티프로 차별화하되 토큰은 공유.</div>
+    </section>
+
+    <!-- ════════ 07 · PREFIX ════════ -->
+    <section class="block" id="prefix">
+      <div class="block-head">
+        <div class="bar"><span class="n">07</span><span class="rule"></span><span class="lbl">CSS Prefix</span></div>
+        <h2>페이지마다<br/><em>고유 prefix.</em></h2>
+        <p class="lede">공통 컴포넌트(<span class="inl">.btn</span>·<span class="inl">.sec-bar</span>·<span class="inl">.imgph</span>·<span class="inl">.eyebrow</span>)는 전역 재사용. 페이지 고유 클래스는 충돌 방지를 위해 unique prefix를 붙입니다.</p>
+      </div>
+      <table class="spec">
+        <thead><tr><th>페이지</th><th>prefix</th><th>예</th></tr></thead>
+        <tbody>
+          <tr><td class="t">/info/why-grout</td><td><span class="inl">wg-*</span></td><td class="muted">기존</td></tr>
+          <tr><td class="t">/info/kerafoxy</td><td><span class="inl">kf-*</span></td><td class="muted">기존</td></tr>
+          <tr><td class="t">/info/kerafoxy-product</td><td><span class="inl">ep-*</span></td><td class="muted">기존</td></tr>
+          <tr><td class="t">/info/kerafoxy-price</td><td><span class="inl">kp-*</span></td><td class="muted">기존</td></tr>
+          <tr><td class="t">/info/comparison</td><td><span class="inl">cp-*</span></td><td class="muted">기존</td></tr>
+          <tr><td class="t">/info/bathroom-grout</td><td><span class="inl">bg-*</span></td><td class="muted">욕실</td></tr>
+          <tr><td class="t">/info/balcony-grout</td><td><span class="inl">bc-*</span></td><td class="muted">베란다</td></tr>
+          <tr><td class="t">/info/entrance-grout</td><td><span class="inl">eg-*</span></td><td class="muted">현관</td></tr>
+          <tr><td class="t">/info/pre-move-inspection</td><td><span class="inl">pm-*</span></td><td class="muted">신축 사전점검</td></tr>
+          <tr><td class="t">/info/remodel-grout</td><td><span class="inl">rm-*</span></td><td class="muted">리모델링</td></tr>
+        </tbody>
+      </table>
+      <div class="note"><b>React 컴포넌트화 시.</b> 각 페이지에 <span class="inl">SecHead</span> 헬퍼(props: <span class="inl">num · ko · en · title · lede</span>)를 동일 구조로 재정의. 하단 <span class="inl">{prefix}-related-*</span> 카드 + CTA Band 패턴은 그대로 사용.</div>
+    </section>
+
+    <!-- ════════ 08 · BRAND FACTS ════════ -->
+    <section class="block" id="brand">
+      <div class="block-head">
+        <div class="bar"><span class="n">08</span><span class="rule"></span><span class="lbl">Brand Facts — 불변</span></div>
+        <h2>이 값들은<br/><em>절대 바꾸지 않습니다.</em></h2>
+        <p class="lede">아래는 창작·추론 대상이 아닌 고정 사실입니다. 모든 페이지에서 토씨까지 동일하게.</p>
+      </div>
+      <table class="spec">
+        <thead><tr><th>항목</th><th>값</th></tr></thead>
+        <tbody>
+          <tr><td class="t">브랜드명</td><td><b>디테일라인</b> · Detailline</td></tr>
+          <tr><td class="t">슬로건</td><td class="serif" style="font-style:italic;font-size:16px;color:var(--ink)">"집요함이 만들어 내는 완벽함"</td></tr>
+          <tr><td class="t">전화</td><td><span class="mono" style="color:var(--ink)">010-8005-6674</span> (전 페이지 동일 · <span class="inl">tel:01080056674</span>)</td></tr>
+          <tr><td class="t">카카오 채널</td><td><span class="inl">https://pf.kakao.com/_TsIAE</span></td></tr>
+          <tr><td class="t">주소</td><td>서울 서초구 본마을4길 11 1층 104호</td></tr>
+          <tr><td class="t">영업시간</td><td>평일 09:00 ~ 18:00</td></tr>
+          <tr><td class="t">신뢰지표</td><td>2,400+ 가구 시공 · <b>2년 무상 A/S</b> · KC 인증 친환경 자재 · 대표 직접 시공</td></tr>
+          <tr><td class="t">집중 지역</td><td>강남구 · 서초구 · 송파구 (3개구)</td></tr>
+          <tr><td class="t">주력 영역</td><td>욕실(주력) &gt; 베란다 &gt; 현관</td></tr>
+          <tr><td class="t">페르소나</td><td>30~40대 노후 아파트 보수 · 신축 입주 · 리모델링</td></tr>
+        </tbody>
+      </table>
+      <div class="note warn"><b>주의 — A/S 기간.</b> 디테일라인은 <b>2년 무상 A/S</b>입니다. (housepick의 5년과 다름 — 절대 혼동 금지.) 가격 모델도 디테일라인 고유 값만 사용. footprint 분리를 위해 타 사이트 텍스트·슬러그·분류명을 복사하지 않습니다.</div>
+    </section>
+
+    <!-- ════════ 09 · REQUIREMENTS ════════ -->
+    <section class="block" id="req">
+      <div class="block-head">
+        <div class="bar"><span class="n">09</span><span class="rule"></span><span class="lbl">SEO · Legal · Marketing</span></div>
+        <h2>화면에 반드시<br/><em>녹여야 할 것.</em></h2>
+        <p class="lede">디자인은 자유롭되, 아래 항목은 모든 페이지에 자연스럽게 배치되어야 합니다.</p>
+      </div>
+
+      <h3 class="sub">SEO</h3>
+      <ul class="rules do">
+        <li><span class="mk">✓</span><span>페이지당 <b>H1 한 개</b> + H2~H3 명확한 위계 (시각 차이 필수)</span></li>
+        <li><span class="mk">✓</span><span>모든 이미지 <b>alt 텍스트</b> + width/height 명시 (CLS 방지)</span></li>
+        <li><span class="mk">✓</span><span>모든 서브페이지 <b>breadcrumb</b> + 본문 내 교차 내부 링크 2~3건 + 하단 관련 콘텐츠 4카드</span></li>
+        <li><span class="mk">✓</span><span>포트폴리오 카드에 <b>단지·평수·지역·시공일</b> 메타 노출</span></li>
+        <li><span class="mk">✓</span><span>JSON-LD: <b>Article + FAQPage + BreadcrumbList</b> (코드) · sitemap 등록 · OG 1200×630</span></li>
+        <li><span class="mk">✓</span><span>1차 키워드 5곳 노출: title · h1 · meta description · URL slug · 첫 단락. 색 대비 <b>WCAG AA</b>(본문 4.5:1)</span></li>
+      </ul>
+
+      <h3 class="sub">법적 (폼·푸터)</h3>
+      <ul class="rules do">
+        <li><span class="mk">✓</span><span>폼 <b>개인정보 동의 체크박스</b> + 수집 항목 전부 명시 + <span class="inl">/privacy</span> 클릭 링크</span></li>
+        <li><span class="mk">✓</span><span>제출 버튼 위 <b>Cloudflare Turnstile</b> 위젯 자리</span></li>
+        <li><span class="mk">✓</span><span>푸터 <b>사업자정보</b>(상호·대표·등록번호·주소·연락처) + 신뢰지표 집계 기준 fine print</span></li>
+      </ul>
+
+      <h3 class="sub">마케팅·전환</h3>
+      <ul class="rules do">
+        <li><span class="mk">✓</span><span>모바일 <b>Floating CTA</b>(전화+카카오, 우하단 고정) 전 페이지</span></li>
+        <li><span class="mk">✓</span><span>Primary 버튼 문구 <b>"무료 견적 받기"</b>로 단일화 · Hero는 Primary 1 + Ghost 1 위계 명확</span></li>
+        <li><span class="mk">✓</span><span>Before/After 슬라이더(사례) · <b>카톡 채널 진입 강조</b>(한국 1순위 전환 채널)</span></li>
+        <li><span class="mk">✓</span><span>가격은 <b>시작가 + "현장별 변동 가능"</b> 명시 · GA4 이벤트(form_submit·phone_click·kakao_click) 트리거 가능 구조</span></li>
+      </ul>
+    </section>
+
+    <!-- ════════ 10 · DO / DON'T ════════ -->
+    <section class="block" id="rules">
+      <div class="block-head">
+        <div class="bar"><span class="n">10</span><span class="rule"></span><span class="lbl">Do · Don't</span></div>
+        <h2>절제가 곧<br/><em>일관성입니다.</em></h2>
+      </div>
+      <div class="grid-2c">
+        <div>
+          <h3 class="sub" style="margin-top:0;color:#46603c">✓ Do</h3>
+          <ul class="rules do">
+            <li><span class="mk">✓</span><span>17개 토큰 + 2개 폰트 안에서만 작업</span></li>
+            <li><span class="mk">✓</span><span>큰 여백 · 큰 타이포 · 낮은 정보 밀도</span></li>
+            <li><span class="mk">✓</span><span>사진(placeholder)이 주연, 아이콘은 절제</span></li>
+            <li><span class="mk">✓</span><span>accent는 라벨·번호·권장·hover에만</span></li>
+            <li><span class="mk">✓</span><span>다크 섹션 1~2개로 강조 위계 형성</span></li>
+            <li><span class="mk">✓</span><span>슬로우 페이드·큰 호버 (절제된 모션)</span></li>
+            <li><span class="mk">✓</span><span>가격은 범위 + 변동 가능 명시</span></li>
+          </ul>
+        </div>
+        <div>
+          <h3 class="sub" style="margin-top:0;color:#9b4d35">✗ Don't</h3>
+          <ul class="rules dont">
+            <li><span class="mk">✗</span><span>그라데이션 배경 · 순색 #000/#fff</span></li>
+            <li><span class="mk">✗</span><span>두 번째 브랜드 색 · 의미색(빨강·초록·노랑)</span></li>
+            <li><span class="mk">✗</span><span>다른 폰트(Inter·Roboto·Cormorant 등) 도입</span></li>
+            <li><span class="mk">✗</span><span>아이콘 도배 · 복잡한 SVG 직접 그리기</span></li>
+            <li><span class="mk">✗</span><span>전체 다크 페이지 (가독성 ↓)</span></li>
+            <li><span class="mk">✗</span><span>"급한 세일" 느낌 · 과한 마이크로 애니메이션</span></li>
+            <li><span class="mk">✗</span><span>AI·도용 사진 · 타 사이트 텍스트/슬러그 복사</span></li>
+          </ul>
+        </div>
+      </div>
+
+      <div style="margin-top:48px;padding:48px 44px;background:var(--dark);color:var(--on-dark);border-radius:3px">
+        <div class="eyebrow" style="color:var(--accent-soft);margin-bottom:18px">요약</div>
+        <h2 class="serif" style="font-size:clamp(26px,3.4vw,40px);font-weight:300;color:var(--on-dark);line-height:1.2">
+          17개 토큰, 2개 폰트,<br/><em style="font-style:italic;color:var(--accent-soft)">한 가지 시그니처.</em>
+        </h2>
+        <p style="color:rgba(255,255,255,.72);font-size:15px;line-height:1.75;max-width:56ch;margin-top:18px">
+          Surface 3 · Ink 4 · Line 2 · Accent 3 · Dark 5. 그리고 Pretendard + Noto Serif KR.
+          이것만으로 페이지 전체를 만들고, 새 색·새 폰트를 추가하지 않습니다.
+          <span style="display:block;margin-top:12px;color:var(--on-dark);font-weight:500">절제가 곧 일관성이고, 일관성이 곧 브랜드입니다.</span>
+        </p>
+      </div>
+    </section>
+
+  </main>
+</div>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script></body>
+</html>

@@ -530,8 +530,9 @@
 
 /* ──────── ≤900 (main mobile layout) ──────── */
 @media (max-width: 900px) {
-  /* Prevent horizontal scroll from any oversized child */
-  html, body { overflow-x: hidden; }
+  /* Prevent horizontal scroll from any oversized child.
+     overflow-x: clip 사용 — hidden은 자식의 position: sticky를 깨지만 clip은 양립 */
+  html, body { overflow-x: clip; }
   .hero-b-wrap { overflow-x: clip; }
 
   /* TILE floor tuning — tile 460→280, perspective 1650→700, plane size 300%×260%→200%×200% */

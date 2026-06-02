@@ -565,7 +565,7 @@ export default function KerafoxyPage() {
             <h3 className="kf-cta-title">
               우리 집 줄눈에 맞는 답이 궁금하다면, <em>무료 견적</em>으로 시작하세요.
             </h3>
-            <p className="kf-cta-sub">평형 · 공간 · 색상을 알려주시면 24시간 내에 회신드립니다. 강남구·서초구·송파구 욕실·베란다·현관 줄눈 무료 견적.</p>
+            <p className="kf-cta-sub">평형 · 공간 · 색상을 알려주시면 24시간 내에 회신드립니다. 서울·경기·인천 줄눈시공 무료 견적 상담.</p>
           </div>
           <div className="kf-cta-actions">
             <button type="button" className="kf-btn kf-btn-primary" onClick={goQuote}>

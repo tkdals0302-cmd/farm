@@ -126,26 +126,31 @@ export default function PortfolioDetailPage() {
     <div className="min-h-screen bg-[var(--bg)]">
       <Navbar />
 
-      <main className="pt-24 md:pt-28 pb-24">
-        {/* Breadcrumb — v2 §6: 홈 > 시공사례 > region > district > 단지+평수 */}
-        <nav className="px-6 md:px-12 lg:px-20 max-w-[1360px] mx-auto mb-8" aria-label="현재 위치">
-          <ol className="flex items-center gap-2 text-[12px] text-[var(--muted-2)] flex-wrap">
-            <li><Link to="/" className="hover:text-[var(--accent)] transition-colors">홈</Link></li>
-            <li className="opacity-40">/</li>
-            <li><Link to="/portfolio" className="hover:text-[var(--accent)] transition-colors">시공사례</Link></li>
-            <li className="opacity-40">/</li>
-            <li className="text-[var(--ink-2)]">{item.region}</li>
-            {item.district && (
-              <>
-                <li className="opacity-40">/</li>
-                <li className="text-[var(--ink-2)]">{item.district}</li>
-              </>
-            )}
-            <li className="opacity-40">/</li>
-            <li className="text-[var(--ink)] truncate">{item.apartment} {item.area}평</li>
-          </ol>
-        </nav>
+      {/* navbar 보정 spacer — navbar 높이만큼 normal flow에 공간 차지
+          (Navbar.tsx: 모바일 h-12 = 48px, ≥768px py-4 + 로고 h-12 ≈ 80px) */}
+      <div className="h-12 md:h-20" aria-hidden="true" />
 
+      {/* Breadcrumb — sticky는 글로벌 .pf-crumb 규칙(src/index.css)에서 처리
+          (v2 §6 5단계: 홈 > 시공사례 > region > district > 단지+평수) */}
+      <nav className="pf-crumb" aria-label="현재 위치">
+        <div className="pf-container pf-crumb-inner">
+          <Link to="/" className="pf-crumb-item">홈</Link>
+          <span className="pf-crumb-sep">/</span>
+          <Link to="/portfolio" className="pf-crumb-item">시공사례</Link>
+          <span className="pf-crumb-sep">/</span>
+          <span className="pf-crumb-item">{item.region}</span>
+          {item.district && (
+            <>
+              <span className="pf-crumb-sep">/</span>
+              <span className="pf-crumb-item">{item.district}</span>
+            </>
+          )}
+          <span className="pf-crumb-sep">/</span>
+          <span className="pf-crumb-here">{item.apartment} {item.area}평</span>
+        </div>
+      </nav>
+
+      <main className="pb-24">
         {/* PDP — portfolio-detail.html 패턴 (좌 sticky 갤러리 + 우 정보) */}
         <PortfolioPDP
           item={item}
@@ -199,7 +204,7 @@ export default function PortfolioDetailPage() {
           </div>
           <div className="flex flex-wrap gap-3 justify-end max-[820px]:flex-nowrap max-[820px]:justify-start max-[820px]:gap-2 max-[820px]:w-full">
             <Link
-              to="/#quote"
+              to="/#calc"
               className="inline-flex items-center gap-2.5 px-[22px] py-4 rounded-[2px] text-sm font-medium bg-[var(--ink)] text-[var(--paper)] hover:bg-[var(--accent-deep)] transition-colors cursor-pointer max-[820px]:flex-1 max-[820px]:min-w-0 max-[820px]:px-3 max-[820px]:py-3.5 max-[820px]:text-[13px] max-[820px]:whitespace-nowrap max-[820px]:justify-center"
             >
               무료 견적 받기 <span>→</span>
@@ -268,7 +273,7 @@ function PortfolioPDP({
     : item.region;
 
   return (
-    <section className="px-6 md:px-12 lg:px-20 max-w-[1360px] mx-auto mb-20" data-screen-label="Detail PDP">
+    <section className="px-6 md:px-12 lg:px-20 pt-6 max-w-[1360px] mx-auto mb-20" data-screen-label="Detail PDP">
       <div className="pdp">
         {/* LEFT — gallery */}
         <div className="pdp-gallery">
@@ -326,20 +331,6 @@ function PortfolioPDP({
                 />
               )}
 
-              {/* AFTER 라벨 (기본) */}
-              <span className="pdp-stage-label" data-pdp="main-label">
-                <span className="sq" />
-                <span>AFTER · {activeAfter?.alt ?? '시공 후'}</span>
-              </span>
-
-              {/* BEFORE 라벨 (hover 시) */}
-              {activeBefore && (
-                <span className="pdp-stage-label pdp-before-label">
-                  <span className="sq" style={{ background: 'var(--ink)' }} />
-                  <span>BEFORE · {activeBefore.alt}</span>
-                </span>
-              )}
-
               <span className="pdp-counter">
                 {pad(activeIndex + 1)} / {pad(totalImages)}
               </span>
@@ -366,10 +357,6 @@ function PortfolioPDP({
 
         {/* RIGHT — info */}
         <div className="pdp-info">
-          <div className="pdp-brand">
-            {locationLabel} · Detailline
-            <span className="chev" />
-          </div>
           <h1 className="pdp-title">
             {item.apartment} {item.area}평 — {item.space} 줄눈시공
           </h1>
@@ -432,7 +419,7 @@ function PortfolioPDP({
             >
               <i className="ri-phone-line" /> 전화 상담
             </a>
-            <Link to="/#quote" className="pdp-cta-btn pdp-cta-dark">
+            <Link to="/#calc" className="pdp-cta-btn pdp-cta-dark">
               <i className="ri-edit-line" /> 무료 견적 받기
             </Link>
           </div>
@@ -518,6 +505,45 @@ function GalleryItem({
 
 // ─── PDP CSS (portfolio-detail.html 기반) ───
 const PDP_CSS = `
+/* ===== container (list와 통일) ===== */
+.pf-container {
+  max-width: 1360px;
+  margin: 0 auto;
+  padding: 0 32px;
+}
+@media (max-width: 720px) {
+  .pf-container { padding: 0 20px; }
+}
+
+/* ===== Breadcrumb (list의 pf-crumb 패턴과 동일) ===== */
+.pf-crumb {
+  background: var(--paper);
+  border-bottom: 1px solid var(--line);
+}
+.pf-crumb-inner {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px;
+  padding: 14px 32px;
+  font-size: 12px;
+  letter-spacing: 0.04em;
+  color: var(--muted-2);
+}
+@media (max-width: 720px) {
+  .pf-crumb-inner { padding: 14px 20px; }
+}
+.pf-crumb-item {
+  color: var(--muted-2);
+  text-decoration: none;
+  transition: color .2s ease;
+}
+.pf-crumb-item:hover { color: var(--accent); }
+.pf-crumb-sep { opacity: .4; }
+.pf-crumb-here { color: var(--ink); }
+
+/* sticky 동작은 src/index.css의 글로벌 .pf-crumb 규칙으로 처리 */
+
 .pdp{display:grid;grid-template-columns:minmax(0,1.12fr) minmax(0,.88fr);gap:48px;align-items:start}
 @media (max-width:900px){ .pdp{grid-template-columns:1fr;gap:30px} }
 
@@ -577,8 +603,6 @@ const PDP_CSS = `
 .pdp-share:hover{color:var(--ink)}
 
 .pdp-info{display:flex;flex-direction:column}
-.pdp-brand{display:flex;align-items:center;gap:8px;font-size:13px;color:var(--muted);font-weight:500}
-.pdp-brand .chev{width:6px;height:6px;border-right:1.4px solid currentColor;border-bottom:1.4px solid currentColor;transform:rotate(-45deg);display:inline-block}
 .pdp-title{font-family:'Noto Serif KR',serif;font-size:clamp(21px,2.1vw,27px);font-weight:500;line-height:1.36;letter-spacing:-.01em;margin-top:10px;color:var(--ink);word-break:keep-all}
 
 .pdp-rows{margin-top:26px;border:1px solid var(--line)}

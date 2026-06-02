@@ -1,21 +1,23 @@
 import { useEffect, useMemo, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { ReactCompareSlider, ReactCompareSliderImage } from 'react-compare-slider';
-import { PORTFOLIO_ITEMS, SPACES } from '../../../data/portfolio';
+import { PORTFOLIO_ITEMS, SPACES, getAllSpaces } from '../../../data/portfolio';
 
 // 홈 카드용 view-model — data/portfolio.ts의 PORTFOLIO_ITEMS에서 변환
 type PortfolioItem = {
-  id: string;        // slug
+  id: string;          // slug
   slug: string;
-  category: string;  // space
+  category: string;    // 표시용 주력 space ('욕실' → '화장실' 매핑)
+  allCategories: string[]; // 필터 매칭용 — 주력 + extraSpaces 모두 포함
   title: string;
   location: string;
-  image: string;     // after-main 또는 첫 after
+  image: string;       // after-main 또는 첫 after
   before?: string;
   after?: string;
 };
 
-const portfolioCategories = ['전체', ...SPACES] as const;
+// 홈 카테고리: '욕실'은 '화장실'로 통합 (UX 단순화)
+const portfolioCategories = ['전체', ...SPACES.filter((s) => s !== '욕실')] as const;
 type Category = (typeof portfolioCategories)[number];
 
 export default function PortfolioAndReviews() {
@@ -30,10 +32,15 @@ export default function PortfolioAndReviews() {
           p.images.find((i) => i.type === 'after-main') ??
           p.images.find((i) => i.type === 'after');
         const firstBefore = p.images.find((i) => i.type === 'before');
+        // 필터 매칭용 — 주력 + extraSpaces 모두 포함, '욕실'은 '화장실'로 통합
+        const allCategories = getAllSpaces(p).map((s) =>
+          s === '욕실' ? '화장실' : s
+        );
         return {
           id: p.slug,
           slug: p.slug,
-          category: p.space,
+          category: p.space === '욕실' ? '화장실' : p.space,
+          allCategories,
           title: `${p.apartment} ${p.area}평 ${p.space}`,
           location: p.district ? `${p.region} ${p.district}` : p.region,
           image: afterMain?.src ?? '',
@@ -85,7 +92,7 @@ export default function PortfolioAndReviews() {
     () =>
       activeCategory === '전체'
         ? portfolioItems
-        : portfolioItems.filter((item) => item.category === activeCategory),
+        : portfolioItems.filter((item) => item.allCategories.includes(activeCategory)),
     [activeCategory, portfolioItems]
   );
 
@@ -138,12 +145,6 @@ export default function PortfolioAndReviews() {
                     className="w-full h-full object-cover object-top transition-transform duration-500 group-hover:scale-105"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent"></div>
-                  {item.before && item.after && (
-                    <span className="absolute top-2 right-2 inline-flex items-center gap-1 bg-[var(--accent)] text-white text-[10px] font-medium px-2 py-0.5 rounded-sm uppercase tracking-[0.12em]">
-                      <i className="ri-contrast-2-line"></i>
-                      시공 전·후
-                    </span>
-                  )}
                   <div className="absolute bottom-0 left-0 right-0 p-4">
                     <span className="inline-block bg-white/20 backdrop-blur-sm text-white text-xs px-2.5 py-1 rounded-sm mb-2">
                       {item.category}

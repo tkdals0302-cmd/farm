@@ -236,6 +236,16 @@ export function getPortfolioBySlug(slug: string): PortfolioItem | undefined {
   return PORTFOLIO_ITEMS.find((p) => p.slug === slug);
 }
 
+/** 주력 + extraSpaces 합친 모든 공간 목록 */
+export function getAllSpaces(p: PortfolioItem): Space[] {
+  return [p.space, ...(p.extraSpaces ?? []).map((e) => e.space)];
+}
+
+/** 주력 + extraSpaces 합친 모든 자재 목록 */
+export function getAllMaterials(p: PortfolioItem): Material[] {
+  return [p.material, ...(p.extraSpaces ?? []).map((e) => e.material)];
+}
+
 export function filterPortfolio(filters: {
   spaces?: Space[];
   regions?: Region[];
@@ -243,9 +253,17 @@ export function filterPortfolio(filters: {
 }): PortfolioItem[] {
   return PORTFOLIO_ITEMS
     .filter((p) => {
-      if (filters.spaces?.length && !filters.spaces.includes(p.space)) return false;
+      // 공간 매칭 — 주력 + extraSpaces 모두 후보
+      if (filters.spaces?.length) {
+        const all = getAllSpaces(p);
+        if (!filters.spaces.some((s) => all.includes(s))) return false;
+      }
       if (filters.regions?.length && !filters.regions.includes(p.region)) return false;
-      if (filters.materials?.length && !filters.materials.includes(p.material)) return false;
+      // 자재 매칭 — 주력 + extraSpaces 모두 후보
+      if (filters.materials?.length) {
+        const all = getAllMaterials(p);
+        if (!filters.materials.some((m) => all.includes(m))) return false;
+      }
       return true;
     })
     .sort((a, b) => b.date.localeCompare(a.date));

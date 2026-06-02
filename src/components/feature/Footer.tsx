@@ -108,6 +108,26 @@ export default function Footer() {
           </div>
         </div>
 
+        {/* 시공 가능 지역 — longtail SEO 자산 */}
+        <div className="border-t border-stone-700 pt-6 pb-6 mb-2">
+          <h4 className="text-white font-bold text-sm mb-3">시공 가능 지역</h4>
+          <div className="text-stone-400 text-xs leading-relaxed space-y-1.5">
+            <p>
+              <span className="text-stone-300 font-medium mr-2">서울</span>
+              강남구 · 서초구 · 송파구 · 강동구 · 성동구 · 마포구 · 용산구 · 양천구 · 영등포구 · 종로구
+            </p>
+            <p>
+              <span className="text-stone-300 font-medium mr-2">경기</span>
+              성남시 분당구 · 수지구 · 하남시 · 과천시 · 광명시 · 고양시 · 일산 · 용인시
+            </p>
+            <p>
+              <span className="text-stone-300 font-medium mr-2">인천</span>
+              송도 · 연수구 · 남동구
+            </p>
+            <p className="text-stone-500 mt-2">그 외 지역 출장비 협의 가능.</p>
+          </div>
+        </div>
+
         {/* Divider */}
         <div className="border-t border-stone-700 pt-6">
           <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-3">

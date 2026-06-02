@@ -429,7 +429,7 @@ export default function WhyGroutPage() {
               지금 우리 집 줄눈이 <em>괜찮은지</em> 점검받아 보세요.
             </h3>
             <p className="wg-cta-sub">
-              사진 한 장만 보내주시면 현재 상태와 시공 필요 여부를 안내해 드립니다. 강남구·서초구·송파구 욕실·베란다·현관 줄눈 무료 견적.
+              사진 한 장만 보내주시면 현재 상태와 시공 필요 여부를 안내해 드립니다. 서울·경기·인천 줄눈시공 무료 견적 상담.
             </p>
           </div>
           <div className="wg-cta-actions">
