@@ -244,18 +244,18 @@ function SecHead({
   lede?: React.ReactNode;
 }) {
   return (
-    <div className="kp-sec-head">
-      <div className="kp-sec-bar">
-        <span className="kp-sec-n">{num}</span>
-        <span className="kp-sec-rule"></span>
-        <span className="kp-sec-lbl">
-          <span className="kp-sec-ko">{ko}</span>
-          <span className="kp-sec-en">{en}</span>
+    <div className="sec-head">
+      <div className="sec-bar">
+        <span className="sec-n">{num}</span>
+        <span className="sec-rule"></span>
+        <span className="sec-lbl">
+          <span className="sec-ko">{ko}</span>
+          <span className="sec-en">{en}</span>
         </span>
       </div>
-      <div className="kp-sec-body">
-        <h2 className="kp-sec-title">{title}</h2>
-        {lede && <p className="kp-sec-lede">{lede}</p>}
+      <div className="sec-body">
+        <h2 className="sec-title">{title}</h2>
+        {lede && <p className="sec-lede">{lede}</p>}
       </div>
     </div>
   );
@@ -322,11 +322,11 @@ export default function KerafoxyPricePage() {
   );
 
   return (
-    <div className="kp-page">
+    <div className="page">
       <Navbar />
 
       {/* ===== Hero ===== */}
-      <header className="kp-hero" data-screen-label="Hero">
+      <header className="hero" data-screen-label="Hero">
         <div
           className="kp-hero-bg"
           style={{
@@ -335,21 +335,21 @@ export default function KerafoxyPricePage() {
           } as React.CSSProperties}
           aria-hidden="true"
         />
-        <div className="kp-container kp-hero-inner">
-          <div className="kp-eyebrow kp-eyebrow-light">Grout Knowledge · 02</div>
-          <h1 className="kp-hero-title">
+        <div className="hero-inner">
+          <div className="hero-eyebrow hero-eyebrow-light">Grout Knowledge · 02</div>
+          <h1 className="hero-title">
             케라폭시 가격<em>,</em>
             <br />한 줄까지 <em>투명하게</em>.
           </h1>
-          <p className="kp-hero-lede">
+          <p className="hero-lede">
             2026년 디테일라인 표준 가격표.<br />
             공간 · 평형 · 시공 범위에 따른 단가를 그대로 공개합니다.
           </p>
-          <ul className="kp-hero-meta">
+          <ul className="hero-meta">
             {HERO_META.map((m) => (
               <li key={m.k}>
-                <span className="kp-meta-k">{m.k}</span>
-                <span className="kp-meta-v">
+                <span className="hero-meta-k">{m.k}</span>
+                <span className="hero-meta-v">
                   {m.v} <small>{m.small}</small>
                 </span>
               </li>
@@ -359,19 +359,19 @@ export default function KerafoxyPricePage() {
       </header>
 
       {/* ===== Breadcrumb ===== */}
-      <nav className="kp-crumb" aria-label="현재 위치">
-        <div className="kp-container kp-crumb-inner">
-          <Link to="/" className="kp-crumb-item">홈</Link>
-          <span className="kp-crumb-sep">/</span>
-          <span className="kp-crumb-item">줄눈 정보</span>
-          <span className="kp-crumb-sep">/</span>
-          <span className="kp-crumb-here">케라폭시 가격 안내</span>
+      <nav className="crumb" aria-label="현재 위치">
+        <div className="container crumb-inner">
+          <Link to="/" className="crumb-item">홈</Link>
+          <span className="crumb-sep">/</span>
+          <span className="crumb-item">줄눈 정보</span>
+          <span className="crumb-sep">/</span>
+          <span className="crumb-here">케라폭시 가격 안내</span>
         </div>
       </nav>
 
       {/* ===== 01 Pricing Table ===== */}
-      <section className="kp-section" data-screen-label="01 Pricing Table">
-        <div className="kp-container">
+      <section className="section" data-screen-label="01 Pricing Table">
+        <div className="container">
           <SecHead
             num="01"
             ko="2026 가격 테이블"
@@ -508,8 +508,8 @@ export default function KerafoxyPricePage() {
       </section>
 
       {/* ===== 02 Set Packages ===== */}
-      <section className="kp-section kp-bg-paper" data-screen-label="02 Set Packages">
-        <div className="kp-container">
+      <section className="section bg-paper" data-screen-label="02 Set Packages">
+        <div className="container">
           <SecHead
             num="02"
             ko="세트 할인 패키지"
@@ -568,8 +568,8 @@ export default function KerafoxyPricePage() {
       </section>
 
       {/* ===== 03 Cost Factors ===== */}
-      <section className="kp-section" data-screen-label="03 Cost Factors">
-        <div className="kp-container">
+      <section className="section" data-screen-label="03 Cost Factors">
+        <div className="container">
           <SecHead
             num="03"
             ko="시공 가격에 영향을 주는 요인"
@@ -601,8 +601,8 @@ export default function KerafoxyPricePage() {
 
       {/* ===== 04 Related ===== */}
       {(
-        <section className="kp-section kp-bg-paper" data-screen-label="04 Related">
-          <div className="kp-container">
+        <section className="section bg-paper" data-screen-label="04 Related">
+          <div className="container">
             <SecHead
               num="04"
               ko="관련 정보 더 보기"
@@ -615,14 +615,14 @@ export default function KerafoxyPricePage() {
               lede="가격 · 제품 · 비교 · 시공 — 네 가지 관점으로 줄눈을 더 깊이 살펴보세요."
             />
 
-            <div className="kp-related-grid">
+            <div className="related-grid">
               {RELATED.map((r) => (
-                <Link key={r.href} to={r.href} className="kp-related-card">
-                  <span className="kp-related-idx">{r.idx}</span>
-                  <h4 className="kp-related-title">{r.title}</h4>
-                  <p className="kp-related-desc">{r.desc}</p>
-                  <span className="kp-related-more">
-                    more <span className="kp-related-arr">→</span>
+                <Link key={r.href} to={r.href} className="related-card">
+                  <span className="related-idx">{r.idx}</span>
+                  <h4 className="related-title">{r.title}</h4>
+                  <p className="related-desc">{r.desc}</p>
+                  <span className="related-more">
+                    more <span className="related-arr">→</span>
                   </span>
                 </Link>
               ))}
@@ -632,24 +632,24 @@ export default function KerafoxyPricePage() {
       )}
 
       {/* ===== CTA Band ===== */}
-      <section className="kp-cta-band" data-screen-label="CTA Band">
-        <div className="kp-container kp-cta-row">
-          <div className="kp-cta-text">
-            <h3 className="kp-cta-title">
+      <section className="cta-band" data-screen-label="CTA Band">
+        <div className="container cta-row">
+          <div className="cta-text">
+            <h3 className="cta-title">
               정확한 시공 비용이 <em>궁금하신가요?</em>
             </h3>
-            <p className="kp-cta-sub">
+            <p className="cta-sub">
               현장 상황에 따라 가격이 달라질 수 있습니다. 공간별 맞춤 견적을 안내해 드립니다. 서울·경기·인천 줄눈시공 무료 견적 상담.
             </p>
           </div>
-          <div className="kp-cta-actions">
-            <button type="button" className="kp-btn kp-btn-primary" onClick={goQuote}>
-              무료 견적 받기 <span className="kp-btn-arr">→</span>
+          <div className="cta-actions">
+            <button type="button" className="btn btn-primary" onClick={goQuote}>
+              무료 견적 받기 <span className="btn-arr">→</span>
             </button>
             <a
               href="tel:010-8005-6674"
               onClick={() => Events.phoneClick('info_cta')}
-              className="kp-btn kp-btn-ghost"
+              className="btn btn-ghost"
             >
               전화 상담 010-8005-6674
             </a>
@@ -669,71 +669,21 @@ export default function KerafoxyPricePage() {
 // ─────────────────────────────────────────────────────────────────────────────
 
 const KP_CSS = `
-.kp-page {
-  background: var(--bg);
-  color: var(--ink);
-  font-family: 'Pretendard Variable', 'Pretendard', sans-serif;
-}
-.kp-page ::selection { background: var(--accent); color: #fff; }
+/* page/container/section/hero/eyebrow/sec-/crumb/btn/cta-band/related/imgph는 글로벌(src/index.css) 처리.
+   페이지 고유: .kp-hero-bg + chip/ptable/sets/cell-* 등 가격표 */
 
-.kp-container {
-  max-width: 1360px;
-  margin: 0 auto;
-  padding: 0 32px;
-}
-@media (max-width: 720px) {
-  .kp-container { padding: 0 20px; }
-}
-
-.kp-section {
-  padding: 120px 0;
-  border-top: 1px solid var(--line);
-}
-.kp-bg-paper { background: var(--paper); }
-@media (max-width: 720px) {
-  .kp-section { padding: 72px 0; }
-}
-
-.kp-eyebrow {
-  font-size: 11.5px;
-  font-weight: 500;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
-  color: var(--accent);
-}
-.kp-eyebrow-light { color: #d9b790; }
-
-.kp-page em {
-  font-style: normal;
-  color: var(--accent);
-}
-.kp-hero em { color: #e3c5a3; }
-
-/* ===== Hero ===== */
-.kp-hero {
-  position: relative;
-  padding: 168px 0 84px;
-  overflow: hidden;
-  isolation: isolate;
-  color-scheme: dark;
-}
-@media (max-width: 720px) {
-  .kp-hero { padding: 120px 0 64px; }
-}
+/* ===== Hero 배경 (페이지 고유 이미지 합성) ===== */
 .kp-hero-bg {
   position: absolute;
   inset: 0;
   z-index: -1;
   background:
-    /* Bottom fade — light top → strong dark near bottom for image blend */
     linear-gradient(180deg, rgba(20,16,12,.25) 0%, rgba(20,16,12,.25) 35%, rgba(14,11,8,.95) 100%),
     radial-gradient(120% 80% at 70% 20%, rgba(138,106,76,.18), transparent 60%),
-    /* Width-anchored, top-aligned */
     var(--hero-img-d, none) center top / 100% auto no-repeat,
     linear-gradient(180deg, #251d14 0%, #18130e 100%);
 }
 @media (max-width: 720px) {
-  /* Mobile uses dedicated mobile-optimized image with cover */
   .kp-hero-bg {
     background:
       linear-gradient(180deg, rgba(20,16,12,.35) 0%, rgba(14,11,8,.78) 100%),
@@ -749,192 +699,7 @@ const KP_CSS = `
   background: radial-gradient(120% 100% at 50% 0%, rgba(0,0,0,.15), rgba(0,0,0,.55) 80%);
   pointer-events: none;
 }
-.kp-ph-corner {
-  position: absolute;
-  top: 14px;
-  right: 16px;
-  font-size: 9.5px;
-  font-weight: 500;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  color: rgba(255,255,255,.4);
-  z-index: 1;
-}
-.kp-ph-label {
-  position: absolute;
-  left: 18px;
-  bottom: 16px;
-  display: inline-flex;
-  align-items: center;
-  gap: 10px;
-  font-size: 10.5px;
-  font-weight: 500;
-  letter-spacing: 0.16em;
-  text-transform: uppercase;
-  color: rgba(255,255,255,.4);
-  z-index: 1;
-}
-.kp-ph-sq {
-  display: inline-block;
-  width: 6px;
-  height: 6px;
-  background: var(--accent);
-}
-.kp-hero-inner { position: relative; z-index: 1; }
-.kp-hero-title {
-  font-family: 'Noto Serif KR', serif;
-  font-weight: 400;
-  font-size: clamp(36px, 5vw, 68px);
-  line-height: 1.25;
-  letter-spacing: -0.01em;
-  color: #fff;
-  margin: 14px 0 22px;
-  max-width: 24ch;
-  word-break: keep-all;
-}
-.kp-hero-lede {
-  font-size: 15.5px;
-  line-height: 1.75;
-  color: rgba(255,255,255,.78);
-  max-width: 56ch;
-  margin: 0;
-}
-.kp-hero-meta {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  list-style: none;
-  padding: 0;
-  margin: 48px 0 0;
-  border-top: 1px solid rgba(255,255,255,.16);
-}
-.kp-hero-meta li {
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-  padding: 22px 22px 22px 0;
-  border-right: 1px solid rgba(255,255,255,.16);
-}
-.kp-hero-meta li:last-child { border-right: none; }
-.kp-hero-meta li:not(:first-child) { padding-left: 22px; }
-.kp-meta-k {
-  font-size: 10px;
-  font-weight: 500;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  color: rgba(255,255,255,.55);
-}
-.kp-meta-v {
-  font-family: 'Noto Serif KR', serif;
-  font-weight: 400;
-  font-size: 17px;
-  color: #fff;
-  letter-spacing: -0.005em;
-}
-.kp-meta-v small {
-  font-family: 'Pretendard Variable', sans-serif;
-  font-size: 11px;
-  font-weight: 500;
-  color: rgba(255,255,255,.55);
-  margin-left: 6px;
-  letter-spacing: 0;
-}
-@media (max-width: 720px) {
-  .kp-hero-meta { grid-template-columns: repeat(2, 1fr); }
-  .kp-hero-meta li:nth-child(2) { border-right: none; }
-  .kp-hero-meta li:nth-child(3) { padding-left: 0; }
-  .kp-hero-meta li:nth-child(3),
-  .kp-hero-meta li:nth-child(4) {
-    border-top: 1px solid rgba(255,255,255,.16);
-  }
-}
-
-/* ===== Breadcrumb ===== */
-.kp-crumb {
-  background: var(--paper);
-  border-bottom: 1px solid var(--line);
-}
-.kp-crumb-inner {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  padding: 14px 32px;
-  font-size: 12px;
-  letter-spacing: 0.04em;
-  color: var(--muted-2);
-}
-@media (max-width: 720px) {
-  .kp-crumb-inner { padding: 14px 20px; }
-}
-.kp-crumb-item {
-  color: var(--muted-2);
-  text-decoration: none;
-  transition: color .2s ease;
-}
-.kp-crumb-item:hover { color: var(--accent); }
-.kp-crumb-sep { opacity: .4; }
-.kp-crumb-here { color: var(--ink); }
-
-/* ===== Section Head ===== */
-.kp-sec-head { margin-bottom: 56px; }
-@media (max-width: 820px) {
-  .kp-sec-head { margin-bottom: 36px; }
-}
-.kp-sec-bar {
-  display: flex;
-  align-items: center;
-  gap: 18px;
-  padding-bottom: 22px;
-  margin-bottom: 32px;
-  border-bottom: 1px solid var(--line);
-}
-.kp-sec-n {
-  font-family: 'Noto Serif KR', serif;
-  font-style: italic;
-  font-weight: 400;
-  font-size: 20px;
-  line-height: 1;
-  color: var(--accent);
-  font-variant-numeric: lining-nums;
-}
-.kp-sec-rule {
-  flex: 0 0 56px;
-  height: 1px;
-  background: var(--accent);
-  opacity: .6;
-}
-.kp-sec-lbl {
-  font-size: 11.5px;
-  font-weight: 500;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
-}
-.kp-sec-ko { color: var(--ink-2); }
-.kp-sec-en { color: var(--muted-2); margin-left: 10px; }
-.kp-sec-body {
-  display: grid;
-  grid-template-columns: 1.05fr 1fr;
-  gap: 64px;
-  align-items: end;
-}
-@media (max-width: 820px) {
-  .kp-sec-body { grid-template-columns: 1fr; gap: 16px; align-items: start; }
-}
-.kp-sec-title {
-  font-family: 'Noto Serif KR', serif;
-  font-weight: 400;
-  font-size: clamp(30px, 3.6vw, 48px);
-  line-height: 1.18;
-  letter-spacing: -0.02em;
-  margin: 0;
-  word-break: keep-all;
-}
-.kp-sec-lede {
-  font-size: 16px;
-  line-height: 1.75;
-  color: var(--muted);
-  max-width: 48ch;
-  margin: 0;
-}
+/* ph-*/crumb/sec-*는 글로벌(src/index.css) 처리 */
 
 /* ===== Pricing Table ===== */
 .kp-pt-controls {
@@ -1389,160 +1154,5 @@ const KP_CSS = `
   .kp-f-impact { justify-self: start; margin-top: 4px; }
 }
 
-/* ===== Related ===== */
-.kp-related-grid {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 24px;
-  margin-top: 32px;
-}
-@media (max-width: 900px) {
-  .kp-related-grid { grid-template-columns: repeat(2, 1fr); }
-}
-@media (max-width: 560px) {
-  .kp-related-grid { grid-template-columns: 1fr; }
-}
-.kp-related-card {
-  display: flex;
-  flex-direction: column;
-  gap: 14px;
-  background: var(--bg);
-  border: 1px solid var(--line);
-  padding: 32px 28px 28px;
-  min-height: 220px;
-  color: inherit;
-  text-decoration: none;
-  transition: background .25s ease, color .25s ease, border-color .25s ease;
-}
-.kp-related-card:hover {
-  background: var(--ink);
-  color: var(--paper);
-  border-color: var(--ink);
-}
-.kp-related-idx {
-  font-size: 10.5px;
-  font-weight: 500;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
-  color: var(--accent);
-}
-.kp-related-card:hover .kp-related-idx { color: #d9b790; }
-.kp-related-title {
-  font-family: 'Noto Serif KR', serif;
-  font-weight: 500;
-  font-size: 21px;
-  line-height: 1.35;
-  letter-spacing: -0.01em;
-  margin: 0;
-  color: var(--ink);
-}
-.kp-related-card:hover .kp-related-title { color: #fff; }
-.kp-related-desc {
-  font-size: 13px;
-  line-height: 1.65;
-  color: var(--muted);
-  margin: 0;
-}
-.kp-related-card:hover .kp-related-desc { color: rgba(255,255,255,.65); }
-.kp-related-more {
-  margin-top: auto;
-  font-size: 12px;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-  color: var(--muted-2);
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-}
-.kp-related-card:hover .kp-related-more { color: #d9b790; }
-.kp-related-arr { transition: transform .3s ease; }
-.kp-related-card:hover .kp-related-arr { transform: translateX(4px); }
-
-/* ===== CTA Band ===== */
-.kp-cta-band {
-  background: var(--bg-2);
-  border-top: 1px solid var(--line);
-  padding: 72px 0;
-}
-@media (max-width: 720px) {
-  .kp-cta-band { padding: 56px 0; }
-}
-.kp-cta-row {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 32px;
-  flex-wrap: wrap;
-}
-.kp-cta-text { display: flex; flex-direction: column; gap: 8px; flex: 1 1 380px; }
-.kp-cta-title {
-  font-family: 'Noto Serif KR', serif;
-  font-weight: 400;
-  font-size: clamp(26px, 3vw, 38px);
-  letter-spacing: -0.015em;
-  line-height: 1.35;
-  margin: 0;
-  word-break: keep-all;
-}
-.kp-cta-sub {
-  font-size: 14px;
-  color: var(--muted);
-  margin: 0;
-}
-.kp-cta-actions {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 12px;
-  justify-content: flex-end;
-}
-@media (max-width: 820px) {
-  .kp-cta-actions {
-    flex-wrap: nowrap;
-    justify-content: flex-start;
-    gap: 8px;
-    width: 100%;
-  }
-  .kp-cta-actions .kp-btn {
-    flex: 1 1 0;
-    min-width: 0;
-    padding: 14px 12px;
-    font-size: 13px;
-    white-space: nowrap;
-    justify-content: center;
-  }
-}
-
-/* ===== Buttons ===== */
-.kp-btn {
-  display: inline-flex;
-  align-items: center;
-  gap: 10px;
-  padding: 16px 22px;
-  border-radius: 2px;
-  font-family: inherit;
-  font-size: 14px;
-  font-weight: 500;
-  letter-spacing: -0.005em;
-  border: 0;
-  cursor: pointer;
-  text-decoration: none;
-  transition: background .25s ease, color .25s ease, border-color .25s ease;
-}
-.kp-btn-arr { transition: transform .3s ease; }
-.kp-btn:hover .kp-btn-arr { transform: translateX(4px); }
-.kp-btn-primary {
-  background: var(--ink);
-  color: var(--paper);
-}
-.kp-btn-primary:hover { background: var(--accent-deep); }
-.kp-btn-ghost {
-  background: transparent;
-  border: 1px solid var(--line-strong);
-  color: var(--ink);
-}
-.kp-btn-ghost:hover {
-  background: var(--ink);
-  color: var(--paper);
-  border-color: var(--ink);
-}
+/* related/cta-band/btn은 글로벌(src/index.css) 처리 */
 `;

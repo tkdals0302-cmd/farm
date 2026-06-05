@@ -50,20 +50,20 @@ export default function PortfolioListPage() {
   };
 
   return (
-    <div className="pf-page min-h-screen bg-[var(--bg)]">
+    <div className="page min-h-screen bg-[var(--bg)]">
       <Navbar />
 
-      {/* ===== Hero ===== (info/why-grout의 wg-hero 패턴 통일) */}
-      <header className="pf-hero" data-screen-label="Hero">
-        <div className="pf-hero-bg" aria-hidden="true" />
-        <div className="pf-container pf-hero-inner">
-          <div className="pf-eyebrow pf-eyebrow-light">Portfolio</div>
-          <h1 className="pf-hero-title">
+      {/* ===== Hero ===== (글로벌 .hero — src/index.css) */}
+      <header className="hero" data-screen-label="Hero">
+        <div className="hero-bg" aria-hidden="true" />
+        <div className="hero-inner">
+          <div className="hero-eyebrow hero-eyebrow-light">Portfolio</div>
+          <h1 className="hero-title">
             줄눈 한 줄로
             <br />
             <em>달라진 공간들</em>.
           </h1>
-          <p className="pf-hero-lede">
+          <p className="hero-lede">
             디테일라인이 시공한 시공 사례 모음입니다.<br />
             욕실·베란다·현관·주방등 케라폭시·폴리우레아 시공 결과를 단지·평수·자재별로 직접 확인하세요.
           </p>
@@ -71,11 +71,11 @@ export default function PortfolioListPage() {
       </header>
 
       {/* ===== Breadcrumb (info/why-grout의 wg-crumb 패턴 동일) ===== */}
-      <nav className="pf-crumb" aria-label="현재 위치">
-        <div className="pf-container pf-crumb-inner">
-          <Link to="/" className="pf-crumb-item">홈</Link>
-          <span className="pf-crumb-sep">/</span>
-          <span className="pf-crumb-here">시공사례</span>
+      <nav className="crumb" aria-label="현재 위치">
+        <div className="container crumb-inner">
+          <Link to="/" className="crumb-item">홈</Link>
+          <span className="crumb-sep">/</span>
+          <span className="crumb-here">시공사례</span>
         </div>
       </nav>
 
@@ -146,8 +146,6 @@ export default function PortfolioListPage() {
 
       <FloatingCTA />
       <Footer />
-
-      <style>{PF_CSS}</style>
     </div>
   );
 }
@@ -250,99 +248,4 @@ function EmptyState({ onReset, hasFilter }: { onReset: () => void; hasFilter: bo
   );
 }
 
-// ─── PF Hero CSS (info/why-grout의 wg-hero 패턴과 동일, prefix만 pf-*) ───
-const PF_CSS = `
-.pf-container {
-  max-width: 1360px;
-  margin: 0 auto;
-  padding: 0 32px;
-}
-@media (max-width: 720px) {
-  .pf-container { padding: 0 20px; }
-}
-
-.pf-eyebrow {
-  font-size: 11.5px;
-  font-weight: 500;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
-  color: var(--accent);
-}
-.pf-eyebrow-light { color: #d9b790; }
-
-.pf-page em { font-style: normal; color: var(--accent); }
-.pf-hero em { color: #e3c5a3; }
-
-/* ===== Hero ===== */
-.pf-hero {
-  position: relative;
-  padding: 168px 0 84px;
-  overflow: hidden;
-  isolation: isolate;
-  color-scheme: dark;
-}
-@media (max-width: 720px) {
-  .pf-hero { padding: 120px 0 64px; }
-}
-.pf-hero-bg {
-  position: absolute;
-  inset: 0;
-  z-index: -1;
-  background:
-    repeating-linear-gradient(135deg, rgba(255,255,255,.05) 0 1px, transparent 1px 24px),
-    radial-gradient(120% 80% at 70% 20%, rgba(138,106,76,.25), transparent 60%),
-    linear-gradient(180deg, #251d14 0%, #18130e 100%);
-}
-.pf-hero-bg::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: radial-gradient(120% 100% at 50% 0%, rgba(0,0,0,.25), rgba(0,0,0,.65) 80%);
-  pointer-events: none;
-}
-.pf-hero-inner { position: relative; z-index: 1; }
-.pf-hero-title {
-  font-family: 'Noto Serif KR', serif;
-  font-weight: 400;
-  font-size: clamp(36px, 5vw, 68px);
-  line-height: 1.25;
-  letter-spacing: -0.01em;
-  color: #fff;
-  margin: 14px 0 22px;
-  max-width: 24ch;
-  word-break: keep-all;
-}
-.pf-hero-lede {
-  font-size: 15.5px;
-  line-height: 1.75;
-  color: rgba(255,255,255,.78);
-  margin: 0;
-  word-break: keep-all;
-}
-
-/* ===== Breadcrumb ===== */
-.pf-crumb {
-  background: var(--paper);
-  border-bottom: 1px solid var(--line);
-}
-.pf-crumb-inner {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  padding: 14px 32px;
-  font-size: 12px;
-  letter-spacing: 0.04em;
-  color: var(--muted-2);
-}
-@media (max-width: 720px) {
-  .pf-crumb-inner { padding: 14px 20px; }
-}
-.pf-crumb-item {
-  color: var(--muted-2);
-  text-decoration: none;
-  transition: color .2s ease;
-}
-.pf-crumb-item:hover { color: var(--accent); }
-.pf-crumb-sep { opacity: .4; }
-.pf-crumb-here { color: var(--ink); }
-`;
+// 모든 CSS는 글로벌(src/index.css)에서 처리 — page/container/hero/crumb 등

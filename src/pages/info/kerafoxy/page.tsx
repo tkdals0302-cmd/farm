@@ -226,18 +226,18 @@ function SecHead({
   dark?: boolean;
 }) {
   return (
-    <div className={`kf-sec-head ${dark ? 'kf-sec-head-dark' : ''}`}>
-      <div className="kf-sec-bar">
-        <span className="kf-sec-n">{num}</span>
-        <span className="kf-sec-rule"></span>
-        <span className="kf-sec-lbl">
-          <span className="kf-sec-ko">{ko}</span>
-          <span className="kf-sec-en">{en}</span>
+    <div className={`sec-head ${dark ? 'sec-head-dark' : ''}`}>
+      <div className="sec-bar">
+        <span className="sec-n">{num}</span>
+        <span className="sec-rule"></span>
+        <span className="sec-lbl">
+          <span className="sec-ko">{ko}</span>
+          <span className="sec-en">{en}</span>
         </span>
       </div>
-      <div className="kf-sec-body">
-        <h2 className="kf-sec-title">{title}</h2>
-        <p className="kf-sec-lede">{lede}</p>
+      <div className="sec-body">
+        <h2 className="sec-title">{title}</h2>
+        <p className="sec-lede">{lede}</p>
       </div>
     </div>
   );
@@ -297,11 +297,11 @@ export default function KerafoxyPage() {
   };
 
   return (
-    <div className="kf-page">
+    <div className="page">
       <Navbar />
 
       {/* ===== 01 Hero ===== */}
-      <header className="kf-hero" data-screen-label="01 Hero">
+      <header className="hero" data-screen-label="01 Hero">
         <div
           className="kf-hero-bg"
           style={{
@@ -310,21 +310,21 @@ export default function KerafoxyPage() {
           } as React.CSSProperties}
           aria-hidden="true"
         />
-        <div className="kf-container kf-hero-inner">
-          <div className="kf-eyebrow kf-eyebrow-light">Grout Knowledge · 01</div>
-          <h1 className="kf-hero-title">
+        <div className="hero-inner">
+          <div className="hero-eyebrow hero-eyebrow-light">Grout Knowledge · 01</div>
+          <h1 className="hero-title">
             케라폭시 줄눈,
             <br />한 줄의 깊이 <em>완벽</em>의 기준.
           </h1>
-          <p className="kf-hero-lede">
+          <p className="hero-lede">
             마페이의 80년 경험치를 흡수한 2액형 고성능 줄눈 소재.<br />
             일반 시멘트 줄눈과 무엇이 다른지, 왜 프리미엄 공간에 선택되는지 정리했습니다.
           </p>
-          <ul className="kf-hero-meta">
+          <ul className="hero-meta">
             {HERO_META.map((m) => (
               <li key={m.k}>
-                <span className="kf-meta-k">{m.k}</span>
-                <span className="kf-meta-v">{m.v}</span>
+                <span className="hero-meta-k">{m.k}</span>
+                <span className="hero-meta-v">{m.v}</span>
               </li>
             ))}
           </ul>
@@ -332,22 +332,22 @@ export default function KerafoxyPage() {
       </header>
 
       {/* ===== Breadcrumb ===== */}
-      <nav className="kf-crumb" aria-label="현재 위치">
-        <div className="kf-container kf-crumb-inner">
-          <Link to="/" className="kf-crumb-item">홈</Link>
-          <span className="kf-crumb-sep">/</span>
-          <span className="kf-crumb-item">줄눈 정보</span>
-          <span className="kf-crumb-sep">/</span>
-          <span className="kf-crumb-here">케라폭시 줄눈이란?</span>
+      <nav className="crumb" aria-label="현재 위치">
+        <div className="container crumb-inner">
+          <Link to="/" className="crumb-item">홈</Link>
+          <span className="crumb-sep">/</span>
+          <span className="crumb-item">줄눈 정보</span>
+          <span className="crumb-sep">/</span>
+          <span className="crumb-here">케라폭시 줄눈이란?</span>
         </div>
       </nav>
 
       {/* ===== 02 Introduction ===== */}
-      <section className="kf-section" data-screen-label="02 Introduction">
-        <div className="kf-container">
+      <section className="section" data-screen-label="02 Introduction">
+        <div className="container">
           <div className="kf-intro">
             <div className="kf-intro-left">
-              <div className="kf-eyebrow">Introduction · 들어가며</div>
+              <div className="eyebrow">Introduction · 들어가며</div>
               <h2 className="kf-intro-title">
                 케라폭시 줄눈,<br />왜 <em>프리미엄 소재</em>인가요?
               </h2>
@@ -389,8 +389,8 @@ export default function KerafoxyPage() {
       </section>
 
       {/* ===== 03 Benefits ===== */}
-      <section className="kf-section kf-bg-paper" data-screen-label="03 Benefits">
-        <div className="kf-container">
+      <section className="section bg-paper" data-screen-label="03 Benefits">
+        <div className="container">
           <SecHead
             num="02"
             ko="5가지 핵심 장점"
@@ -443,8 +443,8 @@ export default function KerafoxyPage() {
       </section>
 
       {/* ===== 04 Spaces ===== */}
-      <section className="kf-section" data-screen-label="04 Spaces">
-        <div className="kf-container">
+      <section className="section" data-screen-label="04 Spaces">
+        <div className="container">
           <SecHead
             num="03"
             ko="적합한 공간"
@@ -475,8 +475,8 @@ export default function KerafoxyPage() {
       </section>
 
       {/* ===== 05 Before · After ===== */}
-      <section className="kf-section-dark" data-screen-label="05 Before · After">
-        <div className="kf-container">
+      <section className="section-dark" data-screen-label="05 Before · After">
+        <div className="container">
           <SecHead
             dark
             num="04"
@@ -529,8 +529,8 @@ export default function KerafoxyPage() {
 
       {/* ===== 06 Related ===== */}
       {(
-        <section className="kf-section kf-bg-paper" data-screen-label="06 Related">
-          <div className="kf-container">
+        <section className="section bg-paper" data-screen-label="06 Related">
+          <div className="container">
             <SecHead
               num="05"
               ko="관련 정보 더 보기"
@@ -542,14 +542,14 @@ export default function KerafoxyPage() {
               }
               lede="가격 · 제품 · 비교 · 시공 — 네 가지 관점으로 줄눈을 더 깊이 살펴보세요."
             />
-            <div className="kf-related-grid">
+            <div className="related-grid">
               {RELATED.map((r) => (
-                <Link key={r.href} to={r.href} className="kf-related-card">
-                  <span className="kf-related-idx">{r.idx}</span>
-                  <h4 className="kf-related-title">{r.title}</h4>
-                  <p className="kf-related-desc">{r.desc}</p>
-                  <span className="kf-related-more">
-                    more <span className="kf-related-arr">→</span>
+                <Link key={r.href} to={r.href} className="related-card">
+                  <span className="related-idx">{r.idx}</span>
+                  <h4 className="related-title">{r.title}</h4>
+                  <p className="related-desc">{r.desc}</p>
+                  <span className="related-more">
+                    more <span className="related-arr">→</span>
                   </span>
                 </Link>
               ))}
@@ -559,22 +559,22 @@ export default function KerafoxyPage() {
       )}
 
       {/* ===== CTA Band ===== */}
-      <section className="kf-cta-band" data-screen-label="CTA Band">
-        <div className="kf-container kf-cta-row">
-          <div className="kf-cta-text">
-            <h3 className="kf-cta-title">
+      <section className="cta-band" data-screen-label="CTA Band">
+        <div className="container cta-row">
+          <div className="cta-text">
+            <h3 className="cta-title">
               우리 집 줄눈에 맞는 답이 궁금하다면, <em>무료 견적</em>으로 시작하세요.
             </h3>
-            <p className="kf-cta-sub">평형 · 공간 · 색상을 알려주시면 24시간 내에 회신드립니다. 서울·경기·인천 줄눈시공 무료 견적 상담.</p>
+            <p className="cta-sub">평형 · 공간 · 색상을 알려주시면 24시간 내에 회신드립니다. 서울·경기·인천 줄눈시공 무료 견적 상담.</p>
           </div>
-          <div className="kf-cta-actions">
-            <button type="button" className="kf-btn kf-btn-primary" onClick={goQuote}>
-              무료 견적 받기 <span className="kf-btn-arr">→</span>
+          <div className="cta-actions">
+            <button type="button" className="btn btn-primary" onClick={goQuote}>
+              무료 견적 받기 <span className="btn-arr">→</span>
             </button>
             <a
               href="tel:010-8005-6674"
               onClick={() => Events.phoneClick('info_cta')}
-              className="kf-btn kf-btn-ghost"
+              className="btn btn-ghost"
             >
               전화 상담 010-8005-6674
             </a>
@@ -594,75 +594,21 @@ export default function KerafoxyPage() {
 // ─────────────────────────────────────────────────────────────────────────────
 
 const KF_CSS = `
-.kf-page {
-  background: var(--bg);
-  color: var(--ink);
-  font-family: 'Pretendard Variable', 'Pretendard', sans-serif;
-}
-.kf-page ::selection { background: var(--accent); color: #fff; }
+/* page/container/section/hero/eyebrow/sec-/crumb/btn/cta-band/related/imgph는 모두 글로벌(src/index.css) 처리.
+   페이지 고유: .kf-hero-bg(이미지 합성) + intro/benefit/compare/spaces/ba */
 
-.kf-container {
-  max-width: 1360px;
-  margin: 0 auto;
-  padding: 0 32px;
-}
-@media (max-width: 720px) {
-  .kf-container { padding: 0 20px; }
-}
-
-.kf-section {
-  padding: 120px 0;
-  border-top: 1px solid var(--line);
-}
-.kf-section-dark {
-  padding: 120px 0;
-  background: var(--dark);
-  color: var(--on-dark);
-}
-.kf-bg-paper { background: var(--paper); }
-@media (max-width: 720px) {
-  .kf-section, .kf-section-dark { padding: 72px 0; }
-}
-
-.kf-eyebrow {
-  font-size: 11.5px;
-  font-weight: 500;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
-  color: var(--accent);
-}
-.kf-eyebrow-light { color: #d9b790; }
-
-em {
-  font-style: normal;
-  color: var(--accent);
-}
-.kf-section-dark em, .kf-hero em { color: #e3c5a3; }
-
-/* ===== Hero ===== */
-.kf-hero {
-  position: relative;
-  padding: 168px 0 84px;
-  overflow: hidden;
-  isolation: isolate;
-}
-@media (max-width: 720px) {
-  .kf-hero { padding: 120px 0 64px; }
-}
+/* ===== Hero 배경 (페이지 고유 이미지 합성) ===== */
 .kf-hero-bg {
   position: absolute;
   inset: 0;
   z-index: -1;
   background:
-    /* Bottom fade — light top → strong dark near bottom for image blend */
     linear-gradient(180deg, rgba(20,16,12,.25) 0%, rgba(20,16,12,.25) 35%, rgba(14,11,8,.95) 100%),
     radial-gradient(120% 80% at 70% 20%, rgba(138,106,76,.18), transparent 60%),
-    /* Width-anchored, top-aligned */
     var(--hero-img-d, none) center top / 100% auto no-repeat,
     linear-gradient(180deg, #251d14 0%, #18130e 100%);
 }
 @media (max-width: 720px) {
-  /* Mobile uses dedicated mobile-optimized image with cover */
   .kf-hero-bg {
     background:
       linear-gradient(180deg, rgba(20,16,12,.35) 0%, rgba(14,11,8,.78) 100%),
@@ -678,160 +624,8 @@ em {
   background: radial-gradient(120% 100% at 50% 0%, rgba(0,0,0,.15), rgba(0,0,0,.55) 80%);
   pointer-events: none;
 }
-.kf-hero-inner { position: relative; z-index: 1; }
-.kf-hero-title {
-  font-family: 'Noto Serif KR', serif;
-  font-weight: 400;
-  font-size: clamp(36px, 5vw, 68px);
-  line-height: 1.25;
-  letter-spacing: -0.01em;
-  color: #fff;
-  margin: 14px 0 22px;
-  max-width: 24ch;
-  word-break: keep-all;
-}
-.kf-hero-lede {
-  font-size: 15.5px;
-  line-height: 1.75;
-  color: rgba(255,255,255,.78);
-  max-width: 56ch;
-  margin: 0;
-}
-.kf-hero-meta {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 0;
-  list-style: none;
-  padding: 0;
-  margin: 48px 0 0;
-  border-top: 1px solid rgba(255,255,255,.16);
-}
-.kf-hero-meta li {
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-  padding: 22px 22px 22px 0;
-  border-right: 1px solid rgba(255,255,255,.16);
-}
-.kf-hero-meta li:last-child { border-right: none; }
-.kf-hero-meta li:not(:first-child) { padding-left: 22px; }
-.kf-meta-k {
-  font-size: 10.5px;
-  font-weight: 500;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  color: rgba(255,255,255,.55);
-}
-.kf-meta-v {
-  font-family: 'Noto Serif KR', serif;
-  font-weight: 400;
-  font-size: 17px;
-  color: #fff;
-  letter-spacing: -0.005em;
-}
-.kf-meta-small {
-  font-size: 11.5px;
-  color: rgba(255,255,255,.6);
-}
-@media (max-width: 720px) {
-  .kf-hero-meta { grid-template-columns: repeat(2, 1fr); }
-  .kf-hero-meta li:nth-child(2) { border-right: none; }
-  .kf-hero-meta li:nth-child(3) { padding-left: 0; }
-  .kf-hero-meta li:nth-child(3), .kf-hero-meta li:nth-child(4) {
-    border-top: 1px solid rgba(255,255,255,.16);
-  }
-}
 
-/* ===== Breadcrumb ===== */
-.kf-crumb {
-  background: var(--paper);
-  border-bottom: 1px solid var(--line);
-}
-.kf-crumb-inner {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  padding: 14px 32px;
-  font-size: 12px;
-  letter-spacing: 0.04em;
-  color: var(--muted-2);
-}
-@media (max-width: 720px) {
-  .kf-crumb-inner { padding: 14px 20px; }
-}
-.kf-crumb-item {
-  color: var(--muted-2);
-  text-decoration: none;
-  transition: color .2s ease;
-}
-.kf-crumb-item:hover { color: var(--accent); }
-.kf-crumb-sep { opacity: .4; }
-.kf-crumb-here { color: var(--ink); }
-
-/* ===== Section Head ===== */
-.kf-sec-head { margin-bottom: 64px; }
-.kf-sec-bar {
-  display: flex;
-  align-items: center;
-  gap: 18px;
-  padding-bottom: 22px;
-  margin-bottom: 36px;
-  border-bottom: 1px solid var(--line);
-}
-.kf-sec-head-dark .kf-sec-bar { border-bottom-color: rgba(255,255,255,.14); }
-.kf-sec-n {
-  font-family: 'Noto Serif KR', serif;
-  font-style: italic;
-  font-weight: 400;
-  font-size: 20px;
-  line-height: 1;
-  color: var(--accent);
-  font-variant-numeric: lining-nums;
-}
-.kf-sec-head-dark .kf-sec-n { color: #d9b790; }
-.kf-sec-rule {
-  flex: 0 0 56px;
-  height: 1px;
-  background: var(--accent);
-  opacity: .6;
-}
-.kf-sec-head-dark .kf-sec-rule { background: #d9b790; opacity: .7; }
-.kf-sec-lbl {
-  font-size: 11.5px;
-  font-weight: 500;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
-}
-.kf-sec-ko { color: var(--ink-2); }
-.kf-sec-head-dark .kf-sec-ko { color: #fff; }
-.kf-sec-en { color: var(--muted-2); margin-left: 10px; }
-.kf-sec-head-dark .kf-sec-en { color: rgba(255,255,255,.5); }
-.kf-sec-body {
-  display: grid;
-  grid-template-columns: 1.05fr 1fr;
-  gap: 64px;
-  align-items: end;
-}
-@media (max-width: 820px) {
-  .kf-sec-body { grid-template-columns: 1fr; gap: 24px; align-items: start; }
-}
-.kf-sec-title {
-  font-family: 'Noto Serif KR', serif;
-  font-weight: 400;
-  font-size: clamp(30px, 3.6vw, 48px);
-  line-height: 1.3;
-  letter-spacing: -0.01em;
-  margin: 0;
-  word-break: keep-all;
-}
-.kf-sec-head-dark .kf-sec-title { color: var(--on-dark); }
-.kf-sec-lede {
-  font-size: 16px;
-  line-height: 1.75;
-  color: var(--muted);
-  margin: 0;
-}
-.kf-sec-head-dark .kf-sec-lede { color: var(--dark-muted); }
+/* crumb/sec-*는 글로벌(src/index.css) 처리 */
 
 /* ===== Intro ===== */
 .kf-intro {
@@ -919,7 +713,7 @@ em {
 }
 
 /* ===== Image placeholder ===== */
-.kf-imgph {
+.imgph {
   position: relative;
   width: 100%;
   overflow: hidden;
@@ -933,7 +727,7 @@ em {
     linear-gradient(180deg, #ece5d8 0%, #d9cfbf 100%);
   border: 1px solid var(--line);
 }
-.kf-imgph-dark {
+.imgph-dark {
   background:
     repeating-linear-gradient(
       135deg,
@@ -945,7 +739,7 @@ em {
   border-color: rgba(255,255,255,.1);
   color: var(--on-dark);
 }
-.kf-ph-corner {
+.ph-corner {
   position: absolute;
   top: 14px;
   right: 16px;
@@ -955,8 +749,8 @@ em {
   text-transform: uppercase;
   color: var(--muted-2);
 }
-.kf-imgph-dark .kf-ph-corner { color: rgba(255,255,255,.55); }
-.kf-ph-label {
+.imgph-dark .ph-corner { color: rgba(255,255,255,.55); }
+.ph-label {
   position: absolute;
   left: 18px;
   bottom: 16px;
@@ -969,8 +763,8 @@ em {
   text-transform: uppercase;
   color: var(--muted-2);
 }
-.kf-imgph-dark .kf-ph-label { color: rgba(255,255,255,.55); }
-.kf-ph-sq {
+.imgph-dark .ph-label { color: rgba(255,255,255,.55); }
+.ph-sq {
   display: inline-block;
   width: 6px;
   height: 6px;
@@ -1336,162 +1130,5 @@ em {
   .kf-ba-bot-v { font-size: 16px; }
 }
 
-/* ===== Related ===== */
-.kf-related-grid {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 24px;
-}
-@media (max-width: 900px) {
-  .kf-related-grid { grid-template-columns: repeat(2, 1fr); }
-}
-@media (max-width: 560px) {
-  .kf-related-grid { grid-template-columns: 1fr; }
-}
-.kf-related-card {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  background: var(--paper);
-  border: 1px solid var(--line);
-  padding: 32px 28px 28px;
-  min-height: 220px;
-  color: inherit;
-  text-decoration: none;
-  transition: background .25s ease, color .25s ease, border-color .25s ease;
-}
-.kf-related-card:hover {
-  background: var(--ink);
-  color: var(--paper);
-  border-color: var(--ink);
-}
-.kf-related-idx {
-  font-size: 10.5px;
-  font-weight: 500;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  color: var(--muted-2);
-}
-.kf-related-card:hover .kf-related-idx { color: #d9b790; }
-.kf-related-title {
-  font-family: 'Noto Serif KR', serif;
-  font-weight: 500;
-  font-size: 21px;
-  line-height: 1.35;
-  color: var(--ink);
-  margin: 0;
-  letter-spacing: -0.005em;
-}
-.kf-related-card:hover .kf-related-title { color: #fff; }
-.kf-related-desc {
-  font-size: 13px;
-  line-height: 1.7;
-  color: var(--muted);
-  margin: 0;
-}
-.kf-related-card:hover .kf-related-desc { color: rgba(255,255,255,.75); }
-.kf-related-more {
-  margin-top: auto;
-  font-size: 11.5px;
-  font-weight: 500;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  color: var(--muted-2);
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-}
-.kf-related-card:hover .kf-related-more { color: #d9b790; }
-.kf-related-arr { transition: transform .3s ease; }
-.kf-related-card:hover .kf-related-arr { transform: translateX(4px); }
-
-/* ===== CTA Band ===== */
-.kf-cta-band {
-  background: var(--bg-2);
-  border-top: 1px solid var(--line);
-  padding: 72px 0;
-}
-@media (max-width: 720px) {
-  .kf-cta-band { padding: 56px 0; }
-}
-.kf-cta-row {
-  display: grid;
-  grid-template-columns: 1.4fr 1fr;
-  gap: 32px;
-  align-items: center;
-}
-@media (max-width: 820px) {
-  .kf-cta-row { grid-template-columns: 1fr; gap: 24px; }
-}
-.kf-cta-text { display: flex; flex-direction: column; gap: 8px; }
-.kf-cta-title {
-  font-family: 'Noto Serif KR', serif;
-  font-weight: 400;
-  font-size: clamp(22px, 2.5vw, 30px);
-  line-height: 1.4;
-  letter-spacing: -0.005em;
-  color: var(--ink);
-  margin: 0;
-  word-break: keep-all;
-}
-.kf-cta-sub {
-  font-size: 14px;
-  color: var(--muted);
-  margin: 0;
-}
-.kf-cta-actions {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
-  justify-content: flex-end;
-}
-@media (max-width: 820px) {
-  .kf-cta-actions {
-    flex-wrap: nowrap;
-    justify-content: flex-start;
-    gap: 8px;
-  }
-  .kf-cta-actions .kf-btn {
-    flex: 1 1 0;
-    min-width: 0;
-    padding: 14px 12px;
-    font-size: 13px;
-    white-space: nowrap;
-    justify-content: center;
-  }
-}
-
-/* ===== Buttons ===== */
-.kf-btn {
-  display: inline-flex;
-  align-items: center;
-  gap: 10px;
-  padding: 16px 22px;
-  border-radius: 2px;
-  font-family: inherit;
-  font-size: 14px;
-  font-weight: 500;
-  letter-spacing: -0.005em;
-  border: 0;
-  cursor: pointer;
-  text-decoration: none;
-  transition: background .25s ease, color .25s ease, border-color .25s ease;
-}
-.kf-btn-arr { transition: transform .3s ease; }
-.kf-btn:hover .kf-btn-arr { transform: translateX(4px); }
-.kf-btn-primary {
-  background: var(--ink);
-  color: var(--paper);
-}
-.kf-btn-primary:hover { background: var(--accent-deep); }
-.kf-btn-ghost {
-  background: transparent;
-  border: 1px solid var(--line-strong);
-  color: var(--ink);
-}
-.kf-btn-ghost:hover {
-  background: var(--ink);
-  color: var(--paper);
-  border-color: var(--ink);
-}
+/* related/cta-band/btn은 글로벌(src/index.css) 처리 */
 `;

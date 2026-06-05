@@ -169,18 +169,18 @@ function SecHead({
   dark?: boolean;
 }) {
   return (
-    <div className={`wg-sec-head ${dark ? 'wg-sec-head-dark' : ''}`}>
-      <div className="wg-sec-bar">
-        <span className="wg-sec-n">{num}</span>
-        <span className="wg-sec-rule"></span>
-        <span className="wg-sec-lbl">
-          <span className="wg-sec-ko">{ko}</span>
-          <span className="wg-sec-en">{en}</span>
+    <div className={`sec-head ${dark ? 'sec-head-dark' : ''}`}>
+      <div className="sec-bar">
+        <span className="sec-n">{num}</span>
+        <span className="sec-rule"></span>
+        <span className="sec-lbl">
+          <span className="sec-ko">{ko}</span>
+          <span className="sec-en">{en}</span>
         </span>
       </div>
-      <div className="wg-sec-body">
-        <h2 className="wg-sec-title">{title}</h2>
-        {lede && <p className="wg-sec-lede">{lede}</p>}
+      <div className="sec-body">
+        <h2 className="sec-title">{title}</h2>
+        {lede && <p className="sec-lede">{lede}</p>}
       </div>
     </div>
   );
@@ -240,27 +240,27 @@ export default function WhyGroutPage() {
   };
 
   return (
-    <div className="wg-page">
+    <div className="page">
       <Navbar />
 
       {/* ===== Hero ===== */}
-      <header className="wg-hero" data-screen-label="Hero">
-        <div className="wg-hero-bg" aria-hidden="true" />
-        <div className="wg-container wg-hero-inner">
-          <div className="wg-eyebrow wg-eyebrow-light">Grout Knowledge · 05</div>
-          <h1 className="wg-hero-title">
+      <header className="hero" data-screen-label="Hero">
+        <div className="hero-bg" aria-hidden="true" />
+        <div className="hero-inner">
+          <div className="hero-eyebrow hero-eyebrow-light">Grout Knowledge · 05</div>
+          <h1 className="hero-title">
             줄눈시공<em>,</em>
             <br />선택이 아닌 <em>필수</em>인 이유.
           </h1>
-          <p className="wg-hero-lede">
+          <p className="hero-lede">
             위생 · 미관 · 방수 · 비용 절감.<br />
             줄눈 하나만 바꿔도 공간의 수명이 크게 달라집니다.
           </p>
-          <ul className="wg-hero-meta">
+          <ul className="hero-meta">
             {HERO_META.map((m) => (
               <li key={m.k}>
-                <span className="wg-meta-k">{m.k}</span>
-                <span className="wg-meta-v">
+                <span className="hero-meta-k">{m.k}</span>
+                <span className="hero-meta-v">
                   {m.v} <small>{m.small}</small>
                 </span>
               </li>
@@ -270,19 +270,19 @@ export default function WhyGroutPage() {
       </header>
 
       {/* ===== Breadcrumb ===== */}
-      <nav className="wg-crumb" aria-label="현재 위치">
-        <div className="wg-container wg-crumb-inner">
-          <Link to="/" className="wg-crumb-item">홈</Link>
-          <span className="wg-crumb-sep">/</span>
-          <span className="wg-crumb-item">줄눈 정보</span>
-          <span className="wg-crumb-sep">/</span>
-          <span className="wg-crumb-here">줄눈시공 하는 이유</span>
+      <nav className="crumb" aria-label="현재 위치">
+        <div className="container crumb-inner">
+          <Link to="/" className="crumb-item">홈</Link>
+          <span className="crumb-sep">/</span>
+          <span className="crumb-item">줄눈 정보</span>
+          <span className="crumb-sep">/</span>
+          <span className="crumb-here">줄눈시공 하는 이유</span>
         </div>
       </nav>
 
       {/* ===== Intro ===== */}
-      <section className="wg-section" data-screen-label="Intro">
-        <div className="wg-container">
+      <section className="section" data-screen-label="Intro">
+        <div className="container">
           <div className="wg-intro-grid">
             <h2 className="wg-intro-title">
               줄눈시공은<br />선택이 아니라 <em>필수</em>입니다.
@@ -303,8 +303,8 @@ export default function WhyGroutPage() {
       </section>
 
       {/* ===== 01 Reasons ===== */}
-      <section className="wg-section wg-bg-paper" data-screen-label="01 Reasons">
-        <div className="wg-container">
+      <section className="section bg-paper" data-screen-label="01 Reasons">
+        <div className="container">
           <SecHead
             num="01"
             ko="줄눈시공을 해야 하는 이유"
@@ -337,8 +337,8 @@ export default function WhyGroutPage() {
       </section>
 
       {/* ===== 02 Problems (dark) ===== */}
-      <section className="wg-section-dark" data-screen-label="02 Problems">
-        <div className="wg-container">
+      <section className="section-dark" data-screen-label="02 Problems">
+        <div className="container">
           <SecHead
             dark
             num="02"
@@ -365,8 +365,8 @@ export default function WhyGroutPage() {
       </section>
 
       {/* ===== 03 Timing ===== */}
-      <section className="wg-section" data-screen-label="03 Timing">
-        <div className="wg-container">
+      <section className="section" data-screen-label="03 Timing">
+        <div className="container">
           <SecHead
             num="03"
             ko="줄눈시공이 필요한 시점"
@@ -393,8 +393,8 @@ export default function WhyGroutPage() {
       </section>
 
       {/* ===== 04 Related ===== */}
-      <section className="wg-section wg-bg-paper" data-screen-label="04 Related">
-        <div className="wg-container">
+      <section className="section bg-paper" data-screen-label="04 Related">
+        <div className="container">
           <SecHead
             num="04"
             ko="관련 정보 더 보기"
@@ -406,14 +406,14 @@ export default function WhyGroutPage() {
             }
             lede="자재 · 가격 · 제품 · 비교 — 네 가지 관점으로 줄눈을 더 깊이 살펴보세요."
           />
-          <div className="wg-related-grid">
+          <div className="related-grid">
             {RELATED.map((r) => (
-              <Link key={r.href} to={r.href} className="wg-related-card">
-                <span className="wg-related-idx">{r.idx}</span>
-                <h4 className="wg-related-title">{r.title}</h4>
-                <p className="wg-related-desc">{r.desc}</p>
-                <span className="wg-related-more">
-                  more <span className="wg-related-arr">→</span>
+              <Link key={r.href} to={r.href} className="related-card">
+                <span className="related-idx">{r.idx}</span>
+                <h4 className="related-title">{r.title}</h4>
+                <p className="related-desc">{r.desc}</p>
+                <span className="related-more">
+                  more <span className="related-arr">→</span>
                 </span>
               </Link>
             ))}
@@ -422,24 +422,24 @@ export default function WhyGroutPage() {
       </section>
 
       {/* ===== CTA Band ===== */}
-      <section className="wg-cta-band" data-screen-label="CTA Band">
-        <div className="wg-container wg-cta-row">
-          <div className="wg-cta-text">
-            <h3 className="wg-cta-title">
+      <section className="cta-band" data-screen-label="CTA Band">
+        <div className="container cta-row">
+          <div className="cta-text">
+            <h3 className="cta-title">
               지금 우리 집 줄눈이 <em>괜찮은지</em> 점검받아 보세요.
             </h3>
-            <p className="wg-cta-sub">
+            <p className="cta-sub">
               사진 한 장만 보내주시면 현재 상태와 시공 필요 여부를 안내해 드립니다. 서울·경기·인천 줄눈시공 무료 견적 상담.
             </p>
           </div>
-          <div className="wg-cta-actions">
-            <button type="button" className="wg-btn wg-btn-primary" onClick={goQuote}>
-              무료 견적 받기 <span className="wg-btn-arr">→</span>
+          <div className="cta-actions">
+            <button type="button" className="btn btn-primary" onClick={goQuote}>
+              무료 견적 받기 <span className="btn-arr">→</span>
             </button>
             <a
               href="tel:010-8005-6674"
               onClick={() => Events.phoneClick('info_cta')}
-              className="wg-btn wg-btn-ghost"
+              className="btn btn-ghost"
             >
               전화 상담 010-8005-6674
             </a>
@@ -459,240 +459,8 @@ export default function WhyGroutPage() {
 // ─────────────────────────────────────────────────────────────────────────────
 
 const WG_CSS = `
-.wg-page {
-  background: var(--bg);
-  color: var(--ink);
-  font-family: 'Pretendard Variable', 'Pretendard', sans-serif;
-}
-.wg-page ::selection { background: var(--accent); color: #fff; }
-
-.wg-container {
-  max-width: 1360px;
-  margin: 0 auto;
-  padding: 0 32px;
-}
-@media (max-width: 720px) {
-  .wg-container { padding: 0 20px; }
-}
-
-.wg-section {
-  padding: 120px 0;
-  border-top: 1px solid var(--line);
-}
-.wg-section-dark {
-  padding: 120px 0;
-  background: var(--dark);
-  color: var(--on-dark);
-}
-.wg-bg-paper { background: var(--paper); }
-@media (max-width: 720px) {
-  .wg-section, .wg-section-dark { padding: 72px 0; }
-}
-
-.wg-eyebrow {
-  font-size: 11.5px;
-  font-weight: 500;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
-  color: var(--accent);
-}
-.wg-eyebrow-light { color: #d9b790; }
-
-.wg-page em {
-  font-style: normal;
-  color: var(--accent);
-}
-.wg-hero em, .wg-section-dark em { color: #e3c5a3; }
-
-/* ===== Hero ===== */
-.wg-hero {
-  position: relative;
-  padding: 168px 0 84px;
-  overflow: hidden;
-  isolation: isolate;
-  color-scheme: dark;
-}
-@media (max-width: 720px) {
-  .wg-hero { padding: 120px 0 64px; }
-}
-.wg-hero-bg {
-  position: absolute;
-  inset: 0;
-  z-index: -1;
-  background:
-    repeating-linear-gradient(135deg, rgba(255,255,255,.05) 0 1px, transparent 1px 24px),
-    radial-gradient(120% 80% at 70% 20%, rgba(138,106,76,.25), transparent 60%),
-    linear-gradient(180deg, #251d14 0%, #18130e 100%);
-}
-.wg-hero-bg::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: radial-gradient(120% 100% at 50% 0%, rgba(0,0,0,.25), rgba(0,0,0,.65) 80%);
-  pointer-events: none;
-}
-.wg-hero-inner { position: relative; z-index: 1; }
-.wg-hero-title {
-  font-family: 'Noto Serif KR', serif;
-  font-weight: 400;
-  font-size: clamp(36px, 5vw, 68px);
-  line-height: 1.25;
-  letter-spacing: -0.01em;
-  color: #fff;
-  margin: 14px 0 22px;
-  max-width: 24ch;
-  word-break: keep-all;
-}
-.wg-hero-lede {
-  font-size: 15.5px;
-  line-height: 1.75;
-  color: rgba(255,255,255,.78);
-  max-width: 56ch;
-  margin: 0;
-}
-.wg-hero-meta {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  list-style: none;
-  padding: 0;
-  margin: 48px 0 0;
-  border-top: 1px solid rgba(255,255,255,.16);
-}
-.wg-hero-meta li {
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-  padding: 22px 22px 22px 0;
-  border-right: 1px solid rgba(255,255,255,.16);
-}
-.wg-hero-meta li:last-child { border-right: none; }
-.wg-hero-meta li:not(:first-child) { padding-left: 22px; }
-.wg-meta-k {
-  font-size: 10px;
-  font-weight: 500;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  color: rgba(255,255,255,.55);
-}
-.wg-meta-v {
-  font-family: 'Noto Serif KR', serif;
-  font-weight: 400;
-  font-size: 17px;
-  color: #fff;
-  letter-spacing: -0.005em;
-}
-.wg-meta-v small {
-  font-family: 'Pretendard Variable', sans-serif;
-  font-size: 11px;
-  font-weight: 500;
-  color: rgba(255,255,255,.55);
-  margin-left: 6px;
-  letter-spacing: 0;
-}
-@media (max-width: 720px) {
-  .wg-hero-meta { grid-template-columns: repeat(2, 1fr); }
-  .wg-hero-meta li:nth-child(2) { border-right: none; }
-  .wg-hero-meta li:nth-child(3) { padding-left: 0; }
-  .wg-hero-meta li:nth-child(3),
-  .wg-hero-meta li:nth-child(4) {
-    border-top: 1px solid rgba(255,255,255,.16);
-  }
-}
-
-/* ===== Breadcrumb ===== */
-.wg-crumb {
-  background: var(--paper);
-  border-bottom: 1px solid var(--line);
-}
-.wg-crumb-inner {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  padding: 14px 32px;
-  font-size: 12px;
-  letter-spacing: 0.04em;
-  color: var(--muted-2);
-}
-@media (max-width: 720px) {
-  .wg-crumb-inner { padding: 14px 20px; }
-}
-.wg-crumb-item {
-  color: var(--muted-2);
-  text-decoration: none;
-  transition: color .2s ease;
-}
-.wg-crumb-item:hover { color: var(--accent); }
-.wg-crumb-sep { opacity: .4; }
-.wg-crumb-here { color: var(--ink); }
-
-/* ===== Section Head ===== */
-.wg-sec-head { margin-bottom: 56px; }
-@media (max-width: 820px) {
-  .wg-sec-head { margin-bottom: 36px; }
-}
-.wg-sec-bar {
-  display: flex;
-  align-items: center;
-  gap: 18px;
-  padding-bottom: 22px;
-  margin-bottom: 32px;
-  border-bottom: 1px solid var(--line);
-}
-.wg-sec-head-dark .wg-sec-bar { border-bottom-color: rgba(255,255,255,.14); }
-.wg-sec-n {
-  font-family: 'Noto Serif KR', serif;
-  font-style: italic;
-  font-weight: 400;
-  font-size: 20px;
-  line-height: 1;
-  color: var(--accent);
-  font-variant-numeric: lining-nums;
-}
-.wg-sec-head-dark .wg-sec-n { color: #d9b790; }
-.wg-sec-rule {
-  flex: 0 0 56px;
-  height: 1px;
-  background: var(--accent);
-  opacity: .6;
-}
-.wg-sec-head-dark .wg-sec-rule { background: #d9b790; opacity: .7; }
-.wg-sec-lbl {
-  font-size: 11.5px;
-  font-weight: 500;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
-}
-.wg-sec-ko { color: var(--ink-2); }
-.wg-sec-head-dark .wg-sec-ko { color: #fff; }
-.wg-sec-en { color: var(--muted-2); margin-left: 10px; }
-.wg-sec-head-dark .wg-sec-en { color: rgba(255,255,255,.5); }
-.wg-sec-body {
-  display: grid;
-  grid-template-columns: 1.05fr 1fr;
-  gap: 64px;
-  align-items: end;
-}
-@media (max-width: 820px) {
-  .wg-sec-body { grid-template-columns: 1fr; gap: 16px; align-items: start; }
-}
-.wg-sec-title {
-  font-family: 'Noto Serif KR', serif;
-  font-weight: 400;
-  font-size: clamp(30px, 3.6vw, 48px);
-  line-height: 1.18;
-  letter-spacing: -0.02em;
-  margin: 0;
-  word-break: keep-all;
-}
-.wg-sec-head-dark .wg-sec-title { color: var(--on-dark); }
-.wg-sec-lede {
-  font-size: 16px;
-  line-height: 1.75;
-  color: var(--muted);
-  max-width: 48ch;
-  margin: 0;
-}
-.wg-sec-head-dark .wg-sec-lede { color: var(--dark-muted); }
+/* page/container/section/hero/eyebrow/sec-/crumb/btn/cta-band/related/imgph는 모두 글로벌(src/index.css) 처리.
+   이하 룰은 why-grout 페이지 고유 (Intro·Reasons·Problems·Timing). */
 
 /* ===== Intro ===== */
 .wg-intro-grid {
@@ -910,160 +678,5 @@ const WG_CSS = `
   word-break: keep-all;
 }
 
-/* ===== Related ===== */
-.wg-related-grid {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 24px;
-}
-@media (max-width: 900px) {
-  .wg-related-grid { grid-template-columns: repeat(2, 1fr); }
-}
-@media (max-width: 560px) {
-  .wg-related-grid { grid-template-columns: 1fr; }
-}
-.wg-related-card {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  background: var(--paper);
-  border: 1px solid var(--line);
-  padding: 32px 28px 28px;
-  min-height: 220px;
-  color: inherit;
-  text-decoration: none;
-  transition: background .25s ease, color .25s ease, border-color .25s ease;
-}
-.wg-related-card:hover {
-  background: var(--ink);
-  color: var(--paper);
-  border-color: var(--ink);
-}
-.wg-related-idx {
-  font-size: 10.5px;
-  font-weight: 500;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  color: var(--muted-2);
-}
-.wg-related-card:hover .wg-related-idx { color: #d9b790; }
-.wg-related-title {
-  font-family: 'Noto Serif KR', serif;
-  font-weight: 500;
-  font-size: 21px;
-  line-height: 1.35;
-  color: var(--ink);
-  margin: 0;
-  letter-spacing: -0.005em;
-}
-.wg-related-card:hover .wg-related-title { color: #fff; }
-.wg-related-desc {
-  font-size: 13px;
-  line-height: 1.7;
-  color: var(--muted);
-  margin: 0;
-}
-.wg-related-card:hover .wg-related-desc { color: rgba(255,255,255,.75); }
-.wg-related-more {
-  margin-top: auto;
-  font-size: 11.5px;
-  font-weight: 500;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  color: var(--muted-2);
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-}
-.wg-related-card:hover .wg-related-more { color: #d9b790; }
-.wg-related-arr { transition: transform .3s ease; }
-.wg-related-card:hover .wg-related-arr { transform: translateX(4px); }
-
-/* ===== CTA Band ===== */
-.wg-cta-band {
-  background: var(--bg-2);
-  border-top: 1px solid var(--line);
-  padding: 72px 0;
-}
-@media (max-width: 720px) {
-  .wg-cta-band { padding: 56px 0; }
-}
-.wg-cta-row {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 32px;
-  flex-wrap: wrap;
-}
-.wg-cta-text { display: flex; flex-direction: column; gap: 8px; flex: 1 1 380px; }
-.wg-cta-title {
-  font-family: 'Noto Serif KR', serif;
-  font-weight: 400;
-  font-size: clamp(26px, 3vw, 38px);
-  letter-spacing: -0.015em;
-  line-height: 1.35;
-  margin: 0;
-  word-break: keep-all;
-}
-.wg-cta-sub {
-  font-size: 14px;
-  color: var(--muted);
-  margin: 0;
-}
-.wg-cta-actions {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 12px;
-  justify-content: flex-end;
-}
-@media (max-width: 820px) {
-  .wg-cta-actions {
-    flex-wrap: nowrap;
-    justify-content: flex-start;
-    gap: 8px;
-    width: 100%;
-  }
-  .wg-cta-actions .wg-btn {
-    flex: 1 1 0;
-    min-width: 0;
-    padding: 14px 12px;
-    font-size: 13px;
-    white-space: nowrap;
-    justify-content: center;
-  }
-}
-
-/* ===== Buttons ===== */
-.wg-btn {
-  display: inline-flex;
-  align-items: center;
-  gap: 10px;
-  padding: 16px 22px;
-  border-radius: 2px;
-  font-family: inherit;
-  font-size: 14px;
-  font-weight: 500;
-  letter-spacing: -0.005em;
-  border: 0;
-  cursor: pointer;
-  text-decoration: none;
-  transition: background .25s ease, color .25s ease, border-color .25s ease;
-}
-.wg-btn-arr { transition: transform .3s ease; }
-.wg-btn:hover .wg-btn-arr { transform: translateX(4px); }
-.wg-btn-primary {
-  background: var(--ink);
-  color: var(--paper);
-}
-.wg-btn-primary:hover { background: var(--accent-deep); }
-.wg-btn-ghost {
-  background: transparent;
-  border: 1px solid var(--line-strong);
-  color: var(--ink);
-}
-.wg-btn-ghost:hover {
-  background: var(--ink);
-  color: var(--paper);
-  border-color: var(--ink);
-}
+/* related/cta-band/btn은 글로벌(src/index.css) 처리 */
 `;

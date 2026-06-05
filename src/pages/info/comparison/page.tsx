@@ -211,18 +211,18 @@ function SecHead({
   lede?: React.ReactNode;
 }) {
   return (
-    <div className="cp-sec-head">
-      <div className="cp-sec-bar">
-        <span className="cp-sec-n">{num}</span>
-        <span className="cp-sec-rule"></span>
-        <span className="cp-sec-lbl">
-          <span className="cp-sec-ko">{ko}</span>
-          <span className="cp-sec-en">{en}</span>
+    <div className="sec-head">
+      <div className="sec-bar">
+        <span className="sec-n">{num}</span>
+        <span className="sec-rule"></span>
+        <span className="sec-lbl">
+          <span className="sec-ko">{ko}</span>
+          <span className="sec-en">{en}</span>
         </span>
       </div>
-      <div className="cp-sec-body">
-        <h2 className="cp-sec-title">{title}</h2>
-        {lede && <p className="cp-sec-lede">{lede}</p>}
+      <div className="sec-body">
+        <h2 className="sec-title">{title}</h2>
+        {lede && <p className="sec-lede">{lede}</p>}
       </div>
     </div>
   );
@@ -282,14 +282,15 @@ export default function ComparisonPage() {
   };
 
   return (
-    <div className="cp-page">
+    <div className="page">
       <Navbar />
 
       {/* ===== Hero ===== */}
+      {/* comparison은 중앙 정렬 + 큰 타이틀이라 페이지 고유 cp-hero 유지 */}
       <header className="cp-hero" data-screen-label="Hero">
         <div className="cp-hero-bg" aria-hidden="true" />
-        <div className="cp-container cp-hero-inner">
-          <div className="cp-eyebrow cp-eyebrow-light">Material Compare Guide</div>
+        <div className="container cp-hero-inner">
+          <div className="eyebrow eyebrow-light">Material Compare Guide</div>
           <h1 className="cp-hero-title">
             폴리우레아 <span className="cp-vs">vs</span> 케라폭시
           </h1>
@@ -301,19 +302,19 @@ export default function ComparisonPage() {
       </header>
 
       {/* ===== Breadcrumb ===== */}
-      <nav className="cp-crumb" aria-label="현재 위치">
-        <div className="cp-container cp-crumb-inner">
-          <Link to="/" className="cp-crumb-item">홈</Link>
-          <span className="cp-crumb-sep">/</span>
-          <span className="cp-crumb-item">줄눈 정보</span>
-          <span className="cp-crumb-sep">/</span>
-          <span className="cp-crumb-here">폴리우레아 vs 케라폭시</span>
+      <nav className="crumb" aria-label="현재 위치">
+        <div className="container crumb-inner">
+          <Link to="/" className="crumb-item">홈</Link>
+          <span className="crumb-sep">/</span>
+          <span className="crumb-item">줄눈 정보</span>
+          <span className="crumb-sep">/</span>
+          <span className="crumb-here">폴리우레아 vs 케라폭시</span>
         </div>
       </nav>
 
       {/* ===== Intro ===== */}
       <section className="cp-intro" data-screen-label="Intro">
-        <div className="cp-container">
+        <div className="container">
           <div className="cp-intro-grid">
             <h2 className="cp-intro-title">
               폴리우레아 줄눈과<br />케라폭시 줄눈,<br />
@@ -345,8 +346,8 @@ export default function ComparisonPage() {
       </section>
 
       {/* ===== 01 Detailed Comparison ===== */}
-      <section className="cp-section cp-bg-paper" data-screen-label="01 Detailed Comparison">
-        <div className="cp-container">
+      <section className="section bg-paper" data-screen-label="01 Detailed Comparison">
+        <div className="container">
           <SecHead
             num="01"
             ko="상세 비교표"
@@ -420,8 +421,8 @@ export default function ComparisonPage() {
       </section>
 
       {/* ===== 02 Recommend ===== */}
-      <section className="cp-section" data-screen-label="02 Recommend">
-        <div className="cp-container">
+      <section className="section" data-screen-label="02 Recommend">
+        <div className="container">
           <SecHead
             num="02"
             ko="어떤 소재를 선택해야 할까요?"
@@ -453,8 +454,8 @@ export default function ComparisonPage() {
       </section>
 
       {/* ===== 03 Related ===== */}
-      <section className="cp-section cp-bg-paper" data-screen-label="03 Related">
-        <div className="cp-container">
+      <section className="section bg-paper" data-screen-label="03 Related">
+        <div className="container">
           <SecHead
             num="03"
             ko="관련 정보 더 보기"
@@ -466,14 +467,14 @@ export default function ComparisonPage() {
             }
             lede="자재 · 제품 · 가격 · 시공 이유 — 네 가지 관점으로 줄눈을 더 깊이 살펴보세요."
           />
-          <div className="cp-related-grid">
+          <div className="related-grid">
             {RELATED.map((r) => (
-              <Link key={r.href} to={r.href} className="cp-related-card">
-                <span className="cp-related-idx">{r.idx}</span>
-                <h4 className="cp-related-title">{r.title}</h4>
-                <p className="cp-related-desc">{r.desc}</p>
-                <span className="cp-related-more">
-                  more <span className="cp-related-arr">→</span>
+              <Link key={r.href} to={r.href} className="related-card">
+                <span className="related-idx">{r.idx}</span>
+                <h4 className="related-title">{r.title}</h4>
+                <p className="related-desc">{r.desc}</p>
+                <span className="related-more">
+                  more <span className="related-arr">→</span>
                 </span>
               </Link>
             ))}
@@ -482,24 +483,24 @@ export default function ComparisonPage() {
       </section>
 
       {/* ===== CTA Band ===== */}
-      <section className="cp-cta-band" data-screen-label="CTA Band">
-        <div className="cp-container cp-cta-row">
-          <div className="cp-cta-text">
-            <h3 className="cp-cta-title">
+      <section className="cta-band" data-screen-label="CTA Band">
+        <div className="container cta-row">
+          <div className="cta-text">
+            <h3 className="cta-title">
               어떤 소재가 맞을지 <em>아직 고민되시나요?</em>
             </h3>
-            <p className="cp-cta-sub">
+            <p className="cta-sub">
               현장 상황과 요구 사항을 듣고 최적의 소재를 추천해 드립니다. 서울·경기·인천 줄눈시공 무료 견적 상담.
             </p>
           </div>
-          <div className="cp-cta-actions">
-            <button type="button" className="cp-btn cp-btn-primary" onClick={goQuote}>
-              무료 견적 받기 <span className="cp-btn-arr">→</span>
+          <div className="cta-actions">
+            <button type="button" className="btn btn-primary" onClick={goQuote}>
+              무료 견적 받기 <span className="btn-arr">→</span>
             </button>
             <a
               href="tel:010-8005-6674"
               onClick={() => Events.phoneClick('info_cta')}
-              className="cp-btn cp-btn-ghost"
+              className="btn btn-ghost"
             >
               전화 상담 010-8005-6674
             </a>
@@ -519,47 +520,11 @@ export default function ComparisonPage() {
 // ─────────────────────────────────────────────────────────────────────────────
 
 const CP_CSS = `
-.cp-page {
-  background: var(--bg);
-  color: var(--ink);
-  font-family: 'Pretendard Variable', 'Pretendard', sans-serif;
-}
-.cp-page ::selection { background: var(--accent); color: #fff; }
-
-.cp-container {
-  max-width: 1360px;
-  margin: 0 auto;
-  padding: 0 32px;
-}
-@media (max-width: 720px) {
-  .cp-container { padding: 0 20px; }
-}
-
-.cp-section {
-  padding: 120px 0;
-  border-top: 1px solid var(--line);
-}
-.cp-bg-paper { background: var(--paper); }
-@media (max-width: 720px) {
-  .cp-section { padding: 72px 0; }
-}
-
-.cp-eyebrow {
-  font-size: 11.5px;
-  font-weight: 500;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
-  color: var(--accent);
-}
-.cp-eyebrow-light { color: #d9b790; }
-
-.cp-page em {
-  font-style: normal;
-  color: var(--accent);
-}
+/* page/container/section/eyebrow/sec-/crumb/btn/cta-band/related는 글로벌(src/index.css) 처리.
+   페이지 고유: .cp-hero (중앙정렬·큰 타이틀) + cp-vs/cp-intro/cp-pill/compare-table */
 .cp-hero em { color: #e3c5a3; }
 
-/* ===== Hero ===== */
+/* ===== Hero (페이지 고유 — 중앙정렬 + 큰 타이틀) ===== */
 .cp-hero {
   position: relative;
   padding: 168px 0 92px;
@@ -589,7 +554,7 @@ const CP_CSS = `
   pointer-events: none;
 }
 .cp-hero-inner { position: relative; z-index: 1; }
-.cp-hero .cp-eyebrow {
+.cp-hero .eyebrow {
   display: inline-flex;
   justify-content: center;
 }
@@ -618,31 +583,7 @@ const CP_CSS = `
   max-width: 54ch;
 }
 
-/* ===== Breadcrumb ===== */
-.cp-crumb {
-  background: var(--paper);
-  border-bottom: 1px solid var(--line);
-}
-.cp-crumb-inner {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  padding: 14px 32px;
-  font-size: 12px;
-  letter-spacing: 0.04em;
-  color: var(--muted-2);
-}
-@media (max-width: 720px) {
-  .cp-crumb-inner { padding: 14px 20px; }
-}
-.cp-crumb-item {
-  color: var(--muted-2);
-  text-decoration: none;
-  transition: color .2s ease;
-}
-.cp-crumb-item:hover { color: var(--accent); }
-.cp-crumb-sep { opacity: .4; }
-.cp-crumb-here { color: var(--ink); }
+/* crumb은 글로벌(src/index.css) 처리 */
 
 /* ===== Intro ===== */
 .cp-intro {
@@ -712,67 +653,7 @@ const CP_CSS = `
   font-size: 18px;
 }
 
-/* ===== Section Head ===== */
-.cp-sec-head { margin-bottom: 56px; }
-@media (max-width: 820px) {
-  .cp-sec-head { margin-bottom: 36px; }
-}
-.cp-sec-bar {
-  display: flex;
-  align-items: center;
-  gap: 18px;
-  padding-bottom: 22px;
-  margin-bottom: 32px;
-  border-bottom: 1px solid var(--line);
-}
-.cp-sec-n {
-  font-family: 'Noto Serif KR', serif;
-  font-style: italic;
-  font-weight: 400;
-  font-size: 20px;
-  line-height: 1;
-  color: var(--accent);
-  font-variant-numeric: lining-nums;
-}
-.cp-sec-rule {
-  flex: 0 0 56px;
-  height: 1px;
-  background: var(--accent);
-  opacity: .6;
-}
-.cp-sec-lbl {
-  font-size: 11.5px;
-  font-weight: 500;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
-}
-.cp-sec-ko { color: var(--ink-2); }
-.cp-sec-en { color: var(--muted-2); margin-left: 10px; }
-.cp-sec-body {
-  display: grid;
-  grid-template-columns: 1.05fr 1fr;
-  gap: 64px;
-  align-items: end;
-}
-@media (max-width: 820px) {
-  .cp-sec-body { grid-template-columns: 1fr; gap: 16px; align-items: start; }
-}
-.cp-sec-title {
-  font-family: 'Noto Serif KR', serif;
-  font-weight: 400;
-  font-size: clamp(30px, 3.6vw, 48px);
-  line-height: 1.18;
-  letter-spacing: -0.02em;
-  margin: 0;
-  word-break: keep-all;
-}
-.cp-sec-lede {
-  font-size: 16px;
-  line-height: 1.75;
-  color: var(--muted);
-  max-width: 48ch;
-  margin: 0;
-}
+/* sec-*는 글로벌(src/index.css) 처리 */
 
 /* ===== Compare Table (desktop) ===== */
 .cp-cmp-wrap {
@@ -1034,160 +915,5 @@ const CP_CSS = `
 .cp-reco-kp .cp-reco-list li::before { color: #d9b790; }
 .cp-reco-pu .cp-reco-list li::before { color: var(--accent); }
 
-/* ===== Related ===== */
-.cp-related-grid {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 24px;
-}
-@media (max-width: 900px) {
-  .cp-related-grid { grid-template-columns: repeat(2, 1fr); }
-}
-@media (max-width: 560px) {
-  .cp-related-grid { grid-template-columns: 1fr; }
-}
-.cp-related-card {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  background: var(--paper);
-  border: 1px solid var(--line);
-  padding: 32px 28px 28px;
-  min-height: 220px;
-  color: inherit;
-  text-decoration: none;
-  transition: background .25s ease, color .25s ease, border-color .25s ease;
-}
-.cp-related-card:hover {
-  background: var(--ink);
-  color: var(--paper);
-  border-color: var(--ink);
-}
-.cp-related-idx {
-  font-size: 10.5px;
-  font-weight: 500;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  color: var(--muted-2);
-}
-.cp-related-card:hover .cp-related-idx { color: #d9b790; }
-.cp-related-title {
-  font-family: 'Noto Serif KR', serif;
-  font-weight: 500;
-  font-size: 21px;
-  line-height: 1.35;
-  color: var(--ink);
-  margin: 0;
-  letter-spacing: -0.005em;
-}
-.cp-related-card:hover .cp-related-title { color: #fff; }
-.cp-related-desc {
-  font-size: 13px;
-  line-height: 1.7;
-  color: var(--muted);
-  margin: 0;
-}
-.cp-related-card:hover .cp-related-desc { color: rgba(255,255,255,.75); }
-.cp-related-more {
-  margin-top: auto;
-  font-size: 11.5px;
-  font-weight: 500;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  color: var(--muted-2);
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-}
-.cp-related-card:hover .cp-related-more { color: #d9b790; }
-.cp-related-arr { transition: transform .3s ease; }
-.cp-related-card:hover .cp-related-arr { transform: translateX(4px); }
-
-/* ===== CTA Band ===== */
-.cp-cta-band {
-  background: var(--bg-2);
-  border-top: 1px solid var(--line);
-  padding: 72px 0;
-}
-@media (max-width: 720px) {
-  .cp-cta-band { padding: 56px 0; }
-}
-.cp-cta-row {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 32px;
-  flex-wrap: wrap;
-}
-.cp-cta-text { display: flex; flex-direction: column; gap: 8px; flex: 1 1 380px; }
-.cp-cta-title {
-  font-family: 'Noto Serif KR', serif;
-  font-weight: 400;
-  font-size: clamp(26px, 3vw, 38px);
-  letter-spacing: -0.015em;
-  line-height: 1.35;
-  margin: 0;
-  word-break: keep-all;
-}
-.cp-cta-sub {
-  font-size: 14px;
-  color: var(--muted);
-  margin: 0;
-}
-.cp-cta-actions {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 12px;
-  justify-content: flex-end;
-}
-@media (max-width: 820px) {
-  .cp-cta-actions {
-    flex-wrap: nowrap;
-    justify-content: flex-start;
-    gap: 8px;
-    width: 100%;
-  }
-  .cp-cta-actions .cp-btn {
-    flex: 1 1 0;
-    min-width: 0;
-    padding: 14px 12px;
-    font-size: 13px;
-    white-space: nowrap;
-    justify-content: center;
-  }
-}
-
-/* ===== Buttons ===== */
-.cp-btn {
-  display: inline-flex;
-  align-items: center;
-  gap: 10px;
-  padding: 16px 22px;
-  border-radius: 2px;
-  font-family: inherit;
-  font-size: 14px;
-  font-weight: 500;
-  letter-spacing: -0.005em;
-  border: 0;
-  cursor: pointer;
-  text-decoration: none;
-  transition: background .25s ease, color .25s ease, border-color .25s ease;
-}
-.cp-btn-arr { transition: transform .3s ease; }
-.cp-btn:hover .cp-btn-arr { transform: translateX(4px); }
-.cp-btn-primary {
-  background: var(--ink);
-  color: var(--paper);
-}
-.cp-btn-primary:hover { background: var(--accent-deep); }
-.cp-btn-ghost {
-  background: transparent;
-  border: 1px solid var(--line-strong);
-  color: var(--ink);
-}
-.cp-btn-ghost:hover {
-  background: var(--ink);
-  color: var(--paper);
-  border-color: var(--ink);
-}
+/* related/cta-band/btn은 글로벌(src/index.css) 처리 */
 `;

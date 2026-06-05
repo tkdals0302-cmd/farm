@@ -202,18 +202,18 @@ function SecHead({
   lede?: React.ReactNode;
 }) {
   return (
-    <div className="ep-sec-head">
-      <div className="ep-sec-bar">
-        <span className="ep-sec-n">{num}</span>
-        <span className="ep-sec-rule"></span>
-        <span className="ep-sec-lbl">
-          <span className="ep-sec-ko">{ko}</span>
-          <span className="ep-sec-en">{en}</span>
+    <div className="sec-head">
+      <div className="sec-bar">
+        <span className="sec-n">{num}</span>
+        <span className="sec-rule"></span>
+        <span className="sec-lbl">
+          <span className="sec-ko">{ko}</span>
+          <span className="sec-en">{en}</span>
         </span>
       </div>
-      <div className="ep-sec-body">
-        <h2 className="ep-sec-title">{title}</h2>
-        {lede && <p className="ep-sec-lede">{lede}</p>}
+      <div className="sec-body">
+        <h2 className="sec-title">{title}</h2>
+        {lede && <p className="sec-lede">{lede}</p>}
       </div>
     </div>
   );
@@ -289,11 +289,11 @@ export default function EpoxyProductsPage() {
   } as React.CSSProperties;
 
   return (
-    <div className="ep-page">
+    <div className="page">
       <Navbar />
 
       {/* ===== Hero ===== */}
-      <header className="ep-hero" data-screen-label="Hero">
+      <header className="hero" data-screen-label="Hero">
         <div
           className="ep-hero-bg"
           style={{
@@ -303,21 +303,21 @@ export default function EpoxyProductsPage() {
           aria-hidden="true"
         />
 
-        <div className="ep-container ep-hero-inner">
-          <div className="ep-eyebrow ep-eyebrow-light">Grout Knowledge · 03</div>
-          <h1 className="ep-hero-title">
+        <div className="hero-inner">
+          <div className="hero-eyebrow hero-eyebrow-light">Grout Knowledge · 03</div>
+          <h1 className="hero-title">
             내 공간에 맞는
             <br />에폭시 계열 <em>한 가지</em>.
           </h1>
-          <p className="ep-hero-lede">
+          <p className="hero-lede">
             디테일라인이 직접 시공하는 4종의 에폭시 계열 줄눈재와<br />
             줄눈 색상을 미리 확인할 수 있는 라이브 시뮬레이터를 제공합니다.
           </p>
-          <ul className="ep-hero-meta">
+          <ul className="hero-meta">
             {HERO_META.map((m) => (
               <li key={m.k}>
-                <span className="ep-meta-k">{m.k}</span>
-                <span className="ep-meta-v">
+                <span className="hero-meta-k">{m.k}</span>
+                <span className="hero-meta-v">
                   {m.v} <small>{m.small}</small>
                 </span>
               </li>
@@ -327,19 +327,19 @@ export default function EpoxyProductsPage() {
       </header>
 
       {/* ===== Breadcrumb ===== */}
-      <nav className="ep-crumb" aria-label="현재 위치">
-        <div className="ep-container ep-crumb-inner">
-          <Link to="/" className="ep-crumb-item">홈</Link>
-          <span className="ep-crumb-sep">/</span>
-          <span className="ep-crumb-item">줄눈 정보</span>
-          <span className="ep-crumb-sep">/</span>
-          <span className="ep-crumb-here">에폭시 계열 제품 소개</span>
+      <nav className="crumb" aria-label="현재 위치">
+        <div className="container crumb-inner">
+          <Link to="/" className="crumb-item">홈</Link>
+          <span className="crumb-sep">/</span>
+          <span className="crumb-item">줄눈 정보</span>
+          <span className="crumb-sep">/</span>
+          <span className="crumb-here">에폭시 계열 제품 소개</span>
         </div>
       </nav>
 
       {/* ===== 01 Product Lineup ===== */}
-      <section className="ep-section" data-screen-label="01 Product Lineup">
-        <div className="ep-container">
+      <section className="section" data-screen-label="01 Product Lineup">
+        <div className="container">
           <SecHead
             num="01"
             ko="제품 라인업"
@@ -394,8 +394,8 @@ export default function EpoxyProductsPage() {
       </section>
 
       {/* ===== 02 Color Simulator ===== */}
-      <section className="ep-section ep-bg-paper" data-screen-label="02 Color Simulator">
-        <div className="ep-container">
+      <section className="section bg-paper" data-screen-label="02 Color Simulator">
+        <div className="container">
           <SecHead
             num="02"
             ko="라이브 컬러 시뮬레이터"
@@ -511,8 +511,8 @@ export default function EpoxyProductsPage() {
 
       {/* ===== 03 Related ===== */}
       {(
-        <section className="ep-section" data-screen-label="03 Related">
-          <div className="ep-container">
+        <section className="section" data-screen-label="03 Related">
+          <div className="container">
             <SecHead
               num="03"
               ko="관련 정보 더 보기"
@@ -524,14 +524,14 @@ export default function EpoxyProductsPage() {
               }
               lede="가격 · 제품 · 비교 · 시공 — 네 가지 관점으로 줄눈을 더 깊이 살펴보세요."
             />
-            <div className="ep-related-grid">
+            <div className="related-grid">
               {RELATED.map((r) => (
-                <Link key={r.href} to={r.href} className="ep-related-card">
-                  <span className="ep-related-idx">{r.idx}</span>
-                  <h4 className="ep-related-title">{r.title}</h4>
-                  <p className="ep-related-desc">{r.desc}</p>
-                  <span className="ep-related-more">
-                    more <span className="ep-related-arr">→</span>
+                <Link key={r.href} to={r.href} className="related-card">
+                  <span className="related-idx">{r.idx}</span>
+                  <h4 className="related-title">{r.title}</h4>
+                  <p className="related-desc">{r.desc}</p>
+                  <span className="related-more">
+                    more <span className="related-arr">→</span>
                   </span>
                 </Link>
               ))}
@@ -541,24 +541,24 @@ export default function EpoxyProductsPage() {
       )}
 
       {/* ===== CTA Band ===== */}
-      <section className="ep-cta-band" data-screen-label="CTA Band">
-        <div className="ep-container ep-cta-row">
-          <div className="ep-cta-text">
-            <h3 className="ep-cta-title">
+      <section className="cta-band" data-screen-label="CTA Band">
+        <div className="container cta-row">
+          <div className="cta-text">
+            <h3 className="cta-title">
               어떤 제품·색이 우리 집에 맞을지 <em>고민되신다면</em>?
             </h3>
-            <p className="ep-cta-sub">
+            <p className="cta-sub">
               공간 사진 한 장만 보내주시면, 가장 잘 어울리는 제품과 색을 추천해 드립니다. 서울·경기·인천 줄눈시공 무료 견적 상담.
             </p>
           </div>
-          <div className="ep-cta-actions">
-            <button type="button" className="ep-btn ep-btn-primary" onClick={goQuote}>
-              무료 견적 받기 <span className="ep-btn-arr">→</span>
+          <div className="cta-actions">
+            <button type="button" className="btn btn-primary" onClick={goQuote}>
+              무료 견적 받기 <span className="btn-arr">→</span>
             </button>
             <a
               href="tel:010-8005-6674"
               onClick={() => Events.phoneClick('info_cta')}
-              className="ep-btn ep-btn-ghost"
+              className="btn btn-ghost"
             >
               전화 상담 010-8005-6674
             </a>
@@ -578,71 +578,21 @@ export default function EpoxyProductsPage() {
 // ─────────────────────────────────────────────────────────────────────────────
 
 const EP_CSS = `
-.ep-page {
-  background: var(--bg);
-  color: var(--ink);
-  font-family: 'Pretendard Variable', 'Pretendard', sans-serif;
-}
-.ep-page ::selection { background: var(--accent); color: #fff; }
+/* page/container/section/hero/eyebrow/sec-/crumb/btn/cta-band/related/imgph는 글로벌(src/index.css) 처리.
+   페이지 고유: .ep-hero-bg(이미지 합성) + prod-*/sel-*/sim-*/tile-*/tip-* */
 
-.ep-container {
-  max-width: 1360px;
-  margin: 0 auto;
-  padding: 0 32px;
-}
-@media (max-width: 720px) {
-  .ep-container { padding: 0 20px; }
-}
-
-.ep-section {
-  padding: 120px 0;
-  border-top: 1px solid var(--line);
-}
-.ep-bg-paper { background: var(--paper); }
-@media (max-width: 720px) {
-  .ep-section { padding: 72px 0; }
-}
-
-.ep-eyebrow {
-  font-size: 11.5px;
-  font-weight: 500;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
-  color: var(--accent);
-}
-.ep-eyebrow-light { color: #d9b790; }
-
-.ep-page em {
-  font-style: normal;
-  color: var(--accent);
-}
-.ep-hero em { color: #e3c5a3; }
-
-/* ===== Hero ===== */
-.ep-hero {
-  position: relative;
-  padding: 168px 0 84px;
-  overflow: hidden;
-  isolation: isolate;
-  color-scheme: dark;
-}
-@media (max-width: 720px) {
-  .ep-hero { padding: 120px 0 64px; }
-}
+/* ===== Hero 배경 (페이지 고유 이미지 합성) ===== */
 .ep-hero-bg {
   position: absolute;
   inset: 0;
   z-index: -1;
   background:
-    /* Bottom fade — light at top, strong dark near bottom so image blends into dark */
     linear-gradient(180deg, rgba(20,16,12,.25) 0%, rgba(20,16,12,.25) 35%, rgba(14,11,8,.95) 100%),
     radial-gradient(120% 80% at 70% 20%, rgba(138,106,76,.18), transparent 60%),
-    /* Width-anchored, top-aligned — image fills full width from the top */
     var(--hero-img-d, none) center top / 100% auto no-repeat,
     linear-gradient(180deg, #251d14 0%, #18130e 100%);
 }
 @media (max-width: 720px) {
-  /* Mobile uses dedicated mobile-optimized image with cover */
   .ep-hero-bg {
     background:
       linear-gradient(180deg, rgba(20,16,12,.35) 0%, rgba(14,11,8,.78) 100%),
@@ -658,192 +608,7 @@ const EP_CSS = `
   background: radial-gradient(120% 100% at 50% 0%, rgba(0,0,0,.15), rgba(0,0,0,.55) 80%);
   pointer-events: none;
 }
-.ep-ph-corner {
-  position: absolute;
-  top: 14px;
-  right: 16px;
-  font-size: 9.5px;
-  font-weight: 500;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  color: rgba(255,255,255,.4);
-  z-index: 1;
-}
-.ep-ph-label {
-  position: absolute;
-  left: 18px;
-  bottom: 16px;
-  display: inline-flex;
-  align-items: center;
-  gap: 10px;
-  font-size: 10.5px;
-  font-weight: 500;
-  letter-spacing: 0.16em;
-  text-transform: uppercase;
-  color: rgba(255,255,255,.4);
-  z-index: 1;
-}
-.ep-ph-sq {
-  display: inline-block;
-  width: 6px;
-  height: 6px;
-  background: var(--accent);
-}
-.ep-hero-inner { position: relative; z-index: 1; }
-.ep-hero-title {
-  font-family: 'Noto Serif KR', serif;
-  font-weight: 400;
-  font-size: clamp(36px, 5vw, 68px);
-  line-height: 1.25;
-  letter-spacing: -0.01em;
-  color: #fff;
-  margin: 14px 0 22px;
-  max-width: 24ch;
-  word-break: keep-all;
-}
-.ep-hero-lede {
-  font-size: 15.5px;
-  line-height: 1.75;
-  color: rgba(255,255,255,.78);
-  max-width: 56ch;
-  margin: 0;
-}
-.ep-hero-meta {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  list-style: none;
-  padding: 0;
-  margin: 48px 0 0;
-  border-top: 1px solid rgba(255,255,255,.16);
-}
-.ep-hero-meta li {
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-  padding: 22px 22px 22px 0;
-  border-right: 1px solid rgba(255,255,255,.16);
-}
-.ep-hero-meta li:last-child { border-right: none; }
-.ep-hero-meta li:not(:first-child) { padding-left: 22px; }
-.ep-meta-k {
-  font-size: 10px;
-  font-weight: 500;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  color: rgba(255,255,255,.55);
-}
-.ep-meta-v {
-  font-family: 'Noto Serif KR', serif;
-  font-weight: 400;
-  font-size: 17px;
-  color: #fff;
-  letter-spacing: -0.005em;
-}
-.ep-meta-v small {
-  font-family: 'Pretendard Variable', sans-serif;
-  font-size: 11px;
-  font-weight: 500;
-  color: rgba(255,255,255,.55);
-  margin-left: 6px;
-  letter-spacing: 0;
-}
-@media (max-width: 720px) {
-  .ep-hero-meta { grid-template-columns: repeat(2, 1fr); }
-  .ep-hero-meta li:nth-child(2) { border-right: none; }
-  .ep-hero-meta li:nth-child(3) { padding-left: 0; }
-  .ep-hero-meta li:nth-child(3),
-  .ep-hero-meta li:nth-child(4) {
-    border-top: 1px solid rgba(255,255,255,.16);
-  }
-}
-
-/* ===== Breadcrumb ===== */
-.ep-crumb {
-  background: var(--paper);
-  border-bottom: 1px solid var(--line);
-}
-.ep-crumb-inner {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  padding: 14px 32px;
-  font-size: 12px;
-  letter-spacing: 0.04em;
-  color: var(--muted-2);
-}
-@media (max-width: 720px) {
-  .ep-crumb-inner { padding: 14px 20px; }
-}
-.ep-crumb-item {
-  color: var(--muted-2);
-  text-decoration: none;
-  transition: color .2s ease;
-}
-.ep-crumb-item:hover { color: var(--accent); }
-.ep-crumb-sep { opacity: .4; }
-.ep-crumb-here { color: var(--ink); }
-
-/* ===== Section Head ===== */
-.ep-sec-head { margin-bottom: 56px; }
-@media (max-width: 820px) {
-  .ep-sec-head { margin-bottom: 36px; }
-}
-.ep-sec-bar {
-  display: flex;
-  align-items: center;
-  gap: 18px;
-  padding-bottom: 22px;
-  margin-bottom: 32px;
-  border-bottom: 1px solid var(--line);
-}
-.ep-sec-n {
-  font-family: 'Noto Serif KR', serif;
-  font-style: italic;
-  font-weight: 400;
-  font-size: 20px;
-  line-height: 1;
-  color: var(--accent);
-  font-variant-numeric: lining-nums;
-}
-.ep-sec-rule {
-  flex: 0 0 56px;
-  height: 1px;
-  background: var(--accent);
-  opacity: .6;
-}
-.ep-sec-lbl {
-  font-size: 11.5px;
-  font-weight: 500;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
-}
-.ep-sec-ko { color: var(--ink-2); }
-.ep-sec-en { color: var(--muted-2); margin-left: 10px; }
-.ep-sec-body {
-  display: grid;
-  grid-template-columns: 1.05fr 1fr;
-  gap: 64px;
-  align-items: end;
-}
-@media (max-width: 820px) {
-  .ep-sec-body { grid-template-columns: 1fr; gap: 16px; align-items: start; }
-}
-.ep-sec-title {
-  font-family: 'Noto Serif KR', serif;
-  font-weight: 400;
-  font-size: clamp(30px, 3.6vw, 48px);
-  line-height: 1.18;
-  letter-spacing: -0.02em;
-  margin: 0;
-  word-break: keep-all;
-}
-.ep-sec-lede {
-  font-size: 16px;
-  line-height: 1.75;
-  color: var(--muted);
-  max-width: 48ch;
-  margin: 0;
-}
+/* ph-*/crumb/sec-*는 글로벌(src/index.css) 처리 */
 
 /* ===== Product Lineup ===== */
 .ep-prod-tabs {
@@ -1223,160 +988,5 @@ const EP_CSS = `
   word-break: keep-all;
 }
 
-/* ===== Related ===== */
-.ep-related-grid {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 24px;
-  margin-top: 32px;
-}
-@media (max-width: 900px) {
-  .ep-related-grid { grid-template-columns: repeat(2, 1fr); }
-}
-@media (max-width: 560px) {
-  .ep-related-grid { grid-template-columns: 1fr; }
-}
-.ep-related-card {
-  display: flex;
-  flex-direction: column;
-  gap: 14px;
-  background: var(--paper);
-  border: 1px solid var(--line);
-  padding: 32px 28px 28px;
-  min-height: 220px;
-  color: inherit;
-  text-decoration: none;
-  transition: background .25s ease, color .25s ease, border-color .25s ease;
-}
-.ep-related-card:hover {
-  background: var(--ink);
-  color: var(--paper);
-  border-color: var(--ink);
-}
-.ep-related-idx {
-  font-size: 10.5px;
-  font-weight: 500;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
-  color: var(--accent);
-}
-.ep-related-card:hover .ep-related-idx { color: #d9b790; }
-.ep-related-title {
-  font-family: 'Noto Serif KR', serif;
-  font-weight: 500;
-  font-size: 21px;
-  line-height: 1.35;
-  letter-spacing: -0.01em;
-  margin: 0;
-  color: var(--ink);
-}
-.ep-related-card:hover .ep-related-title { color: #fff; }
-.ep-related-desc {
-  font-size: 13px;
-  line-height: 1.65;
-  color: var(--muted);
-  margin: 0;
-}
-.ep-related-card:hover .ep-related-desc { color: rgba(255,255,255,.65); }
-.ep-related-more {
-  margin-top: auto;
-  font-size: 12px;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-  color: var(--muted-2);
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-}
-.ep-related-card:hover .ep-related-more { color: #d9b790; }
-.ep-related-arr { transition: transform .3s ease; }
-.ep-related-card:hover .ep-related-arr { transform: translateX(4px); }
-
-/* ===== CTA Band ===== */
-.ep-cta-band {
-  background: var(--bg-2);
-  border-top: 1px solid var(--line);
-  padding: 72px 0;
-}
-@media (max-width: 720px) {
-  .ep-cta-band { padding: 56px 0; }
-}
-.ep-cta-row {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 32px;
-  flex-wrap: wrap;
-}
-.ep-cta-text { display: flex; flex-direction: column; gap: 8px; flex: 1 1 380px; }
-.ep-cta-title {
-  font-family: 'Noto Serif KR', serif;
-  font-weight: 400;
-  font-size: clamp(26px, 3vw, 38px);
-  letter-spacing: -0.015em;
-  line-height: 1.35;
-  margin: 0;
-  word-break: keep-all;
-}
-.ep-cta-sub {
-  font-size: 14px;
-  color: var(--muted);
-  margin: 0;
-}
-.ep-cta-actions {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 12px;
-  justify-content: flex-end;
-}
-@media (max-width: 820px) {
-  .ep-cta-actions {
-    flex-wrap: nowrap;
-    justify-content: flex-start;
-    gap: 8px;
-    width: 100%;
-  }
-  .ep-cta-actions .ep-btn {
-    flex: 1 1 0;
-    min-width: 0;
-    padding: 14px 12px;
-    font-size: 13px;
-    white-space: nowrap;
-    justify-content: center;
-  }
-}
-
-/* ===== Buttons ===== */
-.ep-btn {
-  display: inline-flex;
-  align-items: center;
-  gap: 10px;
-  padding: 16px 22px;
-  border-radius: 2px;
-  font-family: inherit;
-  font-size: 14px;
-  font-weight: 500;
-  letter-spacing: -0.005em;
-  border: 0;
-  cursor: pointer;
-  text-decoration: none;
-  transition: background .25s ease, color .25s ease, border-color .25s ease;
-}
-.ep-btn-arr { transition: transform .3s ease; }
-.ep-btn:hover .ep-btn-arr { transform: translateX(4px); }
-.ep-btn-primary {
-  background: var(--ink);
-  color: var(--paper);
-}
-.ep-btn-primary:hover { background: var(--accent-deep); }
-.ep-btn-ghost {
-  background: transparent;
-  border: 1px solid var(--line-strong);
-  color: var(--ink);
-}
-.ep-btn-ghost:hover {
-  background: var(--ink);
-  color: var(--paper);
-  border-color: var(--ink);
-}
+/* related/cta-band/btn은 글로벌(src/index.css) 처리 */
 `;

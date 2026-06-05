@@ -206,18 +206,18 @@ function SecHead({
   dark?: boolean;
 }) {
   return (
-    <div className={`pu-sec-head ${dark ? 'pu-sec-head-dark' : ''}`}>
-      <div className="pu-sec-bar">
-        <span className="pu-sec-n">{num}</span>
-        <span className="pu-sec-rule"></span>
-        <span className="pu-sec-lbl">
-          <span className="pu-sec-ko">{ko}</span>
-          <span className="pu-sec-en">{en}</span>
+    <div className={`sec-head ${dark ? 'sec-head-dark' : ''}`}>
+      <div className="sec-bar">
+        <span className="sec-n">{num}</span>
+        <span className="sec-rule"></span>
+        <span className="sec-lbl">
+          <span className="sec-ko">{ko}</span>
+          <span className="sec-en">{en}</span>
         </span>
       </div>
-      <div className="pu-sec-body">
-        <h2 className="pu-sec-title">{title}</h2>
-        <p className="pu-sec-lede">{lede}</p>
+      <div className="sec-body">
+        <h2 className="sec-title">{title}</h2>
+        <p className="sec-lede">{lede}</p>
       </div>
     </div>
   );
@@ -277,11 +277,11 @@ export default function PolyureaPage() {
   };
 
   return (
-    <div className="pu-page">
+    <div className="page">
       <Navbar />
 
-      {/* ===== 01 Hero ===== */}
-      <header className="pu-hero" data-screen-label="01 Hero">
+      {/* ===== 01 Hero ===== (글로벌 .hero — src/index.css) */}
+      <header className="hero" data-screen-label="01 Hero">
         <div
           className="pu-hero-bg"
           style={{
@@ -290,21 +290,21 @@ export default function PolyureaPage() {
           } as React.CSSProperties}
           aria-hidden="true"
         />
-        <div className="pu-container pu-hero-inner">
-          <div className="pu-eyebrow pu-eyebrow-light">Grout Knowledge · 03</div>
-          <h1 className="pu-hero-title">
+        <div className="hero-inner">
+          <div className="hero-eyebrow hero-eyebrow-light">Grout Knowledge · 03</div>
+          <h1 className="hero-title">
             폴리우레아 줄눈,
             <br /><em>가성비</em>의 정답.
           </h1>
-          <p className="pu-hero-lede">
+          <p className="hero-lede">
             베란다·외부화장실·현관 — 자외선과 온도 변화에 강한 폴리우레아 줄눈.<br />
             케라폭시 대비 60~70% 가격으로, 5년+ 수명을 확보합니다.
           </p>
-          <ul className="pu-hero-meta">
+          <ul className="hero-meta">
             {HERO_META.map((m) => (
               <li key={m.k}>
-                <span className="pu-meta-k">{m.k}</span>
-                <span className="pu-meta-v">{m.v}</span>
+                <span className="hero-meta-k">{m.k}</span>
+                <span className="hero-meta-v">{m.v}</span>
               </li>
             ))}
           </ul>
@@ -312,22 +312,22 @@ export default function PolyureaPage() {
       </header>
 
       {/* ===== Breadcrumb ===== */}
-      <nav className="pu-crumb" aria-label="현재 위치">
-        <div className="pu-container pu-crumb-inner">
-          <Link to="/" className="pu-crumb-item">홈</Link>
-          <span className="pu-crumb-sep">/</span>
-          <span className="pu-crumb-item">줄눈 정보</span>
-          <span className="pu-crumb-sep">/</span>
-          <span className="pu-crumb-here">폴리우레아 줄눈이란?</span>
+      <nav className="crumb" aria-label="현재 위치">
+        <div className="container crumb-inner">
+          <Link to="/" className="crumb-item">홈</Link>
+          <span className="crumb-sep">/</span>
+          <span className="crumb-item">줄눈 정보</span>
+          <span className="crumb-sep">/</span>
+          <span className="crumb-here">폴리우레아 줄눈이란?</span>
         </div>
       </nav>
 
       {/* ===== 02 Introduction ===== */}
-      <section className="pu-section" data-screen-label="02 Introduction">
-        <div className="pu-container">
+      <section className="section" data-screen-label="02 Introduction">
+        <div className="container">
           <div className="pu-intro">
             <div className="pu-intro-left">
-              <div className="pu-eyebrow">Introduction · 들어가며</div>
+              <div className="eyebrow">Introduction · 들어가며</div>
               <h2 className="pu-intro-title">
                 폴리우레아 줄눈,<br />왜 <em>가성비 추천</em>일까요?
               </h2>
@@ -362,8 +362,8 @@ export default function PolyureaPage() {
       </section>
 
       {/* ===== 03 Benefits ===== */}
-      <section className="pu-section pu-bg-paper" data-screen-label="03 Benefits">
-        <div className="pu-container">
+      <section className="section bg-paper" data-screen-label="03 Benefits">
+        <div className="container">
           <SecHead
             num="02"
             ko="5가지 핵심 장점"
@@ -416,8 +416,8 @@ export default function PolyureaPage() {
       </section>
 
       {/* ===== 04 Spaces ===== */}
-      <section className="pu-section" data-screen-label="04 Spaces">
-        <div className="pu-container">
+      <section className="section" data-screen-label="04 Spaces">
+        <div className="container">
           <SecHead
             num="03"
             ko="적합한 공간"
@@ -449,8 +449,8 @@ export default function PolyureaPage() {
 
       {/* ===== 05 Before · After ===== */}
       {/* TODO: 폴리우레아 베란다 시공 전·후 이미지로 교체 (현재는 케라폭시 이미지 재사용) */}
-      <section className="pu-section-dark" data-screen-label="05 Before · After">
-        <div className="pu-container">
+      <section className="section-dark" data-screen-label="05 Before · After">
+        <div className="container">
           <SecHead
             dark
             num="04"
@@ -501,8 +501,8 @@ export default function PolyureaPage() {
       </section>
 
       {/* ===== 06 Related ===== */}
-      <section className="pu-section pu-bg-paper" data-screen-label="06 Related">
-        <div className="pu-container">
+      <section className="section bg-paper" data-screen-label="06 Related">
+        <div className="container">
           <SecHead
             num="05"
             ko="관련 정보 더 보기"
@@ -514,14 +514,14 @@ export default function PolyureaPage() {
             }
             lede="비교 · 가격 · 케라폭시 · 시공 — 네 가지 관점으로 줄눈을 살펴보세요."
           />
-          <div className="pu-related-grid">
+          <div className="related-grid">
             {RELATED.map((r) => (
-              <Link key={r.href} to={r.href} className="pu-related-card">
-                <span className="pu-related-idx">{r.idx}</span>
-                <h4 className="pu-related-title">{r.title}</h4>
-                <p className="pu-related-desc">{r.desc}</p>
-                <span className="pu-related-more">
-                  more <span className="pu-related-arr">→</span>
+              <Link key={r.href} to={r.href} className="related-card">
+                <span className="related-idx">{r.idx}</span>
+                <h4 className="related-title">{r.title}</h4>
+                <p className="related-desc">{r.desc}</p>
+                <span className="related-more">
+                  more <span className="related-arr">→</span>
                 </span>
               </Link>
             ))}
@@ -530,22 +530,22 @@ export default function PolyureaPage() {
       </section>
 
       {/* ===== CTA Band ===== */}
-      <section className="pu-cta-band" data-screen-label="CTA Band">
-        <div className="pu-container pu-cta-row">
-          <div className="pu-cta-text">
-            <h3 className="pu-cta-title">
+      <section className="cta-band" data-screen-label="CTA Band">
+        <div className="container cta-row">
+          <div className="cta-text">
+            <h3 className="cta-title">
               베란다·외부 공간 줄눈, <em>무료 견적</em>으로 시작하세요.
             </h3>
-            <p className="pu-cta-sub">평형 · 공간을 알려주시면 24시간 내에 회신드립니다. 서울·경기·인천 베란다·외부화장실·현관 폴리우레아 줄눈 무료 견적 상담.</p>
+            <p className="cta-sub">평형 · 공간을 알려주시면 24시간 내에 회신드립니다. 서울·경기·인천 베란다·외부화장실·현관 폴리우레아 줄눈 무료 견적 상담.</p>
           </div>
-          <div className="pu-cta-actions">
-            <button type="button" className="pu-btn pu-btn-primary" onClick={goQuote}>
-              무료 견적 받기 <span className="pu-btn-arr">→</span>
+          <div className="cta-actions">
+            <button type="button" className="btn btn-primary" onClick={goQuote}>
+              무료 견적 받기 <span className="btn-arr">→</span>
             </button>
             <a
               href="tel:010-8005-6674"
               onClick={() => Events.phoneClick('info_cta')}
-              className="pu-btn pu-btn-ghost"
+              className="btn btn-ghost"
             >
               전화 상담 010-8005-6674
             </a>
@@ -565,50 +565,8 @@ export default function PolyureaPage() {
 // ─────────────────────────────────────────────────────────────────────────────
 
 const PU_CSS = `
-.pu-page {
-  background: var(--bg);
-  color: var(--ink);
-  font-family: 'Pretendard Variable', 'Pretendard', sans-serif;
-}
-.pu-page ::selection { background: var(--accent); color: #fff; }
-
-.pu-container {
-  max-width: 1360px;
-  margin: 0 auto;
-  padding: 0 32px;
-}
-@media (max-width: 720px) {
-  .pu-container { padding: 0 20px; }
-}
-
-.pu-section {
-  padding: 120px 0;
-  border-top: 1px solid var(--line);
-}
-.pu-section-dark {
-  padding: 120px 0;
-  background: var(--dark);
-  color: var(--on-dark);
-}
-.pu-bg-paper { background: var(--paper); }
-@media (max-width: 720px) {
-  .pu-section, .pu-section-dark { padding: 72px 0; }
-}
-
-.pu-eyebrow {
-  font-size: 11.5px;
-  font-weight: 500;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
-  color: var(--accent);
-}
-.pu-eyebrow-light { color: #d9b790; }
-
-.pu-page em {
-  font-style: normal;
-  color: var(--accent);
-}
-.pu-section-dark em, .pu-hero em { color: #e3c5a3; }
+/* page/container/section/hero/eyebrow/sec-/crumb/btn/cta-band/related는 글로벌(src/index.css) 처리.
+   페이지 고유: .pu-hero-bg(이미지 합성) + intro/benefit/compare/spaces/ba + pu-inline-link */
 
 .pu-inline-link {
   color: var(--accent);
@@ -617,16 +575,7 @@ const PU_CSS = `
 }
 .pu-inline-link:hover { color: var(--accent-deep); }
 
-/* ===== Hero ===== */
-.pu-hero {
-  position: relative;
-  padding: 168px 0 84px;
-  overflow: hidden;
-  isolation: isolate;
-}
-@media (max-width: 720px) {
-  .pu-hero { padding: 120px 0 64px; }
-}
+/* ===== Hero 배경 (페이지 고유 이미지 합성) ===== */
 .pu-hero-bg {
   position: absolute;
   inset: 0;
@@ -653,156 +602,8 @@ const PU_CSS = `
   background: radial-gradient(120% 100% at 50% 0%, rgba(0,0,0,.15), rgba(0,0,0,.55) 80%);
   pointer-events: none;
 }
-.pu-hero-inner { position: relative; z-index: 1; }
-.pu-hero-title {
-  font-family: 'Noto Serif KR', serif;
-  font-weight: 400;
-  font-size: clamp(36px, 5vw, 68px);
-  line-height: 1.25;
-  letter-spacing: -0.01em;
-  color: #fff;
-  margin: 14px 0 22px;
-  max-width: 24ch;
-  word-break: keep-all;
-}
-.pu-hero-lede {
-  font-size: 15.5px;
-  line-height: 1.75;
-  color: rgba(255,255,255,.78);
-  max-width: 56ch;
-  margin: 0;
-}
-.pu-hero-meta {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 0;
-  list-style: none;
-  padding: 0;
-  margin: 48px 0 0;
-  border-top: 1px solid rgba(255,255,255,.16);
-}
-.pu-hero-meta li {
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-  padding: 22px 22px 22px 0;
-  border-right: 1px solid rgba(255,255,255,.16);
-}
-.pu-hero-meta li:last-child { border-right: none; }
-.pu-hero-meta li:not(:first-child) { padding-left: 22px; }
-.pu-meta-k {
-  font-size: 10.5px;
-  font-weight: 500;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  color: rgba(255,255,255,.55);
-}
-.pu-meta-v {
-  font-family: 'Noto Serif KR', serif;
-  font-weight: 400;
-  font-size: 17px;
-  color: #fff;
-  letter-spacing: -0.005em;
-}
-@media (max-width: 720px) {
-  .pu-hero-meta { grid-template-columns: repeat(2, 1fr); }
-  .pu-hero-meta li:nth-child(2) { border-right: none; }
-  .pu-hero-meta li:nth-child(3) { padding-left: 0; }
-  .pu-hero-meta li:nth-child(3), .pu-hero-meta li:nth-child(4) {
-    border-top: 1px solid rgba(255,255,255,.16);
-  }
-}
 
-/* ===== Breadcrumb ===== */
-.pu-crumb {
-  background: var(--paper);
-  border-bottom: 1px solid var(--line);
-}
-.pu-crumb-inner {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  padding: 14px 32px;
-  font-size: 12px;
-  letter-spacing: 0.04em;
-  color: var(--muted-2);
-}
-@media (max-width: 720px) {
-  .pu-crumb-inner { padding: 14px 20px; }
-}
-.pu-crumb-item {
-  color: var(--muted-2);
-  text-decoration: none;
-  transition: color .2s ease;
-}
-.pu-crumb-item:hover { color: var(--accent); }
-.pu-crumb-sep { opacity: .4; }
-.pu-crumb-here { color: var(--ink); }
-
-/* ===== Section Head ===== */
-.pu-sec-head { margin-bottom: 64px; }
-.pu-sec-bar {
-  display: flex;
-  align-items: center;
-  gap: 18px;
-  padding-bottom: 22px;
-  margin-bottom: 36px;
-  border-bottom: 1px solid var(--line);
-}
-.pu-sec-head-dark .pu-sec-bar { border-bottom-color: rgba(255,255,255,.14); }
-.pu-sec-n {
-  font-family: 'Noto Serif KR', serif;
-  font-style: italic;
-  font-weight: 400;
-  font-size: 20px;
-  line-height: 1;
-  color: var(--accent);
-  font-variant-numeric: lining-nums;
-}
-.pu-sec-head-dark .pu-sec-n { color: #d9b790; }
-.pu-sec-rule {
-  flex: 0 0 56px;
-  height: 1px;
-  background: var(--accent);
-  opacity: .6;
-}
-.pu-sec-head-dark .pu-sec-rule { background: #d9b790; opacity: .7; }
-.pu-sec-lbl {
-  font-size: 11.5px;
-  font-weight: 500;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
-}
-.pu-sec-ko { color: var(--ink-2); }
-.pu-sec-head-dark .pu-sec-ko { color: #fff; }
-.pu-sec-en { color: var(--muted-2); margin-left: 10px; }
-.pu-sec-head-dark .pu-sec-en { color: rgba(255,255,255,.5); }
-.pu-sec-body {
-  display: grid;
-  grid-template-columns: 1.05fr 1fr;
-  gap: 64px;
-  align-items: end;
-}
-@media (max-width: 820px) {
-  .pu-sec-body { grid-template-columns: 1fr; gap: 24px; align-items: start; }
-}
-.pu-sec-title {
-  font-family: 'Noto Serif KR', serif;
-  font-weight: 400;
-  font-size: clamp(30px, 3.6vw, 48px);
-  line-height: 1.3;
-  letter-spacing: -0.01em;
-  margin: 0;
-  word-break: keep-all;
-}
-.pu-sec-head-dark .pu-sec-title { color: var(--on-dark); }
-.pu-sec-lede {
-  font-size: 16px;
-  line-height: 1.75;
-  color: var(--muted);
-  margin: 0;
-}
-.pu-sec-head-dark .pu-sec-lede { color: var(--dark-muted); }
+/* crumb/sec-*는 글로벌(src/index.css) 처리 */
 
 /* ===== Intro ===== */
 .pu-intro {
@@ -1208,162 +1009,5 @@ const PU_CSS = `
   .pu-ba-bot-v { font-size: 16px; }
 }
 
-/* ===== Related ===== */
-.pu-related-grid {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 24px;
-}
-@media (max-width: 900px) {
-  .pu-related-grid { grid-template-columns: repeat(2, 1fr); }
-}
-@media (max-width: 560px) {
-  .pu-related-grid { grid-template-columns: 1fr; }
-}
-.pu-related-card {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  background: var(--paper);
-  border: 1px solid var(--line);
-  padding: 32px 28px 28px;
-  min-height: 220px;
-  color: inherit;
-  text-decoration: none;
-  transition: background .25s ease, color .25s ease, border-color .25s ease;
-}
-.pu-related-card:hover {
-  background: var(--ink);
-  color: var(--paper);
-  border-color: var(--ink);
-}
-.pu-related-idx {
-  font-size: 10.5px;
-  font-weight: 500;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  color: var(--muted-2);
-}
-.pu-related-card:hover .pu-related-idx { color: #d9b790; }
-.pu-related-title {
-  font-family: 'Noto Serif KR', serif;
-  font-weight: 500;
-  font-size: 21px;
-  line-height: 1.35;
-  color: var(--ink);
-  margin: 0;
-  letter-spacing: -0.005em;
-}
-.pu-related-card:hover .pu-related-title { color: #fff; }
-.pu-related-desc {
-  font-size: 13px;
-  line-height: 1.7;
-  color: var(--muted);
-  margin: 0;
-}
-.pu-related-card:hover .pu-related-desc { color: rgba(255,255,255,.75); }
-.pu-related-more {
-  margin-top: auto;
-  font-size: 11.5px;
-  font-weight: 500;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  color: var(--muted-2);
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-}
-.pu-related-card:hover .pu-related-more { color: #d9b790; }
-.pu-related-arr { transition: transform .3s ease; }
-.pu-related-card:hover .pu-related-arr { transform: translateX(4px); }
-
-/* ===== CTA Band ===== */
-.pu-cta-band {
-  background: var(--bg-2);
-  border-top: 1px solid var(--line);
-  padding: 72px 0;
-}
-@media (max-width: 720px) {
-  .pu-cta-band { padding: 56px 0; }
-}
-.pu-cta-row {
-  display: grid;
-  grid-template-columns: 1.4fr 1fr;
-  gap: 32px;
-  align-items: center;
-}
-@media (max-width: 820px) {
-  .pu-cta-row { grid-template-columns: 1fr; gap: 24px; }
-}
-.pu-cta-text { display: flex; flex-direction: column; gap: 8px; }
-.pu-cta-title {
-  font-family: 'Noto Serif KR', serif;
-  font-weight: 400;
-  font-size: clamp(22px, 2.5vw, 30px);
-  line-height: 1.4;
-  letter-spacing: -0.005em;
-  color: var(--ink);
-  margin: 0;
-  word-break: keep-all;
-}
-.pu-cta-sub {
-  font-size: 14px;
-  color: var(--muted);
-  margin: 0;
-}
-.pu-cta-actions {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
-  justify-content: flex-end;
-}
-@media (max-width: 820px) {
-  .pu-cta-actions {
-    flex-wrap: nowrap;
-    justify-content: flex-start;
-    gap: 8px;
-  }
-  .pu-cta-actions .pu-btn {
-    flex: 1 1 0;
-    min-width: 0;
-    padding: 14px 12px;
-    font-size: 13px;
-    white-space: nowrap;
-    justify-content: center;
-  }
-}
-
-/* ===== Buttons ===== */
-.pu-btn {
-  display: inline-flex;
-  align-items: center;
-  gap: 10px;
-  padding: 16px 22px;
-  border-radius: 2px;
-  font-family: inherit;
-  font-size: 14px;
-  font-weight: 500;
-  letter-spacing: -0.005em;
-  border: 0;
-  cursor: pointer;
-  text-decoration: none;
-  transition: background .25s ease, color .25s ease, border-color .25s ease;
-}
-.pu-btn-arr { transition: transform .3s ease; }
-.pu-btn:hover .pu-btn-arr { transform: translateX(4px); }
-.pu-btn-primary {
-  background: var(--ink);
-  color: var(--paper);
-}
-.pu-btn-primary:hover { background: var(--accent-deep); }
-.pu-btn-ghost {
-  background: transparent;
-  border: 1px solid var(--line-strong);
-  color: var(--ink);
-}
-.pu-btn-ghost:hover {
-  background: var(--ink);
-  color: var(--paper);
-  border-color: var(--ink);
-}
+/* related/cta-band/btn은 글로벌(src/index.css) 처리 */
 `;

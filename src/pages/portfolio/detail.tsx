@@ -130,23 +130,23 @@ export default function PortfolioDetailPage() {
           (Navbar.tsx: 모바일 h-12 = 48px, ≥768px py-4 + 로고 h-12 ≈ 80px) */}
       <div className="h-12 md:h-20" aria-hidden="true" />
 
-      {/* Breadcrumb — sticky는 글로벌 .pf-crumb 규칙(src/index.css)에서 처리
+      {/* Breadcrumb — sticky는 글로벌 .crumb 규칙(src/index.css)에서 처리
           (v2 §6 5단계: 홈 > 시공사례 > region > district > 단지+평수) */}
-      <nav className="pf-crumb" aria-label="현재 위치">
-        <div className="pf-container pf-crumb-inner">
-          <Link to="/" className="pf-crumb-item">홈</Link>
-          <span className="pf-crumb-sep">/</span>
-          <Link to="/portfolio" className="pf-crumb-item">시공사례</Link>
-          <span className="pf-crumb-sep">/</span>
-          <span className="pf-crumb-item">{item.region}</span>
+      <nav className="crumb" aria-label="현재 위치">
+        <div className="container crumb-inner">
+          <Link to="/" className="crumb-item">홈</Link>
+          <span className="crumb-sep">/</span>
+          <Link to="/portfolio" className="crumb-item">시공사례</Link>
+          <span className="crumb-sep">/</span>
+          <span className="crumb-item">{item.region}</span>
           {item.district && (
             <>
-              <span className="pf-crumb-sep">/</span>
-              <span className="pf-crumb-item">{item.district}</span>
+              <span className="crumb-sep">/</span>
+              <span className="crumb-item">{item.district}</span>
             </>
           )}
-          <span className="pf-crumb-sep">/</span>
-          <span className="pf-crumb-here">{item.apartment} {item.area}평</span>
+          <span className="crumb-sep">/</span>
+          <span className="crumb-here">{item.apartment} {item.area}평</span>
         </div>
       </nav>
 
@@ -505,44 +505,7 @@ function GalleryItem({
 
 // ─── PDP CSS (portfolio-detail.html 기반) ───
 const PDP_CSS = `
-/* ===== container (list와 통일) ===== */
-.pf-container {
-  max-width: 1360px;
-  margin: 0 auto;
-  padding: 0 32px;
-}
-@media (max-width: 720px) {
-  .pf-container { padding: 0 20px; }
-}
-
-/* ===== Breadcrumb (list의 pf-crumb 패턴과 동일) ===== */
-.pf-crumb {
-  background: var(--paper);
-  border-bottom: 1px solid var(--line);
-}
-.pf-crumb-inner {
-  display: flex;
-  align-items: center;
-  flex-wrap: wrap;
-  gap: 10px;
-  padding: 14px 32px;
-  font-size: 12px;
-  letter-spacing: 0.04em;
-  color: var(--muted-2);
-}
-@media (max-width: 720px) {
-  .pf-crumb-inner { padding: 14px 20px; }
-}
-.pf-crumb-item {
-  color: var(--muted-2);
-  text-decoration: none;
-  transition: color .2s ease;
-}
-.pf-crumb-item:hover { color: var(--accent); }
-.pf-crumb-sep { opacity: .4; }
-.pf-crumb-here { color: var(--ink); }
-
-/* sticky 동작은 src/index.css의 글로벌 .pf-crumb 규칙으로 처리 */
+/* container/crumb는 글로벌(src/index.css) 처리 */
 
 .pdp{display:grid;grid-template-columns:minmax(0,1.12fr) minmax(0,.88fr);gap:48px;align-items:start}
 @media (max-width:900px){ .pdp{grid-template-columns:1fr;gap:30px} }
