@@ -186,6 +186,30 @@ export default function PortfolioDetailPage() {
           </p>
         </section>
 
+        {/* Story Section — 디아트식 긴 글 (선택) */}
+        {item.story && item.story.length > 0 && (
+          <section className="px-6 md:px-12 lg:px-20 max-w-[1360px] mx-auto mb-20 pt-14 border-t border-[var(--line)]">
+            <SectionHeader eyebrow="Story" title="시공 이야기" />
+            <div className="max-w-[860px]">
+              {item.story.map((sec, i) => (
+                <div key={i} className="mb-10 last:mb-0">
+                  <h3
+                    className="text-[20px] md:text-[22px] tracking-[-0.01em] leading-[1.5] mb-4 text-[var(--ink)]"
+                    style={{ fontFamily: "'Noto Serif KR', serif", fontWeight: 500 }}
+                  >
+                    {sec.heading}
+                  </h3>
+                  {sec.text.split('\n\n').map((para, j) => (
+                    <p key={j} className="text-[var(--ink-2)] leading-[1.9] text-[15.5px] md:text-[16.5px] break-keep mb-4 last:mb-0">
+                      {para}
+                    </p>
+                  ))}
+                </div>
+              ))}
+            </div>
+          </section>
+        )}
+
       </main>
 
       {/* CTA Band — info/kerafoxy-price의 .kp-cta-band 패턴과 동일 */}
