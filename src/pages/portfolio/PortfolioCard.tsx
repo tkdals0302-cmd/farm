@@ -99,7 +99,7 @@ export default function PortfolioCard({ item }: { item: PortfolioItem }) {
           className="text-[17px] text-[var(--ink)] leading-[1.35] tracking-[-0.005em] group-hover:text-[var(--accent)] transition-colors break-keep"
           style={{ fontFamily: "'Noto Serif KR', serif", fontWeight: 500 }}
         >
-          {item.apartment} {item.area}평
+          {item.apartment}{item.area ? ` ${item.area}평` : ''}
         </h3>
         <p className="text-[13px] text-[var(--muted)] mt-3">
           {item.space} · {item.material}
