@@ -67,7 +67,7 @@ export default function PortfolioDetailPage() {
         { name: '시공사례', url: `${SITE_URL}/portfolio` },
         { name: item.region, url: `${SITE_URL}/portfolio` },
         ...(item.district ? [{ name: item.district, url: `${SITE_URL}/portfolio` }] : []),
-        { name: `${item.apartment} ${item.area}평`, url },
+        { name: `${item.apartment}${item.area ? ` ${item.area}평` : ''}`, url },
       ])
     );
 
@@ -146,7 +146,7 @@ export default function PortfolioDetailPage() {
             </>
           )}
           <span className="crumb-sep">/</span>
-          <span className="crumb-here">{item.apartment} {item.area}평</span>
+          <span className="crumb-here">{item.apartment}{item.area ? ` ${item.area}평` : ''}</span>
         </div>
       </nav>
 
@@ -358,7 +358,7 @@ function PortfolioPDP({
         {/* RIGHT — info */}
         <div className="pdp-info">
           <h1 className="pdp-title">
-            {item.apartment} {item.area}평 — {item.space} 줄눈시공
+            {item.apartment}{item.area ? ` ${item.area}평` : ''} — {item.space} 줄눈시공
           </h1>
 
           <div className="pdp-rows">
@@ -369,7 +369,7 @@ function PortfolioPDP({
             <div className="pdp-row">
               <span className="k">평형</span>
               <span className="v">
-                {item.area}평{item.areaSqm ? ` / ${item.areaSqm}㎡` : ''}
+                {item.area ? `${item.area}평${item.areaSqm ? ` / ${item.areaSqm}㎡` : ''}` : '확인 중'}
               </span>
             </div>
             {/* 공간·자재 — 가변 (주력 + extraSpaces). 한 줄씩 추가/삭제 */}
