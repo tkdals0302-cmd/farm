@@ -226,6 +226,38 @@ export const PORTFOLIO_ITEMS: PortfolioItem[] = [
     },
     createdAt: '2024-04-07T00:00:00.000Z',
   },
+  {
+    slug: "seoul-mapo-seongsandong-villa-bathroom",
+    apartment: "성산동 빌라",
+    region: "서울",
+    district: "마포구",
+    area: 0,
+    space: "욕실",
+    spaceDetail: "바닥",
+    material: "케라폭시",
+    materialDetail: "111번",
+    duration: "1일",
+    date: "2026-07-12",
+    asPeriod: '2년',
+    images: [
+      { src: "/portfolio/seoul-mapo-seongsandong-villa-bathroom/before_01.webp", alt: "서울 마포구 성산동 빌라 욕실 줄눈 시공 전 상태 01", type: "before" },
+      { src: "/portfolio/seoul-mapo-seongsandong-villa-bathroom/before_02.webp", alt: "서울 마포구 성산동 빌라 욕실 줄눈 시공 전 상태 02", type: "before" },
+      { src: "/portfolio/seoul-mapo-seongsandong-villa-bathroom/before_03.webp", alt: "서울 마포구 성산동 빌라 욕실 줄눈 시공 전 상태 03", type: "before" },
+      { src: "/portfolio/seoul-mapo-seongsandong-villa-bathroom/after-main.webp", alt: "서울 마포구 성산동 빌라 욕실 케라폭시 줄눈시공 시공 후 대표", type: "after-main" },
+      { src: "/portfolio/seoul-mapo-seongsandong-villa-bathroom/before_04.webp", alt: "서울 마포구 성산동 빌라 욕실 줄눈 시공 전 상태 04", type: "before" },
+      { src: "/portfolio/seoul-mapo-seongsandong-villa-bathroom/before_05.webp", alt: "서울 마포구 성산동 빌라 욕실 줄눈 시공 전 상태 05", type: "before" },
+      { src: "/portfolio/seoul-mapo-seongsandong-villa-bathroom/before_06.webp", alt: "서울 마포구 성산동 빌라 욕실 줄눈 시공 전 상태 06", type: "before" },
+      { src: "/portfolio/seoul-mapo-seongsandong-villa-bathroom/after_01.webp", alt: "성산동 빌라 욕실 케라폭시 줄눈 마감 디테일 01", type: "after" },
+    ],
+    title: "성산동 빌라 욕실 케라폭시 줄눈시공 사례 | 디테일라인",
+    description: "서울 마포구 성산동 빌라 욕실에 케라폭시 줄눈시공을 진행한 사례입니다. 500각 타일에 맞춰 111번 색상으로 일체감 있게 마감하였으며, 입주 청소보다 깨끗한 정밀 밑작업으로 완성도를 높였습니다.",
+    excerpt: "마포구 성산동 빌라 욕실, 500각 타일과 케라폭시 111번의 완벽한 일체감 구현",
+    body: {
+      beforeText: "시공 전 현장은 전체적으로 오염도가 매우 심하고 더러운 상태였습니다. 특히 타일 사이와 표면에 먼지와 이물질이 많아 정리가 시급했습니다. 일반적인 300각 타일과 달리 흔치 않은 500각 타일이 시공되어 있었습니다.",
+      afterText: "케라폭시 시공의 핵심인 밑작업을 위해 입주 청소보다 더 깨끗하게 청소를 진행한 후 작업을 시작했습니다. 타일과 가장 잘 어울리는 케라폭시 111번 색상을 선택하여 시공한 결과, 타일과 줄눈이 한판처럼 보이는 뛰어난 일체감을 완성했습니다. 500각 타일이라 작업이 수월했으며, 시공 후 깨끗해진 모습에 고객님께서도 크게 만족하시며 지인 소개를 약속해 주셨습니다. 디테일라인은 시공 후 2년 무상 A/S를 보장합니다.",
+    },
+    createdAt: "2026-07-12T00:00:00.000Z",
+  },
   // ⤵ dl-bot:insert — 새 사례는 이 줄 바로 위에 자동 삽입됨 (이 주석 수정·이동 금지)
 ];
 
