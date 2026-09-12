@@ -334,7 +334,7 @@ export default function SpacePriceCalculator() {
       lines.push(`세트 적용: -${calc.savings}만원`);
     }
     lines.push(
-      `예상 견적가: ${calc.finalTotal}만원${calc.hasNull ? ' +α' : ''} (VAT 포함, 34평·300타일 기준)`,
+      `예상 견적가: ${calc.finalTotal}만원${calc.hasNull ? ' +α' : ''} (VAT 별도, 34평·300타일 기준)`,
     );
     lines.push('※정확한 금액은 유선상담 진행 후 안내드립니다.');
 
@@ -390,7 +390,7 @@ export default function SpacePriceCalculator() {
           <div className="spc-info-chips mt-5">
             <span className="spc-info-chip">34평 이하 기준</span>
             <span className="spc-info-chip">300개 타일 기준</span>
-            <span className="spc-info-chip">VAT 포함</span>
+            <span className="spc-info-chip">VAT 별도</span>
           </div>
         </div>
 
@@ -643,7 +643,7 @@ export default function SpacePriceCalculator() {
               <div className="spc-policy">
                 <span className="spc-policy-chip">📷 원격 견적</span>
                 <span className="spc-policy-chip">💡 2년 A/S · 케라폭시</span>
-                <span className="spc-policy-chip">✓ VAT 포함</span>
+                <span className="spc-policy-chip">✓ VAT 별도</span>
               </div>
 
               <p className="spc-fineprint">
