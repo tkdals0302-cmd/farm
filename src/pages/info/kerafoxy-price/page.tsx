@@ -105,10 +105,7 @@ const SETS: SetPackage[] = [
     desc: '세트 1 + 양조벽 or 샤워벽 3면 ×1곳',
     newPrice: 135,
     oldPrice: 155,
-    services: [
-      { text: '젠 다이 실리콘 ×2' },
-      { text: '세면대 실리콘 ×2' },
-    ],
+    services: [],
   },
   {
     num: '03',
@@ -117,12 +114,7 @@ const SETS: SetPackage[] = [
     desc: '화장실 바닥 ×2 + 전체벽 ×2 + 현관',
     newPrice: 240,
     oldPrice: 260,
-    services: [
-      { text: '젠 다이 실리콘 ×2' },
-      { text: '세면대 실리콘 ×2' },
-      { text: '싱크볼 실리콘' },
-      { text: '주방벽 케라폭시' },
-    ],
+    services: [],
   },
   {
     num: '04',
@@ -131,12 +123,7 @@ const SETS: SetPackage[] = [
     desc: '세트 2 + 세탁실',
     newPrice: 150,
     oldPrice: 170,
-    services: [
-      { text: '젠 다이 실리콘 ×2' },
-      { text: '세면대 실리콘 ×2' },
-      { text: '주방 실리콘' },
-      { text: '싱크볼 실리콘' },
-    ],
+    services: [],
   },
 ];
 
@@ -520,7 +507,7 @@ export default function KerafoxyPricePage() {
                 한 번에 <em>합리적으로</em>.
               </>
             }
-            lede="화장실·현관·벽 등 주요 공간을 묶어 시공하면 실리콘·주방벽 등 추가 서비스가 함께 제공됩니다. VAT 별도 · 34평 이하 · 300개 타일 기준."
+            lede="화장실·현관·벽 등 주요 공간을 묶어 시공하면 세트 할인가가 적용됩니다. VAT 별도 · 34평 이하 · 300개 타일 기준."
           />
 
           <div className="kp-sets">

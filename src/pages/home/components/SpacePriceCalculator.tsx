@@ -116,7 +116,7 @@ const SETS: Record<string, SetDef> = {
       { space: '화장실', variantId: 'sh-floor', material: 'kera' },
       { space: '현관',   variantId: 'ent',      material: 'poly' },
     ],
-    services: ['젠 다이 실리콘 ×2', '세면대 실리콘 ×2'],
+    services: [],
   },
   '3': {
     name: '세트 3', sub: '완성',
@@ -127,7 +127,7 @@ const SETS: Record<string, SetDef> = {
       { space: '화장실', variantId: 'sh-full', material: 'kera' },
       { space: '현관',   variantId: 'ent',     material: 'poly' },
     ],
-    services: ['젠 다이 실리콘 ×2', '세면대 실리콘 ×2', '싱크볼 실리콘', '주방벽 케라폭시'],
+    services: [],
   },
   '4': {
     name: '세트 4', sub: '확장',
@@ -139,7 +139,7 @@ const SETS: Record<string, SetDef> = {
       { space: '현관',   variantId: 'ent',      material: 'poly' },
       { space: '세탁실', variantId: 'ldy',      material: 'poly' },
     ],
-    services: ['젠 다이 실리콘 ×2', '세면대 실리콘 ×2', '주방 실리콘', '싱크볼 실리콘'],
+    services: [],
   },
 };
 
